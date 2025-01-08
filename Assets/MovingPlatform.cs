@@ -1,30 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-    /// <summary>
-    /// Settings for the platform.
-    /// speed modifies the speed that the platform moves between positions
-    /// positions are the positions that the platform moves between
-    /// currentPOS is the index of the current position that the platform is moving towards
-    /// distance is the distance the platform enters and then moves towards the next
-    /// </summary>
 public class MovingPlatform : MonoBehaviour
 {
     [Header("Platform Settings")]
-    [SerializeField] float speed;
+    [SerializeField] float speed;//Speed of the platform
+    [SerializeField] public bool canMove = true;//if the platform can move
     [Header("Platform Positions")]
-    [SerializeField] Transform[] positions = new Transform[2];
-    [SerializeField] int currentPos;
-    [SerializeField] float distance = 0.1f;
+    [SerializeField] Transform[] positions = new Transform[2];//Array of positions the platform can move to
+    [SerializeField] int currentPos;//Current position of the platform
+    [SerializeField] float distance = 0.1f;//The point where the platform will move to the next position
 
     void Update()
     {
-        Vector3 TargetPOS = positions[currentPos].position;
+        //If the platform can move, move to the next position
+        if(canMove)
+        {
+            MoveToNextPosition();
+        }
+    }
+    /// <summary>
+    /// Move the platform to the next position within the positions array
+    /// </summary>
+    void MoveToNextPosition()
+    {
+        // Move the platform to the next position
+        Vector3 targetPOS = positions[currentPos].position;
 
-        transform.position = Vector3.MoveTowards(transform.position, TargetPOS, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPOS, speed * Time.deltaTime);
 
-        if(Vector3.Distance(transform.position,TargetPOS) <= distance)
+        // If the platform has reached the next position, move to the next position
+        if(Vector3.Distance(transform.position,targetPOS) <= distance)
         {
             currentPos = (currentPos + 1) % positions.Length;
         }
