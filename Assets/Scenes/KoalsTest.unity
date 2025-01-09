@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 201763036}
   m_Layer: 0
   m_Name: TestFloor (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201763035}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d32e90418542c33418ccb1801197e178, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 805790855}
   m_Layer: 0
   m_Name: TestFloor
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,7 +253,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805790854}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d32e90418542c33418ccb1801197e178, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -485,7 +485,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 21
+  field of view: 35
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -512,7 +512,7 @@ Transform:
   m_GameObject: {fileID: 1487155850}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.45866665, z: -40}
+  m_LocalPosition: {x: 0, y: 0.45866668, z: -40}
   m_LocalScale: {x: 4, y: 1.3333334, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -529,7 +529,10 @@ GameObject:
   - component: {fileID: 1502129207}
   - component: {fileID: 1502129206}
   - component: {fileID: 1502129205}
+  - component: {fileID: 1502129208}
+  - component: {fileID: 1502129209}
   - component: {fileID: 1502129204}
+  - component: {fileID: 1502129210}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -544,7 +547,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502129203}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6fa1fbc73e2516c45a84fcf528bdfca8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -624,6 +627,78 @@ Transform:
   - {fileID: 1487155853}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1502129208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502129203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b74b2cbcc5e1f4d81db37b7f1fa00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerBody: {fileID: 0}
+  moveSpeed: 10
+  isGrabbingLedge: 0
+  moveDirection: {x: 0, y: 0}
+--- !u!54 &1502129209
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502129203}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &1502129210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502129203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 21347e7e14cf3d0488e7c472a503656d, type: 3}
+  m_NotificationBehavior: 0
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1639040081
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +713,7 @@ GameObject:
   - component: {fileID: 1639040082}
   m_Layer: 0
   m_Name: TestFloor (2)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -650,7 +725,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639040081}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d32e90418542c33418ccb1801197e178, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
