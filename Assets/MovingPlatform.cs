@@ -35,4 +35,20 @@ public class MovingPlatform : MonoBehaviour
             currentPos = (currentPos + 1) % positions.Length;
         }
     }
+    void OnTriggerEnter(Collider other)
+    {
+        //If the object is the player, make the player a child of the platform
+        if(other.gameObject.tag == "Player")
+        {
+            other.transform.parent = this.transform;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        //If the object is the player, remove the player as a child of the platform
+        if(other.gameObject.tag == "Player")
+        {
+            other.transform.parent = null;
+        }
+    }
 }
