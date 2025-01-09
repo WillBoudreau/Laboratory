@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerBody;
     [Header("PlayerStats")]
     public float moveSpeed;
+    public float jumpForce;
     public bool isGrabbingLedge;
     public bool isGrounded;
     private Vector2 moveDirection;
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        playerBody.AddForce(new Vector3(moveDirection.x * moveSpeed, playerBody.velocity.y,playerBody.velocity.z));
+        playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
     }
 
     /// <summary>
@@ -54,6 +55,14 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
     }
+
+    void OnCollisionExit(Collision col)
+    {
+        if(col.gameObject.CompareTag("Platform"))
+        {
+            isGrounded = false;
+        }
+    }
     /// <summary>
     /// Event called when input system detects interaction input. 
     /// </summary>
@@ -66,6 +75,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnJump()
     {
-        
+        if(isGrounded)
+        {
+            playerBody.AddForce(transform.up * jumpForce);
+        }
     }
 }
