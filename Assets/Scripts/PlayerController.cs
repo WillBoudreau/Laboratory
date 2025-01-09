@@ -13,31 +13,49 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform mainCam;
     [Header("PlayerStats")]
-    public float moveSpeed;
-    public float jumpForce;
-    public bool isIdle;
-    public bool isGrabbingLedge;
-    public bool isGrounded;
-    public bool isFacingLeft;
-    public float turnTime;
+    [SerializeField]
+    private float moveSpeed;
+    [SerializeField]
+    private float jumpForce;
+    [SerializeField]
+    private bool isIdle;
+    [SerializeField]
+    private bool isGrabbingLedge;
+    [SerializeField]
+    private bool isGrounded;
+    [SerializeField]
+    private bool isFacingLeft;
+    [SerializeField]
+    private float turnTime;
     private Vector2 moveDirection;
     private Quaternion rightFacing;
     private Quaternion leftFacing;
     [Header("Ledge Grab Properties")]
-    public Vector3 activeOffset;
-    public Vector3 leftOffset;
-    public Vector3 rightOffset;
-    public GameObject ledge;
-    public float climbDuration;
-    public Vector3 topOfLedge;
+    [SerializeField]
+    private Vector3 activeOffset;
+    [SerializeField]
+    private Vector3 leftOffset;
+    [SerializeField]
+    private Vector3 rightOffset;
+    private GameObject ledge;
+    [SerializeField]
+    private float climbDuration;
+    [SerializeField]
+    private Vector3 topOfLedge;
     private Vector3 desiredPosition;
     [Header("Camera Control Properties")]
-    public Vector3 followPosition;
-    public Vector3 rightCameraOffset;
-    public Vector3 leftCameraOffset;
-    public Vector3 upCameraOffset;
-    public Vector3 downCameraOffset;
-    public float hightOffset;
+    private Vector3 followPosition;
+    [SerializeField]
+    private float hightOffset;
+    [Header("Interaction Properties")]
+    public GameObject interactionPrompt;
+    public Transform promptPosition;
+    [SerializeField]
+    private bool interactionPosable;
+    [SerializeField]
+    private bool isGrabbingIntractable;
+    private GameObject interactionTarget;
+    
 
     void Start()
     {
@@ -60,7 +78,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("isIdle", true);
             isIdle = true;
         }
-        if(moveDirection.x > 0)
+        if(moveDirection.x > 0 && !isGrabbingIntractable)
         {
             if(isFacingLeft)
             {
@@ -68,7 +86,7 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = rightFacing;
             }
         }
-        else if(moveDirection.x < 0)
+        else if(moveDirection.x < 0 && !isGrabbingIntractable)
         {
             if(!isFacingLeft)
             {
@@ -83,6 +101,15 @@ public class PlayerController : MonoBehaviour
             isIdle = true;
             playerAnim.SetBool("isHanging", true);
         }
+        if(interactionPosable && !isGrabbingIntractable)
+        {
+            interactionPrompt.SetActive(true);
+        }
+        else
+        {
+            interactionPrompt.SetActive(false);
+        }
+        interactionPrompt.transform.position = promptPosition.position;
     }
 
     void FixedUpdate()
@@ -90,7 +117,14 @@ public class PlayerController : MonoBehaviour
         SetCameraPosition();
         if(!isGrabbingLedge)
         {
-            playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+            if(!isGrabbingIntractable)
+            {
+                playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+            }
+            if(isGrabbingIntractable)
+            {
+                playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+            }
         }
     }
 
@@ -124,6 +158,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+     void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.TryGetComponent<Climbable>(out Climbable other) && col.gameObject.transform.position.y > this.gameObject.transform.position.y)
+        {
+            ledge = other.gameObject;
+            LedgeGrab(ledge);
+        }
+        else if(col.gameObject.TryGetComponent<Intractable>(out Intractable other1))
+        {
+            interactionPosable = true;
+            interactionTarget = other1.gameObject;
+        }
+    }
+
     /// <summary>
     ///  Used for isGrounded check.
     /// </summary>
@@ -142,13 +190,33 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
+        else if(col.gameObject.TryGetComponent<Intractable>(out Intractable other))
+        {
+            interactionPosable = false;
+            interactionTarget = null;
+        }
     }
     /// <summary>
     /// Event called when input system detects interaction input. 
     /// </summary>
     void OnInteract()
     {
-
+        if(interactionPosable)
+        {
+            if(interactionTarget.gameObject.TryGetComponent<Intractable>(out Intractable other))
+            {
+                if(isGrabbingIntractable)
+                {
+                    other.transform.parent = null;
+                    isGrabbingIntractable = false;
+                }
+                else if(!isGrabbingLedge)
+                {
+                    other.transform.parent = this.transform;
+                    isGrabbingIntractable = true;
+                }
+            }
+        }
     }
     /// <summary>
     /// Event called when input system detects jump input. 
@@ -161,14 +229,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-     void OnCollisionEnter(Collision col)
-    {
-        if(col.gameObject.TryGetComponent<Climbable>(out Climbable thing) && col.gameObject.transform.position.y > this.gameObject.transform.position.y)
-        {
-            ledge = thing.gameObject;
-            LedgeGrab(ledge);
-        }
-    }
 
     void LedgeGrab(GameObject ledge)
     {
