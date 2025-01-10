@@ -104,6 +104,18 @@ public class PlayerController : MonoBehaviour
         }
         if(isGrabbingLedge == true)
         {
+            topOfLedge = ledge.transform.position;
+            topOfLedge.y = ledge.transform.position.y * 1.1f;
+            if(ledge.transform.position.x < this.gameObject.transform.position.x)
+            {
+                activeOffset = leftOffset + ledge.transform.position;
+                //used to make sure player is facing ledge
+            }
+            if(ledge.transform.position.x > this.gameObject.transform.position.x)
+            {
+                activeOffset = rightOffset + ledge.transform.position;
+                //used to make sure player is facing ledge
+            }
             this.gameObject.transform.position = activeOffset;
             playerAnim.SetBool("isIdle", true);
             isIdle = true;
@@ -265,18 +277,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="ledge"></param>
     void LedgeGrab(GameObject ledge)
     {
-        topOfLedge = ledge.transform.position;
-        topOfLedge.y = ledge.transform.position.y * 1.1f;
-        if(ledge.transform.position.x < this.gameObject.transform.position.x)
-        {
-            activeOffset = leftOffset + ledge.transform.position;
-            //used to make sure player is facing ledge
-        }
-        if(ledge.transform.position.x > this.gameObject.transform.position.x)
-        {
-            activeOffset = rightOffset + ledge.transform.position;
-            //used to make sure player is facing ledge
-        }
+        this.ledge = ledge;
         isGrabbingLedge = true;
     }
 
