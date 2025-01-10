@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
         {
             interactionPrompt.SetActive(false);
         }
-        if(isGrabbingIntractable)
+        if(isGrabbingIntractable && interactionTarget != null)
         {
             interactionTarget.transform.position = heldObjectLocation.position;
         }
