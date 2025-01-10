@@ -162,8 +162,16 @@ public class PlayerController : MonoBehaviour
     {
         if(col.gameObject.TryGetComponent<Climbable>(out Climbable other) && col.gameObject.transform.position.y > this.gameObject.transform.position.y)
         {
-            ledge = other.gameObject;
-            LedgeGrab(ledge);
+            if(isFacingLeft && other.gameObject.transform.position.x < transform.position.x)
+            {
+                ledge = other.gameObject;
+                LedgeGrab(ledge);
+            }
+            if(!isFacingLeft && other.gameObject.transform.position.x > transform.position.x)
+            {
+                ledge = other.gameObject;
+                LedgeGrab(ledge);
+            }
         }
         else if(col.gameObject.TryGetComponent<Intractable>(out Intractable other1))
         {
@@ -234,7 +242,6 @@ public class PlayerController : MonoBehaviour
     {
         topOfLedge = ledge.transform.position;
         topOfLedge.y = ledge.transform.position.y * 1.1f;
-        topOfLedge.x = ledge.transform.position.x * 1.05f;
         if(ledge.transform.position.x < this.gameObject.transform.position.x)
         {
             activeOffset = leftOffset + ledge.transform.position;
