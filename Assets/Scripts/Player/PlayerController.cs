@@ -44,23 +44,27 @@ public class PlayerController : MonoBehaviour
     private Vector3 topOfLedge;
     private Vector3 desiredPosition;
     [Header("Camera Control Properties")]
-    private Vector3 followPosition;
     [SerializeField]
     private float hightOffset;
+    private Vector3 followPosition;
     [Header("Interaction Properties")]
     public GameObject interactionPrompt;
     public Transform promptPosition;
-    [SerializeField]
-    private bool interactionPosable;
+    public bool interactionPosable;
     [SerializeField]
     private bool isGrabbingIntractable;
-    private GameObject interactionTarget;
+    public Transform heldObjectLocation;
+    public GameObject interactionTarget;
+    [Header("Input Properties")]
+    public InputActionAsset playerInputActions;
+    public PlayerInput input;
     
 
     void Start()
     {
         playerBody = this.gameObject.GetComponent<Rigidbody>();
         playerAnim = this.gameObject.GetComponent<Animator>();
+        input = this.gameObject.GetComponent<PlayerInput>();
         rightFacing = this.transform.rotation;
         leftFacing = new Quaternion(0,-rightFacing.y,0,1);
         mainCam = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
@@ -109,6 +113,10 @@ public class PlayerController : MonoBehaviour
         {
             interactionPrompt.SetActive(false);
         }
+        if(isGrabbingIntractable && interactionTarget != null)
+        {
+            interactionTarget.transform.position = heldObjectLocation.position;
+        }
         interactionPrompt.transform.position = promptPosition.position;
     }
 
@@ -123,7 +131,7 @@ public class PlayerController : MonoBehaviour
             }
             if(isGrabbingIntractable)
             {
-                playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+                playerBody.velocity = new Vector3(moveDirection.x * (moveSpeed*.8f) * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
             }
         }
     }
@@ -134,20 +142,20 @@ public class PlayerController : MonoBehaviour
     /// <param name="movementValue"></param>
     void OnMove(InputValue movementValue)
     {
-        Vector2 moveVector2 = movementValue.Get<Vector2>();
-        moveDirection.y = moveVector2.y;
         //Movement logic
+        Vector2 moveVector2 = movementValue.Get<Vector2>();
         if(!isGrabbingLedge)
         {
             moveDirection.x = moveVector2.x;
         }
         else if(isGrabbingLedge)
         {
-            if(moveVector2.y > 0)
+            moveDirection.y = moveVector2.y;
+            if(moveDirection.y > 0)
             {
                 StartCoroutine(LedgeClimb());
             }
-            if(moveVector2.y < 0)
+            if(moveDirection.y < 0)
             {
                 playerAnim.SetBool("isHanging", false);
                 isGrabbingLedge = false;
@@ -158,6 +166,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Event called when collision starts.
+    /// </summary>
+    /// <param name="col"></param>
      void OnCollisionEnter(Collision col)
     {
         if(col.gameObject.TryGetComponent<Climbable>(out Climbable other) && col.gameObject.transform.position.y > this.gameObject.transform.position.y)
@@ -173,11 +185,6 @@ public class PlayerController : MonoBehaviour
                 LedgeGrab(ledge);
             }
         }
-        else if(col.gameObject.TryGetComponent<Intractable>(out Intractable other1))
-        {
-            interactionPosable = true;
-            interactionTarget = other1.gameObject;
-        }
     }
 
     /// <summary>
@@ -192,6 +199,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Event called when collision ends 
+    /// </summary>
+    /// <param name="col"></param>
     void OnCollisionExit(Collision col)
     {
         if(col.gameObject.CompareTag("Platform"))
@@ -211,18 +222,13 @@ public class PlayerController : MonoBehaviour
     {
         if(interactionPosable)
         {
-            if(interactionTarget.gameObject.TryGetComponent<Intractable>(out Intractable other))
+            if(isGrabbingIntractable)
             {
-                if(isGrabbingIntractable)
-                {
-                    other.transform.parent = null;
-                    isGrabbingIntractable = false;
-                }
-                else if(!isGrabbingLedge)
-                {
-                    other.transform.parent = this.transform;
-                    isGrabbingIntractable = true;
-                }
+                isGrabbingIntractable = false;
+            }
+            else if(!isGrabbingLedge)
+            {
+                isGrabbingIntractable = true;
             }
         }
     }
@@ -235,9 +241,16 @@ public class PlayerController : MonoBehaviour
         {
             playerBody.AddForce(transform.up * jumpForce);
         }
+        if(isGrabbingLedge)
+        {
+            StartCoroutine(LedgeClimb());
+        }
     }
 
-
+    /// <summary>
+    /// Set player into ledge hanging position. 
+    /// </summary>
+    /// <param name="ledge"></param>
     void LedgeGrab(GameObject ledge)
     {
         topOfLedge = ledge.transform.position;
@@ -255,8 +268,13 @@ public class PlayerController : MonoBehaviour
         isGrabbingLedge = true;
     }
 
+    /// <summary>
+    /// Moves player smoothly to the top of target ledge. Disables input during climb. 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator LedgeClimb()
     {
+        input.enabled = false;
         float climbTime = 0f;
         Vector3 startValue = transform.position;
         desiredPosition = topOfLedge;
@@ -268,13 +286,17 @@ public class PlayerController : MonoBehaviour
         }
         transform.position = topOfLedge;
         playerAnim.SetBool("isHanging", false);
-        isGrabbingLedge = false;
         ledge = null;
         topOfLedge = Vector3.zero;
         activeOffset = Vector3.zero;
         moveDirection = Vector2.zero;
+        isGrabbingLedge = false;
+        input.enabled = true;
     }
 
+    /// <summary>
+    /// Sets camera position to follow the player
+    /// </summary>
     void SetCameraPosition()
     {
         followPosition = new Vector3 (transform.position.x,transform.position.y + hightOffset, mainCam.transform.position.z);  
