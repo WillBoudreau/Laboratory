@@ -17,7 +17,21 @@ public class UIManager : MonoBehaviour
         SetUIFalse();
         LoadUI("MainMenuScene");
     }
-
+    void Update()
+    {
+        CheckWinCondition();
+    }
+    /// <summary>
+    /// Check the win condition
+    /// </summary>
+    void CheckWinCondition()
+    {
+        //If the player has won, load the win UI
+        if(gameManager.hasWon)
+        {
+            LoadUI("Win");
+        }
+    }
     /// <summary>
     /// Set the UI elements to false
     /// </summary>
@@ -40,6 +54,7 @@ public class UIManager : MonoBehaviour
         switch (ui)
         {
             case "Win":
+                gameManager.WinGame();
                 winMenu.SetActive(true);
                 break;
             case "MainMenuScene":

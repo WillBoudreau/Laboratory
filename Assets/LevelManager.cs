@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     [Header("Level Settings")]
     [SerializeField] private UIManager uiManager;//The UI Manager
+    [SerializeField] private GameManager gameManager;//The game manager
     void Start()
     {
         //If the UIManager is null, find the UIManager
