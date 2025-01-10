@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
             case "Settings":
                 settingsMenu.SetActive(true);
                 break;
-            case "GameScene":
+            case "Game":
                 gameManager.ResumeGame();
                 gameMenu.SetActive(true);
                 break;
