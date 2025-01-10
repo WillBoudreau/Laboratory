@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1492137304855688154}
   - component: {fileID: 5129697831992784613}
   - component: {fileID: 4943300746571500668}
+  - component: {fileID: -875103691306558785}
   m_Layer: 0
   m_Name: Box
   m_TagString: Box
@@ -29,9 +30,9 @@ Transform:
   m_GameObject: {fileID: 7532309821351990242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -1.1, z: 2.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -92,7 +93,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7532309821351990242}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 143d8bd6566f50b4485a02360eb171e9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -114,7 +115,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7532309821351990242}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -131,5 +132,17 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 56
   m_CollisionDetection: 0
+--- !u!114 &-875103691306558785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7532309821351990242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac073edb4c49bcb4bbc001cfbaec97f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
