@@ -2587,9 +2587,10 @@ GameObject:
   - component: {fileID: 922875860}
   - component: {fileID: 922875859}
   - component: {fileID: 922875862}
+  - component: {fileID: 922875863}
   m_Layer: 0
   m_Name: MovingPlatform2
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2699,6 +2700,27 @@ MonoBehaviour:
   - {fileID: 1584101814}
   currentPos: 0
   distance: 0.1
+--- !u!65 &922875863
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922875857}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2.827242, z: 1}
+  m_Center: {x: 0, y: 0.91362095, z: 0}
 --- !u!1 &929698472
 GameObject:
   m_ObjectHideFlags: 0
