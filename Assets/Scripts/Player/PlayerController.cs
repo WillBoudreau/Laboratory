@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -55,9 +56,11 @@ public class PlayerController : MonoBehaviour
     private bool isGrabbingIntractable;
     public Transform heldObjectLocation;
     public GameObject interactionTarget;
+    public TextMeshProUGUI promptText;
     [Header("Input Properties")]
     public InputActionAsset playerInputActions;
     public PlayerInput input;
+    public bool isGamepadActive;
     
 
     void Start()
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        CheckInputType();
         if(moveDirection.x != 0)
         {
             playerAnim.SetBool("isIdle", false);
@@ -116,6 +120,14 @@ public class PlayerController : MonoBehaviour
         if(isGrabbingIntractable && interactionTarget != null)
         {
             interactionTarget.transform.position = heldObjectLocation.position;
+        }
+        if(isGamepadActive)
+        {
+            promptText.text = "B";
+        }
+        else
+        {
+            promptText.text = "E";
         }
         interactionPrompt.transform.position = promptPosition.position;
     }
@@ -305,4 +317,22 @@ public class PlayerController : MonoBehaviour
             mainCam.position = followPosition;
         }
     }
+
+    /// <summary>
+    /// Checks for active input device between keyboard/mouse and gamepad. 
+    /// </summary>
+    void CheckInputType()
+    {
+        foreach (InputDevice device in input.devices)
+        {
+            if (device is Mouse || device is Keyboard)
+            {
+                isGamepadActive = false;
+            }
+            else if (device is Gamepad)
+            {
+                isGamepadActive = true;
+            }
+        }   
+    }    
 }

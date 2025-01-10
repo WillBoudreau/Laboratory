@@ -5737,9 +5737,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1666142307293482871}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d, type: 3}
+      propertyPath: promptText
+      value: 
+      objectReference: {fileID: 74847030}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d, type: 3}
       propertyPath: interactionPrompt
       value: 
       objectReference: {fileID: 1835595693}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d, type: 3}
+      propertyPath: interactionTarget
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d, type: 3}
       propertyPath: heldObjectLocation
       value: 
