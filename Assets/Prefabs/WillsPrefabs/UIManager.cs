@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,6 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;//The settings menu
     [SerializeField] private GameObject gameMenu;//The game menu
     [SerializeField] private GameObject pauseMenu;//The pause menu
+    [Header("Text References")]
+    [SerializeField] private TextMeshProUGUI winText;//The win text
     [Header("Class References")]
     [SerializeField] private GameManager gameManager;//The game manager
     void Start()
@@ -54,6 +59,7 @@ public class UIManager : MonoBehaviour
         switch (ui)
         {
             case "Win":
+                UpdateWinScreen();
                 gameManager.WinGame();
                 winMenu.SetActive(true);
                 break;
@@ -72,5 +78,12 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(true);
                 break;
         }
+    }
+    /// <summary>
+    /// Update the win screen text to reflect the level completed
+    /// </summary>
+    void UpdateWinScreen()
+    {
+        winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/3\nCOMPLETE";
     }
 }
