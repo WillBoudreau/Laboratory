@@ -14,16 +14,16 @@ public class DoorBehaviour : MonoBehaviour
     /// </summary>
     public void OpenThisDoor()
     {
-       targetIndex = 0;
-       isOpen = true;
+       targetIndex = 1;
+       isOpen = false;
     }
     /// <summary>
     /// Close the door once the player leaves the trigger
     /// </summary>
     public void CloseThisDoor()
     {
-        targetIndex = 1;
-        isOpen = false;
+        targetIndex = 0;
+        isOpen = true;
     }
     void Update()
     {
