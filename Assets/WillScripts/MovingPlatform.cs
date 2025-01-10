@@ -5,11 +5,15 @@ public class MovingPlatform : MonoBehaviour
 {
     [Header("Platform Settings")]
     [SerializeField] float speed;//Speed of the platform
-    [SerializeField] public bool canMove = true;//if the platform can move
+    [SerializeField] public bool canMove = false;//if the platform can move
     [Header("Platform Positions")]
     [SerializeField] Transform[] positions = new Transform[2];//Array of positions the platform can move to
     [SerializeField] int currentPos;//Current position of the platform
     [SerializeField] float distance = 0.1f;//The point where the platform will move to the next position
+    void Start()
+    {
+        canMove = false;
+    }
 
     void Update()
     {

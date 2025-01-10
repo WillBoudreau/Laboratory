@@ -36,7 +36,7 @@ public class Button : MonoBehaviour
             {
                 //If the box is on the button, the platform cannot move
                 //Find the MovingPlatform script and set canMove to false
-                objectToControl.GetComponent<MovingPlatform>().canMove = false;
+                objectToControl.GetComponent<MovingPlatform>().canMove = true;
             }
         }
     }
@@ -50,7 +50,7 @@ public class Button : MonoBehaviour
             {
                 //If the box is off the button, the platform can move
                 //Find the MovingPlatform script and set canMove to true
-                objectToControl.GetComponent<MovingPlatform>().canMove = true;
+                objectToControl.GetComponent<MovingPlatform>().canMove = false;
             }
         }
     }
