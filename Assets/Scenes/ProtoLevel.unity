@@ -2782,7 +2782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 879043167394e974480580e1cf91ad9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
   canMove: 0
   positions:
   - {fileID: 1546656085}
@@ -2808,8 +2808,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.827242, z: 1}
-  m_Center: {x: 0, y: 0.91362095, z: 0}
+  m_Size: {x: 1, y: 0.22, z: 1}
+  m_Center: {x: 0, y: 0.42, z: 0}
 --- !u!1 &929698472
 GameObject:
   m_ObjectHideFlags: 0
