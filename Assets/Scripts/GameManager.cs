@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Object References")]
+    public GameObject player;
+    [SerializeField]
+    private PlayerController playerCon;
+    public enum GameState{MainMenu, Gameplay, Paused, GameEnd}
+    public GameState gameState;
+    public GameState prevState;
     [Header("Game Settings")]
-    [SerializeField] private bool isPaused;//Is the game paused
+    public bool isPaused;//Is the game paused
     public bool hasWon;//Has the player won
 
+    void Start()
+    {
+        gameState = GameState.MainMenu;
+    }
     private void Update()
     {
         //If the game is paused, time scale is 0
