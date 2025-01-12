@@ -6,8 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Object References")]
     public GameObject player;
-    [SerializeField]
-    private PlayerController playerCon;
+    public PlayerController playerCon;
     public enum GameState{MainMenu, Gameplay, Paused, GameEnd}
     public GameState gameState;
     public GameState prevState;

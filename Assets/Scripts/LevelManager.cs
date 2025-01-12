@@ -44,6 +44,8 @@ public class LevelManager : MonoBehaviour
         if(scene.name.Contains("Level"))
         {
             gameManager.gameState = GameManager.GameState.Gameplay;
+            gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();
+            gameManager.playerCon.SetBoundingBox();
         }
         else
         {

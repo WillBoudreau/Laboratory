@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,8 +15,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerBody;
     [SerializeField]
     private Animator playerAnim;
-    [SerializeField]
-    private Transform mainCam;
     [Header("PlayerStats")]
     [SerializeField]
     private float moveSpeed;
@@ -48,10 +47,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 topOfLedge;
     private Vector3 desiredPosition;
     [Header("Camera Control Properties")]
-    [SerializeField]
-    private float hightOffset;
-    private Vector3 followPosition;
-    
+    public Collider2D boundingBox;
+    public CinemachineConfiner2D confiner;
     [Header("Interaction Properties")]
     public GameObject interactionPrompt;
     public Transform promptPosition;
@@ -75,7 +72,6 @@ public class PlayerController : MonoBehaviour
         input = this.gameObject.GetComponent<PlayerInput>();
         rightFacing = this.transform.rotation;
         leftFacing = new Quaternion(0,-rightFacing.y,0,1);
-        mainCam = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
     }
 
     void Update()
@@ -151,7 +147,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        SetCameraPosition();
         if(!isGrabbingLedge)
         {
             if(!isGrabbingIntractable)
@@ -336,18 +331,6 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets camera position to follow the player
-    /// </summary>
-    void SetCameraPosition()
-    {
-        followPosition = new Vector3 (transform.position.x,transform.position.y + hightOffset, mainCam.transform.position.z);  
-        if(mainCam.position != followPosition)
-        {
-            mainCam.position = followPosition;
-        }
-    }
-
-    /// <summary>
     /// Checks for active input device between keyboard/mouse and gamepad. 
     /// </summary>
     void CheckInputType()
@@ -363,5 +346,13 @@ public class PlayerController : MonoBehaviour
                 isGamepadActive = true;
             }
         }   
-    }    
+    } 
+
+    public void SetBoundingBox()
+    {
+        if(boundingBox != null)
+        {
+            confiner.m_BoundingShape2D = boundingBox;
+        }
+    }   
 }
