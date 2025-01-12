@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;//The settings menu
     [SerializeField] private GameObject gameMenu;//The game menu
     [SerializeField] private GameObject pauseMenu;//The pause menu
+    [SerializeField] private GameObject controlsMenu;//The controls menu
     [Header("Text References")]
     [SerializeField] private TextMeshProUGUI winText;//The win text
     [Header("Loading Screen UI Elements")]
@@ -53,6 +54,7 @@ public class UIManager : MonoBehaviour
         settingsMenu.SetActive(false);
         gameMenu.SetActive(false);
         pauseMenu.SetActive(false);
+        controlsMenu.SetActive(false);
     }
     /// <summary>
     /// Load the UI element based on the ui string
@@ -82,6 +84,9 @@ public class UIManager : MonoBehaviour
             case "Pause":
                 gameManager.PauseGame();
                 pauseMenu.SetActive(true);
+                break;
+            case "Controls":
+                controlsMenu.SetActive(true);
                 break;
         }
     }
