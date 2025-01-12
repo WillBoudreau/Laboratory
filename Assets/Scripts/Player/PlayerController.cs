@@ -6,6 +6,9 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Managers")]
+    [SerializeField]
+    private GameManager gameManager;
     [Header("Components")]
     [SerializeField]
     private Rigidbody playerBody;
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float hightOffset;
     private Vector3 followPosition;
+    
     [Header("Interaction Properties")]
     public GameObject interactionPrompt;
     public Transform promptPosition;
@@ -65,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         playerBody = this.gameObject.GetComponent<Rigidbody>();
         playerAnim = this.gameObject.GetComponent<Animator>();
         input = this.gameObject.GetComponent<PlayerInput>();
@@ -166,26 +171,29 @@ public class PlayerController : MonoBehaviour
     /// <param name="movementValue"></param>
     void OnMove(InputValue movementValue)
     {
-        //Movement logic
-        Vector2 moveVector2 = movementValue.Get<Vector2>();
-        if(!isGrabbingLedge)
+        if(gameManager.gameState == GameManager.GameState.Gameplay)
         {
-            moveDirection.x = moveVector2.x;
-        }
-        else if(isGrabbingLedge)
-        {
-            moveDirection.y = moveVector2.y;
-            if(moveDirection.y > 0)
+            //Movement logic
+            Vector2 moveVector2 = movementValue.Get<Vector2>();
+            if(!isGrabbingLedge)
             {
-                StartCoroutine(LedgeClimb());
+                moveDirection.x = moveVector2.x;
             }
-            if(moveDirection.y < 0)
+            else if(isGrabbingLedge)
             {
-                playerAnim.SetBool("isHanging", false);
-                isGrabbingLedge = false;
-                ledge = null;
-                topOfLedge = Vector3.zero;
-                activeOffset = Vector3.zero;
+                moveDirection.y = moveVector2.y;
+                if(moveDirection.y > 0)
+                {
+                    StartCoroutine(LedgeClimb());
+                }
+                if(moveDirection.y < 0)
+                {
+                    playerAnim.SetBool("isHanging", false);
+                    isGrabbingLedge = false;
+                    ledge = null;
+                    topOfLedge = Vector3.zero;
+                    activeOffset = Vector3.zero;
+                }
             }
         }
     }
@@ -261,13 +269,33 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnJump()
     {
-        if(isGrounded)
+        if(gameManager.gameState == GameManager.GameState.Gameplay)
         {
-            playerBody.AddForce(transform.up * jumpForce);
+            if(isGrounded)
+            {
+                playerBody.AddForce(transform.up * jumpForce);
+            }
+            if(isGrabbingLedge)
+            {
+                StartCoroutine(LedgeClimb());
+            }
         }
-        if(isGrabbingLedge)
+    }
+    /// <summary>
+    /// Event called when pause input is detected. 
+    /// </summary>
+    void OnPause()
+    {
+        if(gameManager.gameState == GameManager.GameState.Gameplay)
         {
-            StartCoroutine(LedgeClimb());
+            if(gameManager.isPaused)
+            {
+                gameManager.ResumeGame();
+            }   
+            else
+            {
+                gameManager.PauseGame();
+            }   
         }
     }
 

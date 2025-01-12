@@ -1731,7 +1731,7 @@ MonoBehaviour:
   playerBody: {fileID: 0}
   playerAnim: {fileID: 0}
   mainCam: {fileID: 0}
-  moveSpeed: 200
+  moveSpeed: 250
   jumpForce: 125
   isIdle: 0
   isGrabbingLedge: 0
@@ -1750,8 +1750,10 @@ MonoBehaviour:
   isGrabbingIntractable: 0
   heldObjectLocation: {fileID: 201126389581309903}
   interactionTarget: {fileID: 0}
+  promptText: {fileID: 0}
   playerInputActions: {fileID: -944628639613478452, guid: 21347e7e14cf3d0488e7c472a503656d, type: 3}
   input: {fileID: 1666142307545511599}
+  isGamepadActive: 0
 --- !u!114 &1666142307545511599
 MonoBehaviour:
   m_ObjectHideFlags: 0

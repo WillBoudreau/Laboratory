@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Class References")]
+    [SerializeField] private GameManager gameManager;//The game manager
+    [SerializeField] private LevelManager levelManager;
     [Header("UI Elements")]
     [SerializeField] private GameObject winMenu;//The win menu
     [SerializeField] private GameObject mainMenu;//The main menu
@@ -15,8 +18,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;//The pause menu
     [Header("Text References")]
     [SerializeField] private TextMeshProUGUI winText;//The win text
-    [Header("Class References")]
-    [SerializeField] private GameManager gameManager;//The game manager
+    [Header("Loading Screen UI Elements")]
+    public GameObject loadingScreen;
+    public CanvasGroup loadingScreenCanvasGroup;
+    public Image loadingBar;
+    public float fadeTime;
     void Start()
     {
         SetUIFalse();
@@ -85,5 +91,93 @@ public class UIManager : MonoBehaviour
     void UpdateWinScreen()
     {
         winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/3\nCOMPLETE";
+    }
+
+    // <summary>
+    /// Starts UI loading screen process.
+    /// </summary>
+    /// <param name="targetPanel"></param>
+    public void UILoadingScreen(GameObject targetPanel)
+    {
+        StartCoroutine(LoadingUIFadeIN());
+        StartCoroutine(DelayedSwitchUIPanel(fadeTime, targetPanel));
+    }
+
+    /// <summary>
+    /// Fades loading scnreen out.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator LoadingUIFadeOut()
+    {
+        //Debug.Log("Starting Fade out");
+
+        float timer = 0;
+
+        while (timer < fadeTime)
+        {
+            loadingScreenCanvasGroup.alpha = Mathf.Lerp(1, 0, timer/fadeTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        loadingScreenCanvasGroup.alpha = 0;
+        loadingScreen.SetActive(false);
+        loadingBar.fillAmount = 0;
+        //Debug.Log("Ending Fade out");
+    }
+    /// <summary>
+    /// Fades Loading screen in.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator LoadingUIFadeIN()
+    {
+        //Debug.Log("Starting Fade in");
+        float timer = 0;
+        loadingScreen.SetActive(true);
+
+        while (timer < fadeTime)
+        {
+            loadingScreenCanvasGroup.alpha = Mathf.Lerp(0, 1, timer / fadeTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        loadingScreenCanvasGroup.alpha = 1;
+
+        //Debug.Log("Ending Fadein");
+        StartCoroutine(LoadingBarProgress());
+    }
+    /// <summary>
+    /// Sets the loading bar progress to average progress of all loading. 
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator LoadingBarProgress()
+    {
+        //Debug.Log("Starting Progress Bar");
+        while (levelManager.scenesToLoad.Count <= 0)
+        {
+            //waiting for loading to begin
+            yield return null;
+        }
+        while (levelManager.scenesToLoad.Count > 0)
+        {
+            loadingBar.fillAmount = levelManager.GetLoadingProgress();
+            yield return null;
+        }
+        yield return new WaitForEndOfFrame();
+        //Debug.Log("Ending Progress Bar");
+        StartCoroutine(LoadingUIFadeOut());
+    }
+    /// <summary>
+    /// used for fade in fade out for loading screen UI. 
+    /// </summary>
+    /// <param name="time"></param>
+    /// <param name="uiPanel"></param>
+    /// <returns></returns>
+    private IEnumerator DelayedSwitchUIPanel(float time, GameObject uiPanel)
+    {
+        yield return new WaitForSeconds(time);
+        SetUIFalse();
+        uiPanel.SetActive(true);
     }
 }
