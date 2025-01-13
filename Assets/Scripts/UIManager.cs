@@ -78,11 +78,9 @@ public class UIManager : MonoBehaviour
                 settingsMenu.SetActive(true);
                 break;
             case "Game":
-                gameManager.ResumeGame();
                 gameMenu.SetActive(true);
                 break;
             case "Pause":
-                gameManager.PauseGame();
                 pauseMenu.SetActive(true);
                 break;
             case "Controls":
