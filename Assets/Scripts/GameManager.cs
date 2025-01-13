@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Object References")]
     public GameObject player;
+    public UIManager uiManager;
     public PlayerController playerCon;
     public enum GameState{MainMenu, Gameplay, Paused, GameEnd}
     public GameState gameState;
@@ -20,13 +21,17 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        CheckGamePause();
+    }
+    void CheckGamePause()
+    {
         //If the game is paused, time scale is 0
-        if(isPaused | hasWon)
+        if (isPaused | hasWon)
         {
             Time.timeScale = 0;
         }
         //If the game is not paused, time scale is 1
-        else
+        else if (!isPaused)
         {
             Time.timeScale = 1;
         }
@@ -34,6 +39,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         hasWon = false;
+        isPaused = false;
     }
     public void WinGame()
     {
@@ -46,6 +52,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         isPaused = true;
+        uiManager.LoadUI("Pause");
     }
     /// <summary>
     /// Resume the game
@@ -53,5 +60,6 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         isPaused = false;
+        uiManager.LoadUI("Game");
     }
 }
