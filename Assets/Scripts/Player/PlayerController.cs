@@ -348,6 +348,9 @@ public class PlayerController : MonoBehaviour
         }   
     } 
 
+    /// <summary>
+    /// Sets camera bounding shape.
+    /// </summary>
     public void SetBoundingBox()
     {
         if(boundingBox != null)
