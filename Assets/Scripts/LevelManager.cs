@@ -84,7 +84,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (AsyncOperation operation in scenesToLoad)
         {
-            totalprogress += operation.progress;
+            totalprogress += operation.progress * Time.deltaTime;
         }
 
         return totalprogress / scenesToLoad.Count;
