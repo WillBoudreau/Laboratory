@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     public bool interactionPosable;
     [SerializeField]
     private bool isGrabbingIntractable;
-    public Transform heldObjectLocation;
+    public GameObject heldObjectLocation;
     public GameObject interactionTarget;
     public TextMeshProUGUI promptText;
     [Header("Input Properties")]
@@ -132,7 +132,12 @@ public class PlayerController : MonoBehaviour
         }
         if(isGrabbingIntractable && interactionTarget != null)
         {
-            interactionTarget.transform.position = heldObjectLocation.position;
+            interactionTarget.transform.position = heldObjectLocation.transform.position;
+            heldObjectLocation.GetComponent<Collider>().enabled = true;
+        }
+        else
+        {
+            heldObjectLocation.GetComponent<Collider>().enabled = false;
         }
         if(isGamepadActive)
         {
