@@ -14,7 +14,10 @@ public class BoxSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        /// <summary>
+        /// Spawns a box at the spawn point
+        /// </summary>
+        //InvokeRepeating("SpawnBox", spawnDelay, spawnTime);
     }
     /// <summary>
     /// Spawns a box at the spawn point after running a check to make sure not to spawn a box if one is already there
