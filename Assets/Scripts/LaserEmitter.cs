@@ -15,6 +15,7 @@ public class LaserEmitter : MonoBehaviour
     private Ray ray;
     private RaycastHit raycastHit;
     private Vector3 laserDirection;
+    public LaserReceiver laserReceiver;
 
     void Awake()
     {
@@ -37,8 +38,21 @@ public class LaserEmitter : MonoBehaviour
                 lineRenderer.SetPosition(lineRenderer.positionCount-1,raycastHit.point);
                 remainingLength -= Vector3.Distance(ray.origin,raycastHit.point);
                 ray = new Ray(raycastHit.point, Vector3.Reflect(ray.direction, raycastHit.normal));
-                if(raycastHit.collider.tag != "Reflector")
+                if(raycastHit.collider.tag == "Receiver")
+                {
+                    laserReceiver = raycastHit.collider.gameObject.GetComponent<LaserReceiver>();
+                    laserReceiver.isReceivingLaser = true;
                     break;
+                }
+                else if(raycastHit.collider.tag != "Reflector")
+                {
+                    if(laserReceiver != null)
+                    {
+                        laserReceiver.isReceivingLaser = false;
+                        laserReceiver = null;
+                    }
+                    break;
+                }
             }
             else
             {
