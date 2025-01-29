@@ -39,23 +39,18 @@ public class MovingPlatform : MonoBehaviour
         // Get the target position the platform is moving towards
         Vector3 targetPos = positions[currentPos].position;
 
-        // If there is no obstacle, continue moving towards the target
-        if (!CheckPlatformInterference(targetPos))
-        {
-            previousPosition = transform.position; // Update the previous position as platform moves
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        // Move towards the target position
+        previousPosition = transform.position; // Update the previous position as platform moves
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-            // Check if platform has reached the target position
-            if (Vector3.Distance(transform.position, targetPos) <= distance)
-            {
-                // Move to the next position in the array (looping)
-                currentPos = (currentPos + 1) % positions.Length;
-            }
-        }
-        else
+        // Check if platform has reached the target position
+        if (Vector3.Distance(transform.position, targetPos) <= distance)
         {
-            // If an obstacle is detected, move the platform back to the previous position
-            transform.position = Vector3.MoveTowards(transform.position, previousPosition, speed * Time.deltaTime);
+            currentPos = (currentPos + 1) % positions.Length;
+        }
+        else if (CheckPlatformInterference(targetPos))
+        {
+            currentPos = (currentPos + 1) % positions.Length;
         }
     }
 
