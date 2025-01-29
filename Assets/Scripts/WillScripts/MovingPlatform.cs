@@ -50,6 +50,9 @@ public class MovingPlatform : MonoBehaviour
         }
         else if (CheckPlatformInterference(targetPos))
         {
+            // Move back to the previous position if an obstacle is detected
+            //Vector3 direction = (previousPosition - transform.position).normalized;
+            //transform.position += direction * speed * Time.deltaTime;
             currentPos = (currentPos + 1) % positions.Length;
         }
     }
