@@ -10,15 +10,11 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] Transform[] positions = new Transform[2]; // Array of positions the platform can move to
     [SerializeField] int currentPos; // Current position of the platform
     [SerializeField] float distance = 0.1f; // The point where the platform will move to the next position
-    [SerializeField] LayerMask obstacleLayer; // Layer mask to specify which layers are considered obstacles
-
-    [SerializeField] private Vector3 originalPosition; // Store the original position of the platform
     private Vector3 previousPosition; // Store the previous position of the platform
 
     void Start()
     {
         canMove = false;
-        originalPosition = transform.position; // Initialize the original position
         previousPosition = transform.position; // Initialize the previous position
     }
 
