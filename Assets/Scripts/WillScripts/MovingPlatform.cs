@@ -71,7 +71,7 @@ public class MovingPlatform : MonoBehaviour
     {
         // Log a message when the platform collides with another object
         Debug.Log("Platform collided with " + collision.gameObject.name);
-        if(collision.gameObject != this.gameObject)
+        if(collision.gameObject != this.gameObject && collision.gameObject.tag != "Player")
         {
             if(Vector3.Distance(transform.position, previousPosition) <= 1f)
             {
