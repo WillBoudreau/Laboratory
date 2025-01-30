@@ -48,24 +48,7 @@ public class MovingPlatform : MonoBehaviour
         {
             currentPos = (currentPos + 1) % positions.Length;
         }
-        else if (CheckPlatformInterference(targetPos))
-        {
-            // Move back to the previous position if an obstacle is detected
-            //Vector3 direction = (previousPosition - transform.position).normalized;
-            //transform.position += direction * speed * Time.deltaTime;
-            currentPos = (currentPos + 1) % positions.Length;
-        }
     }
-
-    /// <summary>
-    /// Check for any interference with the platform's movement
-    /// </summary>
-    bool CheckPlatformInterference(Vector3 targetPos)
-    {
-        // Check if there is any obstacle between the platform's current position and the target position
-        return Physics.Linecast(transform.position, targetPos, obstacleLayer);
-    }
-
     void OnTriggerEnter(Collider other)
     {
         // If the object is the player, make the player a child of the platform
@@ -81,6 +64,20 @@ public class MovingPlatform : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.transform.parent = null;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Log a message when the platform collides with another object
+        Debug.Log("Platform collided with " + collision.gameObject.name);
+        if(collision.gameObject != this.gameObject)
+        {
+            if(Vector3.Distance(transform.position, previousPosition) <= 1f)
+            {
+                // If the platform is not moving, reverse the direction
+                currentPos = (currentPos + 1) % positions.Length;
+            }
         }
     }
 }
