@@ -1,9 +1,9 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!5 &1
-TimeManager:
-  m_ObjectHideFlags: 0
-  Fixed Timestep: 0.02
-  Maximum Allowed Timestep: 0.33333334
-  m_TimeScale: 1
-  Maximum Particle Timestep: 0.03
+TimeManager:                   # This object configures Unity's global time settings.
+  m_ObjectHideFlags: 0         # Hide flags for the object; 0 means no special hiding.
+  Fixed Timestep: 0.02         # The interval (in seconds) at which physics updates (FixedUpdate) occur.
+  Maximum Allowed Timestep: 0.33333334  # Caps the timestep when the frame rate is low, preventing excessively long physics steps.
+  m_TimeScale: 1               # Global time scale; 1 represents normal speed, <1 for slow-motion, and >1 for fast-motion.
+  Maximum Particle Timestep: 0.03   # Caps the timestep for particle simulation, improving accuracy at lower frame rates.
