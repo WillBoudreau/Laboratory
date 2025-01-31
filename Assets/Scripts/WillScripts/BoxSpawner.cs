@@ -10,19 +10,10 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoint;//The spawn point
     [SerializeField] private float spawnTime = 2f;//The time between spawns
     [SerializeField] private float spawnDelay = 1f;//The delay before the first spawn
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        /// <summary>
-        /// Spawns a box at the spawn point
-        /// </summary>
-        //InvokeRepeating("SpawnBox", spawnDelay, spawnTime);
-    }
     /// <summary>
     /// Spawns a box at the spawn point after running a check to make sure not to spawn a box if one is already there
     /// </summary>
-    void SpawnBox()
+    public void SpawnBox()
     {
         if(spawnedBoxes.Length > 0)
         {
