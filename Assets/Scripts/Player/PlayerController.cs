@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using Cinemachine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,6 +34,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDirection;
     private Quaternion rightFacing;
     private Quaternion leftFacing;
+    [Header("Player Damage Properties")]
+    [SerializeField]
+    private bool isDead;
+    [SerializeField]
+    private bool isHurt;
+    public float maxFallHight;
     [Header("Ledge Grab Properties")]
     [SerializeField]
     private Vector3 activeOffset;
@@ -55,13 +62,17 @@ public class PlayerController : MonoBehaviour
     public bool interactionPosable;
     [SerializeField]
     private bool isGrabbingIntractable;
-    public GameObject heldObjectLocation;
     public GameObject interactionTarget;
     public TextMeshProUGUI promptText;
     [Header("Input Properties")]
     public InputActionAsset playerInputActions;
     public PlayerInput input;
     public bool isGamepadActive;
+    [Header("Fall Check Properties")]
+    public float lastFallHight;
+    public  Vector3 launchPosition;
+    public Vector3 landingPosition;
+
     
 
     void Start()
@@ -72,6 +83,11 @@ public class PlayerController : MonoBehaviour
         input = this.gameObject.GetComponent<PlayerInput>();
         rightFacing = this.transform.rotation;
         leftFacing = new Quaternion(0,-rightFacing.y,0,1);
+    }
+
+    void Awake()
+    {
+        isDead = false;
     }
 
     void Update()
@@ -132,12 +148,7 @@ public class PlayerController : MonoBehaviour
         }
         if(isGrabbingIntractable && interactionTarget != null)
         {
-            interactionTarget.transform.position = heldObjectLocation.transform.position;
-            heldObjectLocation.GetComponent<Collider>().enabled = true;
-        }
-        else
-        {
-            heldObjectLocation.GetComponent<Collider>().enabled = false;
+            interactionTarget.GetComponent<Rigidbody>().velocity = playerBody.velocity;
         }
         if(isGamepadActive)
         {
@@ -204,18 +215,9 @@ public class PlayerController : MonoBehaviour
     /// <param name="col"></param>
      void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.TryGetComponent<Climbable>(out Climbable other) && col.gameObject.transform.position.y > this.gameObject.transform.position.y)
+        if(col.gameObject.CompareTag("Platform") || col.gameObject.CompareTag("Box"))
         {
-            if(isFacingLeft && other.gameObject.transform.position.x < transform.position.x)
-            {
-                ledge = other.gameObject;
-                LedgeGrab(ledge);
-            }
-            if(!isFacingLeft && other.gameObject.transform.position.x > transform.position.x)
-            {
-                ledge = other.gameObject;
-                LedgeGrab(ledge);
-            }
+            SetLandingPosition();
         }
     }
 
@@ -225,6 +227,10 @@ public class PlayerController : MonoBehaviour
     /// <param name="col"></param>
     void OnCollisionStay(Collision col)
     {
+        if(col.gameObject.CompareTag("Box") && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
+        {
+            isGrounded = true;
+        }
         if(col.gameObject.CompareTag("Platform"))
         {
             isGrounded = true;
@@ -237,9 +243,10 @@ public class PlayerController : MonoBehaviour
     /// <param name="col"></param>
     void OnCollisionExit(Collision col)
     {
-        if(col.gameObject.CompareTag("Platform"))
+        if(col.gameObject.CompareTag("Platform") || col.gameObject.CompareTag("Box"))
         {
             isGrounded = false;
+            SetLaunchPosition();
         }
         else if(col.gameObject.TryGetComponent<Intractable>(out Intractable other))
         {
@@ -296,6 +303,23 @@ public class PlayerController : MonoBehaviour
             {
                 gameManager.PauseGame();
             }   
+        }
+    }
+
+    public void GrabTriggered(GameObject trigger)
+    {
+        if(trigger.TryGetComponent<Climbable>(out Climbable other) && trigger.transform.position.y > this.gameObject.transform.position.y)
+        {
+            if(isFacingLeft && other.gameObject.transform.position.x < transform.position.x)
+            {
+                ledge = trigger;
+                LedgeGrab(ledge);
+            }
+            if(!isFacingLeft && other.gameObject.transform.position.x > transform.position.x)
+            {
+                ledge = other.gameObject;
+                LedgeGrab(ledge);
+            }
         }
     }
 
@@ -362,5 +386,35 @@ public class PlayerController : MonoBehaviour
         {
             confiner.m_BoundingShape2D = boundingBox;
         }
-    }   
+    }
+
+    private void SetLaunchPosition()
+    {
+        launchPosition = transform.position;
+    }
+    private void SetLandingPosition()
+    {
+        landingPosition = transform.position;
+        CheckForFall();
+    }
+
+    private void CheckForFall()
+    {
+        lastFallHight = launchPosition.y - landingPosition.y;
+        if(launchPosition.y - landingPosition.y >= maxFallHight)
+        {
+            TakeDamage();
+        }
+    }
+    public void TakeDamage()
+    {
+        if(isHurt)
+        {
+            isDead = true;
+        }
+        else
+        {
+            isHurt = true;
+        }
+    }
 }

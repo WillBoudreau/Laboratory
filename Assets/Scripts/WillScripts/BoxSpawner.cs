@@ -28,7 +28,7 @@ public class BoxSpawner : MonoBehaviour
     void InstantiateBox()
     {
         // Instantiate a box at the spawn point
-        spawnedBox = Instantiate(boxPrefab, spawnPoint.position, Quaternion.identity);
+        spawnedBox = Instantiate(boxPrefab, spawnPoint.position, boxPrefab.transform.rotation);
     }
 
     void OnTriggerEnter(Collider other)
