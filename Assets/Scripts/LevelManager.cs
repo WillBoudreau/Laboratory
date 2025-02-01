@@ -28,8 +28,15 @@ public class LevelManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(sceneName);
-        uIManager.LoadUI(sceneName);
+        if(sceneName.Contains("L_"))
+        {
+            uIManager.UILoadingScreen(uIManager.gameMenu);
+        }
+        if(sceneName.Contains("MainMenu"))
+        {
+            uIManager.UILoadingScreen(uIManager.mainMenu); 
+        }  
+        StartCoroutine(WaitForScreenLoad(sceneName));
     }
     /// <summary>
     /// Quit the game function

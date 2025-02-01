@@ -11,10 +11,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;//The game manager
     [SerializeField] private LevelManager levelManager;
     [Header("UI Elements")]
-    [SerializeField] private GameObject winMenu;//The win menu
-    [SerializeField] private GameObject mainMenu;//The main menu
+    public GameObject winMenu;//The win menu
+    public GameObject mainMenu;//The main menu
     [SerializeField] private GameObject settingsMenu;//The settings menu
-    [SerializeField] private GameObject gameMenu;//The game menu
+    public GameObject gameMenu;//The game menu
     [SerializeField] private GameObject pauseMenu;//The pause menu
     [SerializeField] private GameObject controlsMenu;//The controls menu
     [Header("Text References")]
