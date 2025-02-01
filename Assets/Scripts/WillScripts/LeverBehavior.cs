@@ -17,7 +17,14 @@ public class LeverBehavior : MonoBehaviour
         //If the object to control is a door
         if(objectToControl.tag == "Door")
         {
-           objectToControl.GetComponent<DoorBehaviour>().OpenThisDoor();
+            if(objectToControl.GetComponent<DoorBehaviour>().isOpen)
+            {
+                objectToControl.GetComponent<DoorBehaviour>().CloseThisDoor();
+            }
+            else
+            {
+                objectToControl.GetComponent<DoorBehaviour>().OpenThisDoor();
+            }
         }
         //If the object to control is a moving platform
         else if(objectToControl.tag == "Platform")

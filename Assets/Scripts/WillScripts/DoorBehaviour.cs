@@ -10,7 +10,7 @@ public class DoorBehaviour : MonoBehaviour
     [SerializeField] private GameObject[] positions = new GameObject[2];//The positions the door can move to,FOR INSPECTOR Closed first then Open
     [SerializeField] private float speed;//The speed of the door
     [SerializeField] private float distance = 0.1f;//The point where the door will move to the next position
-    [SerializeField] private bool isOpen = false;//If the door is open
+    public bool isOpen = false;//If the door is open
     [SerializeField] private int targetIndex = 0;
     /// <summary>
     /// Move the door to the open position
@@ -18,7 +18,7 @@ public class DoorBehaviour : MonoBehaviour
     public void OpenThisDoor()
     {
        targetIndex = 1;
-       isOpen = false;
+       isOpen = true;
     }
     /// <summary>
     /// Close the door once the player leaves the trigger
@@ -26,7 +26,7 @@ public class DoorBehaviour : MonoBehaviour
     public void CloseThisDoor()
     {
         targetIndex = 0;
-        isOpen = true;
+        isOpen = false;
     }
     void Update()
     {
@@ -34,12 +34,12 @@ public class DoorBehaviour : MonoBehaviour
         if(doorType == DoorType.UnPowered)
         {
            //If the door is open, move the door to the open position
-            if(isOpen)
+            if(!isOpen)
             {
                 MoveDoor();
             }
             //If the door is closed, move the door to the closed position
-            else if(!isOpen && targetIndex == 1)
+            else if(isOpen && targetIndex == 1)
             {
                 MoveDoor();
             }
@@ -47,11 +47,11 @@ public class DoorBehaviour : MonoBehaviour
         //If the door is powered, only move the door when the player powers the door
         else if(doorType == DoorType.Powered)
         {
-            if(isOpen)
+            if(!isOpen)
             {
                 MoveDoor();
             }
-            else if(!isOpen && targetIndex == 1)
+            else if(isOpen && targetIndex == 1)
             {
                 MoveDoor();
             }
