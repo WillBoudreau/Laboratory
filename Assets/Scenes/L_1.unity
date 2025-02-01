@@ -13032,6 +13032,7 @@ GameObject:
   - component: {fileID: 1469758469}
   - component: {fileID: 1469758468}
   - component: {fileID: 1469758471}
+  - component: {fileID: 1469758472}
   m_Layer: 0
   m_Name: powered door (5)
   m_TagString: Door
@@ -13145,6 +13146,27 @@ MonoBehaviour:
   distance: 0.1
   isOpen: 0
   targetIndex: 0
+--- !u!65 &1469758472
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469758466}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.5015949, z: 1}
+  m_Center: {x: -0.0000019073486, y: -0.25078842, z: 0}
 --- !u!1 &1476609711
 GameObject:
   m_ObjectHideFlags: 0
@@ -15697,9 +15719,10 @@ GameObject:
   - component: {fileID: 1782186406}
   - component: {fileID: 1782186405}
   - component: {fileID: 1782186404}
+  - component: {fileID: 1782186407}
   m_Layer: 0
   m_Name: powered door (9)
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15790,6 +15813,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782186402}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1782186407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782186402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e04633afc45aa44b8a75f5cb9efff89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorType: 1
+  positions:
+  - {fileID: 1384272156}
+  - {fileID: 314730459}
+  speed: 3
+  distance: 0.1
+  isOpen: 0
+  targetIndex: 0
 --- !u!1 &1785903509
 GameObject:
   m_ObjectHideFlags: 0
@@ -17678,7 +17721,7 @@ Transform:
   m_GameObject: {fileID: 2038332898}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23, y: -19.5, z: 0}
+  m_LocalPosition: {x: 24.73, y: -19.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18359,7 +18402,7 @@ Transform:
   m_GameObject: {fileID: 2141107690}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: -19.5, z: 0}
+  m_LocalPosition: {x: 1.14, y: -19.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18448,7 +18491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9119f03c4465844b1d85d1ee1a00fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 0}
+  objectToControl: {fileID: 1782186402}
 --- !u!4 &432378676229487163 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2209404230055565959, guid: 7f917b9262444744ea5c75d197050b1c,

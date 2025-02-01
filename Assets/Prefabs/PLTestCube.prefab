@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 1425524571372095295}
   - component: {fileID: 3994432066944213329}
   - component: {fileID: 4889952233642357674}
+  - component: {fileID: 693314901368571494}
   m_Layer: 0
   m_Name: PLTestCube
   m_TagString: Box
@@ -191,3 +192,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034f3a07e2b8580498b605493191fffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxLifeTime: 30
+  isPlayerInReach: 0
+--- !u!65 &693314901368571494
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3727949763740477352}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.2852144, y: 2.9016736, z: 2.8310165}
+  m_Center: {x: 0.0662179, y: 0.9508368, z: -0.10707998}
