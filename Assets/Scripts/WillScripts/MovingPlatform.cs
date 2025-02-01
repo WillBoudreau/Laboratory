@@ -16,7 +16,6 @@ public class MovingPlatform : MonoBehaviour
 
     void Start()
     {
-        canMove = false;
         previousPosition = transform.position; // Initialize the previous position
         if(singleton == null)
         {
@@ -58,6 +57,14 @@ public class MovingPlatform : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.transform.parent = this.transform;
+        }
+        else if(other.gameObject.tag == "Door")
+        {
+            if(Vector3.Distance(transform.position, previousPosition) <= 1f)
+            {
+                // If the platform is not moving, reverse the direction
+                currentPos = (currentPos + 1) % positions.Length;
+            }
         }
     }
 
