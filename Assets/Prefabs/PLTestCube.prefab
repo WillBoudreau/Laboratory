@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3994432066944213329}
   - component: {fileID: 1425524571372095295}
   - component: {fileID: 3462999211997830422}
+  - component: {fileID: 1223222257481300352}
   m_Layer: 0
   m_Name: PLTestCube
   m_TagString: Box
@@ -146,3 +147,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 24
   m_CollisionDetection: 0
+--- !u!114 &1223222257481300352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3727949763740477352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034f3a07e2b8580498b605493191fffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
