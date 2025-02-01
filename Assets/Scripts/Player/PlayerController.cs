@@ -123,8 +123,6 @@ public class PlayerController : MonoBehaviour
         }
         if(isGrabbingLedge == true)
         {
-            topOfLedge = ledge.transform.position;
-            topOfLedge.y = ledge.transform.position.y * 1.1f;
             if(ledge.transform.position.x < this.gameObject.transform.position.x)
             {
                 activeOffset = leftOffset + ledge.transform.position;
@@ -332,9 +330,11 @@ public class PlayerController : MonoBehaviour
             }
             if(!isFacingLeft && other.gameObject.transform.position.x > transform.position.x)
             {
-                ledge = other.gameObject;
+                ledge = trigger;
                 LedgeGrab(ledge);
             }
+            topOfLedge = ledge.transform.position;
+            topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
         }
     }
 
