@@ -41,6 +41,11 @@ public class GameManager : MonoBehaviour
         hasWon = false;
         isPaused = false;
     }
+    public void NextLevel()
+    {
+        hasWon = false;
+        isPaused = false;
+    }
     public void WinGame()
     {
         hasWon = true;

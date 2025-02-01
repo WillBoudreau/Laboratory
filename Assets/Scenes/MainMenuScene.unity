@@ -1364,8 +1364,8 @@ Transform:
   - {fileID: 1576021097}
   - {fileID: 1779481802}
   - {fileID: 1681775153}
-  - {fileID: 6596099875396560236}
   - {fileID: 5063505945303972539}
+  - {fileID: 6596099875396560236}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &538966831
@@ -1520,7 +1520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &555704618
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4882,7 +4882,7 @@ GameObject:
   - component: {fileID: 1676225486}
   - component: {fileID: 1676225485}
   m_Layer: 5
-  m_Name: MainMenuButton
+  m_Name: NextLevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4954,7 +4954,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 421211238}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: NextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4973,7 +4973,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainMenuScene
+          m_StringArgument: L_1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1676225486
@@ -5669,7 +5669,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: L_Tutorial
+          m_StringArgument: L_1
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1576021096}
@@ -5779,7 +5779,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Main Menu
+  m_text: Next Test
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

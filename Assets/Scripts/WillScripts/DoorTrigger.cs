@@ -21,10 +21,8 @@ public class DoorTrigger : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered");
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("Player Triggered");
            OpenDoor();
         }
     }
