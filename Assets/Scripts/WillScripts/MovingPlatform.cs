@@ -4,7 +4,7 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour 
 {
     [Header("Class calls")]
-    [SerializeField] private Singleton singleton;//The singleton object
+    [SerializeField] private Singleton singleton; // The singleton object
     [Header("Platform Settings")]
     [SerializeField] float speed; // Speed of the platform
     [SerializeField] public bool canMove = false; // if the platform can move
@@ -51,6 +51,7 @@ public class MovingPlatform : MonoBehaviour
             currentPos = (currentPos + 1) % positions.Length;
         }
     }
+
     void OnTriggerEnter(Collider other)
     {
         // If the object is the player, make the player a child of the platform

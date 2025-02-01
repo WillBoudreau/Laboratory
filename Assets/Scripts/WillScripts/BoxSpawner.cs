@@ -5,46 +5,35 @@ using UnityEngine;
 public class BoxSpawner : MonoBehaviour
 {
     [Header("Box Settings")]
-    [SerializeField] private GameObject boxPrefab;//The box prefab
-    [SerializeField] private GameObject[] spawnedBoxes;//The spawned boxes
-    [SerializeField] private Transform spawnPoint;//The spawn point
-    [SerializeField] private float spawnTime = 2f;//The time between spawns
-    [SerializeField] private float spawnDelay = 1f;//The delay before the first spawn
+    [SerializeField] private GameObject boxPrefab; // The box prefab
+    [SerializeField] private GameObject spawnedBox; // The spawned box
+    [SerializeField] private Transform spawnPoint; // The spawn point
+    [SerializeField] private float spawnTime = 2f; // The time between spawns
+    [SerializeField] private float spawnDelay = 1f; // The delay before the first spawn
+
     /// <summary>
-    /// Spawns a box at the spawn point after running a check to make sure not to spawn a box if one is already there
+    /// Spawns a box at the spawn point if there is no box already spawned
     /// </summary>
     public void SpawnBox()
     {
-        if(spawnedBoxes.Length > 0)
-        {
-            foreach(GameObject box in spawnedBoxes)
-            {
-                if(box == null)
-                {
-                    InstantiateBox();
-                }
-            }
-        }
-        else
+        if (spawnedBox == null)
         {
             InstantiateBox();
         }
     }
+
     /// <summary>
     /// Instantiates a box at the spawn point
     /// </summary>
     void InstantiateBox()
     {
-        //Instantiate a box at the spawn point
-        GameObject box = Instantiate(boxPrefab, spawnPoint.position, Quaternion.identity);
-        //Add the box to the spawned boxes array
-        spawnedBoxes = new GameObject[spawnedBoxes.Length + 1];
-        //Set the last element in the array to the box
-        spawnedBoxes[spawnedBoxes.Length - 1] = box;
+        // Instantiate a box at the spawn point
+        spawnedBox = Instantiate(boxPrefab, spawnPoint.position, Quaternion.identity);
     }
+
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             InvokeRepeating("SpawnBox", spawnDelay, spawnTime);
         }

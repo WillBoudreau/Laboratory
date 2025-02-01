@@ -6,9 +6,9 @@ public class BoxBehavior : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Reciever")
+        if(other.gameObject.tag == "Receiver")
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }
