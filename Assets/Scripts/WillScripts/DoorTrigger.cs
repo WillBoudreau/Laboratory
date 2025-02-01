@@ -5,12 +5,14 @@ using UnityEngine;
 public class DoorTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject door;//The door object
+    public AudioSource doorAudio;
     /// <summary>
     /// Open the door when the player enters the trigger
     /// </summary>
     void OpenDoor()
     {
         door.GetComponent<DoorBehaviour>().OpenThisDoor();
+        doorAudio.Play();
     }
     /// <summary>
     /// Close the door when the player exits the trigger
@@ -18,6 +20,7 @@ public class DoorTrigger : MonoBehaviour
     void CloseDoor()
     {
         door.GetComponent<DoorBehaviour>().CloseThisDoor();
+        doorAudio.Play();
     }
     public void OnTriggerEnter(Collider other)
     {
