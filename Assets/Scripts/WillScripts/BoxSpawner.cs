@@ -35,7 +35,7 @@ public class BoxSpawner : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            InvokeRepeating("SpawnBox", spawnDelay, spawnTime);
+            Invoke("SpawnBox", spawnDelay);
         }
     }
 }
