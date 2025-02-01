@@ -6721,8 +6721,8 @@ PrefabInstance:
       objectReference: {fileID: 2098503433}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
-      propertyPath: jumpForce
-      value: 150
+      propertyPath: pushForce
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
@@ -6731,14 +6731,19 @@ PrefabInstance:
       objectReference: {fileID: 74847030}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
+      propertyPath: maxFallHight
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: pushDistance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
       propertyPath: interactionPrompt
       value: 
       objectReference: {fileID: 1835595693}
-    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
-        type: 3}
-      propertyPath: heldObjectLocation
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

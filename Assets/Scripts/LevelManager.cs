@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name.Contains("L_"))
+        if(scene.name.StartsWith("L_"))
         {
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();
