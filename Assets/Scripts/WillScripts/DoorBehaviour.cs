@@ -7,7 +7,7 @@ public class DoorBehaviour : MonoBehaviour
     [SerializeField] private enum DoorType {UnPowered, Powered};//The type of door
     [SerializeField] private DoorType doorType;//The type of door
     [Header("Door Controls")]
-    [SerializeField] private GameObject[] positions = new GameObject[2];//The positions the door can move to
+    [SerializeField] private GameObject[] positions = new GameObject[2];//The positions the door can move to,FOR INSPECTOR Closed first then Open
     [SerializeField] private float speed;//The speed of the door
     [SerializeField] private float distance = 0.1f;//The point where the door will move to the next position
     [SerializeField] private bool isOpen = false;//If the door is open
