@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
     private bool isGrabbingIntractable;
     public GameObject interactionTarget;
     public TextMeshProUGUI promptText;
+    public float pushDistance;
+    public float currentDistance;
     [Header("Input Properties")]
     public InputActionAsset playerInputActions;
     public PlayerInput input;
@@ -148,7 +150,20 @@ public class PlayerController : MonoBehaviour
         }
         if(isGrabbingIntractable && interactionTarget != null)
         {
-            interactionTarget.GetComponent<Rigidbody>().velocity = playerBody.velocity;
+            currentDistance = Vector3.Distance(transform.position,interactionTarget.transform.position);
+            if(Vector3.Distance(transform.position, interactionTarget.transform.position) <= pushDistance)
+            {
+                if(moveDirection.x != 0)
+                {
+                    interactionTarget.transform.position += new Vector3(moveDirection.x * (Time.deltaTime * 4),0,0);
+                }
+            }
+        }
+        if(interactionTarget != null && Vector3.Distance(transform.position,interactionTarget.transform.position) > pushDistance)
+        {
+
+            isGrabbingIntractable = false;
+            interactionTarget = null;
         }
         if(isGamepadActive)
         {

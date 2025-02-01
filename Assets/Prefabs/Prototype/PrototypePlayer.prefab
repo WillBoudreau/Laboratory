@@ -1328,8 +1328,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.2606826, z: 0.5049909}
-  m_Center: {x: 2.2035041e-15, y: 0.8014448, z: 0.28331667}
+  m_Size: {x: 1, y: 1.2281866, z: 0.7488393}
+  m_Center: {x: 5.0277157e-15, y: 0.91279316, z: 0.40524065}
 --- !u!1 &5558730086429887277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,7 +1749,7 @@ MonoBehaviour:
   playerBody: {fileID: 2713157487807189705}
   playerAnim: {fileID: 1424496899848126070}
   moveSpeed: 250
-  jumpForce: 160
+  jumpForce: 150
   isIdle: 0
   isGrabbingLedge: 0
   isGrounded: 0
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   turnTime: 1
   isDead: 0
   isHurt: 0
-  maxFallHight: 0
+  maxFallHight: 8
   activeOffset: {x: 0, y: 0, z: 0}
   leftOffset: {x: 0.3, y: -3.5, z: 0}
   rightOffset: {x: -0.3, y: -3.5, z: 0}
@@ -1771,6 +1771,8 @@ MonoBehaviour:
   isGrabbingIntractable: 0
   interactionTarget: {fileID: 0}
   promptText: {fileID: 0}
+  pushDistance: 1
+  pushForce: 20
   playerInputActions: {fileID: -944628639613478452, guid: 21347e7e14cf3d0488e7c472a503656d,
     type: 3}
   input: {fileID: 1666142307545511599}
