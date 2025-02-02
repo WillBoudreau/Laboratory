@@ -1166,6 +1166,9 @@ MonoBehaviour:
   singleton: {fileID: 0}
   speed: 3
   canMove: 0
+  platformType: 1
+  platformMovementLimit: 2
+  platformMovementTick: 0
   positions:
   - {fileID: 1711076368}
   - {fileID: 2089567734}

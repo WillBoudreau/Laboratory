@@ -32,6 +32,7 @@ public class LeverBehavior : MonoBehaviour
             else if(obj.tag == "Platform")
             {
                 obj.GetComponent<MovingPlatform>().canMove = true;
+                obj.GetComponent<MovingPlatform>().platformMovementTick = 0;
             }
         }
     }
