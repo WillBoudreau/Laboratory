@@ -5,38 +5,44 @@ using UnityEngine;
 public class BoxButton : MonoBehaviour
 {
     [Header("Box Button Controls")]
-    [SerializeField] private GameObject objectToControl;//The object the button controls
+    [SerializeField] private GameObject[] objectToControl;//The object the button controls
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Collider>().tag == "Box")
+        foreach(GameObject obj in objectToControl)
         {
-            //If the object to control is a door
-            if(objectToControl.tag == "Door")
+            if(other.GetComponent<Collider>().tag == "Box")
             {
-                objectToControl.GetComponent<DoorBehaviour>().OpenThisDoor();
-            }
-            //If the object to control is a moving platform
-            else if(objectToControl.tag == "Platform")
-            {
-                objectToControl.GetComponent<MovingPlatform>().canMove = true;
+                //If the object to control is a door
+                if(obj.tag == "Door")
+                {
+                    obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                }
+                //If the object to control is a moving platform
+                else if(obj.tag == "Platform")
+                {
+                    obj.GetComponent<MovingPlatform>().canMove = true;
+                }
             }
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if(other.GetComponent<Collider>().tag ==  "Box")
+        foreach(GameObject obj in objectToControl)
         {
-            //If the object is a moving platform
-            if(objectToControl.gameObject.tag == "Platform")
+            if(other.GetComponent<Collider>().tag == "Box")
             {
-                objectToControl.GetComponent<MovingPlatform>().canMove = false;
+                //If the object to control is a door
+                if(obj.tag == "Door")
+                {
+                    obj.GetComponent<DoorBehaviour>().CloseThisDoor();
+                }
+                //If the object to control is a moving platform
+                else if(obj.tag == "Platform")
+                {
+                    obj.GetComponent<MovingPlatform>().canMove = false;
+                }
             }
-            //If the object is a door
-            else if(objectToControl.gameObject.tag == "Door")
-            {
-                objectToControl.GetComponent<DoorBehaviour>().CloseThisDoor();
-            }  
-        } 
+        }
     }
 }
