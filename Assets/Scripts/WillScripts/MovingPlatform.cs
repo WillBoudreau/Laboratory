@@ -68,6 +68,7 @@ public class MovingPlatform : MonoBehaviour
         // Check if platform has reached the target position
         if (Vector3.Distance(transform.position, targetPos) <= distance)
         {
+            StartCoroutine(Timer());
             currentPos = (currentPos + 1) % positions.Length;
             // Increment the platform movement tick
             if(PlatformType.Limited == platformType)
@@ -77,6 +78,10 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(2);
+    }
     void OnTriggerEnter(Collider other)
     {
         // If the object is the player, make the player a child of the platform
@@ -102,17 +107,17 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        // Log a message when the platform collides with another object
-        Debug.Log("Platform collided with " + collision.gameObject.name);
-        if(collision.gameObject != this.gameObject && collision.gameObject.tag != "Player")
-        {
-            if(Vector3.Distance(transform.position, previousPosition) <= 1f)
-            {
-                // If the platform is not moving, reverse the direction
-                currentPos = (currentPos + 1) % positions.Length;
-            }
-        }
-    }
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     Log a message when the platform collides with another object
+    //     Debug.Log("Platform collided with " + collision.gameObject.name);
+    //     if(collision.gameObject != this.gameObject && collision.gameObject.tag != "Player")
+    //     {
+    //         if(Vector3.Distance(transform.position, previousPosition) <= 1f)
+    //         {
+    //             If the platform is not moving, reverse the direction
+    //             currentPos = (currentPos + 1) % positions.Length;
+    //         }
+    //     }
+    // }
 }
