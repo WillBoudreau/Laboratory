@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         if(sceneName.Contains("L_"))
         {
-            uIManager.UILoadingScreen(uIManager.gameMenu);
+            uIManager.UILoadingScreen(uIManager.hUD);
         }
         if(sceneName.Contains("MainMenu"))
         {

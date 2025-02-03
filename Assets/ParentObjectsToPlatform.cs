@@ -8,18 +8,14 @@ public class ParentObjectsToPlatform : MonoBehaviour
     {
         if(other.gameObject.tag == "Box")
         {
-            Vector3 originalScale = other.gameObject.transform.localScale;
-            other.gameObject.transform.SetParent(this.gameObject.transform);
-            other.gameObject.transform.localScale = originalScale;
+            other.gameObject.transform.SetParent(this.gameObject.transform,true); 
         }
     }
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.tag == "Box")
         {
-            Vector3 originalScale = other.gameObject.transform.localScale;
-            other.gameObject.transform.SetParent(null);
-            other.gameObject.transform.localScale = originalScale;
+            other.gameObject.transform.SetParent(null,true);
         }
     }
 }

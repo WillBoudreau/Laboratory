@@ -14,16 +14,22 @@ public class UIManager : MonoBehaviour
     public GameObject winMenu;//The win menu
     public GameObject mainMenu;//The main menu
     [SerializeField] private GameObject settingsMenu;//The settings menu
-    public GameObject gameMenu;//The game menu
+    public GameObject hUD;//The game menu
     [SerializeField] private GameObject pauseMenu;//The pause menu
     [SerializeField] private GameObject controlsMenu;//The controls menu
+    public GameObject loadingScreen;
+    public GameObject deathScreen;
     [Header("Text References")]
     [SerializeField] private TextMeshProUGUI winText;//The win text
     [Header("Loading Screen UI Elements")]
-    public GameObject loadingScreen;
     public CanvasGroup loadingScreenCanvasGroup;
     public Image loadingBar;
     public float fadeTime;
+    [Header("HUD UI Elements")]
+    public GameObject hurtIndicator;
+    public CanvasGroup deathCanvasGroup;
+    public float deathFadeTime;
+
     void Start()
     {
         SetUIFalse();
@@ -32,6 +38,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         CheckWinCondition();
+        UpdateHUD();
     }
     /// <summary>
     /// Check the win condition
@@ -52,7 +59,7 @@ public class UIManager : MonoBehaviour
         winMenu.SetActive(false);
         mainMenu.SetActive(false);
         settingsMenu.SetActive(false);
-        gameMenu.SetActive(false);
+        hUD.SetActive(false);
         pauseMenu.SetActive(false);
         controlsMenu.SetActive(false);
     }
@@ -78,7 +85,7 @@ public class UIManager : MonoBehaviour
                 settingsMenu.SetActive(true);
                 break;
             case "Game":
-                gameMenu.SetActive(true);
+                hUD.SetActive(true);
                 break;
             case "Pause":
                 pauseMenu.SetActive(true);
@@ -182,5 +189,52 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         SetUIFalse();
         uiPanel.SetActive(true);
+    }
+
+    private void UpdateHUD()
+    {
+        if(hUD.activeSelf)
+        {
+            hurtIndicator.SetActive(gameManager.playerCon.isHurt);
+        }
+    }
+
+    /// <summary>
+    /// Fades Death screen out.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator DeathUIFadeOut()
+    {
+        //Debug.Log("Starting Fade out");
+
+        float timer = 0;
+
+        while (timer < fadeTime)
+        {
+            deathCanvasGroup.alpha = Mathf.Lerp(1, 0, timer/deathFadeTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        deathCanvasGroup.alpha = 0;
+        deathScreen.SetActive(false);
+        //Debug.Log("Ending Fade out");
+    }
+    /// <summary>
+    /// Fades death screen in.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator DeathUIFadeIN()
+    {
+        deathScreen.SetActive(true);
+        //Debug.Log("Starting Fade in");
+        float timer = 0;
+        loadingScreen.SetActive(true);
+        while (timer < fadeTime)
+        {
+            deathCanvasGroup.alpha = Mathf.Lerp(0, 1, timer / deathFadeTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        deathCanvasGroup.alpha = 1;
     }
 }

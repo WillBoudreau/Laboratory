@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     public bool isPaused;//Is the game paused
     public bool hasWon;//Has the player won
+    
 
     void Start()
     {

@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     [Header("Managers")]
     [SerializeField]
     private GameManager gameManager;
+    [SerializeField]
+    private LevelManager levelManager;
+    [SerializeField]
+    private UIManager uIManager;
     [Header("Components")]
     [SerializeField]
     private Rigidbody playerBody;
@@ -27,19 +31,19 @@ public class PlayerController : MonoBehaviour
     private bool isGrabbingLedge;
     [SerializeField]
     private bool isGrounded;
-    [SerializeField]
-    private bool isFacingLeft;
+    public bool isFacingLeft;
     [SerializeField]
     private float turnTime;
     private Vector2 moveDirection;
     private Quaternion rightFacing;
     private Quaternion leftFacing;
     [Header("Player Damage Properties")]
-    [SerializeField]
-    private bool isDead;
-    [SerializeField]
-    private bool isHurt;
+    public bool isDead;
+    public bool isHurt;
     public float maxFallHight;
+    public float recoveryTime;
+    private float hurtTimer;
+    public float deathFadeTime;
     [Header("Ledge Grab Properties")]
     [SerializeField]
     private Vector3 activeOffset;
@@ -74,17 +78,22 @@ public class PlayerController : MonoBehaviour
     public float lastFallHight;
     public  Vector3 launchPosition;
     public Vector3 landingPosition;
+    [Header("Checkpoint system")]
+    public Checkpoint activeCheckpoint;
 
     
 
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        levelManager = FindObjectOfType<LevelManager>();
+        uIManager = FindObjectOfType<UIManager>();
         playerBody = this.gameObject.GetComponent<Rigidbody>();
         playerAnim = this.gameObject.GetComponent<Animator>();
         input = this.gameObject.GetComponent<PlayerInput>();
         rightFacing = this.transform.rotation;
         leftFacing = new Quaternion(0,-rightFacing.y,0,1);
+        deathFadeTime = uIManager.deathFadeTime*3;
     }
 
     void Awake()
@@ -157,6 +166,10 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        else if(interactionTarget == null)
+        {
+            isGrabbingIntractable = false;
+        }
         if(interactionTarget != null && Vector3.Distance(transform.position,interactionTarget.transform.position) > pushDistance)
         {
 
@@ -170,6 +183,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             promptText.text = "E";
+        }
+        if(isHurt)
+        {
+            hurtTimer -= Time.deltaTime;
+            if(hurtTimer <= 0)
+            {
+                isHurt = false;
+            }
         }
         interactionPrompt.transform.position = promptPosition.position;
     }
@@ -425,11 +446,38 @@ public class PlayerController : MonoBehaviour
     {
         if(isHurt)
         {
-            isDead = true;
+            StartCoroutine(Death());
         }
         else
         {
             isHurt = true;
+            hurtTimer = recoveryTime;
         }
+    }
+
+    /// <summary>
+    /// Used to set the new checkpoint when reached
+    /// </summary>
+    /// <param name="checkpoint"></param>
+    public void CheckpointHit(Checkpoint checkpoint)
+    {
+        activeCheckpoint = checkpoint;
+        activeCheckpoint.canBeActivated = false;
+    }
+
+    IEnumerator Death()
+    {
+        StartCoroutine(uIManager.DeathUIFadeIN());
+        yield return new WaitForSeconds(deathFadeTime);
+        if(activeCheckpoint != null)
+        {
+            transform.position = activeCheckpoint.transform.position;
+            isFacingLeft = activeCheckpoint.leftLevelFlow;
+        }
+        else
+        {
+            transform.position = levelManager.spawn.transform.position;
+        }
+        StartCoroutine(uIManager.DeathUIFadeOut());
     }
 }

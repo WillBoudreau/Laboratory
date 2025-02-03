@@ -46,6 +46,18 @@ public class LaserEmitter : MonoBehaviour
                 }
                 else if(raycastHit.collider.tag != "Reflector")
                 {
+                    if(raycastHit.collider.tag == "Player")
+                    {
+                        if(!raycastHit.collider.gameObject.GetComponent<PlayerController>().isHurt)
+                        {
+                            raycastHit.collider.gameObject.GetComponent<PlayerController>().TakeDamage();
+                            raycastHit.collider.gameObject.GetComponent<PlayerController>().TakeDamage();
+                        }   
+                    }
+                    if(raycastHit.collider.tag == "Box")
+                    {
+                        Destroy(raycastHit.collider.gameObject);
+                    }
                     if(laserReceiver != null)
                     {
                         laserReceiver.isReceivingLaser = false;
