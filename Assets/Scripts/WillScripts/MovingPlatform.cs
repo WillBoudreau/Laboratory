@@ -5,9 +5,15 @@ public class MovingPlatform : MonoBehaviour
 {
     [Header("Class calls")]
     [SerializeField] private Singleton singleton; // The singleton object
-    [Header("Platform Settings")]
+    
+    [Header("Platform Movement Settings")]
     [SerializeField] float speed; // Speed of the platform
     [SerializeField] public bool canMove = false; // if the platform can move
+    [SerializeField] private enum PlatformType {Constant, Limited}; // Type of platform movement
+    [SerializeField] private PlatformType platformType; // The type of platform movement
+    // The limit of platform movement
+    [SerializeField] private int platformMovementLimit; // The limit of platform movement
+    public int platformMovementTick; // The tick of platform movement
     [Header("Platform Positions")]
     [SerializeField] Transform[] positions = new Transform[2]; // Array of positions the platform can move to
     [SerializeField] int currentPos; // Current position of the platform
@@ -16,7 +22,6 @@ public class MovingPlatform : MonoBehaviour
 
     void Start()
     {
-        canMove = false;
         previousPosition = transform.position; // Initialize the previous position
         if(singleton == null)
         {
@@ -29,7 +34,22 @@ public class MovingPlatform : MonoBehaviour
         // If the platform can move, move to the next position
         if (canMove)
         {
-            MoveToNextPosition();
+            // If the platform type is limited, check if the platform has reached the limit
+            if(PlatformType.Limited == platformType)
+            {
+                if(platformMovementTick <= platformMovementLimit)
+                {
+                    MoveToNextPosition();
+                }
+                else if(platformMovementTick >= platformMovementLimit)
+                {
+                    canMove = false;
+                }
+            }
+            else
+            {
+                MoveToNextPosition();
+            }
         }
     }
 
@@ -49,6 +69,11 @@ public class MovingPlatform : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPos) <= distance)
         {
             currentPos = (currentPos + 1) % positions.Length;
+            // Increment the platform movement tick
+            if(PlatformType.Limited == platformType)
+            {
+                platformMovementTick++;
+            }
         }
     }
 
@@ -59,8 +84,15 @@ public class MovingPlatform : MonoBehaviour
         {
             other.transform.parent = this.transform;
         }
+        else if(other.gameObject.tag == "Door")
+        {
+            if(Vector3.Distance(transform.position, previousPosition) <= 1f)
+            {
+                // If the platform is not moving, reverse the direction
+                currentPos = (currentPos + 1) % positions.Length;
+            }
+        }
     }
-
     void OnTriggerExit(Collider other)
     {
         // If the object is the player, remove the player as a child of the platform

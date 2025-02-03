@@ -7,29 +7,33 @@ using UnityEngine.InputSystem;
 public class LeverBehavior : MonoBehaviour
 {
     [Header("Lever Controls")]
-    [SerializeField] private GameObject objectToControl;//The object the lever controls
+    [SerializeField] private GameObject[] objectToControl;//The object the lever controls
     private bool playerInRange = false;
     /// <summary>
     /// Activate the lever
     /// </summary>
     void ActivateLever()
     {
-        //If the object to control is a door
-        if(objectToControl.tag == "Door")
+        foreach(GameObject obj in objectToControl)
         {
-            if(objectToControl.GetComponent<DoorBehaviour>().isOpen)
+            //If the object to control is a door
+            if(obj.tag == "Door")
             {
-                objectToControl.GetComponent<DoorBehaviour>().CloseThisDoor();
+                if (obj.GetComponent<DoorBehaviour>().isOpen)
+                {
+                    obj.GetComponent<DoorBehaviour>().CloseThisDoor();
+                }
+                else
+                {
+                    obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                }
             }
-            else
+            //If the object to control is a moving platform
+            else if(obj.tag == "Platform")
             {
-                objectToControl.GetComponent<DoorBehaviour>().OpenThisDoor();
+                obj.GetComponent<MovingPlatform>().canMove = true;
+                obj.GetComponent<MovingPlatform>().platformMovementTick = 0;
             }
-        }
-        //If the object to control is a moving platform
-        else if(objectToControl.tag == "Platform")
-        {
-           objectToControl.GetComponent<MovingPlatform>().canMove = true;
         }
     }
 
