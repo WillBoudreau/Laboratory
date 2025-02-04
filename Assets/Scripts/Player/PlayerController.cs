@@ -58,8 +58,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 topOfLedge;
     private Vector3 desiredPosition;
     [Header("Camera Control Properties")]
+    public CinemachineVirtualCamera playerCam;
+    public bool isZoomedOut;
     public Collider2D boundingBox;
     public CinemachineConfiner2D confiner;
+    public int zoomedInPos;
+    public int zoomedOutPos;
     [Header("Interaction Properties")]
     public GameObject interactionPrompt;
     public Transform promptPosition;
@@ -190,6 +194,20 @@ public class PlayerController : MonoBehaviour
             if(hurtTimer <= 0)
             {
                 isHurt = false;
+            }
+        }
+        if(isZoomedOut)
+        {
+            if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance < zoomedOutPos)
+            {
+                playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += Time.deltaTime; 
+            }
+        }
+        else
+        {
+            if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance > zoomedInPos)
+            {
+                playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= Time.deltaTime;
             }
         }
         interactionPrompt.transform.position = promptPosition.position;
