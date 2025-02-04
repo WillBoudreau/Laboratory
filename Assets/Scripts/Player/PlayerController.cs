@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private LevelManager levelManager;
     [SerializeField]
     private UIManager uIManager;
+    [SerializeField]
+    private SFXManager sFXManager;
     [Header("Components")]
     [SerializeField]
     private Rigidbody playerBody;
@@ -92,6 +94,7 @@ public class PlayerController : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         levelManager = FindObjectOfType<LevelManager>();
         uIManager = FindObjectOfType<UIManager>();
+        sFXManager = FindObjectOfType<SFXManager>();
         playerBody = this.gameObject.GetComponent<Rigidbody>();
         playerAnim = this.gameObject.GetComponent<Animator>();
         input = this.gameObject.GetComponent<PlayerInput>();
@@ -209,6 +212,14 @@ public class PlayerController : MonoBehaviour
             {
                 playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= Time.deltaTime *2;
             }
+        }
+        if(!sFXManager.source2D.isPlaying && moveDirection.x != 0)
+        {
+            sFXManager.Player2DSFX(sFXManager.metalStep,true);
+        }
+        else if(sFXManager.source2D.isPlaying && moveDirection.x == 0)
+        {
+            sFXManager.source2D.Stop();
         }
         interactionPrompt.transform.position = promptPosition.position;
     }

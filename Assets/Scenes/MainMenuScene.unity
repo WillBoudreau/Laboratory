@@ -9448,7 +9448,8 @@ AudioSource:
   m_GameObject: {fileID: 1467707070}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7326656164753982419, guid: d809b0d414c671d408ba81d822d8aa17,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -10100,6 +10101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1744534259}
   - component: {fileID: 1744534261}
+  - component: {fileID: 1744534260}
   m_Layer: 0
   m_Name: SFXManager
   m_TagString: Sound
@@ -10122,7 +10124,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 501068506}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1744534261
+--- !u!82 &1744534260
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10133,9 +10135,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2529065824597774371, guid: d809b0d414c671d408ba81d822d8aa17,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 74ddb9bfb30334c44bda0daa8df2fee4, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -10219,6 +10221,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1744534261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744534258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90788246db5f414bac3bbd1e11676d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source2D: {fileID: 1744534260}
+  buttonPress: {fileID: 8300000, guid: ab0367c20c22ff044828b1f5483e767e, type: 3}
+  metalStep: {fileID: 8300000, guid: 6884ebdaaba2ff141aaa7f78bc0cf28c, type: 3}
 --- !u!1 &1779279296
 GameObject:
   m_ObjectHideFlags: 0
@@ -16852,6 +16869,11 @@ PrefabInstance:
       propertyPath: confiner
       value: 
       objectReference: {fileID: 2098503433}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: jumpForce
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: playerCam

@@ -5,12 +5,12 @@ using UnityEngine;
 public class DoorTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject door;//The door object
-    public AudioSource doorAudio;
+    public SFXTrigger sFXTrigger; //Needed for 3D sfx
 
 
     void Awake()
     {
-        doorAudio = GameObject.FindWithTag("Sound").GetComponent<AudioSource>();
+        sFXTrigger = gameObject.GetComponent<SFXTrigger>();
     }
     /// <summary>
     /// Open the door when the player enters the trigger
@@ -18,7 +18,7 @@ public class DoorTrigger : MonoBehaviour
     void OpenDoor()
     {
         door.GetComponent<DoorBehaviour>().OpenThisDoor();
-        doorAudio.Play();
+        sFXTrigger.PlaySFX(1);
     }
     /// <summary>
     /// Close the door when the player exits the trigger
@@ -26,7 +26,7 @@ public class DoorTrigger : MonoBehaviour
     void CloseDoor()
     {
         door.GetComponent<DoorBehaviour>().CloseThisDoor();
-        doorAudio.Play();
+        sFXTrigger.PlaySFX(2);
     }
     public void OnTriggerEnter(Collider other)
     {
