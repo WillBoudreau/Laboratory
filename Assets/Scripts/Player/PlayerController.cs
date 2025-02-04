@@ -344,6 +344,7 @@ public class PlayerController : MonoBehaviour
             if(isGrounded)
             {
                 playerBody.AddForce(transform.up * jumpForce);
+                sFXManager.source2D.Stop();
             }
             if(isGrabbingLedge)
             {
