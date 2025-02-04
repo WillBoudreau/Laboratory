@@ -32,11 +32,4 @@ public class MovingPuzzlePlatform : MonoBehaviour
             currentPoint = (currentPoint + 1) % movePoints.Length;//Move to the next point
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Box")
-        {
-            Destroy(other.gameObject);//Destroy the box
-        }
-    }
 }

@@ -364,6 +364,9 @@ MonoBehaviour:
   singleton: {fileID: 0}
   speed: 3
   canMove: 0
+  platformType: 0
+  platformMovementLimit: 0
+  platformMovementTick: 0
   positions:
   - {fileID: 262552662}
   - {fileID: 956754816}
@@ -1498,7 +1501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9119f03c4465844b1d85d1ee1a00fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 113236635}
+  objectToControl:
+  - {fileID: 0}
 --- !u!1 &525995616
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,7 +2063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b8ca113d63e52469adb2d5be395a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 958262083}
+  objectsToControl:
+  - {fileID: 958262083}
   massThreshold: 0.2
 --- !u!1 &695859382
 GameObject:
@@ -3109,6 +3114,9 @@ MonoBehaviour:
   singleton: {fileID: 0}
   speed: 3
   canMove: 0
+  platformType: 0
+  platformMovementLimit: 0
+  platformMovementTick: 0
   positions:
   - {fileID: 163463493}
   - {fileID: 525995617}
@@ -4641,6 +4649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 959355817}
+  doorAudio: {fileID: 0}
 --- !u!1 &1370993330
 GameObject:
   m_ObjectHideFlags: 0
@@ -4760,6 +4769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 959355817}
+  doorAudio: {fileID: 0}
 --- !u!1 &1400991907
 GameObject:
   m_ObjectHideFlags: 0
@@ -4808,6 +4818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 886413909}
+  doorAudio: {fileID: 0}
 --- !u!65 &1400991910
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6559,6 +6570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 886413909}
+  doorAudio: {fileID: 0}
 --- !u!65 &2034318801
 BoxCollider:
   m_ObjectHideFlags: 0
