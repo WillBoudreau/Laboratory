@@ -10640,7 +10640,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: L_1
+          m_StringArgument: L_Tutorial
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1576021096}
@@ -16479,6 +16479,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2098503435 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1724394666256343947, guid: ef4e645916e880545966ecf7313beacd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2556111337473575840}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2556111337473575840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16702,6 +16714,11 @@ PrefabInstance:
       objectReference: {fileID: 2098503433}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
+      propertyPath: playerCam
+      value: 
+      objectReference: {fileID: 2098503435}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
       propertyPath: pushForce
       value: 20
       objectReference: {fileID: 0}
@@ -16710,6 +16727,11 @@ PrefabInstance:
       propertyPath: promptText
       value: 
       objectReference: {fileID: 74847030}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: zoomedInPos
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: maxFallHight
@@ -16724,6 +16746,11 @@ PrefabInstance:
         type: 3}
       propertyPath: recoveryTime
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: zoomedOutPos
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
