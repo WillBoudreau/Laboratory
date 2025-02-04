@@ -814,7 +814,7 @@ GameObject:
   m_Layer: 0
   m_Name: NextLvlTrig
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1612,7 +1612,7 @@ GameObject:
   m_Layer: 0
   m_Name: DoorOpenPOS
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1714,11 +1714,10 @@ GameObject:
   - component: {fileID: 670542564}
   - component: {fileID: 670542563}
   - component: {fileID: 670542562}
-  - component: {fileID: 670542561}
   m_Layer: 0
   m_Name: DoorClosePOS
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1737,26 +1736,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1933876099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &670542561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670542559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e04633afc45aa44b8a75f5cb9efff89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorType: 0
-  positions:
-  - {fileID: 0}
-  - {fileID: 0}
-  speed: 3
-  distance: 0.1
-  isOpen: 0
-  targetIndex: 0
 --- !u!65 &670542562
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1961,11 +1940,10 @@ GameObject:
   - component: {fileID: 695859387}
   - component: {fileID: 695859386}
   - component: {fileID: 695859385}
-  - component: {fileID: 695859384}
   m_Layer: 0
   m_Name: DoorClosePOS
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1984,26 +1962,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 530302489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &695859384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695859382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e04633afc45aa44b8a75f5cb9efff89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorType: 0
-  positions:
-  - {fileID: 0}
-  - {fileID: 0}
-  speed: 3
-  distance: 0.1
-  isOpen: 0
-  targetIndex: 0
 --- !u!65 &695859385
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3880,7 +3838,7 @@ GameObject:
   m_Layer: 0
   m_Name: BoxSpawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4282,7 +4240,7 @@ GameObject:
   m_Layer: 0
   m_Name: door1Trig (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4491,7 +4449,7 @@ GameObject:
   m_Layer: 0
   m_Name: door1Trig (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4611,7 +4569,7 @@ GameObject:
   m_Layer: 0
   m_Name: door1Trig (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4730,7 +4688,7 @@ GameObject:
   m_Layer: 0
   m_Name: DoorOpenPOS
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6473,7 +6431,7 @@ GameObject:
   m_Layer: 0
   m_Name: door1Trig (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
