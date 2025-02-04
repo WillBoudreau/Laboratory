@@ -16,10 +16,16 @@ public class LaserEmitter : MonoBehaviour
     private RaycastHit raycastHit;
     private Vector3 laserDirection;
     public LaserReceiver laserReceiver;
+    public AudioSource sFXSource;
+    public bool isArray;
 
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        if(isArray)
+        {
+            sFXSource.volume = 0.075f;
+        }
     }
 
     // Update is called once per frame
