@@ -6,6 +6,12 @@ public class DoorTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject door;//The door object
     public AudioSource doorAudio;
+
+
+    void Awake()
+    {
+        doorAudio = GameObject.FindWithTag("Sound").GetComponent<AudioSource>();
+    }
     /// <summary>
     /// Open the door when the player enters the trigger
     /// </summary>
