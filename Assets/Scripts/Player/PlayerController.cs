@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
                 playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= Time.deltaTime *2;
             }
         }
-        if(!sFXManager.source2D.isPlaying && moveDirection.x != 0)
+        if(!sFXManager.source2D.isPlaying && moveDirection.x != 0 && isGrounded)
         {
             sFXManager.Player2DSFX(sFXManager.metalStep,true);
         }
