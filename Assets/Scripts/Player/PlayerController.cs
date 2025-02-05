@@ -149,6 +149,8 @@ public class PlayerController : MonoBehaviour
                 activeOffset = rightOffset + ledge.transform.position;
                 //used to make sure player is facing ledge
             }
+            topOfLedge = ledge.transform.position;
+            topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
             this.gameObject.transform.position = activeOffset;
             playerAnim.SetBool("isIdle", true);
             isIdle = true;
