@@ -9770,6 +9770,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ledge (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6308354944664179309, guid: bcd89c79c20b6e643827afd74894a852,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26406,7 +26411,7 @@ PrefabInstance:
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -22.071426
+      value: -22.043
       objectReference: {fileID: 0}
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
@@ -39206,7 +39211,7 @@ GameObject:
   - component: {fileID: 1045729603}
   m_Layer: 0
   m_Name: powered door (11)
-  m_TagString: Door
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41119,7 +41124,7 @@ GameObject:
   - component: {fileID: 1106172573}
   - component: {fileID: 1106172572}
   - component: {fileID: 1106172575}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: powered door (4)
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -41135,7 +41140,7 @@ Transform:
   m_GameObject: {fileID: 1106172570}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 29.5, y: -20.1017, z: 0}
+  m_LocalPosition: {x: 29.5, y: -20.147, z: 0}
   m_LocalScale: {x: 0.2034, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

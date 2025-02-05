@@ -719,6 +719,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8158548904546963403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3149230898410498501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1330556821869148296}
+  m_Layer: 6
+  m_Name: GroundChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1330556821869148296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3149230898410498501}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6596099876700949223}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3198821575138784684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1762,7 @@ Transform:
   - {fileID: 4689327581875436500}
   - {fileID: 3528651957830185676}
   - {fileID: 4661327655504778488}
+  - {fileID: 1330556821869148296}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &7645474022128464097
@@ -1746,32 +1778,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  levelManager: {fileID: 0}
+  uIManager: {fileID: 0}
+  sFXManager: {fileID: 0}
   playerBody: {fileID: 2713157487807189705}
   playerAnim: {fileID: 1424496899848126070}
-  moveSpeed: 250
-  jumpForce: 150
+  groundChecker: {fileID: 3149230898410498501}
+  moveSpeed: 300
+  jumpForce: 300
   isIdle: 0
   isGrabbingLedge: 0
   isGrounded: 0
   isFacingLeft: 0
   turnTime: 1
+  gravScale: 2
+  jumpBoost: 1.015
+  groundingDistance: 0.25
+  isJumping: 0
+  jumpThreshold: 3
   isDead: 0
   isHurt: 0
-  maxFallHight: 8
+  maxFallHight: 7
+  recoveryTime: 5
+  deathFadeTime: 0
   activeOffset: {x: 0, y: 0, z: 0}
   leftOffset: {x: 0.3, y: -3.5, z: 0}
   rightOffset: {x: -0.3, y: -3.5, z: 0}
   climbDuration: 1
   topOfLedge: {x: 0, y: 0, z: 0}
+  playerCam: {fileID: 0}
+  isZoomedOut: 0
   boundingBox: {fileID: 0}
   confiner: {fileID: 0}
+  zoomedInPos: 10
+  zoomedOutPos: 15
   interactionPrompt: {fileID: 0}
   promptPosition: {fileID: 4689327581875436500}
   interactionPosable: 0
   isGrabbingIntractable: 0
   interactionTarget: {fileID: 0}
   promptText: {fileID: 0}
-  pushDistance: 1
+  pushDistance: 2.5
   currentDistance: 0
   playerInputActions: {fileID: -944628639613478452, guid: 21347e7e14cf3d0488e7c472a503656d,
     type: 3}
@@ -1780,6 +1827,7 @@ MonoBehaviour:
   lastFallHight: 0
   launchPosition: {x: 0, y: 0, z: 0}
   landingPosition: {x: 0, y: 0, z: 0}
+  fallThreshold: 0
   activeCheckpoint: {fileID: 0}
 --- !u!114 &1666142307545511599
 MonoBehaviour:
@@ -1820,7 +1868,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6623255379414128161}
   serializedVersion: 4
-  m_Mass: 0.5
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1838,7 +1886,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!95 &1424496899848126070
 Animator:
   serializedVersion: 5

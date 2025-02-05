@@ -14,15 +14,15 @@ public class ParentObjectsToPlatform : MonoBehaviour
             //rb.angularVelocity = Vector3.zero;
         }
     }
-    void OnTriggerStay(Collider other)
-    {
-        if(other.gameObject.tag == "Box")
-        {
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-    }
+    // void OnTriggerStay(Collider other)
+    // {
+    //     if(other.gameObject.tag == "Box")
+    //     {
+    //         Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+    //         rb.velocity = Vector3.zero;
+    //         rb.angularVelocity = Vector3.zero;
+    //     }
+    // }
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.tag == "Box")

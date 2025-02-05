@@ -87,7 +87,7 @@ public class MovingPlatform : MonoBehaviour
         // If the object is the player, make the player a child of the platform
         if (other.gameObject.CompareTag("Player"))
         {
-            other.transform.parent = this.transform;
+            other.transform.SetParent(transform,true);
         }
         else if(other.gameObject.tag == "Door")
         {
@@ -103,7 +103,7 @@ public class MovingPlatform : MonoBehaviour
         // If the object is the player, remove the player as a child of the platform
         if (other.gameObject.CompareTag("Player"))
         {
-            other.transform.parent = singleton.transform;
+            other.transform.SetParent(singleton.transform,true);
         }
     }
 

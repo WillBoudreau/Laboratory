@@ -9521,6 +9521,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375013184}
   m_CullTransparentMesh: 1
+--- !u!1 &1397797132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3149230898410498501, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8060713795379508857}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1467707070
 GameObject:
   m_ObjectHideFlags: 0
@@ -16970,6 +16976,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 501068506}
     m_Modifications:
+    - target: {fileID: 1330556821869148296, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2713157487807189705, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: m_Mass
@@ -17030,6 +17041,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6596099876700949223, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6623255379414128161, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: m_Name
@@ -17042,7 +17058,22 @@ PrefabInstance:
       objectReference: {fileID: 2098503433}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
+      propertyPath: gravScale
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: jumpBoost
+      value: 1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
       propertyPath: jumpForce
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: moveSpeed
       value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
@@ -17050,11 +17081,6 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 2098503435}
-    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
-        type: 3}
-      propertyPath: pushForce
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: promptText
@@ -17084,6 +17110,26 @@ PrefabInstance:
         type: 3}
       propertyPath: zoomedOutPos
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: groundChecker
+      value: 
+      objectReference: {fileID: 1397797132}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: jumpThreshold
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: groundingDistance
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}

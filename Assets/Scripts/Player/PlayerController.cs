@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerBody;
     [SerializeField]
     private Animator playerAnim;
+    [SerializeField]
+    private GameObject groundChecker;
     [Header("PlayerStats")]
     [SerializeField]
     private float moveSpeed;
@@ -39,6 +41,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDirection;
     private Quaternion rightFacing;
     private Quaternion leftFacing;
+    public float gravScale;
+    public float jumpBoost;
+    public RaycastHit groundingHit;
+    public float groundingDistance;
+    public bool isJumping;
+    public float jumpThreshold;
+    public float groundCheckRadius;
     [Header("Player Damage Properties")]
     public bool isDead;
     public bool isHurt;
@@ -84,6 +93,7 @@ public class PlayerController : MonoBehaviour
     public float lastFallHight;
     public  Vector3 launchPosition;
     public Vector3 landingPosition;
+    public float fallThreshold;
     [Header("Checkpoint system")]
     public Checkpoint activeCheckpoint;
 
@@ -111,10 +121,15 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CheckInputType();
-        if(moveDirection.x != 0)
+        isGrounded = GroundingCheck(Vector2.down,groundingDistance);
+        if(moveDirection.x != 0 && isGrounded)
         {
             playerAnim.SetBool("isIdle", false);
             isIdle = false;
+        }
+        else if(!isGrounded)
+        {
+            playerAnim.SetBool("isIdle", true);
         }
         else if(moveDirection.x == 0 && moveDirection.y == 0)
         {
@@ -224,6 +239,19 @@ public class PlayerController : MonoBehaviour
             sFXManager.source2D.Stop();
         }
         interactionPrompt.transform.position = promptPosition.position;
+        //Debug.Log(playerBody.velocity.y + " = player Y velocities");
+        if(playerBody.velocity.y < fallThreshold && !isGrabbingLedge)
+        {
+            playerBody.AddForce(Vector3.down * gravScale);
+        }
+        if(playerBody.velocity.y > jumpThreshold)
+        {
+            isJumping = true;
+        }
+        else
+        {
+            isJumping = false;
+        }
     }
 
     void FixedUpdate()
@@ -232,12 +260,20 @@ public class PlayerController : MonoBehaviour
         {
             if(!isGrabbingIntractable)
             {
-                playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+                if(isGrounded || isJumping)
+                {
+                    playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+                }
+                if(isJumping)
+                {
+                    playerBody.velocity = new Vector3(playerBody.velocity.x, playerBody.velocity.y*jumpBoost,playerBody.velocity.z);
+                }
             }
             if(isGrabbingIntractable)
             {
-                playerBody.velocity = new Vector3(moveDirection.x * (moveSpeed*.8f) * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+                playerBody.velocity = new Vector3(moveDirection.x * (moveSpeed*.7f) * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
             }
+            
         }
     }
 
@@ -292,14 +328,14 @@ public class PlayerController : MonoBehaviour
     /// <param name="col"></param>
     void OnCollisionStay(Collision col)
     {
-        if(col.gameObject.CompareTag("Box") && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
-        {
-            isGrounded = true;
-        }
-        if(col.gameObject.CompareTag("Platform"))
-        {
-            isGrounded = true;
-        }
+        // if(col.gameObject.CompareTag("Box") && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
+        // {
+        //     isGrounded = true;
+        // }
+        // if(col.gameObject.CompareTag("Platform"))
+        // {
+        //     isGrounded = true;
+        // }
     }
 
     /// <summary>
@@ -310,7 +346,7 @@ public class PlayerController : MonoBehaviour
     {
         if(col.gameObject.CompareTag("Platform") || col.gameObject.CompareTag("Box"))
         {
-            isGrounded = false;
+            //isGrounded = false;
             SetLaunchPosition();
         }
         else if(col.gameObject.TryGetComponent<Intractable>(out Intractable other))
@@ -472,6 +508,7 @@ public class PlayerController : MonoBehaviour
         if(launchPosition.y - landingPosition.y >= maxFallHight)
         {
             TakeDamage();
+            launchPosition = landingPosition;
         }
     }
     public void TakeDamage()
@@ -511,5 +548,31 @@ public class PlayerController : MonoBehaviour
             transform.position = levelManager.spawn.transform.position;
         }
         StartCoroutine(uIManager.DeathUIFadeOut());
+    }
+
+    public bool GroundingCheck(Vector2 direction, float distance)
+    {
+        Ray ray = new Ray(groundChecker.transform.position,direction); 
+        
+        if(Physics.SphereCast(ray.origin,groundCheckRadius,ray.direction, out groundingHit, distance))
+        {
+            if(groundingHit.collider.gameObject.tag == "Platform" || groundingHit.collider.gameObject.tag == "Box" || groundingHit.collider.gameObject.tag == "Door")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //If the logic makes it to hear, then there aren't any layers that whatever child script called this method should be looking out for and returns false back to that child script
+        return false;
+    }
+
+    void OnDrawGizmos()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(groundChecker.transform.position,groundCheckRadius);
     }
 }
