@@ -9,9 +9,18 @@ public class ParentObjectsToPlatform : MonoBehaviour
         if(other.gameObject.tag == "Box")
         {
             other.gameObject.transform.SetParent(this.gameObject.transform, true);
-            //Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            //rb.velocity = Vector3.zero;
-            //rb.angularVelocity = Vector3.zero;
+            Debug.Log(other.gameObject.name + " is now a child of " + this.gameObject.name);
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            Debug.Log(rb.velocity);
+            // Accessing the physic material of the box
+            Collider boxCollider = other.gameObject.GetComponent<Collider>();
+            if (boxCollider != null)
+            {
+                PhysicMaterial physicMaterial = boxCollider.material;
+                physicMaterial.dynamicFriction = 0f;
+                physicMaterial.staticFriction = 0f;
+                Debug.Log(physicMaterial.dynamicFriction);
+            }
         }
     }
     void OnTriggerStay(Collider other)
@@ -19,8 +28,15 @@ public class ParentObjectsToPlatform : MonoBehaviour
         if(other.gameObject.tag == "Box")
         {
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            Debug.Log(rb.velocity);
+            Collider boxCollider = other.gameObject.GetComponent<Collider>();
+            if (boxCollider != null)
+            {
+                PhysicMaterial physicMaterial = boxCollider.material;
+                physicMaterial.dynamicFriction = 0f;
+                physicMaterial.staticFriction = 0f;
+                Debug.Log(physicMaterial.dynamicFriction);
+            }
         }
     }
     void OnTriggerExit(Collider other)
@@ -28,6 +44,8 @@ public class ParentObjectsToPlatform : MonoBehaviour
         if(other.gameObject.tag == "Box")
         {
             other.gameObject.transform.SetParent(null, true);
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            Debug.Log(rb.velocity);
         }
     }
 }

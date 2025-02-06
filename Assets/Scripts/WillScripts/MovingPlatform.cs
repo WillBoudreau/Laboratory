@@ -10,13 +10,12 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private float speed; // Speed of the platform
     [SerializeField] public bool canMove = false; // if the platform can move
     [SerializeField] private float movementPauseTime = 0.5f; // When the moving platform reachs its destination, wait this long before moving again
-    [SerializeField] private enum PlatformType {Constant, Limited}; // Type of platform movement
-    [SerializeField] private PlatformType platformType; // The type of platform movement
-    [SerializeField] private int platformMovementLimit; // The limit of platform movement
-    [SerializeField] public int platformMovementTick; // The tick of platform movement
+    [SerializeField] private enum MovementType {BackAndForth, ExtraPOS}; // The type of movement the platform will have
+    [SerializeField] private MovementType movementType; // The type of movement the platform will have
 
     [Header("Platform Positions")]
     [SerializeField] private Transform[] positions = new Transform[2]; // Array of positions the platform can move to
+    [SerializeField] private int previousPOS; // The previous position of the platform
     [SerializeField] private int currentPos; // Current position of the platform
     [SerializeField] private float distance = 0.1f; // The point where the platform will move to the next position
 
@@ -41,22 +40,7 @@ public class MovingPlatform : MonoBehaviour
             // If the movement pause is not in effect/finished, move to next position
             if (movementPauseTimer <= 0)
             {
-                // If the platform type is limited, check if the platform has reached the limit
-                if(PlatformType.Limited == platformType)
-                {
-                    if(platformMovementTick <= platformMovementLimit)
-                    {
-                        MoveToNextPosition();
-                    }
-                    else if(platformMovementTick >= platformMovementLimit)
-                    {
-                        canMove = false;
-                    }
-                }
-                else
-                {
-                    MoveToNextPosition();
-                }
+                MoveToNextPosition();
             }
             else
             {
@@ -83,11 +67,6 @@ public class MovingPlatform : MonoBehaviour
             // Setup movement pause timer
             movementPauseTimer = movementPauseTime;
             currentPos = (currentPos + 1) % positions.Length;
-            // Increment the platform movement tick
-            if(PlatformType.Limited == platformType)
-            {
-                platformMovementTick++;
-            }
         }
     }
 
@@ -117,18 +96,4 @@ public class MovingPlatform : MonoBehaviour
             other.transform.parent = singleton.transform;
         }
     }
-
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     Log a message when the platform collides with another object
-    //     Debug.Log("Platform collided with " + collision.gameObject.name);
-    //     if(collision.gameObject != this.gameObject && collision.gameObject.tag != "Player")
-    //     {
-    //         if(Vector3.Distance(transform.position, previousPosition) <= 1f)
-    //         {
-    //             If the platform is not moving, reverse the direction
-    //             currentPos = (currentPos + 1) % positions.Length;
-    //         }
-    //     }
-    // }
 }
