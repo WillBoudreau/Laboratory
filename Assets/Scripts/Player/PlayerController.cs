@@ -260,10 +260,7 @@ public class PlayerController : MonoBehaviour
         {
             if(!isGrabbingIntractable)
             {
-                if(isGrounded || isJumping)
-                {
-                    playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
-                }
+                playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
                 if(isJumping)
                 {
                     playerBody.velocity = new Vector3(playerBody.velocity.x, playerBody.velocity.y*jumpBoost,playerBody.velocity.z);

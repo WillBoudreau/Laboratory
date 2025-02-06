@@ -7154,6 +7154,7 @@ MonoBehaviour:
   singleton: {fileID: 0}
   speed: 3
   canMove: 0
+  movementPauseTime: 0.5
   platformType: 0
   platformMovementLimit: 0
   platformMovementTick: 0
@@ -7481,7 +7482,7 @@ PrefabInstance:
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.9285712
+      value: 3.944
       objectReference: {fileID: 0}
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
@@ -14658,7 +14659,7 @@ PrefabInstance:
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.9285712
+      value: 2.934
       objectReference: {fileID: 0}
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
@@ -21469,7 +21470,7 @@ PrefabInstance:
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -21.857141
+      value: -21.828
       objectReference: {fileID: 0}
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
@@ -48324,7 +48325,7 @@ PrefabInstance:
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.0714285
+      value: -1.042
       objectReference: {fileID: 0}
     - target: {fileID: 6221069767389345697, guid: bcd89c79c20b6e643827afd74894a852,
         type: 3}
