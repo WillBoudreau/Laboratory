@@ -7,22 +7,26 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private Singleton singleton; // The singleton object
     
     [Header("Platform Movement Settings")]
-    [SerializeField] float speed; // Speed of the platform
+    [SerializeField] private float speed; // Speed of the platform
     [SerializeField] public bool canMove = false; // if the platform can move
+    [SerializeField] private float movementPauseTime = 0.5f; // When the moving platform reachs its destination, wait this long before moving again
     [SerializeField] private enum PlatformType {Constant, Limited}; // Type of platform movement
     [SerializeField] private PlatformType platformType; // The type of platform movement
-    // The limit of platform movement
     [SerializeField] private int platformMovementLimit; // The limit of platform movement
-    public int platformMovementTick; // The tick of platform movement
+    [SerializeField] public int platformMovementTick; // The tick of platform movement
+
     [Header("Platform Positions")]
-    [SerializeField] Transform[] positions = new Transform[2]; // Array of positions the platform can move to
-    [SerializeField] int currentPos; // Current position of the platform
-    [SerializeField] float distance = 0.1f; // The point where the platform will move to the next position
+    [SerializeField] private Transform[] positions = new Transform[2]; // Array of positions the platform can move to
+    [SerializeField] private int currentPos; // Current position of the platform
+    [SerializeField] private float distance = 0.1f; // The point where the platform will move to the next position
+
     private Vector3 previousPosition; // Store the previous position of the platform
+    private float movementPauseTimer = 0;
 
     void Start()
     {
         previousPosition = transform.position; // Initialize the previous position
+
         if(singleton == null)
         {
             singleton = FindObjectOfType<Singleton>();
@@ -34,21 +38,29 @@ public class MovingPlatform : MonoBehaviour
         // If the platform can move, move to the next position
         if (canMove)
         {
-            // If the platform type is limited, check if the platform has reached the limit
-            if(PlatformType.Limited == platformType)
+            // If the movement pause is not in effect/finished, move to next position
+            if (movementPauseTimer <= 0)
             {
-                if(platformMovementTick <= platformMovementLimit)
+                // If the platform type is limited, check if the platform has reached the limit
+                if(PlatformType.Limited == platformType)
+                {
+                    if(platformMovementTick <= platformMovementLimit)
+                    {
+                        MoveToNextPosition();
+                    }
+                    else if(platformMovementTick >= platformMovementLimit)
+                    {
+                        canMove = false;
+                    }
+                }
+                else
                 {
                     MoveToNextPosition();
-                }
-                else if(platformMovementTick >= platformMovementLimit)
-                {
-                    canMove = false;
                 }
             }
             else
             {
-                MoveToNextPosition();
+                movementPauseTimer -= Time.deltaTime;
             }
         }
     }
@@ -68,7 +80,8 @@ public class MovingPlatform : MonoBehaviour
         // Check if platform has reached the target position
         if (Vector3.Distance(transform.position, targetPos) <= distance)
         {
-            StartCoroutine(Timer());
+            // Setup movement pause timer
+            movementPauseTimer = movementPauseTime;
             currentPos = (currentPos + 1) % positions.Length;
             // Increment the platform movement tick
             if(PlatformType.Limited == platformType)
@@ -78,10 +91,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    IEnumerator Timer()
-    {
-        yield return new WaitForSeconds(2);
-    }
+
     void OnTriggerEnter(Collider other)
     {
         // If the object is the player, make the player a child of the platform
@@ -98,6 +108,7 @@ public class MovingPlatform : MonoBehaviour
             }
         }
     }
+
     void OnTriggerExit(Collider other)
     {
         // If the object is the player, remove the player as a child of the platform
