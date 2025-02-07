@@ -14,13 +14,14 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private MovementType movementType; // The type of movement the platform will have
 
     [Header("Platform Positions")]
-    [SerializeField] private Transform[] positions = new Transform[2]; // Array of positions the platform can move to
+    [SerializeField] private List<Transform> positions = new List<Transform>(); // List of positions the platform can move to
     [SerializeField] private int previousPOS; // The previous position of the platform
     [SerializeField] private int currentPos; // Current position of the platform
     [SerializeField] private float distance = 0.1f; // The point where the platform will move to the next position
 
     private Vector3 previousPosition; // Store the previous position of the platform
     private float movementPauseTimer = 0;
+    private bool movingForward = true; // Direction of movement
 
     void Start()
     {
@@ -50,7 +51,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     /// <summary>
-    /// Move the platform to the next position within the positions array
+    /// Move the platform to the next position within the positions list
     /// </summary>
     void MoveToNextPosition()
     {
@@ -66,10 +67,29 @@ public class MovingPlatform : MonoBehaviour
         {
             // Setup movement pause timer
             movementPauseTimer = movementPauseTime;
-            currentPos = (currentPos + 1) % positions.Length;
+
+            // If the platform is at the last position, reverse the direction
+            if (currentPos == positions.Count - 1)
+            {
+                movingForward = false;
+            }
+            // If the platform is at the first position, keep the direction
+            else if (currentPos == 0)
+            {
+                movingForward = true;
+            }
+
+            // Move to the next position based on the direction
+            if (movingForward)
+            {
+                currentPos++;
+            }
+            else
+            {
+                currentPos--;
+            }
         }
     }
-
 
     void OnTriggerEnter(Collider other)
     {
@@ -83,7 +103,7 @@ public class MovingPlatform : MonoBehaviour
             if(Vector3.Distance(transform.position, previousPosition) <= 1f)
             {
                 // If the platform is not moving, reverse the direction
-                currentPos = (currentPos + 1) % positions.Length;
+                currentPos = (currentPos + 1) % positions.Count;
             }
         }
     }
