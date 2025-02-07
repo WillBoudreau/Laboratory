@@ -75,7 +75,6 @@ public class UIManager : MonoBehaviour
         {
             case "Win":
                 UpdateWinScreen();
-                gameManager.WinGame();
                 winMenu.SetActive(true);
                 break;
             case "MainMenuScene":
@@ -100,7 +99,8 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void UpdateWinScreen()
     {
-        winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/3\nCOMPLETE";
+        int totalScenes = SceneManager.sceneCountInBuildSettings;
+        winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/{totalScenes}\nCOMPLETE";
     }
 
     // <summary>

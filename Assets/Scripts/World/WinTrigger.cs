@@ -5,7 +5,7 @@ using UnityEngine;
 public class WinTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject player;//The player object
-    [SerializeField] private GameManager gameManager;//The game manager object
+    [SerializeField] private UIManager uIManager;//The UI manager object
     void Start()
     {
         //If the player is not set, find the player
@@ -13,10 +13,10 @@ public class WinTrigger : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
-        //If the game manager is not set, find the game manager
-        if(gameManager == null)
+        //If the UI manager is not set, find the UI manager
+        if(uIManager == null)
         {
-            gameManager = FindObjectOfType<GameManager>();
+            uIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         }
     }
     void OnTriggerEnter(Collider other)
@@ -24,8 +24,7 @@ public class WinTrigger : MonoBehaviour
         //If the object is the player
         if(other.gameObject == player)
         {
-            //Check for win
-            gameManager.WinGame();
+            uIManager.LoadUI("Win");
         }
     }
 
