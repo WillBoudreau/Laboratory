@@ -47,10 +47,10 @@ public class GameManager : MonoBehaviour
         hasWon = false;
         isPaused = false;
     }
-    public void WinGame()
-    {
-        hasWon = true;
-    }
+    // public void WinGame()
+    // {
+    //     hasWon = true;
+    // }
 
     /// <summary>
     /// Pause the game
