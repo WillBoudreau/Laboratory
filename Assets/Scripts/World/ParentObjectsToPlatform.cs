@@ -11,6 +11,7 @@ public class ParentObjectsToPlatform : MonoBehaviour
             other.gameObject.transform.SetParent(this.gameObject.transform, true);
             Debug.Log(other.gameObject.name + " is now a child of " + this.gameObject.name);
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            rb.angularDrag = 0f;
             Debug.Log(rb.velocity);
             // Accessing the physic material of the box
             Collider boxCollider = other.gameObject.GetComponent<Collider>();
@@ -29,6 +30,7 @@ public class ParentObjectsToPlatform : MonoBehaviour
         {
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
             Debug.Log(rb.velocity);
+            rb.angularDrag = 0f;
             Collider boxCollider = other.gameObject.GetComponent<Collider>();
             if (boxCollider != null)
             {

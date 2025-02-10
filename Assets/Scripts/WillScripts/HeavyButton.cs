@@ -30,6 +30,10 @@ public class HeavyButton : MonoBehaviour
                     objectToControl.GetComponent<BoxSpawner>().SpawnBox();
                 }
             }
+            else if(other.gameObject.GetComponent<Rigidbody>() == null)
+            {
+                return;
+            }
         }
     }
     void OnTriggerExit(Collider other)
