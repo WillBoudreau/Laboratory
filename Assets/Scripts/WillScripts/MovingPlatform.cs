@@ -125,8 +125,6 @@ public class MovingPlatform : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("hit");
-
         // If the object is the player, make the player a child of the platform
         if (other.gameObject.CompareTag("Player"))
         {
@@ -135,24 +133,22 @@ public class MovingPlatform : MonoBehaviour
 
         if(other.gameObject.tag == "Door")
         {
-            
+            // Setup movement pause timer
+            movementPauseTimer = movementPauseTime;
 
-            if(Vector3.Distance(transform.position, previousPosition) <= 1f)
+            // Reverse moving direction
+            if (movingForward)
             {
-                // Reverse moving direction
-                if (movingForward)
-                {
-                    movingForward = false;
-                }
-                else
-                {
-                    movingForward = true;
-                }
-
-                int previousTargetIndexTemp = previousTargetIndex;
-                previousTargetIndex = currentTargetIndex;
-                currentTargetIndex = previousTargetIndexTemp;
+                movingForward = false;
             }
+            else
+            {
+                movingForward = true;
+            }
+
+            int previousTargetIndexTemp = previousTargetIndex;
+            previousTargetIndex = currentTargetIndex;
+            currentTargetIndex = previousTargetIndexTemp;
         }
     }
 
