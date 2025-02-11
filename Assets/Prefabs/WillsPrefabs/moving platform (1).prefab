@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8801606131617207955}
   - component: {fileID: 1656056477246563599}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BoxTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,15 +188,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   singleton: {fileID: 0}
   speed: 3
-  canMove: 0
+  canMove: 1
   movementPauseTime: 0.5
   movementType: 0
-  positions:
-  - {fileID: 0}
-  - {fileID: 0}
-  previousPOS: 0
-  currentPos: 0
-  distance: 0.1
+  targetPositions: []
+  previousTargetIndex: 0
+  currentTargetIndex: 0
+  distanceToHitTarget: 0.01
 --- !u!65 &755655274404987065
 BoxCollider:
   m_ObjectHideFlags: 0
