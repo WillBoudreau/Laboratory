@@ -2050,12 +2050,12 @@ MonoBehaviour:
   canMove: 0
   movementPauseTime: 0.5
   movementType: 0
-  positions:
+  targetPositions:
   - {fileID: 262552662}
   - {fileID: 956754816}
-  previousPOS: 0
-  currentPos: 0
-  distance: 0.1
+  previousTargetIndex: 0
+  currentTargetIndex: 0
+  distanceToHitTarget: 0.1
 --- !u!65 &113236641
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19163,12 +19163,12 @@ MonoBehaviour:
   canMove: 0
   movementPauseTime: 0.5
   movementType: 0
-  positions:
+  targetPositions:
   - {fileID: 163463493}
   - {fileID: 525995617}
-  previousPOS: 0
-  currentPos: 0
-  distance: 0.1
+  previousTargetIndex: 0
+  currentTargetIndex: 0
+  distanceToHitTarget: 0.1
 --- !u!1 &959355817
 GameObject:
   m_ObjectHideFlags: 0
