@@ -18,6 +18,8 @@ public class LaserEmitter : MonoBehaviour
     public LaserReceiver laserReceiver;
     public AudioSource sFXSource;
     public bool isArray;
+    public GameObject particlePrefab;
+    public GameObject[] collisionParticles;
 
     void Awake()
     {
