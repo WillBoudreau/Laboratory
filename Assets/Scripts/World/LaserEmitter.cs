@@ -23,6 +23,7 @@ public class LaserEmitter : MonoBehaviour
 
     void Awake()
     {
+        SetUpParticles();
         lineRenderer = GetComponent<LineRenderer>();
         if(isArray)
         {
@@ -45,6 +46,7 @@ public class LaserEmitter : MonoBehaviour
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount-1,raycastHit.point);
                 remainingLength -= Vector3.Distance(ray.origin,raycastHit.point);
+                SetParticlePos(i,raycastHit);
                 ray = new Ray(raycastHit.point, Vector3.Reflect(ray.direction, raycastHit.normal));
                 if(raycastHit.collider.tag == "Receiver")
                 {
@@ -80,5 +82,21 @@ public class LaserEmitter : MonoBehaviour
                 lineRenderer.SetPosition(lineRenderer.positionCount-1,ray.origin + ray.direction * remainingLength);
             }
         }
+    }
+
+    void SetUpParticles()
+    {
+        collisionParticles = new GameObject[maxReflections];
+        for(int i = 0; i < maxReflections; i++)
+        {
+            collisionParticles[i] = Instantiate(particlePrefab,this.transform);
+            collisionParticles[i].SetActive(false);
+        }
+    }
+
+    void SetParticlePos(int index, RaycastHit hit)
+    {
+        collisionParticles[index].SetActive(true);
+        collisionParticles[index].transform.position = hit.collider.gameObject.transform.position;
     }
 }
