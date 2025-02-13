@@ -5,23 +5,47 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
     [Header("Button Settings")]
-    [SerializeField] private GameObject objectToControl;//The object the button controls
+    [SerializeField] private GameObject[] objectsToControl;//The object the button controls
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        //For each object in the array
+        foreach(GameObject obj in objectsToControl)
         {
-           //If the box is on the button, the platform cannot move
-           //Find the MovingPlatform script and set canMove to false
-           objectToControl.GetComponent<MovingPlatform>().canMove = true;
+            //If the object that enters the trigger is a box or the player
+            if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
+            {
+                //If the object is a door, open it
+                if(obj.tag == "Door")
+                {
+                    obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                }
+                //If the object is a platform, allow it to move
+                else if(obj.tag == "Platform")
+                {
+                    obj.GetComponent<MovingPlatform>().canMove = true;
+                }
+            }
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        //For each object in the array
+        foreach(GameObject obj in objectsToControl)
         {
-            //If the box is off the button, the platform can move
-            //Find the MovingPlatform script and set canMove to true
-            objectToControl.GetComponent<MovingPlatform>().canMove = false;
+            //If the object that enters the trigger is a box or the player
+            if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
+            {
+                //If the object is a door, close it
+                if(obj.tag == "Door")
+                {
+                    obj.GetComponent<DoorBehaviour>().CloseThisDoor();
+                }
+                //If the object is a platform, stop it from moving
+                else if(obj.tag == "Platform")
+                {
+                    obj.GetComponent<MovingPlatform>().canMove = false;
+                }
+            }
         }
     }
 }
