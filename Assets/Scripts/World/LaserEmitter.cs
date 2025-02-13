@@ -97,6 +97,6 @@ public class LaserEmitter : MonoBehaviour
     void SetParticlePos(int index, RaycastHit hit)
     {
         collisionParticles[index].SetActive(true);
-        collisionParticles[index].transform.position = hit.collider.gameObject.transform.position;
+        collisionParticles[index].transform.position = hit.point;
     }
 }

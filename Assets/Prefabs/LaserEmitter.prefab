@@ -156,6 +156,9 @@ MonoBehaviour:
   laserReceiver: {fileID: 0}
   sFXSource: {fileID: 6387509206983824090}
   isArray: 0
+  particlePrefab: {fileID: 7581198098861856096, guid: 18eb809ceacfc4f46a5b985cde0aeff4,
+    type: 3}
+  collisionParticles: []
 --- !u!82 &6387509206983824090
 AudioSource:
   m_ObjectHideFlags: 0
@@ -265,7 +268,7 @@ GameObject:
   - component: {fileID: 9135123226287794991}
   - component: {fileID: 5730299925953366810}
   m_Layer: 0
-  m_Name: LaserEmitter 1
+  m_Name: LaserEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
