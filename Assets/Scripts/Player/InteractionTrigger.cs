@@ -20,7 +20,10 @@ public class InteractionTrigger : MonoBehaviour
         if(other.gameObject.TryGetComponent<Intractable>(out Intractable pushable))
         {
             player.interactionPosable = true;
-            player.interactionTarget = pushable.gameObject;
+            if(pushable.gameObject.tag == "Box")
+            {
+                player.interactionTarget = pushable.gameObject;
+            }
         }
     }
 

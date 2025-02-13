@@ -2050,12 +2050,14 @@ MonoBehaviour:
   canMove: 0
   movementPauseTime: 0.5
   movementType: 0
+  autoAssignTargetPositions: 1
   targetPositions:
   - {fileID: 262552662}
   - {fileID: 956754816}
   previousTargetIndex: 0
   currentTargetIndex: 0
   distanceToHitTarget: 0.1
+  targetPositionsParent: {fileID: 0}
 --- !u!65 &113236641
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6942,6 +6944,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 354429177}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &358537841
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.8519907
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035577231860516183, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727949763740477352, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+      propertyPath: m_Name
+      value: PLTestCube
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c36476892e2e794ba7d7cfac00b3647, type: 3}
 --- !u!1001 &364406466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19164,12 +19234,14 @@ MonoBehaviour:
   canMove: 0
   movementPauseTime: 0.5
   movementType: 0
+  autoAssignTargetPositions: 1
   targetPositions:
   - {fileID: 163463493}
   - {fileID: 525995617}
   previousTargetIndex: 0
   currentTargetIndex: 0
   distanceToHitTarget: 0.1
+  targetPositionsParent: {fileID: 0}
 --- !u!1 &959355817
 GameObject:
   m_ObjectHideFlags: 0
@@ -43757,3 +43829,4 @@ SceneRoots:
   - {fileID: 574860241}
   - {fileID: 951581991}
   - {fileID: 1790892392}
+  - {fileID: 358537841}

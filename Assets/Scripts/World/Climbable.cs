@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Climbable : MonoBehaviour
 {
+    public bool isFreeHanging;
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerController>().GrabTriggered(this.gameObject);
+            other.GetComponent<PlayerController>().GrabTriggered(this.gameObject, isFreeHanging);
         }
     }
 }

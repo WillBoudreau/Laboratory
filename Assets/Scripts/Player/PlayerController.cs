@@ -68,6 +68,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Vector3 topOfLedge;
     private Vector3 desiredPosition;
+    private bool isFreeHanging;
+    public AnimationClip climbAnim;
+    public AnimationClip freehandClimbAnim;
+    private bool isClimbing;
     [Header("Camera Control Properties")]
     public CinemachineVirtualCamera playerCam;
     public bool isZoomedOut;
@@ -82,9 +86,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool isGrabbingIntractable;
     public GameObject interactionTarget;
+    public Transform grabPoint;
     public TextMeshProUGUI promptText;
     public float pushDistance;
     public float currentDistance;
+    public bool isPushing;
+    public bool isPulling;
+    public float pushForce;
     [Header("Input Properties")]
     public InputActionAsset playerInputActions;
     public PlayerInput input;
@@ -168,8 +176,16 @@ public class PlayerController : MonoBehaviour
             topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
             this.gameObject.transform.position = activeOffset;
             playerAnim.SetBool("isIdle", true);
+            if(isFreeHanging)
+            {
+                playerAnim.SetBool("isFreeHanging", true);
+            }
+            else
+            {
+                playerAnim.SetBool("isHanging", true);
+            }
             isIdle = true;
-            playerAnim.SetBool("isHanging", true);
+            
         }
         if(interactionPosable && !isGrabbingIntractable)
         {
@@ -186,19 +202,37 @@ public class PlayerController : MonoBehaviour
             {
                 if(moveDirection.x != 0)
                 {
-                    interactionTarget.transform.position += new Vector3(moveDirection.x * (Time.deltaTime * 4),0,0);
+                    interactionTarget.transform.position += new Vector3(moveDirection.x * (Time.deltaTime * pushForce),0,0);
+                }
+                if(moveDirection.x < 0)
+                {
+                    playerAnim.SetBool("isPushing", false);
+                    playerAnim.SetBool("isPulling", true);
+                }
+                else if(moveDirection.x > 0)
+                {
+                    playerAnim.SetBool("isPushing", true);
+                    playerAnim.SetBool("isPulling", false);
+                }
+                else
+                {
+                    playerAnim.SetBool("isPushing", false);
+                    playerAnim.SetBool("isPulling", false);
                 }
             }
         }
         else if(interactionTarget == null)
         {
             isGrabbingIntractable = false;
+            playerAnim.SetBool("isPushing", false);
+            playerAnim.SetBool("isPulling", false);
         }
         if(interactionTarget != null && Vector3.Distance(transform.position,interactionTarget.transform.position) > pushDistance)
         {
-
             isGrabbingIntractable = false;
             interactionTarget = null;
+            playerAnim.SetBool("isPushing", false);
+            playerAnim.SetBool("isPulling", false);
         }
         if(isGamepadActive)
         {
@@ -268,7 +302,7 @@ public class PlayerController : MonoBehaviour
             }
             if(isGrabbingIntractable)
             {
-                playerBody.velocity = new Vector3(moveDirection.x * (moveSpeed*.7f) * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+                playerBody.velocity = new Vector3(moveDirection.x * (moveSpeed*.5f) * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
             }
             
         }
@@ -287,6 +321,7 @@ public class PlayerController : MonoBehaviour
             if(!isGrabbingLedge)
             {
                 moveDirection.x = moveVector2.x;
+                playerAnim.SetBool("isIdle",false);
             }
             else if(isGrabbingLedge)
             {
@@ -366,6 +401,7 @@ public class PlayerController : MonoBehaviour
             else if(!isGrabbingLedge)
             {
                 isGrabbingIntractable = true;
+                interactionTarget.transform.position = grabPoint.position;
             }
         }
     }
@@ -378,6 +414,7 @@ public class PlayerController : MonoBehaviour
         {
             if(isGrounded)
             {
+                playerAnim.SetTrigger("jump");
                 playerBody.AddForce(transform.up * jumpForce);
                 sFXManager.source2D.Stop();
             }
@@ -405,10 +442,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void GrabTriggered(GameObject trigger)
+    /// <summary>
+    /// Event for when the grab is triggered by a ledge. 
+    /// </summary>
+    /// <param name="trigger"></param>
+    public void GrabTriggered(GameObject trigger, bool isFreeHanging)
     {
         if(trigger.TryGetComponent<Climbable>(out Climbable other) && trigger.transform.position.y > this.gameObject.transform.position.y)
         {
+            this.isFreeHanging = isFreeHanging;
             if(isFacingLeft && other.gameObject.transform.position.x < transform.position.x)
             {
                 ledge = trigger;
@@ -430,6 +472,10 @@ public class PlayerController : MonoBehaviour
     /// <param name="ledge"></param>
     void LedgeGrab(GameObject ledge)
     {
+        if(!isClimbing)
+        {
+            playerAnim.SetTrigger("grab");
+        }
         this.ledge = ledge;
         isGrabbingLedge = true;
     }
@@ -440,6 +486,16 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     IEnumerator LedgeClimb()
     {
+        if(isFreeHanging)
+        {
+            climbDuration = freehandClimbAnim.length *.8f;
+        }
+        else
+        {
+            climbDuration = climbAnim.length *.8f;
+        }
+        isClimbing = true;
+        playerAnim.SetTrigger("climb");
         input.enabled = false;
         float climbTime = 0f;
         Vector3 startValue = transform.position;
@@ -452,12 +508,14 @@ public class PlayerController : MonoBehaviour
         }
         transform.position = topOfLedge;
         playerAnim.SetBool("isHanging", false);
+        playerAnim.SetBool("isFreeHanging", false);
         ledge = null;
         topOfLedge = Vector3.zero;
         activeOffset = Vector3.zero;
         moveDirection = Vector2.zero;
         isGrabbingLedge = false;
         input.enabled = true;
+        isClimbing = false;
     }
 
     /// <summary>
@@ -489,16 +547,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used to se the start position for a fall check.
+    /// </summary>
     private void SetLaunchPosition()
     {
         launchPosition = transform.position;
     }
+
+    /// <summary>
+    /// used to set the end position for the fall check.
+    /// </summary>
     private void SetLandingPosition()
     {
         landingPosition = transform.position;
         CheckForFall();
     }
 
+    /// <summary>
+    /// Checks if the player has fallen more than the max fall hight, if they have, player takes damage. 
+    /// </summary>
     private void CheckForFall()
     {
         lastFallHight = launchPosition.y - landingPosition.y;
@@ -508,6 +576,10 @@ public class PlayerController : MonoBehaviour
             launchPosition = landingPosition;
         }
     }
+
+    /// <summary>
+    /// Makes the player take damage, if already hurt, trigger player death. 
+    /// </summary>
     public void TakeDamage()
     {
         if(isHurt)
@@ -531,6 +603,10 @@ public class PlayerController : MonoBehaviour
         activeCheckpoint.canBeActivated = false;
     }
 
+    /// <summary>
+    /// Kills the player, trigger the fade out fade in, can be timed to death animation. 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Death()
     {
         StartCoroutine(uIManager.DeathUIFadeIN());
@@ -547,6 +623,12 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(uIManager.DeathUIFadeOut());
     }
 
+    /// <summary>
+    /// Checks a small area around the bottom of the player to check for grounding. 
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <param name="distance"></param>
+    /// <returns></returns>
     public bool GroundingCheck(Vector2 direction, float distance)
     {
         Ray ray = new Ray(groundChecker.transform.position,direction); 
@@ -566,6 +648,9 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Draws a gizmo, curently showing the grounding check area.
+    /// </summary>
     void OnDrawGizmos()
     {
         // Draw a yellow sphere at the transform's position
