@@ -1,36 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class MovingPlatform : MonoBehaviour 
+public class MovingPlatform : MonoBehaviour
 {
     private enum MovementType // The type of movement the platform will have between target positions
     {
         BackAndForth, // Move between target positions in the pattern 1,2,3,2,1,2,3...
         Loop // Move between target positions in the pattern 1,2,3,1,2,3,1...
-    }; 
+    };
 
     [Header("Class calls")]
     [SerializeField] private Singleton singleton; // The singleton object
-    
+
     [Header("Platform Movement Settings")]
-    [SerializeField] private float speed; // Speed of the platform
-    [SerializeField] public bool canMove = true; // if the platform can move
+    [SerializeField] private float speed = 3; // Speed of the platform
+    [SerializeField] public bool canMove = false; // if the platform can move
     [SerializeField] private float movementPauseTime = 0.5f; // When the moving platform reachs its destination, wait this long before moving again
-    [SerializeField] private MovementType movementType; // The type of movement the platform will have
+    [SerializeField] private MovementType movementType = MovementType.BackAndForth; // The type of movement the platform will have
 
     [Header("Platform Positions")]
+    [SerializeField] public bool autoAssignTargetPositions = true; // if you want to run the "AssignTargetPositionsInList()" on start
     [SerializeField] private List<Transform> targetPositions = new List<Transform>(); // List of target positions the platform moves to
     [SerializeField] private int previousTargetIndex; // The previous target position index of the platform
     [SerializeField] private int currentTargetIndex; // Current target position index of the platform
-    [SerializeField] private float distanceToHitTarget = 0.1f; // The point where the platform will move to the next position
+    [SerializeField] private float distanceToHitTarget = 0.01f; // The point where the platform will move to the next position
 
-    private Vector3 previousPosition; // Store the previous position of the platform
+    [Header("References")]
+    [SerializeField] private GameObject targetPositionsParent; // The parent object for all target position game objects
+
     private float movementPauseTimer = 0;
     private bool movingForward = true; // Direction of movement
 
     void Start()
     {
-        previousPosition = transform.position; // Initialize the previous position
+        if (autoAssignTargetPositions)
+            AssignTargetPositionsInList();
+
+        if (targetPositions.Count < 2) // Logs a error when 1 or less 
+        {
+            Debug.Log("Error: 1 or less target positions in target positions list");
+        }
+
+        transform.position = targetPositions[0].position; // Move Platform to position 1 (index 0) on the list
+
+        previousTargetIndex = 0;
+        currentTargetIndex = 1;
 
         if(singleton == null)
         {
@@ -64,7 +78,6 @@ public class MovingPlatform : MonoBehaviour
         Vector3 targetPos = targetPositions[currentTargetIndex].position;
 
         // Move towards the target position
-        previousPosition = transform.position; // Update the previous position as platform moves
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
         // Check if platform has reached the target position
@@ -96,7 +109,7 @@ public class MovingPlatform : MonoBehaviour
 
                 case MovementType.Loop:
 
-                    // If the platform is at the last position and its moving forward, go back to target position 0 or 1
+                    // If the platform is at the last position and its moving forward, go back to target position 1 (index 0)
                     if (currentTargetIndex == targetPositions.Count - 1 && movingForward == true)
                     {
                         currentTargetIndex = -1;
@@ -158,6 +171,25 @@ public class MovingPlatform : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.transform.SetParent(singleton.transform,true);
+        }
+    }
+
+    /// <summary>
+    /// Takes the target positons parent game object and assigns its children as the target positions for the moving platform
+    /// </summary>
+    private void AssignTargetPositionsInList()
+    {
+        targetPositions = new List<Transform>();
+
+        if (targetPositionsParent.transform.childCount < 2)
+        {
+            Debug.Log("Error: 1 or less target positions found in parent");
+            return;
+        }
+
+        for(int i = 0; i < targetPositionsParent.transform.childCount; i++)
+        {
+            targetPositions.Add(targetPositionsParent.transform.GetChild(i).transform);
         }
     }
 }
