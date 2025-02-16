@@ -50,6 +50,7 @@ public class LevelManager : MonoBehaviour
     {
         if(scene.name.StartsWith("L_"))
         {
+            player.SetActive(true);
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();
             gameManager.playerCon.SetBoundingBox();
@@ -57,6 +58,7 @@ public class LevelManager : MonoBehaviour
         else
         {
             gameManager.gameState = GameManager.GameState.MainMenu;
+            player.SetActive(false);
         }
         Debug.Log("SceneLoaded");
         spawn = GameObject.FindWithTag("Spawn");
