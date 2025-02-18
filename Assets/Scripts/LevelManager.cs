@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     [Header("Level Settings")]
     [SerializeField] private UIManager uIManager;//The UI Manager
     [SerializeField] private GameManager gameManager;//The game manager
+    [SerializeField] private MusicHandler musicHandler;
     [SerializeField] 
     private GameObject player; 
     public GameObject spawn;
@@ -51,14 +52,16 @@ public class LevelManager : MonoBehaviour
         if(scene.name.StartsWith("L_"))
         {
             player.SetActive(true);
-            gameManager.gameState = GameManager.GameState.Gameplay;
+            gameManager.ChangeGameState(GameManager.GameState.Gameplay);
             gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();
             gameManager.playerCon.SetBoundingBox();
+            musicHandler.SwitchAudioTrack("level");
         }
         else
         {
-            gameManager.gameState = GameManager.GameState.MainMenu;
+            gameManager.ChangeGameState(GameManager.GameState.MainMenu);
             player.SetActive(false);
+            musicHandler.SwitchAudioTrack("title");
         }
         Debug.Log("SceneLoaded");
         spawn = GameObject.FindWithTag("Spawn");

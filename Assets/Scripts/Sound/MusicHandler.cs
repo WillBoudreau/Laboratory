@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class MusicHandler : MonoBehaviour
@@ -13,6 +14,7 @@ public class MusicHandler : MonoBehaviour
     [Header("References")]
     public Slider volumeSlider;
     [SerializeField] private AudioSource musicPlayer;
+    public AudioMixer mixer;
 
     [Header("Sound References")]
     [SerializeField] private AudioClip titleMusic;
@@ -43,12 +45,10 @@ public class MusicHandler : MonoBehaviour
         {
             case "title":
                 musicPlayer.clip = titleMusic;
-                musicPlayer.volume = titleVolume;
                 break;
 
             case "level":
                 musicPlayer.clip = levelMusic;
-                musicPlayer.volume = levelVolume;
                 break;
 
             default:
@@ -76,6 +76,11 @@ public class MusicHandler : MonoBehaviour
     public void RestoreVolume()
     {
         isLowerVolume = false;
+    }
+
+    public void ChangeVolume(string group, float value)
+    {
+        mixer.SetFloat(group,value);
     }
 
     void Update()

@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [Header("Class References")]
     [SerializeField] private GameManager gameManager;//The game manager
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private MusicHandler musicHandler;
     [Header("UI Elements")]
     public GameObject winMenu;//The win menu
     public GameObject mainMenu;//The main menu
@@ -19,6 +20,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject controlsMenu;//The controls menu
     public GameObject loadingScreen;
     public GameObject deathScreen;
+    [Header("Options UI Elements")]
+    public Slider masterVolSlider;
+    public Slider musicVolSlider;
+    public Slider sFXVolSlider;
     [Header("Text References")]
     [SerializeField] private TextMeshProUGUI winText;//The win text
     [Header("Loading Screen UI Elements")]
@@ -236,5 +241,54 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         deathCanvasGroup.alpha = 1;
+    }
+    /// <summary>
+    /// Sets sliders value to base volume level
+    /// </summary>
+    public void GetStartingVolume()
+    {
+        if(musicHandler.mixer.GetFloat("MasterVol",out float masterValue))
+        {
+            masterVolSlider.value = masterValue;
+        }
+        if(musicHandler.mixer.GetFloat("MusicVol",out float musicValue))
+        {
+            musicVolSlider.value = musicValue;
+        }
+        if(musicHandler.mixer.GetFloat("SFXVol", out float sfxValue))
+        {
+            sFXVolSlider.value = sfxValue;
+        }
+    }
+    /// <summary>
+    /// Used by slider to pass value to sound manager
+    /// </summary>
+    /// <param name="group"></param>
+    public void SliderVolume(string group)
+    {
+        switch(group)
+        {
+            case "MasterVol":
+                musicHandler.ChangeVolume(group,masterVolSlider.value);
+                break;
+            case "MusicVol":
+                musicHandler.ChangeVolume(group,musicVolSlider.value);
+                break;
+            case "SFXVol":
+                musicHandler.ChangeVolume(group,sFXVolSlider.value);
+                break;
+        }
+    }
+
+    public void BackFromOptions()
+    {
+        if(gameManager.gameState == GameManager.GameState.MainMenu)
+        {
+            LoadUI("MainMenuScene");
+        }
+        else if(gameManager.gameState == GameManager.GameState.Gameplay)
+        {
+            LoadUI("Pause");
+        }
     }
 }
