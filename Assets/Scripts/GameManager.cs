@@ -68,4 +68,10 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         uiManager.LoadUI("Game");
     }
+
+    public void ChangeGameState(GameState newState)
+    {
+        prevState = gameState;
+        gameState = newState;
+    }
 }
