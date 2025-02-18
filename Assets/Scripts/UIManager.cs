@@ -119,7 +119,7 @@ public class UIManager : MonoBehaviour
     public void UILoadingScreen(GameObject targetPanel)
     {
         StartCoroutine(LoadingUIFadeIN());
-        StartCoroutine(DelayedSwitchUIPanel(fadeTime, targetPanel));
+        StartCoroutine(DelayedSwitchUIPanel(levelManager.minLoadTime, targetPanel));
     }
 
     /// <summary>

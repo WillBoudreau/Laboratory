@@ -77,8 +77,8 @@ public class LevelManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator WaitForScreenLoad(string sceneName)
     {
-        yield return new WaitForSeconds(uIManager.fadeTime);
         //Debug.Log("Loading Scene Starting");
+        yield return new WaitForSeconds(uIManager.fadeTime);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.completed += OperationCompleted;
@@ -94,7 +94,7 @@ public class LevelManager : MonoBehaviour
 
         foreach (AsyncOperation operation in scenesToLoad)
         {
-            totalProgress = Mathf.Lerp(totalProgress, operation.progress / Time.deltaTime, minLoadTime);
+            totalProgress += operation.progress;
         }
 
         return totalProgress / scenesToLoad.Count;
