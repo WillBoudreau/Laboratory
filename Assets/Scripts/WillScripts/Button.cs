@@ -14,7 +14,7 @@ public class Button : MonoBehaviour
         {
             Debug.Log(obj.tag);
             //If the object that enters the trigger is a box or the player
-            if(other.gameObject.tag == "Box" | other.gameObject.tag == "Player")
+            if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
             {
                 Debug.Log("Box or Player can interact with button");
                 //If the object is a door, open it

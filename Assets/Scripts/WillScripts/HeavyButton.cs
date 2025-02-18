@@ -7,7 +7,7 @@ public class HeavyButton : MonoBehaviour
     [Header("Heavy Button Settings")]
     [SerializeField] private GameObject[] objectsToControl;//The object the button controls
     [SerializeField] private float massThreshold;//The mass threshold for the object to control
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         foreach(GameObject objectToControl in objectsToControl)
         {
