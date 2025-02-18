@@ -14,8 +14,10 @@ public class LeverBehavior : MonoBehaviour
     /// </summary>
     void ActivateLever()
     {
+        Debug.Log("Lever Activated");
         foreach(GameObject obj in objectToControl)
         {
+            Debug.Log(obj.tag);
             //If the object to control is a door
             if(obj.tag == "Door")
             {

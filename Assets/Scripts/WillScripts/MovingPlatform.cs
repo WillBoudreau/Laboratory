@@ -14,7 +14,7 @@ public class MovingPlatform : MonoBehaviour
 
     [Header("Platform Movement Settings")]
     [SerializeField] private float speed = 3; // Speed of the platform
-    public bool canMove = false; // if the platform can move
+    [SerializeField] public bool canMove = false; // if the platform can move
     [SerializeField] private float movementPauseTime = 0.5f; // When the moving platform reachs its destination, wait this long before moving again
     [SerializeField] private MovementType movementType = MovementType.BackAndForth; // The type of movement the platform will have
 
