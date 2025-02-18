@@ -24,6 +24,9 @@ public class UIManager : MonoBehaviour
     public Slider masterVolSlider;
     public Slider musicVolSlider;
     public Slider sFXVolSlider;
+    public TMP_Dropdown resolutionDropdown;
+    private Resolution[] resolutions;
+    public Toggle fullscreenToggle;
     [Header("Text References")]
     [SerializeField] private TextMeshProUGUI winText;//The win text
     [Header("Loading Screen UI Elements")]
@@ -86,6 +89,7 @@ public class UIManager : MonoBehaviour
                 mainMenu.SetActive(true);
                 break;
             case "Settings":
+                InitializeResDropDown();
                 settingsMenu.SetActive(true);
                 break;
             case "Game":
@@ -280,6 +284,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used by setting menu to go back to correct screen when accessed from paused menu or main menu.
+    /// </summary>
     public void BackFromOptions()
     {
         if(gameManager.gameState == GameManager.GameState.MainMenu)
@@ -290,5 +297,50 @@ public class UIManager : MonoBehaviour
         {
             LoadUI("Pause");
         }
+    }
+
+    /// <summary>
+    /// Sets all dropdown options to available resolutions on device. 
+    /// </summary>
+    private void InitializeResDropDown()
+    {
+        resolutions = Screen.resolutions;
+
+        resolutionDropdown.ClearOptions();
+
+        List<string> Options = new List<string>();
+
+        int CurrentResolutionIndex = 0;
+
+        for(int i = 0; i < resolutions.Length; i++)
+        {
+            string Option = string.Format("{0} X {1}", resolutions[i].width, resolutions[i].height);
+            Options.Add(Option);
+
+            if(resolutions[i].width == Screen.currentResolution.width &&
+               resolutions[i].height == Screen.currentResolution.height)
+            {
+                CurrentResolutionIndex = i;
+            }
+        }
+
+        resolutionDropdown.AddOptions(Options);
+        resolutionDropdown.value = CurrentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+    }
+    /// <summary>
+    /// Sets Resolution, used by dropdown object on value change.
+    /// </summary>
+    public void SetResolution()
+    {
+        Resolution resolution = resolutions[resolutionDropdown.value];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+    /// <summary>
+    /// fullscreen toggle
+    /// </summary>
+    public void SetFullScreen()
+    {
+        Screen.fullScreen = fullscreenToggle.isOn;
     }
 }
