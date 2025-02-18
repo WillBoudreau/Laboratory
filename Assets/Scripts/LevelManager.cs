@@ -8,11 +8,11 @@ public class LevelManager : MonoBehaviour
     [Header("Level Settings")]
     [SerializeField] private UIManager uIManager;//The UI Manager
     [SerializeField] private GameManager gameManager;//The game manager
-    [SerializeField] private MusicHandler musicHandler;
     [SerializeField] 
     private GameObject player; 
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
+    public float minLoadTime;
     void Start()
     {
         //If the UIManager is null, find the UIManager
@@ -52,16 +52,14 @@ public class LevelManager : MonoBehaviour
         if(scene.name.StartsWith("L_"))
         {
             player.SetActive(true);
-            gameManager.ChangeGameState(GameManager.GameState.Gameplay);
+            gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();
             gameManager.playerCon.SetBoundingBox();
-            musicHandler.SwitchAudioTrack("level");
         }
         else
         {
-            gameManager.ChangeGameState(GameManager.GameState.MainMenu);
+            gameManager.gameState = GameManager.GameState.MainMenu;
             player.SetActive(false);
-            musicHandler.SwitchAudioTrack("title");
         }
         Debug.Log("SceneLoaded");
         spawn = GameObject.FindWithTag("Spawn");
@@ -92,14 +90,14 @@ public class LevelManager : MonoBehaviour
     /// <returns></returns>
     public float GetLoadingProgress()
     {
-        float totalprogress = 0;
+        float totalProgress = 0;
 
         foreach (AsyncOperation operation in scenesToLoad)
         {
-            totalprogress += operation.progress * Time.deltaTime;
+            totalProgress = Mathf.Lerp(totalProgress, operation.progress / Time.deltaTime, minLoadTime);
         }
 
-        return totalprogress / scenesToLoad.Count;
+        return totalProgress / scenesToLoad.Count;
     }
     /// <summary>
     /// Event for when load operation is finished. 

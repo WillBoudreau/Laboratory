@@ -480,6 +480,17 @@ public class PlayerController : MonoBehaviour
             }
             topOfLedge = ledge.transform.position;
             topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
+            if(isFreeHanging)
+            {
+                if(isFacingLeft)
+                {
+                    topOfLedge.x = ledge.transform.position.x - ledge.transform.localScale.x/2;
+                }
+                else
+                {
+                    topOfLedge.x = ledge.transform.position.x + ledge.transform.localScale.x/2;
+                }
+            }
         }
     }
 
