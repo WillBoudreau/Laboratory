@@ -8,20 +8,25 @@ public class Button : MonoBehaviour
     [SerializeField] private GameObject[] objectsToControl;//The object the button controls
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.tag);
         //For each object in the array
         foreach(GameObject obj in objectsToControl)
         {
+            Debug.Log(obj.tag);
             //If the object that enters the trigger is a box or the player
-            if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
+            if(other.gameObject.tag == "Box" | other.gameObject.tag == "Player")
             {
+                Debug.Log("Box or Player can interact with button");
                 //If the object is a door, open it
                 if(obj.tag == "Door")
                 {
+                    Debug.Log("Door can open");
                     obj.GetComponent<DoorBehaviour>().OpenThisDoor();
                 }
                 //If the object is a platform, allow it to move
                 else if(obj.tag == "Platform")
                 {
+                    Debug.Log("Platform can move");
                     obj.GetComponent<MovingPlatform>().canMove = true;
                 }
             }
