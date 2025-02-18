@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         isPaused = true;
+        playerCon.inputEnabled = false;
         uiManager.LoadUI("Pause");
     }
     /// <summary>
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         isPaused = false;
+        playerCon.inputEnabled = true;
         uiManager.LoadUI("Game");
     }
 
