@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
     public InputActionAsset playerInputActions;
     public PlayerInput input;
     public bool isGamepadActive;
+    public bool inputEnabled;
     [Header("Fall Check Properties")]
     public float lastFallHight;
     public  Vector3 launchPosition;
@@ -124,203 +125,209 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         isDead = false;
+        inputEnabled = true;
     }
 
     void Update()
     {
-        CheckInputType();
-        isGrounded = GroundingCheck(Vector2.down,groundingDistance);
-        if(moveDirection.x != 0 && isGrounded)
+        if(inputEnabled)
         {
-            playerAnim.SetBool("isIdle", false);
-            isIdle = false;
-        }
-        else if(!isGrounded)
-        {
-            playerAnim.SetBool("isIdle", true);
-        }
-        else if(moveDirection.x == 0 && moveDirection.y == 0)
-        {
-            playerAnim.SetBool("isIdle", true);
-            isIdle = true;
-        }
-        if(moveDirection.x > 0 && !isGrabbingIntractable)
-        {
-            if(isFacingLeft)
+            CheckInputType();
+            isGrounded = GroundingCheck(Vector2.down,groundingDistance);
+            if(moveDirection.x != 0 && isGrounded)
             {
-                isFacingLeft = false;
-                transform.rotation = rightFacing;
+                playerAnim.SetBool("isIdle", false);
+                isIdle = false;
             }
-        }
-        else if(moveDirection.x < 0 && !isGrabbingIntractable)
-        {
-            if(!isFacingLeft)
+            else if(!isGrounded)
             {
-                isFacingLeft = true;
-                transform.rotation = leftFacing;
+                playerAnim.SetBool("isIdle", true);
             }
-        }
-        if(isGrabbingLedge == true)
-        {
-            if(ledge.transform.position.x < this.gameObject.transform.position.x)
+            else if(moveDirection.x == 0 && moveDirection.y == 0)
             {
-                activeOffset = leftOffset + ledge.transform.position;
-                //used to make sure player is facing ledge
+                playerAnim.SetBool("isIdle", true);
+                isIdle = true;
             }
-            if(ledge.transform.position.x > this.gameObject.transform.position.x)
+            if(moveDirection.x > 0 && !isGrabbingIntractable)
             {
-                activeOffset = rightOffset + ledge.transform.position;
-                //used to make sure player is facing ledge
-            }
-            topOfLedge = ledge.transform.position;
-            topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
-            this.gameObject.transform.position = activeOffset;
-            playerAnim.SetBool("isIdle", true);
-            if(isFreeHanging)
-            {
-                playerAnim.SetBool("isFreeHanging", true);
-            }
-            else
-            {
-                playerAnim.SetBool("isHanging", true);
-            }
-            isIdle = true;
-            
-        }
-        if(interactionPosable && !isGrabbingIntractable)
-        {
-            interactionPrompt.SetActive(true);
-        }
-        else
-        {
-            interactionPrompt.SetActive(false);
-        }
-        if(isGrabbingIntractable && interactionTarget != null)
-        {
-            currentDistance = Vector3.Distance(transform.position,interactionTarget.transform.position);
-            if(Vector3.Distance(transform.position, interactionTarget.transform.position) <= pushDistance)
-            {
-                if(moveDirection.x != 0)
+                if(isFacingLeft)
                 {
-                    interactionTarget.transform.position += new Vector3(moveDirection.x * (Time.deltaTime * pushForce),0,0);
+                    isFacingLeft = false;
+                    transform.rotation = rightFacing;
                 }
-                if(moveDirection.x < 0)
+            }
+            else if(moveDirection.x < 0 && !isGrabbingIntractable)
+            {
+                if(!isFacingLeft)
                 {
-                    if(isFacingLeft)
-                    {
-                        playerAnim.SetBool("isPushing", true);
-                        playerAnim.SetBool("isPulling", false);
-                    }
-                    else
-                    {
-                        playerAnim.SetBool("isPushing", false);
-                        playerAnim.SetBool("isPulling", true);
-                    }
+                    isFacingLeft = true;
+                    transform.rotation = leftFacing;
                 }
-                else if(moveDirection.x > 0)
+            }
+            if(isGrabbingLedge == true)
+            {
+                if(ledge.transform.position.x < this.gameObject.transform.position.x)
                 {
-                    if(isFacingLeft)
-                    {
-                        playerAnim.SetBool("isPushing", false);
-                        playerAnim.SetBool("isPulling", true);
-                    }
-                    else
-                    {
-                        playerAnim.SetBool("isPushing", true);
-                        playerAnim.SetBool("isPulling", false);
-                    }
+                    activeOffset = leftOffset + ledge.transform.position;
+                    //used to make sure player is facing ledge
+                }
+                if(ledge.transform.position.x > this.gameObject.transform.position.x)
+                {
+                    activeOffset = rightOffset + ledge.transform.position;
+                    //used to make sure player is facing ledge
+                }
+                topOfLedge = ledge.transform.position;
+                topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
+                this.gameObject.transform.position = activeOffset;
+                playerAnim.SetBool("isIdle", true);
+                if(isFreeHanging)
+                {
+                    playerAnim.SetBool("isFreeHanging", true);
                 }
                 else
                 {
-                    playerAnim.SetBool("isPushing", false);
-                    playerAnim.SetBool("isPulling", false);
+                    playerAnim.SetBool("isHanging", true);
+                }
+                isIdle = true;
+            }
+            if(interactionPosable && !isGrabbingIntractable)
+            {
+                interactionPrompt.SetActive(true);
+            }
+            else
+            {
+                interactionPrompt.SetActive(false);
+            }
+            if(isGrabbingIntractable && interactionTarget != null)
+            {
+                currentDistance = Vector3.Distance(transform.position,interactionTarget.transform.position);
+                if(Vector3.Distance(transform.position, interactionTarget.transform.position) <= pushDistance)
+                {
+                    if(moveDirection.x != 0)
+                    {
+                        interactionTarget.transform.position += new Vector3(moveDirection.x * (Time.deltaTime * pushForce),0,0);
+                    }
+                    if(moveDirection.x < 0)
+                    {
+                        if(isFacingLeft)
+                        {
+                            playerAnim.SetBool("isPushing", true);
+                            playerAnim.SetBool("isPulling", false);
+                        }
+                        else
+                        {
+                            playerAnim.SetBool("isPushing", false);
+                            playerAnim.SetBool("isPulling", true);
+                        }
+                    }
+                    else if(moveDirection.x > 0)
+                    {
+                        if(isFacingLeft)
+                        {
+                            playerAnim.SetBool("isPushing", false);
+                            playerAnim.SetBool("isPulling", true);
+                        }
+                        else
+                        {
+                            playerAnim.SetBool("isPushing", true);
+                            playerAnim.SetBool("isPulling", false);
+                        }
+                    }
+                    else
+                    {
+                        playerAnim.SetBool("isPushing", false);
+                        playerAnim.SetBool("isPulling", false);
+                    }
                 }
             }
-        }
-        else if(interactionTarget == null)
-        {
-            isGrabbingIntractable = false;
-            playerAnim.SetBool("isPushing", false);
-            playerAnim.SetBool("isPulling", false);
-        }
-        if(interactionTarget != null && Vector3.Distance(transform.position,interactionTarget.transform.position) > pushDistance)
-        {
-            isGrabbingIntractable = false;
-            interactionTarget = null;
-            playerAnim.SetBool("isPushing", false);
-            playerAnim.SetBool("isPulling", false);
-        }
-        if(isGamepadActive)
-        {
-            promptText.text = "B";
-        }
-        else
-        {
-            promptText.text = "E";
-        }
-        if(isHurt)
-        {
-            hurtTimer -= Time.deltaTime;
-            if(hurtTimer <= 0)
+            else if(interactionTarget == null)
             {
-                isHurt = false;
+                isGrabbingIntractable = false;
+                playerAnim.SetBool("isPushing", false);
+                playerAnim.SetBool("isPulling", false);
             }
-        }
-        if(isZoomedOut)
-        {
-            if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance < zoomedOutPos)
+            if(interactionTarget != null && Vector3.Distance(transform.position,interactionTarget.transform.position) > pushDistance)
             {
-                playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += Time.deltaTime *2; 
+                isGrabbingIntractable = false;
+                interactionTarget = null;
+                playerAnim.SetBool("isPushing", false);
+                playerAnim.SetBool("isPulling", false);
             }
-        }
-        else
-        {
-            if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance > zoomedInPos)
+            if(isGamepadActive)
             {
-                playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= Time.deltaTime *2;
+                promptText.text = "B";
             }
-        }
-        if(!sFXManager.source2D.isPlaying && moveDirection.x != 0 && isGrounded)
-        {
-            sFXManager.Player2DSFX(sFXManager.metalStep,true);
-        }
-        else if(sFXManager.source2D.isPlaying && moveDirection.x == 0)
-        {
-            sFXManager.source2D.Stop();
-        }
-        interactionPrompt.transform.position = promptPosition.position;
-        //Debug.Log(playerBody.velocity.y + " = player Y velocities");
-        if(playerBody.velocity.y < fallThreshold && !isGrabbingLedge)
-        {
-            playerBody.AddForce(Vector3.down * gravScale);
-        }
-        if(playerBody.velocity.y > jumpThreshold)
-        {
-            isJumping = true;
-        }
-        else
-        {
-            isJumping = false;
-        }
+            else
+            {
+                promptText.text = "E";
+            }
+            if(isHurt)
+            {
+                hurtTimer -= Time.deltaTime;
+                if(hurtTimer <= 0)
+                {
+                    isHurt = false;
+                }
+            }
+            if(isZoomedOut)
+            {
+                if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance < zoomedOutPos)
+                {
+                    playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += Time.deltaTime *2; 
+                }
+            }
+            else
+            {
+                if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance > zoomedInPos)
+                {
+                    playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= Time.deltaTime *2;
+                }
+            }
+            if(!sFXManager.source2D.isPlaying && moveDirection.x != 0 && isGrounded)
+            {
+                sFXManager.Player2DSFX(sFXManager.metalStep,true);
+            }
+            else if(sFXManager.source2D.isPlaying && moveDirection.x == 0)
+            {
+                sFXManager.source2D.Stop();
+            }
+            interactionPrompt.transform.position = promptPosition.position;
+            //Debug.Log(playerBody.velocity.y + " = player Y velocities");
+            if(playerBody.velocity.y < fallThreshold && !isGrabbingLedge)
+            {
+                playerBody.AddForce(Vector3.down * gravScale);
+            }
+            if(playerBody.velocity.y > jumpThreshold)
+            {
+                isJumping = true;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }  
     }
 
     void FixedUpdate()
     {
-        if(!isGrabbingLedge)
+        if(inputEnabled)
         {
-            if(!isGrabbingIntractable)
+            if(!isGrabbingLedge)
             {
-                playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
-                if(isJumping)
+                if(!isGrabbingIntractable)
                 {
-                    playerBody.velocity = new Vector3(playerBody.velocity.x, playerBody.velocity.y*jumpBoost,playerBody.velocity.z);
+                    playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+                    if(isJumping)
+                    {
+                        playerBody.velocity = new Vector3(playerBody.velocity.x, playerBody.velocity.y*jumpBoost,playerBody.velocity.z);
+                    }
                 }
+                if(isGrabbingIntractable)
+                {
+                    playerBody.velocity = new Vector3(moveDirection.x * (moveSpeed*.5f) * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+                }
+                
             }
-            if(isGrabbingIntractable)
-            {
-                playerBody.velocity = new Vector3(moveDirection.x * (moveSpeed*.5f) * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
-            }
-            
         }
     }
 
@@ -330,7 +337,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="movementValue"></param>
     void OnMove(InputValue movementValue)
     {
-        if(gameManager.gameState == GameManager.GameState.Gameplay)
+        if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled)
         {
             //Movement logic
             Vector2 moveVector2 = movementValue.Get<Vector2>();
@@ -408,7 +415,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnInteract()
     {
-        if(interactionPosable)
+        if(interactionPosable && inputEnabled)
         {
             if(isGrabbingIntractable)
             {
@@ -426,7 +433,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnJump()
     {
-        if(gameManager.gameState == GameManager.GameState.Gameplay)
+        if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled)
         {
             if(isGrounded)
             {
