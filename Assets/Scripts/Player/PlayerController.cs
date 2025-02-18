@@ -206,13 +206,29 @@ public class PlayerController : MonoBehaviour
                 }
                 if(moveDirection.x < 0)
                 {
-                    playerAnim.SetBool("isPushing", false);
-                    playerAnim.SetBool("isPulling", true);
+                    if(isFacingLeft)
+                    {
+                        playerAnim.SetBool("isPushing", true);
+                        playerAnim.SetBool("isPulling", false);
+                    }
+                    else
+                    {
+                        playerAnim.SetBool("isPushing", false);
+                        playerAnim.SetBool("isPulling", true);
+                    }
                 }
                 else if(moveDirection.x > 0)
                 {
-                    playerAnim.SetBool("isPushing", true);
-                    playerAnim.SetBool("isPulling", false);
+                    if(isFacingLeft)
+                    {
+                        playerAnim.SetBool("isPushing", false);
+                        playerAnim.SetBool("isPulling", true);
+                    }
+                    else
+                    {
+                        playerAnim.SetBool("isPushing", true);
+                        playerAnim.SetBool("isPulling", false);
+                    }
                 }
                 else
                 {
@@ -401,7 +417,7 @@ public class PlayerController : MonoBehaviour
             else if(!isGrabbingLedge)
             {
                 isGrabbingIntractable = true;
-                interactionTarget.transform.position = grabPoint.position;
+                //interactionTarget.transform.position = grabPoint.position;
             }
         }
     }
@@ -415,6 +431,7 @@ public class PlayerController : MonoBehaviour
             if(isGrounded)
             {
                 playerAnim.SetTrigger("jump");
+                playerAnim.SetBool("isJumping",true);
                 playerBody.AddForce(transform.up * jumpForce);
                 sFXManager.source2D.Stop();
             }
@@ -561,6 +578,7 @@ public class PlayerController : MonoBehaviour
     private void SetLandingPosition()
     {
         landingPosition = transform.position;
+        playerAnim.SetBool("isJumping", false);
         CheckForFall();
     }
 
