@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5231093958072684026}
   m_Layer: 0
   m_Name: BoxButton
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 8383785037285411156}
   m_Layer: 0
   m_Name: Collider (3)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,7 +185,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5064535744525515385}
   serializedVersion: 4
-  m_Mass: 0.2
+  m_Mass: 0.3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -218,8 +218,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectsToControl:
   - {fileID: 0}
-  upwardVelocity: 0.5
+  upwardVelocity: 1
   isActivated: 0
+  isBoxSpawner: 0
+  spawner: {fileID: 0}
 --- !u!1 &6561816462844763666
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +317,7 @@ GameObject:
   - component: {fileID: 2495713945452704742}
   m_Layer: 0
   m_Name: Collider (4)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -451,7 +453,7 @@ GameObject:
   - component: {fileID: 9193923836684544825}
   m_Layer: 0
   m_Name: Collider (2)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
