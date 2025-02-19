@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     private GameObject player; 
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
+    public float minLoadTime;
     void Start()
     {
         //If the UIManager is null, find the UIManager
@@ -28,14 +29,12 @@ public class LevelManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        Time.timeScale = 1;
         if(sceneName.Contains("L_"))
         {
             uIManager.UILoadingScreen(uIManager.hUD);
         }
         if(sceneName.Contains("MainMenu"))
         {
-            Debug.Log("Setting Ui to menu");
             uIManager.UILoadingScreen(uIManager.mainMenu); 
         }  
         StartCoroutine(WaitForScreenLoad(sceneName));
@@ -57,10 +56,9 @@ public class LevelManager : MonoBehaviour
             gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();
             gameManager.playerCon.SetBoundingBox();
         }
-        else if (scene.name.StartsWith("Main"))
+        else
         {
             gameManager.gameState = GameManager.GameState.MainMenu;
-            Time.timeScale = 1;
             player.SetActive(false);
         }
         Debug.Log("SceneLoaded");
@@ -79,7 +77,7 @@ public class LevelManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator WaitForScreenLoad(string sceneName)
     {
-        Debug.Log("Loading Scene " + sceneName + " Starting");
+        //Debug.Log("Loading Scene Starting");
         yield return new WaitForSeconds(uIManager.fadeTime);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);

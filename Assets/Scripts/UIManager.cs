@@ -119,7 +119,7 @@ public class UIManager : MonoBehaviour
     public void UILoadingScreen(GameObject targetPanel)
     {
         StartCoroutine(LoadingUIFadeIN());
-        StartCoroutine(DelayedSwitchUIPanel(fadeTime, targetPanel));
+        StartCoroutine(DelayedSwitchUIPanel(levelManager.minLoadTime, targetPanel));
     }
 
     /// <summary>
@@ -150,7 +150,6 @@ public class UIManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator LoadingUIFadeIN()
     {
-        SetUIFalse();
         //Debug.Log("Starting Fade in");
         float timer = 0;
         loadingScreen.SetActive(true);
