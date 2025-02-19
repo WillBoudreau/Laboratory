@@ -6,6 +6,7 @@ public class Button : MonoBehaviour
 {
     [Header("Button Settings")]
     [SerializeField] private GameObject[] objectsToControl;//The object the button controls
+    [SerializeField] private int objectsOnButton = 0;//The number of objects on the button
     void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
@@ -16,6 +17,8 @@ public class Button : MonoBehaviour
             //If the object that enters the trigger is a box or the player
             if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
             {
+                objectsOnButton++;
+
                 Debug.Log("Box or Player can interact with button");
                 //If the object is a door, open it
                 if(obj.tag == "Door")
@@ -40,15 +43,19 @@ public class Button : MonoBehaviour
             //If the object that enters the trigger is a box or the player
             if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
             {
-                //If the object is a door, close it
-                if(obj.tag == "Door")
+                objectsOnButton--;
+                if(objectsOnButton <= 0)
                 {
-                    obj.GetComponent<DoorBehaviour>().CloseThisDoor();
-                }
-                //If the object is a platform, stop it from moving
-                else if(obj.tag == "Platform")
-                {
-                    obj.GetComponent<MovingPlatform>().canMove = false;
+                    //If the object is a door, close it
+                    if(obj.tag == "Door")
+                    {
+                        obj.GetComponent<DoorBehaviour>().CloseThisDoor();
+                    }
+                    //If the object is a platform, stop it from moving
+                    else if(obj.tag == "Platform")
+                    {
+                        obj.GetComponent<MovingPlatform>().canMove = false;
+                    }
                 }
             }
         }
