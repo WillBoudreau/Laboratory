@@ -28,7 +28,6 @@ public class LevelManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        Time.timeScale = 1;
         if(sceneName.Contains("L_"))
         {
             uIManager.UILoadingScreen(uIManager.hUD);

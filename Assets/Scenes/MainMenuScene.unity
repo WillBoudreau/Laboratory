@@ -1723,6 +1723,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451301210}
   m_CullTransparentMesh: 1
+--- !u!1 &459655206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459655207}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Spawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &459655207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459655206}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &462592817
 GameObject:
   m_ObjectHideFlags: 0
@@ -5536,6 +5567,16 @@ PrefabInstance:
       objectReference: {fileID: 74847030}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
+      propertyPath: zoomedInPos
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: zoomedOutPos
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
       propertyPath: interactionPrompt
       value: 
       objectReference: {fileID: 1835595693}
@@ -6853,10 +6894,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 2047621511}
   m_HandleRect: {fileID: 1014462945}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 9
+  m_MinValue: -40
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 4
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -8614,10 +8655,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1138164721}
   m_HandleRect: {fileID: 891316055}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 9
+  m_MinValue: -40
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 4
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -9639,7 +9680,6 @@ MonoBehaviour:
   startingTrack: title
   titleVolume: 0.5
   levelVolume: 0.5
-  volumeSlider: {fileID: 1335837270}
   musicPlayer: {fileID: 1467707073}
   mixer: {fileID: 24100000, guid: d809b0d414c671d408ba81d822d8aa17, type: 2}
   titleMusic: {fileID: 8300000, guid: 2c5f720cfc00b0a438f0853172eff685, type: 3}
@@ -9824,10 +9864,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 932186570}
   m_HandleRect: {fileID: 1282248047}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 9
+  m_MinValue: -40
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 4
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -13799,6 +13839,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 501068506}
     m_Modifications:
+    - target: {fileID: 1278453316379441521, guid: ef4e645916e880545966ecf7313beacd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1724394666256343947, guid: ef4e645916e880545966ecf7313beacd,
         type: 3}
       propertyPath: m_Follow
@@ -13882,3 +13927,4 @@ SceneRoots:
   - {fileID: 1016733354}
   - {fileID: 1392075761}
   - {fileID: 1022156858}
+  - {fileID: 459655207}
