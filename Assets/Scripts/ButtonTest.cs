@@ -10,6 +10,8 @@ public class ButtonTest : MonoBehaviour
 
     private Rigidbody rb;
     [HideInInspector] public bool isActivated;
+    public bool isBoxSpawner;
+    public BoxSpawner spawner;
 
     // Start is called before the first frame update
     void Start()
@@ -48,22 +50,29 @@ public class ButtonTest : MonoBehaviour
 
     private void ButtonActivated()
     {
-        //For each object in the array
-        foreach (GameObject obj in objectsToControl)
+        if(isBoxSpawner)
         {
-            //If the object is a door, open it
-            if (obj.tag == "Door")
-            {
-                obj.GetComponent<DoorBehaviour>().OpenThisDoor();
-            }
-            //If the object is a platform, allow it to move
-            else if (obj.tag == "Platform")
-            {
-                obj.GetComponent<MovingPlatform>().canMove = true;
-            }
+            spawner.SpawnBox();
         }
+        else
+        {
+            //For each object in the array
+            foreach (GameObject obj in objectsToControl)
+            {
+                //If the object is a door, open it
+                if (obj.tag == "Door")
+                {
+                    obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                }
+                //If the object is a platform, allow it to move
+                else if (obj.tag == "Platform")
+                {
+                    obj.GetComponent<MovingPlatform>().canMove = true;
+                }
+            }
 
-        isActivated = true;
+            isActivated = true;
+        }
     }
 
     private void ButtonDeactivated()

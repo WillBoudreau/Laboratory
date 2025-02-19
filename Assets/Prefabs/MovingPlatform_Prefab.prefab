@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1302996759034818797}
   m_Layer: 0
   m_Name: Ledge_Grab_Bar
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 7415643955229033011}
   - component: {fileID: 9200576859096545585}
   - component: {fileID: 4334122580382010027}
+  - component: {fileID: 3732496576068168315}
   m_Layer: 0
   m_Name: MovingPlatform
   m_TagString: Platform
@@ -360,6 +361,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7042386, y: 1.3069704, z: 2.002198}
   m_Center: {x: 0, y: 0.0018218755, z: 0.9992269}
+--- !u!54 &3732496576068168315
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037365715286128571}
+  serializedVersion: 4
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 124
+  m_CollisionDetection: 0
 --- !u!1 &5026666166892206273
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +399,7 @@ GameObject:
   - component: {fileID: 4158070427028807646}
   m_Layer: 0
   m_Name: MovingPlatformComponents
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,7 +434,7 @@ GameObject:
   - component: {fileID: 6370760998297859642}
   m_Layer: 0
   m_Name: Ledge_Grab_Bar (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -670,7 +698,7 @@ GameObject:
   - component: {fileID: 3461553211654649440}
   m_Layer: 0
   m_Name: BoxTrigger
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -734,7 +762,7 @@ GameObject:
   - component: {fileID: 678673611361219865}
   m_Layer: 0
   m_Name: MovingPlatform_Prefab
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
