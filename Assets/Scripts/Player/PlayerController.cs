@@ -523,11 +523,11 @@ public class PlayerController : MonoBehaviour
     {
         if(isFreeHanging)
         {
-            climbDuration = freehandClimbAnim.length *.8f;
+            climbDuration = freehandClimbAnim.length /1.5f;
         }
         else
         {
-            climbDuration = climbAnim.length *.8f;
+            climbDuration = climbAnim.length /1.5f;
         }
         isClimbing = true;
         playerAnim.SetTrigger("climb");
@@ -645,6 +645,7 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     IEnumerator Death()
     {
+        inputEnabled = false;
         StartCoroutine(uIManager.DeathUIFadeIN());
         yield return new WaitForSeconds(deathFadeTime);
         if(activeCheckpoint != null)
@@ -656,6 +657,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = levelManager.spawn.transform.position;
         }
+        inputEnabled = true;
         StartCoroutine(uIManager.DeathUIFadeOut());
     }
 
