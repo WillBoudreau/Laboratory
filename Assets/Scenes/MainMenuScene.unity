@@ -332,7 +332,6 @@ MonoBehaviour:
   gameManager: {fileID: 421211238}
   player: {fileID: 0}
   spawn: {fileID: 0}
-  minLoadTime: 5
 --- !u!1 &74073934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3994,7 +3993,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 421211238}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
