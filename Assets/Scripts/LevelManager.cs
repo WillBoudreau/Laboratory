@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Spawn Not Found!")
+            Debug.Log("Spawn Not Found!");
             SceneManager.sceneLoaded -= OnSceneLoaded;
             return;
         }
