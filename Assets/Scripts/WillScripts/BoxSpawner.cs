@@ -8,8 +8,6 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private GameObject boxPrefab; // The box prefab
     [SerializeField] private GameObject spawnedBox; // The spawned box
     [SerializeField] private Transform spawnPoint; // The spawn point
-    [SerializeField] private float spawnTime = 2f; // The time between spawns
-    [SerializeField] private float spawnDelay = 1f; // The delay before the first spawn
 
     /// <summary>
     /// Spawns a box at the spawn point if there is no box already spawned
@@ -33,9 +31,9 @@ public class BoxSpawner : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if(other.CompareTag("Player") && spawnedBox == null)
         {
-            Invoke("SpawnBox", spawnDelay);
+            SpawnBox();
         }
     }
 }

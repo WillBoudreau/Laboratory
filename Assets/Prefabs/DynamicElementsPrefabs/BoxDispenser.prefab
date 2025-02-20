@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 4.5, y: 5.74, z: 0}
-  m_LocalScale: {x: 55, y: 55, z: 55}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5095498834008428432}
@@ -104,8 +104,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.025571823, y: 0.033502586, z: 0.053866223}
-  m_Center: {x: -0.0021247864, y: -0.00047011793, z: 0.018056655}
+  m_Size: {x: 2.4807193, y: 2.4807198, z: 4.000001}
+  m_Center: {x: 0.06706011, y: -2.8449926e-14, z: 2.001986}
 --- !u!1 &7921013574211122141
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +117,6 @@ GameObject:
   - component: {fileID: 5095498834008428432}
   - component: {fileID: 5163942294314301787}
   - component: {fileID: 6752886629454497653}
-  - component: {fileID: 7075771548802236224}
   m_Layer: 0
   m_Name: box dispenser POS
   m_TagString: Untagged
@@ -190,24 +189,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7075771548802236224
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7921013574211122141}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0117622875, y: 0.013614016, z: 0.0044693574}
-  m_Center: {x: 0.0010787973, y: -0.0011104094, z: 0.001518013}

@@ -120,12 +120,15 @@ public class PlayerController : MonoBehaviour
         rightFacing = this.transform.rotation;
         leftFacing = new Quaternion(0,-rightFacing.y,0,1);
         deathFadeTime = uIManager.deathFadeTime*3;
+        confiner.InvalidateCache();
+        gameObject.SetActive(false);
     }
 
     void Awake()
     {
         isDead = false;
         inputEnabled = true;
+        confiner.InvalidateCache();
     }
 
     void Update()
@@ -579,6 +582,7 @@ public class PlayerController : MonoBehaviour
         if(boundingBox != null)
         {
             confiner.m_BoundingShape2D = boundingBox;
+            confiner.InvalidateCache();
         }
     }
 
