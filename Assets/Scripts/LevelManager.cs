@@ -54,6 +54,12 @@ public class LevelManager : MonoBehaviour
         {
             player.transform.position = spawn.transform.position;
         }
+        else
+        {
+            Debug.Log("Spawn Not Found!");
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            return;
+        }
         if(scene.name.StartsWith("L_"))
         {
             player.SetActive(true);
