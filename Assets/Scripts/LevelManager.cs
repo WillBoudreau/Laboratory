@@ -49,6 +49,11 @@ public class LevelManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        spawn = GameObject.FindWithTag("Spawn");
+        if(spawn != null)
+        {
+            player.transform.position = spawn.transform.position;
+        }
         if(scene.name.StartsWith("L_"))
         {
             player.SetActive(true);
@@ -63,11 +68,6 @@ public class LevelManager : MonoBehaviour
             player.SetActive(false);
         }
         Debug.Log("SceneLoaded");
-        spawn = GameObject.FindWithTag("Spawn");
-        if(spawn != null)
-        {
-            player.transform.position = spawn.transform.position;
-        }
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
