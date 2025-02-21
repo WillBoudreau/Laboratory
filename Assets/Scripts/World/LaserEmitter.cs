@@ -12,6 +12,11 @@ public class LaserEmitter : MonoBehaviour
     private float laserLength;
     [SerializeField]
     private LineRenderer lineRenderer;
+    [SerializeField] private enum LaserType {Damaged, Normal};//The type of laser
+    [SerializeField] private LaserType laserType;//The type of laser
+    [SerializeField] private float timeBetweenBurst;//The time between each burst
+    [SerializeField] private float coolDownTimer;//The cooldown timer
+    [SerializeField] private float timeBetweenShots;//The time between each shots, acts as a burst reset
     private Ray ray;
     private RaycastHit raycastHit;
     private Vector3 laserDirection;
@@ -33,6 +38,76 @@ public class LaserEmitter : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        //If the laser is Normal, continue to fire the laser
+        if(LaserType.Normal == laserType)
+        {
+            FireLaser();
+        }
+        // if the laser is damaged, fire the laser in bursts
+        else if(LaserType.Damaged == laserType)
+        {
+            LaserBurstFire();
+        }
+    }
+
+    void SetUpParticles()
+    {
+        collisionParticles = new GameObject[maxReflections];
+        for(int i = 0; i < maxReflections; i++)
+        {
+            collisionParticles[i] = Instantiate(particlePrefab,this.transform);
+            collisionParticles[i].SetActive(false);
+        }
+    }
+
+    void SetParticlePos(int index, RaycastHit hit)
+    {
+        collisionParticles[index].SetActive(true);
+        collisionParticles[index].transform.position = hit.point;
+    }
+
+    void DisableParticles()
+    {
+        foreach (var particle in collisionParticles)
+        {
+            particle.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Fire the laser in bursts
+    /// <summary>
+    void LaserBurstFire()
+    {
+        //If the time between bursts is less than or equal to 0, stop firing the laser
+        if(timeBetweenBurst <= 0)
+        {
+            lineRenderer.positionCount = 0;
+            DisableParticles();
+            coolDownTimer -= Time.deltaTime;
+
+            //If the cooldown timer is less than or equal to 0, reset the cooldown timer
+            if(coolDownTimer <= 0)
+            {
+                //Reset the cooldown timer and the time between bursts
+                coolDownTimer = timeBetweenShots;
+                timeBetweenBurst = timeBetweenShots;
+            }
+        }
+        else
+        {
+            //Decrease the time between bursts
+            timeBetweenBurst -= Time.deltaTime;
+            lineRenderer.positionCount = 1;
+            FireLaser();
+        }
+    }
+
+    /// <summary>
+    /// Fire the laser
+    /// </summary>
+    void FireLaser()
     {
         ray = new Ray(transform.position,transform.right);
         lineRenderer.positionCount = 1;
@@ -82,21 +157,5 @@ public class LaserEmitter : MonoBehaviour
                 lineRenderer.SetPosition(lineRenderer.positionCount-1,ray.origin + ray.direction * remainingLength);
             }
         }
-    }
-
-    void SetUpParticles()
-    {
-        collisionParticles = new GameObject[maxReflections];
-        for(int i = 0; i < maxReflections; i++)
-        {
-            collisionParticles[i] = Instantiate(particlePrefab,this.transform);
-            collisionParticles[i].SetActive(false);
-        }
-    }
-
-    void SetParticlePos(int index, RaycastHit hit)
-    {
-        collisionParticles[index].SetActive(true);
-        collisionParticles[index].transform.position = hit.point;
     }
 }
