@@ -9,6 +9,8 @@ public class LaserReceiver : MonoBehaviour
     public bool isReceivingLaser;
     public Material basic;
     public Material hit;
+    [SerializeField] private enum ReceiverType { Charged, Uncharged };
+    [SerializeField] private ReceiverType receiverType;
     [SerializeField] private GameObject[] objectsToActivate;
 
     // Update is called once per frame
@@ -22,6 +24,10 @@ public class LaserReceiver : MonoBehaviour
         else
         {
             marker.sharedMaterial = basic;
+            if(receiverType == ReceiverType.Charged)
+            {
+                DeactivateObjects();
+            }
         }
     }
     /// <summary>
@@ -42,6 +48,23 @@ public class LaserReceiver : MonoBehaviour
             else if(obj.tag == "BoxDispenser")
             {
                 obj.GetComponent<BoxSpawner>().SpawnBox();
+            }
+        }
+    }
+    /// <summary>
+    /// Deactivate the Objects that link to the receiver
+    /// </summary>
+    void DeactivateObjects()
+    {
+        foreach(GameObject obj in objectsToActivate)
+        {
+            if(obj.tag == "Door")
+            {
+                obj.GetComponent<DoorBehaviour>().CloseThisDoor();
+            }
+            else if(obj.tag == "Platform")
+            {
+                obj.GetComponent<MovingPlatform>().canMove = false;
             }
         }
     }
