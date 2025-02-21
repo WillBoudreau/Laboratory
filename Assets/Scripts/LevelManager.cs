@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     private GameObject player; 
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
+    private int activeLevelNumber;
     void Start()
     {
         //If the UIManager is null, find the UIManager
@@ -38,6 +39,30 @@ public class LevelManager : MonoBehaviour
             uIManager.UILoadingScreen(uIManager.mainMenu); 
         }  
         StartCoroutine(WaitForScreenLoad(sceneName));
+    }
+    /// <summary>
+    /// used to load the next level when all puzzles complete
+    /// </summary>
+    public void LoadNextLevel()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        if(sceneName.Contains("L_"))
+        {
+            if(sceneName == "L_1")
+            {
+                activeLevelNumber = 1;
+            }
+            if(sceneName == "L_2")
+            {
+                activeLevelNumber = 2;
+            }
+            else
+            {
+                activeLevelNumber = 0;
+            }
+            activeLevelNumber=+1;
+            LoadScene("L_" + activeLevelNumber );
+        }
     }
     /// <summary>
     /// Quit the game function

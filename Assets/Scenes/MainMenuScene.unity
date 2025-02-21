@@ -2255,7 +2255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: V 0.1.4
+  m_text: V 0.1.6
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5547,7 +5547,7 @@ PrefabInstance:
     - target: {fileID: 4661327655504778488, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.1857924
+      value: 1.5027323
       objectReference: {fileID: 0}
     - target: {fileID: 6596099876700949223, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
@@ -5614,6 +5614,11 @@ PrefabInstance:
       propertyPath: confiner
       value: 
       objectReference: {fileID: 2098503433}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: jumpForce
+      value: 240
+      objectReference: {fileID: 0}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: playerCam
@@ -11214,8 +11219,8 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 69596039}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+        m_MethodName: LoadNextLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13946,7 +13951,7 @@ PrefabInstance:
     - target: {fileID: 5415182159440856694, guid: ef4e645916e880545966ecf7313beacd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.0000005
+      value: 2.7500002
       objectReference: {fileID: 0}
     - target: {fileID: 5415182159440856694, guid: ef4e645916e880545966ecf7313beacd,
         type: 3}
