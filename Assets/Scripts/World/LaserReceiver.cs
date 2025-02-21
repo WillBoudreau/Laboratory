@@ -39,6 +39,10 @@ public class LaserReceiver : MonoBehaviour
             {
                 obj.GetComponent<MovingPlatform>().canMove = true;
             }
+            else if(obj.tag == "BoxDispenser")
+            {
+                obj.GetComponent<BoxSpawner>().SpawnBox();
+            }
         }
     }
 }
