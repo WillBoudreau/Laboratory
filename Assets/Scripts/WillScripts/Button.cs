@@ -46,6 +46,7 @@ public class Button : MonoBehaviour
                 objectsOnButton--;
                 if(objectsOnButton <= 0)
                 {
+                    objectsOnButton = 0;
                     //If the object is a door, close it
                     if(obj.tag == "Door")
                     {

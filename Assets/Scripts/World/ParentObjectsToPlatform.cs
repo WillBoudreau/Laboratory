@@ -9,7 +9,6 @@ public class ParentObjectsToPlatform : MonoBehaviour
         if(other.gameObject.tag == "Box")
         {
             other.gameObject.transform.SetParent(this.gameObject.transform, true);
-            Debug.Log(other.gameObject.name + " is now a child of " + this.gameObject.name);
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
             rb.angularDrag = 0f;
             Debug.Log(rb.velocity);
@@ -20,7 +19,6 @@ public class ParentObjectsToPlatform : MonoBehaviour
                 PhysicMaterial physicMaterial = boxCollider.material;
                 physicMaterial.dynamicFriction = 0f;
                 physicMaterial.staticFriction = 0f;
-                Debug.Log(physicMaterial.dynamicFriction);
             }
         }
     }
@@ -29,7 +27,6 @@ public class ParentObjectsToPlatform : MonoBehaviour
         if(other.gameObject.tag == "Box")
         {
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            Debug.Log(rb.velocity);
             rb.angularDrag = 0f;
             Collider boxCollider = other.gameObject.GetComponent<Collider>();
             if (boxCollider != null)
@@ -37,7 +34,6 @@ public class ParentObjectsToPlatform : MonoBehaviour
                 PhysicMaterial physicMaterial = boxCollider.material;
                 physicMaterial.dynamicFriction = 0f;
                 physicMaterial.staticFriction = 0f;
-                Debug.Log(physicMaterial.dynamicFriction);
             }
         }
     }
@@ -47,7 +43,6 @@ public class ParentObjectsToPlatform : MonoBehaviour
         {
             other.gameObject.transform.SetParent(null, true);
             Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            Debug.Log(rb.velocity);
         }
     }
 }

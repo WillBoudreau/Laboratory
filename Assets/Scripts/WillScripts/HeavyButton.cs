@@ -13,7 +13,6 @@ public class HeavyButton : MonoBehaviour
         {
             if(other.gameObject.GetComponent<Rigidbody>().mass > massThreshold)
             {
-                Debug.Log("Heavy object on button");
                 //If the object is a moving platform
                 if(objectToControl.gameObject.tag == "Platform")
                 {
