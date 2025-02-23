@@ -80,8 +80,10 @@ public class PlayerController : MonoBehaviour
     public int zoomedInPos;
     public int zoomedOutPos;
     [Header("Interaction Properties")]
-    public GameObject interactionPrompt;
-    public Transform promptPosition;
+    [SerializeField]
+    private MeshRenderer interactionBaseModelRen;
+    [SerializeField]
+    private MeshRenderer interactionExtraModelRen;
     public bool interactionPosable;
     [SerializeField]
     private bool isGrabbingIntractable;
@@ -195,11 +197,11 @@ public class PlayerController : MonoBehaviour
             }
             if(interactionPosable && !isGrabbingIntractable)
             {
-                interactionPrompt.SetActive(true);
+                
             }
             else
             {
-                interactionPrompt.SetActive(false);
+                
             }
             if(isGrabbingIntractable && interactionTarget != null)
             {
@@ -294,7 +296,6 @@ public class PlayerController : MonoBehaviour
             {
                 sFXManager.source2D.Stop();
             }
-            interactionPrompt.transform.position = promptPosition.position;
             //Debug.Log(playerBody.velocity.y + " = player Y velocities");
             if(playerBody.velocity.y < fallThreshold && !isGrabbingLedge)
             {
@@ -420,14 +421,21 @@ public class PlayerController : MonoBehaviour
     {
         if(interactionPosable && inputEnabled)
         {
-            if(isGrabbingIntractable)
+            if(interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
             {
-                isGrabbingIntractable = false;
+                if(isGrabbingIntractable)
+                {
+                    isGrabbingIntractable = false;
+                }
+                else if(!isGrabbingLedge)
+                {
+                    isGrabbingIntractable = true;
+                    //interactionTarget.transform.position = grabPoint.position;
+                }
             }
-            else if(!isGrabbingLedge)
+            else if(interactionTarget.TryGetComponent<LeverBehavior>(out LeverBehavior lever))
             {
-                isGrabbingIntractable = true;
-                //interactionTarget.transform.position = grabPoint.position;
+                lever.ActivateLever();
             }
         }
     }
@@ -675,7 +683,7 @@ public class PlayerController : MonoBehaviour
         
         if(Physics.SphereCast(ray.origin,groundCheckRadius,ray.direction, out groundingHit, distance))
         {
-            if(groundingHit.collider.gameObject.tag == "Platform" || groundingHit.collider.gameObject.tag == "Box" || groundingHit.collider.gameObject.tag == "Door")
+            if(groundingHit.collider.gameObject.tag == "Platform" || groundingHit.collider.gameObject.tag == "Box" || groundingHit.collider.gameObject.tag == "Door" || groundingHit.collider.gameObject.tag == "ReflectorBox" || groundingHit.collider.gameObject.tag == "Reflector")
             {
                 return true;
             }

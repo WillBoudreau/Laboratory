@@ -62,6 +62,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 08ae60ba721383d478564816781d0b54, type: 2}
+  - {fileID: 2100000, guid: 3bee92ce1c2436444b176b07af99aa91, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,6 +95,7 @@ GameObject:
   - component: {fileID: 6763176525819692510}
   - component: {fileID: 3799323078889045327}
   - component: {fileID: 2479993400159060402}
+  - component: {fileID: -6623258285387091819}
   m_Layer: 2
   m_Name: Lever
   m_TagString: Untagged
@@ -152,6 +154,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToControl:
   - {fileID: 0}
+--- !u!114 &-6623258285387091819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3137227316418715511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac073edb4c49bcb4bbc001cfbaec97f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sFXTrigger: {fileID: 0}
 --- !u!1 &8171337990818139973
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,6 +262,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 08ae60ba721383d478564816781d0b54, type: 2}
+  - {fileID: 2100000, guid: 3bee92ce1c2436444b176b07af99aa91, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

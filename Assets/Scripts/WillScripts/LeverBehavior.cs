@@ -12,7 +12,7 @@ public class LeverBehavior : MonoBehaviour
     /// <summary>
     /// Activate the lever
     /// </summary>
-    void ActivateLever()
+    public void ActivateLever()
     {
         Debug.Log("Lever Activated");
         foreach(GameObject obj in objectToControl)
