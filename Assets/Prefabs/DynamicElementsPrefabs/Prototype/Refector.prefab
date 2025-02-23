@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 6907937509622103990}
   - component: {fileID: 6937968739980950090}
   - component: {fileID: 5863092551332467854}
+  - component: {fileID: 1191316218617899756}
   m_Layer: 2
   m_Name: Refector
   m_TagString: Untagged
@@ -211,3 +212,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1191316218617899756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9186290551105245879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d57ba01966da11e4a8471a3920f4ad45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 1
+  axis: {x: 0, y: 0, z: 1}
+  rotateAngle: 0
+  canRotate: 0
