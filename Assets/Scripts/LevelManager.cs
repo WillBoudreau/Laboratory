@@ -88,6 +88,10 @@ public class LevelManager : MonoBehaviour
         if(scene.name.StartsWith("L_"))
         {
             player.SetActive(true);
+            if(scene.name.Contains("2"))
+            {
+                gameManager.playerCon.faceLeft();
+            }
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();
             gameManager.playerCon.SetBoundingBox();

@@ -697,4 +697,12 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(groundChecker.transform.position,groundCheckRadius);
     }
+    /// <summary>
+    /// used by level manager to make sure player faces the right way. 
+    /// </summary>
+    public void faceLeft()
+    {
+        isFacingLeft = true;
+        transform.rotation = leftFacing;
+    }
 }
