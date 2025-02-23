@@ -12,7 +12,7 @@ public class LaserEmitter : MonoBehaviour
     private float laserLength;
     [SerializeField]
     private LineRenderer lineRenderer;
-    [SerializeField] private enum LaserType {Damaged, Normal};//The type of laser
+    [SerializeField] private enum LaserType {Normal,Damaged};//The type of laser
     [SerializeField] private LaserType laserType;//The type of laser
     [Header("Damaged Laser Settings")]
     [SerializeField] private float timeBetweenBurst;//The time between each burst
