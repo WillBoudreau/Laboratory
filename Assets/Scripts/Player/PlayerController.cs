@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         playerAnim = this.gameObject.GetComponent<Animator>();
         input = this.gameObject.GetComponent<PlayerInput>();
         rightFacing = this.transform.rotation;
-        leftFacing = new Quaternion(0,-rightFacing.y,0,1);
+        leftFacing = new Quaternion(0,-transform.rotation.y,0,1);
         deathFadeTime = uIManager.deathFadeTime*3;
         confiner.InvalidateCache();
         gameObject.SetActive(false);
