@@ -14,6 +14,7 @@ public class LaserEmitter : MonoBehaviour
     private LineRenderer lineRenderer;
     [SerializeField] private enum LaserType {Damaged, Normal};//The type of laser
     [SerializeField] private LaserType laserType;//The type of laser
+    [Header("Damaged Laser Settings")]
     [SerializeField] private float timeBetweenBurst;//The time between each burst
     [SerializeField] private float coolDownTimer;//The cooldown timer
     [SerializeField] private float timeBetweenShots;//The time between each shots, acts as a burst reset
