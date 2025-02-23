@@ -32,6 +32,11 @@ public class Button : MonoBehaviour
                     Debug.Log("Platform can move");
                     obj.GetComponent<MovingPlatform>().canMove = true;
                 }
+                else if(obj.tag == "Receiver")
+                {
+                    Debug.Log(("firing laser"));
+                    obj.GetComponent<LaserEmitter>().FireLaser();
+                }
             }
         }
     }
@@ -56,6 +61,10 @@ public class Button : MonoBehaviour
                     else if(obj.tag == "Platform")
                     {
                         obj.GetComponent<MovingPlatform>().canMove = false;
+                    }
+                    else if(obj.tag == "Receiver")
+                    {
+                        obj.GetComponent<LaserEmitter>().DisableLaser();
                     }
                 }
             }

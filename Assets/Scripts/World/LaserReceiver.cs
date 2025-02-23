@@ -50,6 +50,10 @@ public class LaserReceiver : MonoBehaviour
                 obj.GetComponent<BoxSpawner>().SpawnBox();
             }
         }
+        if(receiverType == ReceiverType.Charged)
+        {
+            isReceivingLaser = false;
+        }
     }
     /// <summary>
     /// Deactivate the Objects that link to the receiver

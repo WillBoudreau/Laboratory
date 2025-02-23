@@ -18,6 +18,7 @@ public class LaserEmitter : MonoBehaviour
     [SerializeField] private float timeBetweenBurst;//The time between each burst
     [SerializeField] private float coolDownTimer;//The cooldown timer
     [SerializeField] private float timeBetweenShots;//The time between each shots, acts as a burst reset
+    public bool isButtonActivated;//If the button is activated
     private Ray ray;
     private RaycastHit raycastHit;
     private Vector3 laserDirection;
@@ -41,7 +42,7 @@ public class LaserEmitter : MonoBehaviour
     void Update()
     {
         //If the laser is Normal, continue to fire the laser
-        if(LaserType.Normal == laserType)
+        if(LaserType.Normal == laserType && !isButtonActivated)
         {
             FireLaser();
         }
@@ -84,8 +85,7 @@ public class LaserEmitter : MonoBehaviour
         //If the time between bursts is less than or equal to 0, stop firing the laser
         if(timeBetweenBurst <= 0)
         {
-            lineRenderer.positionCount = 0;
-            DisableParticles();
+            DisableLaser();
             coolDownTimer -= Time.deltaTime;
 
             //If the cooldown timer is less than or equal to 0, reset the cooldown timer
@@ -104,11 +104,16 @@ public class LaserEmitter : MonoBehaviour
             FireLaser();
         }
     }
+    public void DisableLaser()
+    {
+        lineRenderer.positionCount = 0;
+        DisableParticles();
+    }
 
     /// <summary>
     /// Fire the laser
     /// </summary>
-    void FireLaser()
+    public void FireLaser()
     {
         ray = new Ray(transform.position,transform.right);
         lineRenderer.positionCount = 1;
@@ -119,6 +124,7 @@ public class LaserEmitter : MonoBehaviour
         {
             if(Physics.Raycast(ray.origin,ray.direction, out raycastHit, remainingLength))
             {
+                laserReceiver = raycastHit.collider.gameObject.GetComponent<LaserReceiver>();
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount-1,raycastHit.point);
                 remainingLength -= Vector3.Distance(ray.origin,raycastHit.point);
@@ -126,8 +132,12 @@ public class LaserEmitter : MonoBehaviour
                 ray = new Ray(raycastHit.point, Vector3.Reflect(ray.direction, raycastHit.normal));
                 if(raycastHit.collider.tag == "Receiver")
                 {
-                    laserReceiver = raycastHit.collider.gameObject.GetComponent<LaserReceiver>();
                     laserReceiver.isReceivingLaser = true;
+                    break;
+                }
+                else if(raycastHit.collider.tag == "Receiver" && laserReceiver.isReceivingLaser)
+                {
+                    laserReceiver.isReceivingLaser = false;
                     break;
                 }
                 else if(raycastHit.collider.tag != "Reflector")
