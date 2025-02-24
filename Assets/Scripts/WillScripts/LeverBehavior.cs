@@ -35,6 +35,10 @@ public class LeverBehavior : MonoBehaviour
             {
                 obj.GetComponent<MovingPlatform>().canMove = true;
             }
+            else if(obj.tag == "Elevator")
+            {
+                obj.GetComponent<ElevatorBehaviour>().canMove = true;
+            }
             //If the object to control is a reflector
             else if(obj.tag == "Reflector")
             {
