@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
     public  Vector3 launchPosition;
     public Vector3 landingPosition;
     public float fallThreshold;
+    public bool isFalling;
     [Header("Checkpoint system")]
     public Checkpoint activeCheckpoint;
 
@@ -308,6 +309,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 isJumping = false;
+                isFalling = true;
+                playerAnim.SetTrigger("isFalling");
             }
         }  
     }
@@ -617,6 +620,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void CheckForFall()
     {
+        if(isFalling)
+        {
+            isFalling = false;
+            playerAnim.SetTrigger("landing");            
+        }
         lastFallHight = launchPosition.y - landingPosition.y;
         if(launchPosition.y - landingPosition.y >= maxFallHight)
         {
