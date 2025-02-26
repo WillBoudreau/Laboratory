@@ -33,7 +33,14 @@ public class LeverBehavior : MonoBehaviour
             //If the object to control is a moving platform
             else if(obj.tag == "Platform")
             {
-                obj.GetComponent<MovingPlatform>().canMove = true;
+                if(obj.GetComponent<MovingPlatform>().canMove == true)
+                {
+                    obj.GetComponent<MovingPlatform>().canMove = false;
+                }
+                else
+                {
+                    obj.GetComponent<MovingPlatform>().canMove = true;
+                }
             }
             else if(obj.tag == "Elevator")
             {
