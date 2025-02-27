@@ -19,6 +19,7 @@ public class LaserEmitter : MonoBehaviour
     [SerializeField] private float coolDownTimer;//The cooldown timer
     [SerializeField] private float timeBetweenShots;//The time between each shots, acts as a burst reset
     public bool isButtonActivated;//If the button is activated
+    public bool deActivated;//If the laser is deactivated
     private Ray ray;
     private RaycastHit raycastHit;
     private Vector3 laserDirection;
@@ -41,16 +42,24 @@ public class LaserEmitter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //If the laser is Normal, continue to fire the laser
-        if(LaserType.Normal == laserType && !isButtonActivated)
+        if(IsLaserActivated() == true)
         {
-            FireLaser();
+            //If the laser is Normal, continue to fire the laser
+            if(LaserType.Normal == laserType && !isButtonActivated)
+            {
+                FireLaser();
+            }
+            // if the laser is damaged, fire the laser in bursts
+            else if(LaserType.Damaged == laserType)
+            {
+                LaserBurstFire();
+            }
         }
-        // if the laser is damaged, fire the laser in bursts
-        else if(LaserType.Damaged == laserType)
+        else
         {
-            LaserBurstFire();
+            DisableLaser();
         }
+        
     }
 
     void SetUpParticles()
@@ -104,10 +113,27 @@ public class LaserEmitter : MonoBehaviour
             FireLaser();
         }
     }
+    /// <summary>
+    /// Disable the laser
+    /// </summary>
     public void DisableLaser()
     {
         lineRenderer.positionCount = 0;
         DisableParticles();
+    }
+    /// <summary>
+    /// Determine whether the laser is activated or deactivated
+    /// </summary>
+    public bool IsLaserActivated()
+    {
+        if(!deActivated)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>

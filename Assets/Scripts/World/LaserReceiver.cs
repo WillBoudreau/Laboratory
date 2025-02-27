@@ -49,6 +49,11 @@ public class LaserReceiver : MonoBehaviour
             {
                 obj.GetComponent<BoxSpawner>().SpawnBox();
             }
+            else if(obj.tag == "Receiver")
+            {
+                Debug.Log("Deactivating Receiver");
+                obj.GetComponent<LaserEmitter>().deActivated = true;
+            }
         }
         if(receiverType == ReceiverType.Charged)
         {
