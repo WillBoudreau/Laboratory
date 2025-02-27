@@ -3553,6 +3553,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline: {fileID: 782789992}
+  player: {fileID: 0}
+  singleton: {fileID: 0}
 --- !u!1001 &221745135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21921,7 +21923,7 @@ Transform:
   m_GameObject: {fileID: 1120389613}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 52.06, y: -4, z: 0}
+  m_LocalPosition: {x: -52.89, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40988,42 +40990,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &2190750775494511623
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6554654587817436943}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2.578391, z: 2.7075043}
-  m_Center: {x: 0, y: -0.12058693, z: 0.014251709}
---- !u!4 &2260920835915863490
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6554654587817436943}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0.5}
-  m_LocalScale: {x: 0.25, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8634317492648457943}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2503710109567724576
 Transform:
   m_ObjectHideFlags: 0
@@ -41141,18 +41107,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3461553211511620714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6554654587817436943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 350766a3948b5d84c9911ddaa1eba70d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3593204522255198680
 GameObject:
   m_ObjectHideFlags: 0
@@ -41702,24 +41656,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 195960111671601649}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &6554654587817436943
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2260920835915863490}
-  - component: {fileID: 2190750775494511623}
-  - component: {fileID: 3461553211511620714}
-  m_Layer: 0
-  m_Name: BoxTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!65 &6840848801836585154
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42004,8 +41940,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1925752, y: 1.5421757, z: 3.0672855}
-  m_Center: {x: -0.038418412, y: -0.0011002421, z: 0.54084873}
+  m_Size: {x: 1.6210015, y: 1.5421757, z: 3.0672855}
+  m_Center: {x: -0.25263155, y: -0.0011002223, z: 0.54084873}
 --- !u!4 &7616039148905233937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5753214781457392040, guid: 2176136a82f083e4d9de40d7ae4560c0,
@@ -42186,7 +42122,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2503710109567724576}
-  - {fileID: 2260920835915863490}
   - {fileID: 5505116405832221462}
   - {fileID: 2515006928994701067}
   m_Father: {fileID: 678673611486594835}
@@ -42209,6 +42144,8 @@ MonoBehaviour:
   targetPositions:
   - {fileID: 5251117996664773792}
   - {fileID: 6263976273037699512}
+  singleton: {fileID: 0}
+  isAbleToParent: 1
 --- !u!95 &8634317492648457946
 Animator:
   serializedVersion: 5
