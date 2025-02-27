@@ -129,8 +129,15 @@ public class LaserEmitter : MonoBehaviour
                 lineRenderer.SetPosition(lineRenderer.positionCount-1,raycastHit.point);
                 remainingLength -= Vector3.Distance(ray.origin,raycastHit.point);
                 SetParticlePos(i,raycastHit);
-                ray = new Ray(raycastHit.point, Vector3.Reflect(ray.direction, raycastHit.normal));
-                if(raycastHit.collider.tag == "Receiver")
+                if(raycastHit.collider.tag == "Reflector")
+                {
+                    ray = new Ray(raycastHit.point, Vector3.Reflect(ray.direction, raycastHit.normal));
+                }
+                if(raycastHit.collider.tag == "ReflectorBox")
+                {
+                    ray = new Ray(raycastHit.transform.position, Vector3.right);
+                }
+                else if(raycastHit.collider.tag == "Receiver")
                 {
                     laserReceiver.isReceivingLaser = true;
                     break;
@@ -140,7 +147,7 @@ public class LaserEmitter : MonoBehaviour
                     laserReceiver.isReceivingLaser = false;
                     break;
                 }
-                else if(raycastHit.collider.tag != "Reflector")
+                else if(raycastHit.collider.tag != "Reflector" || raycastHit.collider.tag == "ReflectorBox")
                 {
                     if(raycastHit.collider.tag == "Player")
                     {
