@@ -9,8 +9,14 @@ public class ElevatorBehaviour : MonoBehaviour
     public bool canMove; // if the platform can move
     [SerializeField] private float movementPauseTime = 0.5f; // When the moving platform reachs its destination, wait this long before moving again
     [SerializeField] private GameObject[] targetPositions; // List of target positions the platform moves to
+    [SerializeField] private Singleton singleton; // The singleton object
+    public bool isAbleToParent = true;//If the player is able to parent to the elevator
 
-
+    void Start()
+    {
+        singleton = FindObjectOfType<Singleton>();
+        isAbleToParent = true;
+    }
     void Update()
     {
         // If the platform can move, move to the next position
@@ -53,18 +59,34 @@ public class ElevatorBehaviour : MonoBehaviour
         // Start moving the platform again
         canMove = true;
     }
-    // void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
+    {
+        if(isAbleToParent)
+        {
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log("Player Triggered Elevator");
+                other.transform.SetParent(transform, true);
+            }
+        }
+        else
+        {
+            other.transform.parent = singleton.transform;
+        }
+    }
+    // private void OnTriggerEnter(Collider other)
     // {
     //     if (other.CompareTag("Player"))
     //     {
+    //         Debug.Log("Player Triggered Elevator");
     //         other.transform.SetParent(transform,true);
     //     }
     // }
-    // void OnTriggerExit(Collider other)
+    // private void OnTriggerExit(Collider other)
     // {
     //     if (other.CompareTag("Player"))
     //     {
-    //         other.transform.SetParent(null);
+    //         other.transform.parent = singleton.transform;
     //     }
     // }
 }
