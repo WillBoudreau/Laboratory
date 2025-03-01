@@ -18,38 +18,34 @@ public class LeverBehavior : MonoBehaviour
         foreach(GameObject obj in objectToControl)
         {
             Debug.Log(obj.tag);
-            //If the object to control is a door
-            if(obj.tag == "Door")
+            switch(obj.tag)
             {
-                if (obj.GetComponent<DoorBehaviour>().isOpen)
-                {
-                    obj.GetComponent<DoorBehaviour>().CloseThisDoor();
-                }
-                else
-                {
-                    obj.GetComponent<DoorBehaviour>().OpenThisDoor();
-                }
-            }
-            //If the object to control is a moving platform
-            else if(obj.tag == "Platform")
-            {
-                if(obj.GetComponent<MovingPlatform>().canMove == true)
-                {
-                    obj.GetComponent<MovingPlatform>().canMove = false;
-                }
-                else
-                {
-                    obj.GetComponent<MovingPlatform>().canMove = true;
-                }
-            }
-            else if(obj.tag == "Elevator")
-            {
-                obj.GetComponent<ElevatorBehaviour>().canMove = true;
-            }
-            //If the object to control is a reflector
-            else if(obj.tag == "Reflector")
-            {
-                obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
+                case "Door":
+                    if (obj.GetComponent<DoorBehaviour>().isOpen)
+                    {
+                        obj.GetComponent<DoorBehaviour>().CloseThisDoor();
+                    }
+                    else
+                    {
+                        obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                    }
+                    break;
+                case "Platform":
+                    if(obj.GetComponent<MovingPlatform>().canMove == true)
+                    {
+                        obj.GetComponent<MovingPlatform>().canMove = false;
+                    }
+                    else
+                    {
+                        obj.GetComponent<MovingPlatform>().canMove = true;
+                    }
+                    break;
+                case "Elevator":
+                    obj.GetComponent<ElevatorBehaviour>().canMove = true;
+                    break;
+                case "Reflector":
+                    obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
+                    break;
             }
         }
     }

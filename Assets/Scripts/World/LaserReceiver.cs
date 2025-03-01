@@ -37,22 +37,24 @@ public class LaserReceiver : MonoBehaviour
     {
         foreach(GameObject obj in objectsToActivate)
         {
-            if(obj.tag == "Door")
+            switch(obj.tag)
             {
-                obj.GetComponent<DoorBehaviour>().OpenThisDoor();
-            }
-            else if(obj.tag == "Platform")
-            {
-                obj.GetComponent<MovingPlatform>().canMove = true;
-            }
-            else if(obj.tag == "BoxDispenser")
-            {
-                obj.GetComponent<BoxSpawner>().SpawnBox();
-            }
-            else if(obj.tag == "Receiver")
-            {
-                Debug.Log("Deactivating Receiver");
-                obj.GetComponent<LaserEmitter>().deActivated = true;
+                case "Door":
+                    obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                    break;
+                case "Platform":
+                    obj.GetComponent<MovingPlatform>().canMove = true;
+                    break;
+                case "BoxDispenser":
+                    obj.GetComponent<BoxSpawner>().SpawnBox();
+                    break;
+                case "Receiver":
+                    Debug.Log("Deactivating Receiver");
+                    obj.GetComponent<LaserEmitter>().deActivated = true;
+                    break;
+                case "Reflector":
+                    obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
+                    break;
             }
         }
         if(receiverType == ReceiverType.Charged)
