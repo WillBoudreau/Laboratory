@@ -135,6 +135,20 @@ public class LaserEmitter : MonoBehaviour
             return false;
         }
     }
+    /// <summary>
+    /// Switch laser type
+    /// </summary>
+    public void SwitchLaserType()
+    {
+        if(laserType == LaserType.Normal)
+        {
+            laserType = LaserType.Damaged;
+        }
+        else
+        {
+            laserType = LaserType.Normal;
+        }
+    }
 
     /// <summary>
     /// Fire the laser
