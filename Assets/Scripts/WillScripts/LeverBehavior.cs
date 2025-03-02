@@ -46,6 +46,9 @@ public class LeverBehavior : MonoBehaviour
                 case "Reflector":
                     obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
                     break;
+                case "Receiver":
+                    obj.GetComponent<LaserEmitter>().FireLaser();
+                    break;
             }
         }
     }

@@ -37,6 +37,11 @@ public class Button : MonoBehaviour
                     Debug.Log(("firing laser"));
                     obj.GetComponent<LaserEmitter>().FireLaser();
                 }
+                else if(obj.tag == "Dispenser")
+                {
+                    Debug.Log(("dispensing"));
+                    obj.GetComponent<BoxSpawner>().SpawnBox();
+                }
             }
         }
     }
