@@ -54,6 +54,7 @@ public class ReflectorBehaviour : MonoBehaviour
     }
     public IEnumerator RotateReflectorCoroutine()
     {
+        canRotate = true;
         while (canRotate)
         {
             RotateReflector();
