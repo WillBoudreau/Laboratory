@@ -5823,6 +5823,11 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1460582586750174355, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: outline
+      value: 
+      objectReference: {fileID: 2100000, guid: 3bee92ce1c2436444b176b07af99aa91, type: 2}
     - target: {fileID: 1848219778861376593, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12885,7 +12890,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: L_2
+          m_StringArgument: L_3
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1576021096}

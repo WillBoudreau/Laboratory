@@ -62,7 +62,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e509467b58d7ba74f8b6f1fd8fd2594a, type: 2}
-  - {fileID: 2100000, guid: 3bee92ce1c2436444b176b07af99aa91, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -183,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sFXTrigger: {fileID: -3143215096046300572}
+  meshRenderer: {fileID: 3372649371281428925}
 --- !u!114 &4889952233642357674
 MonoBehaviour:
   m_ObjectHideFlags: 0

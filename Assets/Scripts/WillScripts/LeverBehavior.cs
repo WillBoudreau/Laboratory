@@ -8,6 +8,7 @@ public class LeverBehavior : MonoBehaviour
 {
     [Header("Lever Controls")]
     [SerializeField] private GameObject[] objectToControl;//The object the lever controls
+    [SerializeField] private bool setToDamaged;//Set the lever to damaged
     private bool playerInRange = false;
     /// <summary>
     /// Activate the lever
@@ -47,7 +48,14 @@ public class LeverBehavior : MonoBehaviour
                     obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
                     break;
                 case "Receiver":
-                    obj.GetComponent<LaserEmitter>().FireLaser();
+                    if(!setToDamaged)
+                    {
+                        obj.GetComponent<LaserEmitter>().FireLaser();
+                    }
+                    else
+                    {
+                        obj.GetComponent<LaserEmitter>().SwitchLaserType();
+                    }
                     break;
             }
         }

@@ -56,17 +56,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -29.407793
+      value: -50.169228
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44
+      value: -7.788643
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -35.910282
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
@@ -369,7 +369,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686281871066549692}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -422,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sFXTrigger: {fileID: 7911053570688223665}
+  meshRenderer: {fileID: 7998154007681258236}
 --- !u!114 &7911053570688223665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,3 +588,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   core: {fileID: 4448719220981216655}
+--- !u!23 &7998154007681258236 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1461304994638716399, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
+    type: 3}
+  m_PrefabInstance: {fileID: 380343509506027757}
+  m_PrefabAsset: {fileID: 0}
