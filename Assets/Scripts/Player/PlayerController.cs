@@ -259,14 +259,6 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetBool("isPushing", false);
                 playerAnim.SetBool("isPulling", false);
             }
-            if(isGamepadActive)
-            {
-                promptText.text = "B";
-            }
-            else
-            {
-                promptText.text = "E";
-            }
             if(isHurt)
             {
                 hurtTimer -= Time.deltaTime;
@@ -309,8 +301,14 @@ public class PlayerController : MonoBehaviour
             else
             {
                 isJumping = false;
-                isFalling = true;
-                playerAnim.SetTrigger("isFalling");
+            }
+            if(!isJumping && !isGrounded)
+            {
+                playerAnim.SetBool("isFalling",true);
+            }
+            else
+            {
+                playerAnim.SetBool("isFalling",false);
             }
         }  
     }
@@ -385,19 +383,19 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    ///  Used for isGrounded check.
+    ///  Used for as a backup isGrounded check for things that ignore raycast.
     /// </summary>
     /// <param name="col"></param>
     void OnCollisionStay(Collision col)
     {
-        // if(col.gameObject.CompareTag("Box") && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
-        // {
-        //     isGrounded = true;
-        // }
-        // if(col.gameObject.CompareTag("Platform"))
-        // {
-        //     isGrounded = true;
-        // }
+        if(col.gameObject.CompareTag("Reflector") || col.gameObject.CompareTag("Platform") || col.gameObject.CompareTag("Box") && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
+        {
+            isGrounded = true;
+        }
+        if(col.gameObject.CompareTag("Platform"))
+        {
+            isGrounded = true;
+        }
     }
 
     /// <summary>

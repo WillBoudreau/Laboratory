@@ -62,7 +62,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 08ae60ba721383d478564816781d0b54, type: 2}
-  - {fileID: 2100000, guid: 3bee92ce1c2436444b176b07af99aa91, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToControl:
   - {fileID: 0}
+  setToDamaged: 0
 --- !u!114 &-6623258285387091819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sFXTrigger: {fileID: 0}
+  meshRenderer: {fileID: 3314347749910163300}
 --- !u!1 &8171337990818139973
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +263,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 08ae60ba721383d478564816781d0b54, type: 2}
-  - {fileID: 2100000, guid: 3bee92ce1c2436444b176b07af99aa91, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
