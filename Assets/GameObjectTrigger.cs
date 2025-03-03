@@ -20,7 +20,7 @@ public class GameObjectTrigger : MonoBehaviour
                     // If the object to control is a door
                     if (obj.tag == "Door")
                     {
-                        obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                        obj.GetComponent<DoorBehaviour>().CloseThisDoor();
                     }
                     // If the object to control is a moving platform
                     else if (obj.tag == "Platform")
