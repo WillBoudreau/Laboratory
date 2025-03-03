@@ -26,12 +26,14 @@ public class LaserEmitter : MonoBehaviour
     public LaserReceiver laserReceiver;
     public AudioSource sFXSource;
     public bool isArray;
+    public GameObject sourceParticle;
     public GameObject particlePrefab;
     public GameObject[] collisionParticles;
 
     void Awake()
     {
         SetUpParticles();
+        sourceParticle.SetActive(false);
         lineRenderer = GetComponent<LineRenderer>();
         if(isArray)
         {
@@ -120,6 +122,7 @@ public class LaserEmitter : MonoBehaviour
     {
         lineRenderer.positionCount = 0;
         DisableParticles();
+        sourceParticle.SetActive(false);
     }
     /// <summary>
     /// Determine whether the laser is activated or deactivated
@@ -155,6 +158,7 @@ public class LaserEmitter : MonoBehaviour
     /// </summary>
     public void FireLaser()
     {
+        sourceParticle.SetActive(true);
         ray = new Ray(transform.position,transform.right);
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0,transform.position);

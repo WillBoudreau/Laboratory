@@ -157,9 +157,12 @@ MonoBehaviour:
   timeBetweenBurst: 0
   coolDownTimer: 0
   timeBetweenShots: 0
+  isButtonActivated: 0
+  deActivated: 0
   laserReceiver: {fileID: 0}
   sFXSource: {fileID: 6387509206983824090}
   isArray: 0
+  sourceParticle: {fileID: 5424775045269480840}
   particlePrefab: {fileID: 7581198098861856096, guid: 18eb809ceacfc4f46a5b985cde0aeff4,
     type: 3}
   collisionParticles: []
@@ -456,6 +459,12 @@ PrefabInstance:
 --- !u!4 &10816075549252379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3081822948800651676, guid: 4e0b941939aaa644a9a61da574c453cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 3090235210580818567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5424775045269480840 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7037460064082468623, guid: 4e0b941939aaa644a9a61da574c453cf,
     type: 3}
   m_PrefabInstance: {fileID: 3090235210580818567}
   m_PrefabAsset: {fileID: 0}
