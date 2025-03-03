@@ -45,6 +45,7 @@ public class LeverBehavior : MonoBehaviour
                     obj.GetComponent<ElevatorBehaviour>().canMove = true;
                     break;
                 case "Reflector":
+                    obj.GetComponent<ReflectorBehaviour>().canRotate = true;
                     obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
                     break;
                 case "Receiver":
