@@ -331,8 +331,10 @@ MonoBehaviour:
   uIManager: {fileID: 1576021096}
   gameManager: {fileID: 421211238}
   player: {fileID: 0}
+  interaction: {fileID: 2049701077}
   spawn: {fileID: 0}
   activeLevelNumber: 0
+  sceneName: 
 --- !u!114 &74847030 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4319035023910898646, guid: ef4e645916e880545966ecf7313beacd,
@@ -14388,7 +14390,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: L_Tutorial
+          m_StringArgument: L_2
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1576021096}
@@ -16124,6 +16126,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047621510}
   m_CullTransparentMesh: 1
+--- !u!114 &2049701077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1460582586750174355, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 884737602}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772a6212169c219438e40d0dc92ba6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2052951624
 PrefabInstance:
   m_ObjectHideFlags: 0

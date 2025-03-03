@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;//The game manager
     [SerializeField] 
     private GameObject player; 
+    [SerializeField] 
+    private InteractionTrigger interaction;
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     public int activeLevelNumber;
@@ -70,6 +72,8 @@ public class LevelManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        interaction.targets = new List<GameObject>();
+        interaction.baseMats = new List<Material>();
         sceneName = SceneManager.GetActiveScene().name;
         spawn = GameObject.FindWithTag("Spawn");
         if(spawn != null)

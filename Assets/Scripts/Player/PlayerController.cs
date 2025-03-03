@@ -421,7 +421,7 @@ public class PlayerController : MonoBehaviour
     {
         if(interactionPosable && inputEnabled)
         {
-            if(interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
+            if(interactionTarget != null && interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
             {
                 if(isGrabbingIntractable)
                 {

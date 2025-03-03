@@ -175,7 +175,27 @@ public class LaserEmitter : MonoBehaviour
                 }
                 if(raycastHit.collider.tag == "ReflectorBox")
                 {
-                    ray = new Ray(raycastHit.transform.position, Vector3.right);
+                    if(raycastHit.collider.gameObject.TryGetComponent<ReflectorBox>(out ReflectorBox box))
+                    {
+                        switch(box.direction)
+                        {
+                            case ReflectorBox.Direction.right:
+                                ray = new Ray(raycastHit.transform.position, Vector3.right);
+                                break;
+                            case ReflectorBox.Direction.left:
+                                ray = new Ray(raycastHit.transform.position, Vector3.left);
+                                break;
+                            case ReflectorBox.Direction.up:
+                                ray = new Ray(raycastHit.transform.position, Vector3.up);
+                                break;
+                            case ReflectorBox.Direction.down:
+                                ray = new Ray(raycastHit.transform.position, Vector3.down);
+                                break;
+                            default:
+                                ray = new Ray(raycastHit.transform.position, Vector3.right);
+                                break;
+                        }
+                    }
                 }
                 else if(raycastHit.collider.tag == "Receiver")
                 {

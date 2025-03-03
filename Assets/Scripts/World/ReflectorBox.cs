@@ -6,6 +6,8 @@ using UnityEngine;
 public class ReflectorBox : MonoBehaviour
 {
     public GameObject core;
+    public enum Direction{right,left,up,down}
+    public Direction direction;
 
     // Update is called once per frame
     void Update()
