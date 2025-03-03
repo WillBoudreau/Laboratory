@@ -112,9 +112,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865825666639057687}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: -3, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7912120680930181455}
@@ -124,7 +124,7 @@ Transform:
   - {fileID: 6017920294571776613}
   - {fileID: 7739804927391101687}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!54 &1762848971312491198
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 1801808092055149777}
   - component: {fileID: 8172850900814199047}
   - component: {fileID: 3037571023348606657}
-  - component: {fileID: 3249010081495417616}
+  - component: {fileID: 2744166286663496857}
   m_Layer: 0
   m_Name: Icosphere
   m_TagString: ReflectorBox
@@ -729,8 +729,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   core: {fileID: 9152196606553044702}
   direction: 2
---- !u!64 &3249010081495417616
-MeshCollider:
+--- !u!135 &2744166286663496857
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -747,7 +747,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 289301614986012343, guid: f722dd5c93a78ae4eb8f9fc1399f313d, type: 3}
+  serializedVersion: 3
+  m_Radius: 0.4
+  m_Center: {x: 0.5, y: 0, z: 0}

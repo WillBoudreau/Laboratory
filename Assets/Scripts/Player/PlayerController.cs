@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     [SerializeField]
     private GameObject groundChecker;
+    [SerializeField]
+    private Transform rightFacing;
+    [SerializeField]
+    private Transform leftFacing;
+
     [Header("PlayerStats")]
     [SerializeField]
     private float moveSpeed;
@@ -39,8 +44,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float turnTime;
     private Vector2 moveDirection;
-    private Quaternion rightFacing;
-    private Quaternion leftFacing;
     public float gravScale;
     public float jumpBoost;
     public RaycastHit groundingHit;
@@ -120,8 +123,6 @@ public class PlayerController : MonoBehaviour
         playerBody = this.gameObject.GetComponent<Rigidbody>();
         playerAnim = this.gameObject.GetComponent<Animator>();
         input = this.gameObject.GetComponent<PlayerInput>();
-        rightFacing = this.transform.rotation;
-        leftFacing = new Quaternion(0,-transform.rotation.y,0,1);
         deathFadeTime = uIManager.deathFadeTime*3;
         confiner.InvalidateCache();
         gameObject.SetActive(false);
@@ -159,7 +160,7 @@ public class PlayerController : MonoBehaviour
                 if(isFacingLeft)
                 {
                     isFacingLeft = false;
-                    transform.rotation = rightFacing;
+                    transform.rotation = rightFacing.rotation;
                 }
             }
             else if(moveDirection.x < 0 && !isGrabbingIntractable)
@@ -167,7 +168,7 @@ public class PlayerController : MonoBehaviour
                 if(!isFacingLeft)
                 {
                     isFacingLeft = true;
-                    transform.rotation = leftFacing;
+                    transform.rotation = leftFacing.rotation;
                 }
             }
             if(isGrabbingLedge == true)
@@ -415,7 +416,7 @@ public class PlayerController : MonoBehaviour
     {
         if(interactionPosable && inputEnabled)
         {
-            if(interactionTarget != null && interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
+            if(interactionTarget.tag != null && interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
             {
                 if(isGrabbingIntractable)
                 {
@@ -712,6 +713,6 @@ public class PlayerController : MonoBehaviour
     public void faceLeft()
     {
         isFacingLeft = true;
-        transform.rotation = leftFacing;
+        transform.rotation = leftFacing.rotation;
     }
 }
