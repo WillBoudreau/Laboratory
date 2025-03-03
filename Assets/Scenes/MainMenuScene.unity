@@ -2746,7 +2746,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: V 0.1.7
+  m_text: V 0.2.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12192,10 +12192,10 @@ MonoBehaviour:
   winText: {fileID: 1375013186}
   loadingScreenCanvasGroup: {fileID: 1039002007}
   loadingBar: {fileID: 1598468900}
-  fadeTime: 0.1
+  fadeTime: 0.5
   hurtIndicator: {fileID: 1085583275}
   deathCanvasGroup: {fileID: 462592819}
-  deathFadeTime: 0.5
+  deathFadeTime: 0.75
 --- !u!4 &1576021097
 Transform:
   m_ObjectHideFlags: 0

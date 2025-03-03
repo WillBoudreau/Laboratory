@@ -20,13 +20,13 @@ public class InteractionTrigger : MonoBehaviour
     {
         if(other.gameObject.TryGetComponent<Intractable>(out Intractable interaction))
         {
-            player.interactionPosable = true;
-            List<Material> materials = new List<Material>();
-            materials.Add(interaction.meshRenderer.material);
-            materials.Add(outline);
-            interaction.meshRenderer.SetMaterials(materials);
-            if(interaction.gameObject.tag == "Box")
+            if(player.interactionTarget == null)
             {
+                player.interactionPosable = true;
+                List<Material> materials = new List<Material>();
+                materials.Add(interaction.meshRenderer.material);
+                materials.Add(outline);
+                interaction.meshRenderer.SetMaterials(materials);
                 player.interactionTarget = interaction.gameObject;
             }
         }

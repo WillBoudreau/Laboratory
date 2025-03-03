@@ -414,7 +414,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnInteract()
     {
-        if(interactionPosable && inputEnabled)
+        if(interactionPosable && inputEnabled && interactionTarget != null)
         {
             if(interactionTarget.tag != null && interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
             {
