@@ -366,9 +366,10 @@ public class PlayerController : MonoBehaviour
     /// <param name="col"></param>
      void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.CompareTag("Platform") || col.gameObject.CompareTag("Box"))
+        if(col.gameObject.tag == "Receiver" || col.gameObject.tag == "Reflector" || col.gameObject.tag == "Platform" || col.gameObject.tag == "Box" && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
         {
-            SetLandingPosition();
+            isGrounded = true;
+            SetLandingPosition(); 
         }
     }
 
@@ -383,6 +384,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
     }
+    
 
     /// <summary>
     /// Event called when collision ends 

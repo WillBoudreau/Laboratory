@@ -30,6 +30,7 @@ public class LaserEmitter : MonoBehaviour
     public GameObject particlePrefab;
     public GameObject[] collisionParticles;
     public float laserHightOffset;
+    public LayerMask ignoreLayer;
 
     void Awake()
     {
@@ -167,7 +168,7 @@ public class LaserEmitter : MonoBehaviour
 
         for(int i = 0; i< maxReflections; i++)
         {
-            if(Physics.Raycast(ray.origin,ray.direction, out raycastHit, remainingLength))
+            if(Physics.Raycast(ray.origin,ray.direction, out raycastHit, remainingLength, ignoreLayer))
             {
                 laserReceiver = raycastHit.collider.gameObject.GetComponent<LaserReceiver>();
                 lineRenderer.positionCount += 1;

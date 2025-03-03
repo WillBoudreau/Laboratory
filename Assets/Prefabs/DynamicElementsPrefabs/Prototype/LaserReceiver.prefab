@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 6329175312004122469}
   - component: {fileID: 5751772425481825469}
   - component: {fileID: 283702674747311011}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LaserReceiver
   m_TagString: Receiver
   m_Icon: {fileID: 0}
@@ -228,3 +228,5 @@ MonoBehaviour:
   isReceivingLaser: 0
   basic: {fileID: 2100000, guid: ef2631cf42d6a664c9310f5845a7edcd, type: 2}
   hit: {fileID: 2100000, guid: 591b89162bfdd1c48a5aea526e864c53, type: 2}
+  receiverType: 0
+  objectsToActivate: []
