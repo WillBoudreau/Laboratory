@@ -29,6 +29,7 @@ public class LaserEmitter : MonoBehaviour
     public GameObject sourceParticle;
     public GameObject particlePrefab;
     public GameObject[] collisionParticles;
+    public float laserHightOffset;
 
     void Awake()
     {
@@ -190,19 +191,19 @@ public class LaserEmitter : MonoBehaviour
                             switch(box.direction)
                             {
                                 case ReflectorBox.Direction.right:
-                                    ray = new Ray(raycastHit.transform.position, Vector3.right);
+                                    ray = new Ray(raycastHit.transform.position, box.transform.right + Vector3.up*laserHightOffset);
                                     break;
                                 case ReflectorBox.Direction.left:
-                                    ray = new Ray(raycastHit.transform.position, Vector3.left);
+                                    ray = new Ray(raycastHit.transform.position, -box.transform.right+ Vector3.up*laserHightOffset);
                                     break;
                                 case ReflectorBox.Direction.up:
-                                    ray = new Ray(raycastHit.transform.position, Vector3.up);
+                                    ray = new Ray(raycastHit.transform.position, box.transform.up);
                                     break;
                                 case ReflectorBox.Direction.down:
-                                    ray = new Ray(raycastHit.transform.position, Vector3.down);
+                                    ray = new Ray(raycastHit.transform.position, -box.transform.up);
                                     break;
                                 default:
-                                    ray = new Ray(raycastHit.transform.position, Vector3.right);
+                                    ray = new Ray(raycastHit.transform.position, box.transform.right);
                                     break;
                             }
                         }
