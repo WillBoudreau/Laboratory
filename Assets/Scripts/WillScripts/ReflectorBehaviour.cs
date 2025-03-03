@@ -12,7 +12,17 @@ public class ReflectorBehaviour : MonoBehaviour
     [SerializeField] private ReflectorType reflectorType; // The type of reflector
     public bool canRotate; // If the reflector can rotate
     private float currentRotation = 0; // Track the current rotation
-
+    void Start()
+    {
+        if(reflectorType == ReflectorType.stationary)
+        {
+            canRotate = false;
+        }
+        else if(reflectorType == ReflectorType.rotating)
+        {
+            canRotate = true;
+        }
+    }
     void Update()
     {
         if(reflectorType == ReflectorType.rotating)
@@ -54,7 +64,7 @@ public class ReflectorBehaviour : MonoBehaviour
     }
     public IEnumerator RotateReflectorCoroutine()
     {
-        canRotate = true;
+        //canRotate = true;
         while (canRotate)
         {
             RotateReflector();

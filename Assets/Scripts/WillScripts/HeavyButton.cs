@@ -28,6 +28,11 @@ public class HeavyButton : MonoBehaviour
                 {
                     objectToControl.GetComponent<BoxSpawner>().SpawnBox();
                 }
+                //if the object is a reflector
+                else if(objectToControl.gameObject.tag == "Reflector")
+                {
+                    objectToControl.GetComponent<ReflectorBehaviour>().canRotate = false;
+                }
             }
             else if(other.gameObject.GetComponent<Rigidbody>() == null)
             {
@@ -48,6 +53,10 @@ public class HeavyButton : MonoBehaviour
                 else if(objectToControl.gameObject.tag == "Door")
                 {
                     objectToControl.GetComponent<DoorBehaviour>().CloseThisDoor();
+                }
+                else if(objectToControl.gameObject.tag == "Reflector")
+                {
+                    objectToControl.GetComponent<ReflectorBehaviour>().canRotate = true;
                 }
             }
         }
