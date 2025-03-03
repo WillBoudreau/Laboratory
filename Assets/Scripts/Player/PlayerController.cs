@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour
     private bool isGrabbingIntractable;
     public GameObject interactionTarget;
     public Transform grabPoint;
-    public TextMeshProUGUI promptText;
     public float pushDistance;
     public float currentDistance;
     public bool isPushing;

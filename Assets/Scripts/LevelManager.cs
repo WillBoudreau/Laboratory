@@ -12,7 +12,8 @@ public class LevelManager : MonoBehaviour
     private GameObject player; 
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
-    private int activeLevelNumber;
+    public int activeLevelNumber;
+    public string sceneName;
     void Start()
     {
         //If the UIManager is null, find the UIManager
@@ -20,6 +21,7 @@ public class LevelManager : MonoBehaviour
         {
             uIManager = FindObjectOfType<UIManager>();
         }
+        
         player = gameManager.player;
     }
     /// <summary>
@@ -45,24 +47,18 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void LoadNextLevel()
     {
-        string sceneName = SceneManager.GetActiveScene().name;
-        if(sceneName.Contains("L_"))
+        sceneName = SceneManager.GetActiveScene().name;
+
+        if(sceneName == "L_1" || sceneName == "L_2")
         {
-            if(sceneName == "L_1")
-            {
-                activeLevelNumber = 1;
-            }
-            if(sceneName == "L_2")
-            {
-                activeLevelNumber = 2;
-            }
-            else
-            {
-                activeLevelNumber = 0;
-            }
-            activeLevelNumber=+1;
-            LoadScene("L_" + activeLevelNumber );
+            activeLevelNumber += 1;
         }
+        else
+        {
+            activeLevelNumber = 0;
+            activeLevelNumber += 1;
+        }
+        LoadScene(string.Format("L_{0}", activeLevelNumber));
     }
     /// <summary>
     /// Quit the game function
@@ -74,6 +70,7 @@ public class LevelManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        sceneName = SceneManager.GetActiveScene().name;
         spawn = GameObject.FindWithTag("Spawn");
         if(spawn != null)
         {
@@ -85,7 +82,7 @@ public class LevelManager : MonoBehaviour
             SceneManager.sceneLoaded -= OnSceneLoaded;
             return;
         }
-        if(scene.name.StartsWith("L_"))
+        if(scene.name.StartsWith("L"))
         {
             player.SetActive(true);
             if(scene.name.Contains("2"))
