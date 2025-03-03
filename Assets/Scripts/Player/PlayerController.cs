@@ -146,10 +146,6 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetBool("isIdle", false);
                 isIdle = false;
             }
-            else if(!isGrounded)
-            {
-                playerAnim.SetBool("isIdle", true);
-            }
             else if(moveDirection.x == 0 && moveDirection.y == 0)
             {
                 playerAnim.SetBool("isIdle", true);
@@ -382,11 +378,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="col"></param>
     void OnCollisionStay(Collision col)
     {
-        if(col.gameObject.CompareTag("Reflector") || col.gameObject.CompareTag("Platform") || col.gameObject.CompareTag("Box") && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
-        {
-            isGrounded = true;
-        }
-        if(col.gameObject.CompareTag("Platform"))
+        if(col.gameObject.tag == "Receiver" || col.gameObject.tag == "Reflector" || col.gameObject.tag == "Platform" || col.gameObject.tag == "Box" && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
         {
             isGrounded = true;
         }

@@ -56,22 +56,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.72
+      value: -50.144714
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -43
+      value: -7.788643
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.09494591
+      value: -35.886513
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7194401
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.69455457
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
@@ -96,7 +96,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 87.983
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f722dd5c93a78ae4eb8f9fc1399f313d,
         type: 3}
@@ -445,7 +445,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -490,7 +490,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -549,6 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   core: {fileID: 4448719220981216655}
+  direction: 0
 --- !u!64 &5413152895217418330
 MeshCollider:
   m_ObjectHideFlags: 0
