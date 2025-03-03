@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     public AnimationClip climbAnim;
     public AnimationClip freehandClimbAnim;
     private bool isClimbing;
+    private Coroutine climbRoutine;
     [Header("Camera Control Properties")]
     public CinemachineVirtualCamera playerCam;
     public bool isZoomedOut;
@@ -195,14 +196,6 @@ public class PlayerController : MonoBehaviour
                 }
                 isIdle = true;
             }
-            if(interactionPosable && !isGrabbingIntractable)
-            {
-                
-            }
-            else
-            {
-                
-            }
             if(isGrabbingIntractable && interactionTarget != null)
             {
                 currentDistance = Vector3.Distance(transform.position,interactionTarget.transform.position);
@@ -301,14 +294,6 @@ public class PlayerController : MonoBehaviour
             {
                 isJumping = false;
             }
-            if(!isJumping && !isGrounded)
-            {
-                playerAnim.SetBool("isFalling",true);
-            }
-            else
-            {
-                playerAnim.SetBool("isFalling",false);
-            }
         }  
     }
 
@@ -333,6 +318,15 @@ public class PlayerController : MonoBehaviour
                 
             }
         }
+        if(!isJumping && !isGrounded && !isClimbing)
+        {
+            playerAnim.SetBool("isIdle",false);
+            playerAnim.SetBool("isFalling",true);
+        }
+        else
+        {
+            playerAnim.SetBool("isFalling",false);
+        }
     }
 
     /// <summary>
@@ -355,7 +349,7 @@ public class PlayerController : MonoBehaviour
                 moveDirection.y = moveVector2.y;
                 if(moveDirection.y > 0)
                 {
-                    StartCoroutine(LedgeClimb());
+                    climbRoutine = StartCoroutine(LedgeClimb());
                 }
                 if(moveDirection.y < 0)
                 {
@@ -548,7 +542,9 @@ public class PlayerController : MonoBehaviour
         desiredPosition = topOfLedge;
         while (climbTime <= climbDuration)
         {
-            climbTime += Time.deltaTime;  
+            climbTime += Time.deltaTime; 
+            topOfLedge = ledge.transform.position;
+            topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
             transform.position = Vector3.Lerp(startValue, topOfLedge, climbTime/climbDuration);
             yield return null;
         }
