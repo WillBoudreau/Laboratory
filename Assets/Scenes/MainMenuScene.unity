@@ -2748,9 +2748,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: V 0.2.0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bc0ea083b6ae7414cb9d010e74dbfff5, type: 2}
-  m_sharedMaterial: {fileID: 157549075619950657, guid: bc0ea083b6ae7414cb9d010e74dbfff5,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8628,7 +8627,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: DAMAGE WARNING!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bc0ea083b6ae7414cb9d010e74dbfff5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -8692,7 +8691,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: -4.126343, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1085583278
@@ -12197,8 +12196,6 @@ MonoBehaviour:
   hurtIndicator: {fileID: 1085583275}
   deathCanvasGroup: {fileID: 462592819}
   deathFadeTime: 0.75
-  targetButtons:
-  - {fileID: 0}
 --- !u!4 &1576021097
 Transform:
   m_ObjectHideFlags: 0
@@ -13951,7 +13948,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: L_Tutorial
+          m_StringArgument: L_3
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1576021096}
@@ -16160,8 +16157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2911555954172491371, guid: ef4e645916e880545966ecf7313beacd, type: 3}
-    m_RemovedGameObjects:
-    - {fileID: 8268531153813411965, guid: ef4e645916e880545966ecf7313beacd, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8096927926568714887, guid: ef4e645916e880545966ecf7313beacd,
