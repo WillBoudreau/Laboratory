@@ -65,6 +65,10 @@ public class ReflectorBehaviour : MonoBehaviour
     public IEnumerator RotateReflectorCoroutine()
     {
         //canRotate = true;
+        if(reflectorType == ReflectorType.stationary)
+        {
+            canRotate = true;
+        }
         while (canRotate)
         {
             RotateReflector();
