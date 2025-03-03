@@ -51,7 +51,7 @@ public class LeverBehavior : MonoBehaviour
                 case "Receiver":
                     if(!setToDamaged)
                     {
-                        obj.GetComponent<LaserEmitter>().FireLaser();
+                        obj.GetComponent<LaserEmitter>().isButtonActivated = false;
                     }
                     else
                     {
