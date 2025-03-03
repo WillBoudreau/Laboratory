@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     public GameObject hurtIndicator;
     public CanvasGroup deathCanvasGroup;
     public float deathFadeTime;
+    [Header("Target Buttons")]
+    public Button[] targetButtons;
 
     void Start()
     {
