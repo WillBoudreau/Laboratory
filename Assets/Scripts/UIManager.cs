@@ -125,8 +125,16 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void UpdateWinScreen()
     {
-        int totalScenes = SceneManager.sceneCountInBuildSettings;
-        winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/{totalScenes}\nCOMPLETE";
+        int totalScenes = SceneManager.sceneCountInBuildSettings - 1;
+        if(SceneManager.GetActiveScene().buildIndex == totalScenes)
+        {
+            winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/{totalScenes}\nCOMPLETE\nSIMULATION COMPLETE";
+        }
+        else
+        {
+            winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/{totalScenes}\nCOMPLETE";
+
+        }
     }
 
     // <summary>
