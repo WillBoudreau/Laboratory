@@ -43,26 +43,6 @@ public class LeverBehavior : MonoBehaviour
                         break;
                     }
                     Debug.Log(obj.GetComponent<MovingPlatform>().canMove + "2");
-                    // var platform = obj.GetComponent<MovingPlatform>();
-                    // if(platform.canMove)
-                    // {
-                    //     platform.canMove = false;
-                    // }
-                    // else
-                    // {
-                    //     platform.canMove = true;
-                    // }
-                    // if(obj.GetComponent<MovingPlatform>().canMove == true)
-                    // {
-                    //     obj.GetComponent<MovingPlatform>().canMove = false;
-                    //     break;
-                    // }
-                    // else 
-                    // {
-                    //     obj.GetComponent<MovingPlatform>().canMove = true;
-                    //     break;
-                    // }
-                    // Debug.Log(obj.GetComponent<MovingPlatform>().canMove);
                     break;
                 case "Elevator":
                     obj.GetComponent<ElevatorBehaviour>().canMove = true;
