@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     [SerializeField]
     private GameObject groundChecker;
+    [SerializeField]
+    private Transform rightFacing;
+    [SerializeField]
+    private Transform leftFacing;
+
     [Header("PlayerStats")]
     [SerializeField]
     private float moveSpeed;
@@ -39,8 +44,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float turnTime;
     private Vector2 moveDirection;
-    private Quaternion rightFacing;
-    private Quaternion leftFacing;
     public float gravScale;
     public float jumpBoost;
     public RaycastHit groundingHit;
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
     public AnimationClip climbAnim;
     public AnimationClip freehandClimbAnim;
     private bool isClimbing;
+    private Coroutine climbRoutine;
     [Header("Camera Control Properties")]
     public CinemachineVirtualCamera playerCam;
     public bool isZoomedOut;
@@ -89,13 +93,13 @@ public class PlayerController : MonoBehaviour
     private bool isGrabbingIntractable;
     public GameObject interactionTarget;
     public Transform grabPoint;
-    public TextMeshProUGUI promptText;
     public float pushDistance;
     public float currentDistance;
     public bool isPushing;
     public bool isPulling;
     public float pushForce;
     [Header("Input Properties")]
+    public bool debugMode;
     public InputActionAsset playerInputActions;
     public PlayerInput input;
     public bool isGamepadActive;
@@ -105,6 +109,7 @@ public class PlayerController : MonoBehaviour
     public  Vector3 launchPosition;
     public Vector3 landingPosition;
     public float fallThreshold;
+    public bool isFalling;
     [Header("Checkpoint system")]
     public Checkpoint activeCheckpoint;
 
@@ -119,8 +124,6 @@ public class PlayerController : MonoBehaviour
         playerBody = this.gameObject.GetComponent<Rigidbody>();
         playerAnim = this.gameObject.GetComponent<Animator>();
         input = this.gameObject.GetComponent<PlayerInput>();
-        rightFacing = this.transform.rotation;
-        leftFacing = new Quaternion(0,-transform.rotation.y,0,1);
         deathFadeTime = uIManager.deathFadeTime*3;
         confiner.InvalidateCache();
         gameObject.SetActive(false);
@@ -144,10 +147,6 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetBool("isIdle", false);
                 isIdle = false;
             }
-            else if(!isGrounded)
-            {
-                playerAnim.SetBool("isIdle", true);
-            }
             else if(moveDirection.x == 0 && moveDirection.y == 0)
             {
                 playerAnim.SetBool("isIdle", true);
@@ -158,7 +157,7 @@ public class PlayerController : MonoBehaviour
                 if(isFacingLeft)
                 {
                     isFacingLeft = false;
-                    transform.rotation = rightFacing;
+                    transform.rotation = rightFacing.rotation;
                 }
             }
             else if(moveDirection.x < 0 && !isGrabbingIntractable)
@@ -166,7 +165,7 @@ public class PlayerController : MonoBehaviour
                 if(!isFacingLeft)
                 {
                     isFacingLeft = true;
-                    transform.rotation = leftFacing;
+                    transform.rotation = leftFacing.rotation;
                 }
             }
             if(isGrabbingLedge == true)
@@ -194,14 +193,6 @@ public class PlayerController : MonoBehaviour
                     playerAnim.SetBool("isHanging", true);
                 }
                 isIdle = true;
-            }
-            if(interactionPosable && !isGrabbingIntractable)
-            {
-                
-            }
-            else
-            {
-                
             }
             if(isGrabbingIntractable && interactionTarget != null)
             {
@@ -258,14 +249,6 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetBool("isPushing", false);
                 playerAnim.SetBool("isPulling", false);
             }
-            if(isGamepadActive)
-            {
-                promptText.text = "B";
-            }
-            else
-            {
-                promptText.text = "E";
-            }
             if(isHurt)
             {
                 hurtTimer -= Time.deltaTime;
@@ -290,7 +273,7 @@ public class PlayerController : MonoBehaviour
             }
             if(!sFXManager.source2D.isPlaying && moveDirection.x != 0 && isGrounded)
             {
-                sFXManager.Player2DSFX(sFXManager.metalStep,true);
+                sFXManager.Player2DSFX(sFXManager.metalStep,false);
             }
             else if(sFXManager.source2D.isPlaying && moveDirection.x == 0)
             {
@@ -333,6 +316,15 @@ public class PlayerController : MonoBehaviour
                 
             }
         }
+        if(!isJumping && !isGrounded && !isClimbing)
+        {
+            playerAnim.SetBool("isIdle",false);
+            playerAnim.SetBool("isFalling",true);
+        }
+        else
+        {
+            playerAnim.SetBool("isFalling",false);
+        }
     }
 
     /// <summary>
@@ -355,7 +347,7 @@ public class PlayerController : MonoBehaviour
                 moveDirection.y = moveVector2.y;
                 if(moveDirection.y > 0)
                 {
-                    StartCoroutine(LedgeClimb());
+                    climbRoutine = StartCoroutine(LedgeClimb());
                 }
                 if(moveDirection.y < 0)
                 {
@@ -375,27 +367,25 @@ public class PlayerController : MonoBehaviour
     /// <param name="col"></param>
      void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.CompareTag("Platform") || col.gameObject.CompareTag("Box"))
+        if(col.gameObject.tag == "Receiver" || col.gameObject.tag == "Reflector" || col.gameObject.tag == "Platform" || col.gameObject.tag == "Box" && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
         {
-            SetLandingPosition();
+            isGrounded = true;
+            SetLandingPosition(); 
         }
     }
 
     /// <summary>
-    ///  Used for isGrounded check.
+    ///  Used for as a backup isGrounded check for things that ignore raycast.
     /// </summary>
     /// <param name="col"></param>
     void OnCollisionStay(Collision col)
     {
-        // if(col.gameObject.CompareTag("Box") && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
-        // {
-        //     isGrounded = true;
-        // }
-        // if(col.gameObject.CompareTag("Platform"))
-        // {
-        //     isGrounded = true;
-        // }
+        if(col.gameObject.tag == "Receiver" || col.gameObject.tag == "Reflector" || col.gameObject.tag == "Platform" || col.gameObject.tag == "Box" && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
+        {
+            isGrounded = true;
+        }
     }
+    
 
     /// <summary>
     /// Event called when collision ends 
@@ -419,9 +409,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnInteract()
     {
-        if(interactionPosable && inputEnabled)
+        if(interactionPosable && inputEnabled && interactionTarget != null)
         {
-            if(interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
+            if(interactionTarget.tag != null && interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
             {
                 if(isGrabbingIntractable)
                 {
@@ -436,6 +426,7 @@ public class PlayerController : MonoBehaviour
             else if(interactionTarget.TryGetComponent<LeverBehavior>(out LeverBehavior lever))
             {
                 lever.ActivateLever();
+                sFXManager.Player2DSFX(sFXManager.leverSFX,false);
             }
         }
     }
@@ -452,6 +443,7 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetBool("isJumping",true);
                 playerBody.AddForce(transform.up * jumpForce);
                 sFXManager.source2D.Stop();
+                sFXManager.Player2DSFX(sFXManager.jumpSFX,false);
             }
             if(isGrabbingLedge)
             {
@@ -542,13 +534,15 @@ public class PlayerController : MonoBehaviour
         }
         isClimbing = true;
         playerAnim.SetTrigger("climb");
-        input.enabled = false;
+        inputEnabled = false;
         float climbTime = 0f;
         Vector3 startValue = transform.position;
         desiredPosition = topOfLedge;
         while (climbTime <= climbDuration)
         {
-            climbTime += Time.deltaTime;  
+            climbTime += Time.deltaTime; 
+            topOfLedge = ledge.transform.position;
+            topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
             transform.position = Vector3.Lerp(startValue, topOfLedge, climbTime/climbDuration);
             yield return null;
         }
@@ -560,7 +554,7 @@ public class PlayerController : MonoBehaviour
         activeOffset = Vector3.zero;
         moveDirection = Vector2.zero;
         isGrabbingLedge = false;
-        input.enabled = true;
+        inputEnabled = true;
         isClimbing = false;
     }
 
@@ -617,11 +611,32 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void CheckForFall()
     {
+        if(isFalling)
+        {
+            isFalling = false;
+            playerAnim.SetTrigger("landing");            
+        }
         lastFallHight = launchPosition.y - landingPosition.y;
         if(launchPosition.y - landingPosition.y >= maxFallHight)
         {
             TakeDamage();
+            RollForHurtSFX();
             launchPosition = landingPosition;
+        }
+    }
+
+    void RollForHurtSFX()
+    {
+        float roll;
+        roll = UnityEngine.Random.Range(1, 3);
+        Debug.Log("Hurt roll=" + roll);
+        if(roll == 1)
+        {
+            sFXManager.Player2DSFX(sFXManager.hurtSFX1,false);
+        }
+        if(roll == 2)
+        {
+            sFXManager.Player2DSFX(sFXManager.hurtSFX2,false);
         }
     }
 
@@ -711,6 +726,39 @@ public class PlayerController : MonoBehaviour
     public void faceLeft()
     {
         isFacingLeft = true;
-        transform.rotation = leftFacing;
+        transform.rotation = leftFacing.rotation;
+    }
+
+    /// <summary>
+    /// Debug controls to load level 1.
+    /// </summary>
+    void OnDebugLoadLevel1()
+    {
+        if(debugMode)
+        {
+            levelManager.DebugLoadScene("L_1");
+        }
+    }
+
+    /// <summary>
+    /// Debug controls to load level 2.
+    /// </summary>
+    void OnDebugLoadLevel2()
+    {
+        if(debugMode)
+        {
+            levelManager.DebugLoadScene("L_2");
+        }
+    }
+
+    /// <summary>
+    /// Debug controls to load level 3.
+    /// </summary>
+    void OnDebugLoadLevel3()
+    {
+        if(debugMode)
+        {
+            levelManager.DebugLoadScene("L_3");   
+        }
     }
 }

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6611219315597658171}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.00000020861626, y: 0, z: 8.333334}
+  m_LocalPosition: {x: -0, y: 0, z: 8.333334}
   m_LocalScale: {x: 13.333329, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -157,12 +157,19 @@ MonoBehaviour:
   timeBetweenBurst: 0
   coolDownTimer: 0
   timeBetweenShots: 0
+  isButtonActivated: 0
+  deActivated: 0
   laserReceiver: {fileID: 0}
   sFXSource: {fileID: 6387509206983824090}
   isArray: 0
+  sourceParticle: {fileID: 5424775045269480840}
   particlePrefab: {fileID: 7581198098861856096, guid: 18eb809ceacfc4f46a5b985cde0aeff4,
     type: 3}
   collisionParticles: []
+  laserHightOffset: 0.092
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 375
 --- !u!82 &6387509206983824090
 AudioSource:
   m_ObjectHideFlags: 0
@@ -456,6 +463,12 @@ PrefabInstance:
 --- !u!4 &10816075549252379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3081822948800651676, guid: 4e0b941939aaa644a9a61da574c453cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 3090235210580818567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5424775045269480840 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7037460064082468623, guid: 4e0b941939aaa644a9a61da574c453cf,
     type: 3}
   m_PrefabInstance: {fileID: 3090235210580818567}
   m_PrefabAsset: {fileID: 0}

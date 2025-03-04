@@ -8,6 +8,7 @@ public class LeverBehavior : MonoBehaviour
 {
     [Header("Lever Controls")]
     [SerializeField] private GameObject[] objectToControl;//The object the lever controls
+    [SerializeField] private bool setToDamaged;//Set the lever to damaged
     private bool playerInRange = false;
     /// <summary>
     /// Activate the lever
@@ -18,27 +19,48 @@ public class LeverBehavior : MonoBehaviour
         foreach(GameObject obj in objectToControl)
         {
             Debug.Log(obj.tag);
-            //If the object to control is a door
-            if(obj.tag == "Door")
+            switch(obj.tag)
             {
-                if (obj.GetComponent<DoorBehaviour>().isOpen)
-                {
-                    obj.GetComponent<DoorBehaviour>().CloseThisDoor();
-                }
-                else
-                {
-                    obj.GetComponent<DoorBehaviour>().OpenThisDoor();
-                }
-            }
-            //If the object to control is a moving platform
-            else if(obj.tag == "Platform")
-            {
-                obj.GetComponent<MovingPlatform>().canMove = true;
-            }
-            //If the object to control is a reflector
-            else if(obj.tag == "Reflector")
-            {
-                obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
+                case "Door":
+                    if (obj.GetComponent<DoorBehaviour>().isOpen)
+                    {
+                        obj.GetComponent<DoorBehaviour>().CloseThisDoor();
+                    }
+                    else
+                    {
+                        obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                    }
+                    break;
+                case "Platform":
+                    obj.GetComponent<MovingPlatform>().canMove = true;
+                    // if(obj.GetComponent<MovingPlatform>().canMove == true)
+                    // {
+                    //     obj.GetComponent<MovingPlatform>().canMove = false;
+                    //     break;
+                    // }
+                    // else 
+                    // {
+                    //     obj.GetComponent<MovingPlatform>().canMove = true;
+                    // }
+                    // Debug.Log(obj.GetComponent<MovingPlatform>().canMove);
+                    break;
+                case "Elevator":
+                    obj.GetComponent<ElevatorBehaviour>().canMove = true;
+                    break;
+                case "Reflector":
+                    obj.GetComponent<ReflectorBehaviour>().canRotate = true;
+                    obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
+                    break;
+                case "Receiver":
+                    if(!setToDamaged)
+                    {
+                        obj.GetComponent<LaserEmitter>().isButtonActivated = false;
+                    }
+                    else
+                    {
+                        obj.GetComponent<LaserEmitter>().SwitchLaserType();
+                    }
+                    break;
             }
         }
     }

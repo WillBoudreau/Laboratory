@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractionTrigger : MonoBehaviour
 {
     public PlayerController player;
+    public Material outline;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,12 +18,16 @@ public class InteractionTrigger : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.TryGetComponent<Intractable>(out Intractable pushable))
+        if(other.gameObject.TryGetComponent<Intractable>(out Intractable interaction))
         {
-            player.interactionPosable = true;
-            if(pushable.gameObject.tag == "Box")
+            if(player.interactionTarget == null)
             {
-                player.interactionTarget = pushable.gameObject;
+                player.interactionPosable = true;
+                List<Material> materials = new List<Material>();
+                materials.Add(interaction.meshRenderer.material);
+                materials.Add(outline);
+                interaction.meshRenderer.SetMaterials(materials);
+                player.interactionTarget = interaction.gameObject;
             }
         }
     }
@@ -33,8 +38,11 @@ public class InteractionTrigger : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.TryGetComponent<Intractable>(out Intractable pushable))
+        if(other.gameObject.TryGetComponent<Intractable>(out Intractable interaction))
         {
+            List<Material> materials = new List<Material>();
+            materials.Add(interaction.meshRenderer.material);
+            interaction.meshRenderer.SetMaterials(materials);
             player.interactionPosable = false;
             player.interactionTarget = null;
         }

@@ -6,6 +6,7 @@ public class Intractable : MonoBehaviour
 {
     public SFXTrigger sFXTrigger;
     private Rigidbody rb;
+    public MeshRenderer meshRenderer;
 
     void Start()
     {

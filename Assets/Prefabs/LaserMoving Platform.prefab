@@ -157,9 +157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   singleton: {fileID: 0}
-  speed: 3
-  canMove: 0
-  movementPauseTime: 0.5
+  speed: 2
+  canMove: 1
+  movementPauseTime: 1
   movementType: 0
   autoAssignTargetPositions: 0
   targetPositions:
@@ -348,17 +348,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxReflections: 9
   laserLength: 10000
-  lineRenderer: {fileID: 0}
-  laserType: 1
+  lineRenderer: {fileID: 6562936395520969092}
+  laserType: 0
   timeBetweenBurst: 0
   coolDownTimer: 0
   timeBetweenShots: 0
+  isButtonActivated: 0
+  deActivated: 0
   laserReceiver: {fileID: 0}
   sFXSource: {fileID: 5952194501710318626}
   isArray: 0
+  sourceParticle: {fileID: 512707737338111406}
   particlePrefab: {fileID: 7581198098861856096, guid: 18eb809ceacfc4f46a5b985cde0aeff4,
     type: 3}
   collisionParticles: []
+  laserHightOffset: 0
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!82 &5952194501710318626
 AudioSource:
   m_ObjectHideFlags: 0
@@ -862,6 +869,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e0b941939aaa644a9a61da574c453cf, type: 3}
+--- !u!1 &512707737338111406 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7037460064082468623, guid: 4e0b941939aaa644a9a61da574c453cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 7401547635817183905}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5508819306351893309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3081822948800651676, guid: 4e0b941939aaa644a9a61da574c453cf,

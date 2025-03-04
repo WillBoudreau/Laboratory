@@ -5,10 +5,7 @@ using UnityEngine;
 public class LaserReceiver : MonoBehaviour
 {
     [Header("Laser Receiver Settings")]
-    public MeshRenderer marker;
     public bool isReceivingLaser;
-    public Material basic;
-    public Material hit;
     [SerializeField] private enum ReceiverType { Charged, Uncharged };
     [SerializeField] private ReceiverType receiverType;
     [SerializeField] private GameObject[] objectsToActivate;
@@ -18,12 +15,10 @@ public class LaserReceiver : MonoBehaviour
     {
         if(isReceivingLaser)
         {
-            marker.sharedMaterial = hit;
             ActivateObjects();
         }
         else
         {
-            marker.sharedMaterial = basic;
             if(receiverType == ReceiverType.Charged)
             {
                 DeactivateObjects();
@@ -37,17 +32,24 @@ public class LaserReceiver : MonoBehaviour
     {
         foreach(GameObject obj in objectsToActivate)
         {
-            if(obj.tag == "Door")
+            switch(obj.tag)
             {
-                obj.GetComponent<DoorBehaviour>().OpenThisDoor();
-            }
-            else if(obj.tag == "Platform")
-            {
-                obj.GetComponent<MovingPlatform>().canMove = true;
-            }
-            else if(obj.tag == "BoxDispenser")
-            {
-                obj.GetComponent<BoxSpawner>().SpawnBox();
+                case "Door":
+                    obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                    break;
+                case "Platform":
+                    obj.GetComponent<MovingPlatform>().canMove = true;
+                    break;
+                case "BoxDispenser":
+                    obj.GetComponent<BoxSpawner>().SpawnBox();
+                    break;
+                case "Receiver":
+                    Debug.Log("Deactivating Receiver");
+                    obj.GetComponent<LaserEmitter>().deActivated = true;
+                    break;
+                case "Reflector":
+                    obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
+                    break;
             }
         }
         if(receiverType == ReceiverType.Charged)

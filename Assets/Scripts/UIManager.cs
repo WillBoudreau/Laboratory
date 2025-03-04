@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -37,7 +38,12 @@ public class UIManager : MonoBehaviour
     public GameObject hurtIndicator;
     public CanvasGroup deathCanvasGroup;
     public float deathFadeTime;
-
+    [Header("Target Buttons")]
+    public GameObject menuFirstButton;
+    public GameObject pauseFirstButton;
+    public GameObject controlsFirstButton;
+    public GameObject optionsFirstButton;
+    public GameObject nextLevelButton;
     void Start()
     {
         SetUIFalse();
@@ -84,22 +90,33 @@ public class UIManager : MonoBehaviour
             case "Win":
                 UpdateWinScreen();
                 winMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(nextLevelButton);
                 break;
             case "MainMenuScene":
                 mainMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(menuFirstButton);
                 break;
             case "Settings":
                 InitializeResDropDown();
                 settingsMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(optionsFirstButton);
                 break;
             case "Game":
                 hUD.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(null);
                 break;
             case "Pause":
                 pauseMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(pauseFirstButton);
                 break;
             case "Controls":
                 controlsMenu.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(controlsFirstButton);
                 break;
         }
     }
@@ -199,6 +216,11 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         SetUIFalse();
         uiPanel.SetActive(true);
+        if(uiPanel = mainMenu)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(menuFirstButton);
+        }
     }
 
     private void UpdateHUD()
@@ -322,11 +344,10 @@ public class UIManager : MonoBehaviour
                resolutions[i].height == Screen.currentResolution.height)
             {
                 CurrentResolutionIndex = i;
+                resolutionDropdown.value = CurrentResolutionIndex;
             }
         }
-
         resolutionDropdown.AddOptions(Options);
-        resolutionDropdown.value = CurrentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
     }
     /// <summary>

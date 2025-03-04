@@ -12,25 +12,30 @@ public class LaserEmitter : MonoBehaviour
     private float laserLength;
     [SerializeField]
     private LineRenderer lineRenderer;
-    [SerializeField] private enum LaserType {Damaged, Normal};//The type of laser
+    [SerializeField] private enum LaserType {Normal,Damaged};//The type of laser
     [SerializeField] private LaserType laserType;//The type of laser
     [Header("Damaged Laser Settings")]
     [SerializeField] private float timeBetweenBurst;//The time between each burst
     [SerializeField] private float coolDownTimer;//The cooldown timer
     [SerializeField] private float timeBetweenShots;//The time between each shots, acts as a burst reset
     public bool isButtonActivated;//If the button is activated
+    public bool deActivated;//If the laser is deactivated
     private Ray ray;
     private RaycastHit raycastHit;
     private Vector3 laserDirection;
     public LaserReceiver laserReceiver;
     public AudioSource sFXSource;
     public bool isArray;
+    public GameObject sourceParticle;
     public GameObject particlePrefab;
     public GameObject[] collisionParticles;
+    public float laserHightOffset;
+    public LayerMask ignoreLayer;
 
     void Awake()
     {
         SetUpParticles();
+        sourceParticle.SetActive(false);
         lineRenderer = GetComponent<LineRenderer>();
         if(isArray)
         {
@@ -41,16 +46,24 @@ public class LaserEmitter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //If the laser is Normal, continue to fire the laser
-        if(LaserType.Normal == laserType && !isButtonActivated)
+        if(IsLaserActivated() == true)
         {
-            FireLaser();
+            //If the laser is Normal, continue to fire the laser
+            if(LaserType.Normal == laserType && !isButtonActivated)
+            {
+                FireLaser();
+            }
+            // if the laser is damaged, fire the laser in bursts
+            else if(LaserType.Damaged == laserType)
+            {
+                LaserBurstFire();
+            }
         }
-        // if the laser is damaged, fire the laser in bursts
-        else if(LaserType.Damaged == laserType)
+        else
         {
-            LaserBurstFire();
+            DisableLaser();
         }
+        
     }
 
     void SetUpParticles()
@@ -104,10 +117,42 @@ public class LaserEmitter : MonoBehaviour
             FireLaser();
         }
     }
+    /// <summary>
+    /// Disable the laser
+    /// </summary>
     public void DisableLaser()
     {
         lineRenderer.positionCount = 0;
         DisableParticles();
+        sourceParticle.SetActive(false);
+    }
+    /// <summary>
+    /// Determine whether the laser is activated or deactivated
+    /// </summary>
+    public bool IsLaserActivated()
+    {
+        if(!deActivated)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    /// <summary>
+    /// Switch laser type
+    /// </summary>
+    public void SwitchLaserType()
+    {
+        if(laserType == LaserType.Normal)
+        {
+            laserType = LaserType.Damaged;
+        }
+        else
+        {
+            laserType = LaserType.Normal;
+        }
     }
 
     /// <summary>
@@ -115,6 +160,7 @@ public class LaserEmitter : MonoBehaviour
     /// </summary>
     public void FireLaser()
     {
+        sourceParticle.SetActive(true);
         ray = new Ray(transform.position,transform.right);
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0,transform.position);
@@ -122,15 +168,49 @@ public class LaserEmitter : MonoBehaviour
 
         for(int i = 0; i< maxReflections; i++)
         {
-            if(Physics.Raycast(ray.origin,ray.direction, out raycastHit, remainingLength))
+            if(Physics.Raycast(ray.origin,ray.direction, out raycastHit, remainingLength, ignoreLayer))
             {
                 laserReceiver = raycastHit.collider.gameObject.GetComponent<LaserReceiver>();
                 lineRenderer.positionCount += 1;
                 lineRenderer.SetPosition(lineRenderer.positionCount-1,raycastHit.point);
                 remainingLength -= Vector3.Distance(ray.origin,raycastHit.point);
                 SetParticlePos(i,raycastHit);
-                ray = new Ray(raycastHit.point, Vector3.Reflect(ray.direction, raycastHit.normal));
-                if(raycastHit.collider.tag == "Receiver")
+                if(raycastHit.collider.tag == "Reflector")
+                {
+                    ray = new Ray(raycastHit.point, Vector3.Reflect(ray.direction, raycastHit.normal));
+                }
+                if(raycastHit.collider.tag == "ReflectorBox")
+                {
+                    if(raycastHit.collider.gameObject.TryGetComponent<ReflectorBox>(out ReflectorBox box))
+                    {
+                        if(isArray)
+                        {
+                            Destroy(raycastHit.collider.gameObject.transform.parent.gameObject);
+                        }
+                        else
+                        {
+                            switch(box.direction)
+                            {
+                                case ReflectorBox.Direction.right:
+                                    ray = new Ray(raycastHit.transform.position, box.transform.right + Vector3.up*laserHightOffset);
+                                    break;
+                                case ReflectorBox.Direction.left:
+                                    ray = new Ray(raycastHit.transform.position, -box.transform.right+ Vector3.up*laserHightOffset);
+                                    break;
+                                case ReflectorBox.Direction.up:
+                                    ray = new Ray(raycastHit.transform.position, box.transform.up);
+                                    break;
+                                case ReflectorBox.Direction.down:
+                                    ray = new Ray(raycastHit.transform.position, -box.transform.up);
+                                    break;
+                                default:
+                                    ray = new Ray(raycastHit.transform.position, box.transform.right);
+                                    break;
+                            }
+                        }
+                    }
+                }
+                else if(raycastHit.collider.tag == "Receiver")
                 {
                     laserReceiver.isReceivingLaser = true;
                     break;
@@ -140,7 +220,7 @@ public class LaserEmitter : MonoBehaviour
                     laserReceiver.isReceivingLaser = false;
                     break;
                 }
-                else if(raycastHit.collider.tag != "Reflector")
+                else if(raycastHit.collider.tag != "Reflector" || raycastHit.collider.tag == "ReflectorBox")
                 {
                     if(raycastHit.collider.tag == "Player")
                     {
