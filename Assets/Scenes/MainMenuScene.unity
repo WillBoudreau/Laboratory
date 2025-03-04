@@ -13226,6 +13226,10 @@ MonoBehaviour:
   source2D: {fileID: 1744534260}
   buttonPress: {fileID: 8300000, guid: ab0367c20c22ff044828b1f5483e767e, type: 3}
   metalStep: {fileID: 8300000, guid: 6884ebdaaba2ff141aaa7f78bc0cf28c, type: 3}
+  leverSFX: {fileID: 8300000, guid: 899cd6eb8e61de94e80916bfb26aa4c5, type: 3}
+  hurtSFX1: {fileID: 8300000, guid: 85005ae5efdacee42ac07fc8a58ab677, type: 3}
+  hurtSFX2: {fileID: 8300000, guid: e872b6a96ba20064e86105b857590d0d, type: 3}
+  jumpSFX: {fileID: 8300000, guid: 107b9490d08ce0f4db302b751bf9f18a, type: 3}
 --- !u!1 &1779279296
 GameObject:
   m_ObjectHideFlags: 0
@@ -13975,7 +13979,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: L_3
+          m_StringArgument: L_2
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1576021096}

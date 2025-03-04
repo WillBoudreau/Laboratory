@@ -44388,16 +44388,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 619011470}
     m_Modifications:
-    - target: {fileID: 1581119904930303131, guid: 2176136a82f083e4d9de40d7ae4560c0,
-        type: 3}
-      propertyPath: laserType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1581119904930303131, guid: 2176136a82f083e4d9de40d7ae4560c0,
-        type: 3}
-      propertyPath: lineRenderer
-      value: 
-      objectReference: {fileID: 7684825684462676119}
     - target: {fileID: 5753214781457392040, guid: 2176136a82f083e4d9de40d7ae4560c0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -44448,21 +44438,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6138164722164106800, guid: 2176136a82f083e4d9de40d7ae4560c0,
-        type: 3}
-      propertyPath: speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138164722164106800, guid: 2176136a82f083e4d9de40d7ae4560c0,
-        type: 3}
-      propertyPath: canMove
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138164722164106800, guid: 2176136a82f083e4d9de40d7ae4560c0,
-        type: 3}
-      propertyPath: movementPauseTime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8195627983476023076, guid: 2176136a82f083e4d9de40d7ae4560c0,
         type: 3}
       propertyPath: m_Name
@@ -44473,12 +44448,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2176136a82f083e4d9de40d7ae4560c0, type: 3}
---- !u!120 &7684825684462676119 stripped
-LineRenderer:
-  m_CorrespondingSourceObject: {fileID: 6562936395520969092, guid: 2176136a82f083e4d9de40d7ae4560c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 7684825684462676118}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8048163312769757695
 Transform:
   m_ObjectHideFlags: 0

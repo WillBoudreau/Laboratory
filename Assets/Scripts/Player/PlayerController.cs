@@ -272,7 +272,7 @@ public class PlayerController : MonoBehaviour
             }
             if(!sFXManager.source2D.isPlaying && moveDirection.x != 0 && isGrounded)
             {
-                sFXManager.Player2DSFX(sFXManager.metalStep,true);
+                sFXManager.Player2DSFX(sFXManager.metalStep,false);
             }
             else if(sFXManager.source2D.isPlaying && moveDirection.x == 0)
             {
@@ -425,6 +425,7 @@ public class PlayerController : MonoBehaviour
             else if(interactionTarget.TryGetComponent<LeverBehavior>(out LeverBehavior lever))
             {
                 lever.ActivateLever();
+                sFXManager.Player2DSFX(sFXManager.leverSFX,false);
             }
         }
     }
@@ -441,6 +442,7 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetBool("isJumping",true);
                 playerBody.AddForce(transform.up * jumpForce);
                 sFXManager.source2D.Stop();
+                sFXManager.Player2DSFX(sFXManager.jumpSFX,false);
             }
             if(isGrabbingLedge)
             {
@@ -617,7 +619,23 @@ public class PlayerController : MonoBehaviour
         if(launchPosition.y - landingPosition.y >= maxFallHight)
         {
             TakeDamage();
+            RollForHurtSFX();
             launchPosition = landingPosition;
+        }
+    }
+
+    void RollForHurtSFX()
+    {
+        float roll;
+        roll = UnityEngine.Random.Range(1, 3);
+        Debug.Log("Hurt roll=" + roll);
+        if(roll == 1)
+        {
+            sFXManager.Player2DSFX(sFXManager.hurtSFX1,false);
+        }
+        if(roll == 2)
+        {
+            sFXManager.Player2DSFX(sFXManager.hurtSFX2,false);
         }
     }
 

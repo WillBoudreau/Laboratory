@@ -9,6 +9,10 @@ public class SFXManager : MonoBehaviour
     [Header("2D sounds")]
     public AudioClip buttonPress;
     public AudioClip metalStep;
+    public AudioClip leverSFX;
+    public AudioClip hurtSFX1;
+    public AudioClip hurtSFX2;
+    public AudioClip jumpSFX;
 
     void Start()
     {
