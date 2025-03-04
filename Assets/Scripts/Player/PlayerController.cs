@@ -525,11 +525,11 @@ public class PlayerController : MonoBehaviour
     {
         if(isFreeHanging)
         {
-            climbDuration = freehandClimbAnim.length *.8f;
+            climbDuration = freehandClimbAnim.length *.5f;
         }
         else
         {
-            climbDuration = climbAnim.length *.8f;
+            climbDuration = climbAnim.length *.5f;
         }
         playerAnim.SetBool("isClimbing", true);
         isClimbing = true;

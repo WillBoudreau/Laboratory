@@ -104,11 +104,8 @@ public class UIManager : MonoBehaviour
             case "Settings":
                 InitializeResDropDown();
                 settingsMenu.SetActive(true);
-                if(gameManager.playerCon.isGamepadActive)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    EventSystem.current.SetSelectedGameObject(optionsFirstButton);
-                }
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(optionsFirstButton);
                 break;
             case "Game":
                 hUD.SetActive(true);
@@ -116,19 +113,13 @@ public class UIManager : MonoBehaviour
                 break;
             case "Pause":
                 pauseMenu.SetActive(true);
-                if(gameManager.playerCon.isGamepadActive)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    EventSystem.current.SetSelectedGameObject(pauseFirstButton);
-                }
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(pauseFirstButton);
                 break;
             case "Controls":
                 controlsMenu.SetActive(true);
-                if(gameManager.playerCon.isGamepadActive)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    EventSystem.current.SetSelectedGameObject(controlsFirstButton);
-                }
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(controlsFirstButton);
                 break;
         }
     }

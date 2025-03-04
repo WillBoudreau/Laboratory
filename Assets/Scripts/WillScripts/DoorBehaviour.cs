@@ -12,6 +12,12 @@ public class DoorBehaviour : MonoBehaviour
     [SerializeField] private float distance = 0.1f;//The point where the door will move to the next position
     public bool isOpen = false;//If the door is open
     [SerializeField] private int targetIndex = 0;
+    private SFXTrigger sFXTrigger;
+
+    void Awake()
+    {
+        sFXTrigger = gameObject.GetComponent<SFXTrigger>();
+    }
     /// <summary>
     /// Move the door to the open position
     /// </summary>
@@ -19,6 +25,10 @@ public class DoorBehaviour : MonoBehaviour
     {
        targetIndex = 1;
        isOpen = true;
+       if(sFXTrigger != null)
+       {
+            sFXTrigger.PlaySFX(1);
+       }
     }
     /// <summary>
     /// Close the door once the player leaves the trigger
@@ -27,6 +37,10 @@ public class DoorBehaviour : MonoBehaviour
     {
         targetIndex = 0;
         isOpen = false;
+        if(sFXTrigger != null)
+       {
+            sFXTrigger.PlaySFX(2);
+       }
     }
     void Update()
     {
