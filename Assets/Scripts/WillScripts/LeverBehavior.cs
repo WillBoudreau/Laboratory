@@ -32,7 +32,26 @@ public class LeverBehavior : MonoBehaviour
                     }
                     break;
                 case "Platform":
-                    obj.GetComponent<MovingPlatform>().canMove = true;
+                    Debug.Log(obj.GetComponent<MovingPlatform>().canMove + "1");
+                    if(obj.GetComponent<MovingPlatform>().canMove == false)
+                    {
+                        obj.GetComponent<MovingPlatform>().canMove = true;
+                    }
+                    else
+                    {
+                        obj.GetComponent<MovingPlatform>().canMove = false;
+                        break;
+                    }
+                    Debug.Log(obj.GetComponent<MovingPlatform>().canMove + "2");
+                    // var platform = obj.GetComponent<MovingPlatform>();
+                    // if(platform.canMove)
+                    // {
+                    //     platform.canMove = false;
+                    // }
+                    // else
+                    // {
+                    //     platform.canMove = true;
+                    // }
                     // if(obj.GetComponent<MovingPlatform>().canMove == true)
                     // {
                     //     obj.GetComponent<MovingPlatform>().canMove = false;
@@ -41,6 +60,7 @@ public class LeverBehavior : MonoBehaviour
                     // else 
                     // {
                     //     obj.GetComponent<MovingPlatform>().canMove = true;
+                    //     break;
                     // }
                     // Debug.Log(obj.GetComponent<MovingPlatform>().canMove);
                     break;
@@ -71,6 +91,10 @@ public class LeverBehavior : MonoBehaviour
         {
             Debug.Log("Player Triggered Lever");
             playerInRange = true;
+            if(Keyboard.current.eKey.isPressed)
+            {
+                ActivateLever();
+            }
         }
     }
 
@@ -84,11 +108,11 @@ public class LeverBehavior : MonoBehaviour
 
     void Update()
     {
-        //If the player is in range and presses the E key
-        if(playerInRange && Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            Debug.Log("Player Activated Lever");
-            ActivateLever();
-        }
+        // //If the player is in range and presses the E key
+        // if(playerInRange && Keyboard.current.eKey.wasPressedThisFrame)
+        // {
+        //     Debug.Log("Player Activated Lever");
+        //     ActivateLever();
+        // }
     }
 }
