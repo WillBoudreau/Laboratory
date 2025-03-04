@@ -195,7 +195,7 @@ public class LaserEmitter : MonoBehaviour
                                     ray = new Ray(raycastHit.transform.position, box.transform.right + Vector3.up*laserHightOffset);
                                     break;
                                 case ReflectorBox.Direction.left:
-                                    ray = new Ray(raycastHit.transform.position, -box.transform.right+ Vector3.up*laserHightOffset);
+                                    ray = new Ray(raycastHit.transform.position, -box.transform.right + Vector3.up*laserHightOffset);
                                     break;
                                 case ReflectorBox.Direction.up:
                                     ray = new Ray(raycastHit.transform.position, box.transform.up);

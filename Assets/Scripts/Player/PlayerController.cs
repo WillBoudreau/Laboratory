@@ -149,7 +149,6 @@ public class PlayerController : MonoBehaviour
             }
             else if(moveDirection.x == 0 && moveDirection.y == 0)
             {
-                playerAnim.SetBool("isIdle", true);
                 isIdle = true;
             }
             if(moveDirection.x > 0 && !isGrabbingIntractable)
@@ -292,6 +291,7 @@ public class PlayerController : MonoBehaviour
             {
                 isJumping = false;
             }
+            playerAnim.SetBool("isIdle", isIdle);
         }  
     }
 
@@ -318,7 +318,6 @@ public class PlayerController : MonoBehaviour
         }
         if(!isJumping && !isGrounded && !isClimbing)
         {
-            playerAnim.SetBool("isIdle",false);
             playerAnim.SetBool("isFalling",true);
         }
         else
@@ -532,6 +531,7 @@ public class PlayerController : MonoBehaviour
         {
             climbDuration = climbAnim.length *.8f;
         }
+        playerAnim.SetBool("isClimbing", true);
         isClimbing = true;
         playerAnim.SetTrigger("climb");
         inputEnabled = false;
@@ -550,6 +550,7 @@ public class PlayerController : MonoBehaviour
         playerAnim.SetBool("isHanging", false);
         playerAnim.SetBool("isFreeHanging", false);
         ledge = null;
+        playerAnim.SetBool("isClimbing", false);
         topOfLedge = Vector3.zero;
         activeOffset = Vector3.zero;
         moveDirection = Vector2.zero;
