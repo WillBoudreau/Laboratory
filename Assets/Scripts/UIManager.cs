@@ -38,8 +38,7 @@ public class UIManager : MonoBehaviour
     public CanvasGroup deathCanvasGroup;
     public float deathFadeTime;
     [Header("Target Buttons")]
-    public Button[] targetButtons;
-
+    public Button startButton;
     void Start()
     {
         SetUIFalse();
