@@ -761,12 +761,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1300678422}
+  m_Father: {fileID: 1393775336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -234.7, y: -242.96667}
-  m_SizeDelta: {x: -569.6026, y: -546.0666}
+  m_AnchoredPosition: {x: -15.699997, y: -0.5}
+  m_SizeDelta: {x: -51.399963, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &204918034
 GameObject:
@@ -2104,6 +2104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1867640081}
   uiManager: {fileID: 1576021096}
+  levelManager: {fileID: 69596039}
   playerCon: {fileID: 1867640086}
   gameState: 0
   prevState: 0
@@ -2271,7 +2272,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 0c91b726bd36a1f468a7a3a5b9124659,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 0c91b726bd36a1f468a7a3a5b9124659, type: 3}
+    m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 21300000, guid: 0c91b726bd36a1f468a7a3a5b9124659, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -5017,7 +5018,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 0c91b726bd36a1f468a7a3a5b9124659,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 0c91b726bd36a1f468a7a3a5b9124659, type: 3}
+    m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 21300000, guid: 0c91b726bd36a1f468a7a3a5b9124659, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -10014,9 +10015,6 @@ RectTransform:
   - {fileID: 1535835209}
   - {fileID: 523450124}
   - {fileID: 1393775336}
-  - {fileID: 169794965}
-  - {fileID: 1375463936}
-  - {fileID: 1409411550}
   - {fileID: 563007605}
   - {fileID: 564511960}
   - {fileID: 2009522179}
@@ -10686,11 +10684,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1300678422}
+  m_Father: {fileID: 1393775336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -499.5013, y: -242.46667}
+  m_AnchoredPosition: {x: -21.400055, y: 0}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1375463937
@@ -10869,7 +10867,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 169794965}
+  - {fileID: 1375463936}
+  - {fileID: 1409411550}
   m_Father: {fileID: 1300678422}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -11083,12 +11084,12 @@ RectTransform:
   m_Children:
   - {fileID: 581058010}
   - {fileID: 1513838453}
-  m_Father: {fileID: 1300678422}
+  m_Father: {fileID: 1393775336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -219, y: 26.066622}
-  m_SizeDelta: {x: -518.20264, y: 150}
+  m_AnchoredPosition: {x: 0, y: 2.000002}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1409411551
 MonoBehaviour:
@@ -14169,7 +14170,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 0c91b726bd36a1f468a7a3a5b9124659,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 0c91b726bd36a1f468a7a3a5b9124659, type: 3}
+    m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 21300000, guid: 0c91b726bd36a1f468a7a3a5b9124659, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -14192,7 +14193,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: L_2
+          m_StringArgument: L_Tutorial
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1576021096}

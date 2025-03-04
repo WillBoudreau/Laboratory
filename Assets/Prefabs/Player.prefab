@@ -1523,6 +1523,8 @@ MonoBehaviour:
   playerBody: {fileID: 2713157487807189705}
   playerAnim: {fileID: 1424496899848126070}
   groundChecker: {fileID: 3149230898410498501}
+  rightFacing: {fileID: 0}
+  leftFacing: {fileID: 0}
   moveSpeed: 250
   jumpForce: 240
   isIdle: 0
@@ -1565,6 +1567,7 @@ MonoBehaviour:
   isPushing: 0
   isPulling: 0
   pushForce: 2.33
+  debugMode: 1
   playerInputActions: {fileID: -944628639613478452, guid: 21347e7e14cf3d0488e7c472a503656d,
     type: 3}
   input: {fileID: 1666142307545511599}

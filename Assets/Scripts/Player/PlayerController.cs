@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
     public bool isPulling;
     public float pushForce;
     [Header("Input Properties")]
+    public bool debugMode;
     public InputActionAsset playerInputActions;
     public PlayerInput input;
     public bool isGamepadActive;
@@ -533,7 +534,7 @@ public class PlayerController : MonoBehaviour
         }
         isClimbing = true;
         playerAnim.SetTrigger("climb");
-        input.enabled = false;
+        inputEnabled = false;
         float climbTime = 0f;
         Vector3 startValue = transform.position;
         desiredPosition = topOfLedge;
@@ -553,7 +554,7 @@ public class PlayerController : MonoBehaviour
         activeOffset = Vector3.zero;
         moveDirection = Vector2.zero;
         isGrabbingLedge = false;
-        input.enabled = true;
+        inputEnabled = true;
         isClimbing = false;
     }
 
@@ -726,5 +727,38 @@ public class PlayerController : MonoBehaviour
     {
         isFacingLeft = true;
         transform.rotation = leftFacing.rotation;
+    }
+
+    /// <summary>
+    /// Debug controls to load level 1.
+    /// </summary>
+    void OnDebugLoadLevel1()
+    {
+        if(debugMode)
+        {
+            levelManager.DebugLoadScene("L_1");
+        }
+    }
+
+    /// <summary>
+    /// Debug controls to load level 2.
+    /// </summary>
+    void OnDebugLoadLevel2()
+    {
+        if(debugMode)
+        {
+            levelManager.DebugLoadScene("L_2");
+        }
+    }
+
+    /// <summary>
+    /// Debug controls to load level 3.
+    /// </summary>
+    void OnDebugLoadLevel3()
+    {
+        if(debugMode)
+        {
+            levelManager.DebugLoadScene("L_3");   
+        }
     }
 }

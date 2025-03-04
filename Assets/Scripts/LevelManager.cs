@@ -141,4 +141,17 @@ public class LevelManager : MonoBehaviour
         scenesToLoad.Remove(operation);
         operation.completed -= OperationCompleted;
     }
+
+    public void DebugLoadScene(string scenesToLoad)
+    {
+        if(scenesToLoad == "L_1")
+        {
+            activeLevelNumber = 1;
+        }
+        if(scenesToLoad == "L_2")
+        {
+            activeLevelNumber = 2;
+        }
+        LoadScene(scenesToLoad);
+    }
 }

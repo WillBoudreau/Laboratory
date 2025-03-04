@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     [Header("Object References")]
     public GameObject player;
     public UIManager uiManager;
+    public LevelManager levelManager;
     public PlayerController playerCon;
     public enum GameState{MainMenu, Gameplay, Paused, GameEnd}
     public GameState gameState;
@@ -75,5 +77,37 @@ public class GameManager : MonoBehaviour
     {
         prevState = gameState;
         gameState = newState;
+    }
+    /// <summary>
+    /// Debug controls to load level 1.
+    /// </summary>
+    void OnDebugLoadLevel1()
+    {
+        if(playerCon.debugMode)
+        {
+            levelManager.DebugLoadScene("L_1");
+        }
+    }
+
+    /// <summary>
+    /// Debug controls to load level 2.
+    /// </summary>
+    void OnDebugLoadLevel2()
+    {
+        if(playerCon.debugMode)
+        {
+            levelManager.DebugLoadScene("L_2");
+        }
+    }
+
+    /// <summary>
+    /// Debug controls to load level 3.
+    /// </summary>
+    void OnDebugLoadLevel3()
+    {
+        if(playerCon.debugMode)
+        {
+            levelManager.DebugLoadScene("L_3");   
+        }
     }
 }
