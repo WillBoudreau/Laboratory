@@ -5,10 +5,7 @@ using UnityEngine;
 public class LaserReceiver : MonoBehaviour
 {
     [Header("Laser Receiver Settings")]
-    public MeshRenderer marker;
     public bool isReceivingLaser;
-    public Material basic;
-    public Material hit;
     [SerializeField] private enum ReceiverType { Charged, Uncharged };
     [SerializeField] private ReceiverType receiverType;
     [SerializeField] private GameObject[] objectsToActivate;
@@ -18,12 +15,10 @@ public class LaserReceiver : MonoBehaviour
     {
         if(isReceivingLaser)
         {
-            marker.sharedMaterial = hit;
             ActivateObjects();
         }
         else
         {
-            marker.sharedMaterial = basic;
             if(receiverType == ReceiverType.Charged)
             {
                 DeactivateObjects();
