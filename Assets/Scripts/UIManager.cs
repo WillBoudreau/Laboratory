@@ -98,11 +98,8 @@ public class UIManager : MonoBehaviour
                 break;
             case "MainMenuScene":
                 mainMenu.SetActive(true);
-                if(gameManager.playerCon.isGamepadActive)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    EventSystem.current.SetSelectedGameObject(menuFirstButton);
-                }
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(menuFirstButton);
                 break;
             case "Settings":
                 InitializeResDropDown();
