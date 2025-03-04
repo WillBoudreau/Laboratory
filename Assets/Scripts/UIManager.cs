@@ -90,19 +90,28 @@ public class UIManager : MonoBehaviour
             case "Win":
                 UpdateWinScreen();
                 winMenu.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(nextLevelButton);
+                if(gameManager.playerCon.isGamepadActive)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(nextLevelButton);
+                }
                 break;
             case "MainMenuScene":
                 mainMenu.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(menuFirstButton);
+                if(gameManager.playerCon.isGamepadActive)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(menuFirstButton);
+                }
                 break;
             case "Settings":
                 InitializeResDropDown();
                 settingsMenu.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+                if(gameManager.playerCon.isGamepadActive)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+                }
                 break;
             case "Game":
                 hUD.SetActive(true);
@@ -110,13 +119,19 @@ public class UIManager : MonoBehaviour
                 break;
             case "Pause":
                 pauseMenu.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+                if(gameManager.playerCon.isGamepadActive)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+                }
                 break;
             case "Controls":
                 controlsMenu.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(controlsFirstButton);
+                if(gameManager.playerCon.isGamepadActive)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(controlsFirstButton);
+                }
                 break;
         }
     }
