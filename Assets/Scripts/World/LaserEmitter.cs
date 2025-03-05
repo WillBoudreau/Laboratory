@@ -232,6 +232,7 @@ public class LaserEmitter : MonoBehaviour
                     }
                     if(raycastHit.collider.tag == "Box")
                     {
+                        FindObjectOfType<PlayerController>().interactionPosable = false;
                         Destroy(raycastHit.collider.gameObject);
                     }
                     if(laserReceiver != null)
