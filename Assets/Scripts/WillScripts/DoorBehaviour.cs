@@ -23,12 +23,12 @@ public class DoorBehaviour : MonoBehaviour
     /// </summary>
     public void OpenThisDoor()
     {
-       targetIndex = 1;
-       isOpen = true;
-       if(sFXTrigger != null)
-       {
+        targetIndex = 1;
+        if(sFXTrigger != null  && !sFXTrigger.source3D.isPlaying && !isOpen)
+        {
             sFXTrigger.PlaySFX(1);
-       }
+        }
+        isOpen = true;
     }
     /// <summary>
     /// Close the door once the player leaves the trigger
@@ -36,11 +36,11 @@ public class DoorBehaviour : MonoBehaviour
     public void CloseThisDoor()
     {
         targetIndex = 0;
-        isOpen = false;
-        if(sFXTrigger != null)
-       {
+        if(sFXTrigger != null && !sFXTrigger.source3D.isPlaying && isOpen)
+        {
             sFXTrigger.PlaySFX(2);
-       }
+        }
+        isOpen = false;
     }
     void Update()
     {

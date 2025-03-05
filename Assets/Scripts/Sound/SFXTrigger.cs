@@ -14,6 +14,7 @@ public class SFXTrigger : MonoBehaviour
     void Start()
     {
         source3D = gameObject.GetComponent<AudioSource>();
+        source3D.loop = false;
     }
 
     public void PlaySFX(int clipNumber)
@@ -21,10 +22,12 @@ public class SFXTrigger : MonoBehaviour
         switch(clipNumber)
         {
             case 1:
-                source3D.PlayOneShot(clip);
+                source3D.clip = clip;
+                source3D.Play();
                 break;
             case 2:
-                source3D.PlayOneShot(clip2);
+                source3D.clip = clip2;
+                source3D.Play();
                 break;
             default:
                 source3D.PlayOneShot(clip);

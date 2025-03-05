@@ -104,6 +104,9 @@ public class PlayerController : MonoBehaviour
     public PlayerInput input;
     public bool isGamepadActive;
     public bool inputEnabled;
+    public GameObject promptHolder;
+    public TextMeshProUGUI promptText;
+    public Transform promptPos;
     [Header("Fall Check Properties")]
     public float lastFallHight;
     public  Vector3 launchPosition;
@@ -290,6 +293,24 @@ public class PlayerController : MonoBehaviour
             else
             {
                 isJumping = false;
+            }
+            if(interactionPosable && !isGrabbingIntractable)
+            {
+                promptHolder.SetActive(true);
+                promptHolder.transform.position = promptPos.position;
+                switch(isGamepadActive)
+                {
+                    case true:
+                        promptText.text = "B";
+                        break;
+                    case false:
+                        promptText.text = "E";
+                        break;
+                }
+            }
+            else
+            {
+                promptHolder.SetActive(false);
             }
             playerAnim.SetBool("isIdle", isIdle);
         }  
@@ -488,7 +509,7 @@ public class PlayerController : MonoBehaviour
                 LedgeGrab(ledge);
             }
             topOfLedge = ledge.transform.position;
-            topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
+            topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y;
             if(isFreeHanging)
             {
                 if(isFacingLeft)
