@@ -11,7 +11,7 @@ public class LaserReceiver : MonoBehaviour
     [SerializeField] private GameObject[] objectsToActivate;
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(isReceivingLaser)
         {
