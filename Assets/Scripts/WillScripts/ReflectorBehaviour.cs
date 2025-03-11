@@ -38,16 +38,21 @@ public class ReflectorBehaviour : MonoBehaviour
     {
         if(reflectorType == ReflectorType.stationary)
         {
-           // Calculate the rotation for this frame
+            // Calculate the rotation for this frame
             float rotationThisFrame = rotateAngle * Time.deltaTime * rotateSpeed;
             prism.transform.Rotate(axis, rotationThisFrame);
             currentRotation += rotationThisFrame;
 
             if (currentRotation >= rotateAngle)
             {
-                canRotate = false;
+                // Ensure rotationThisFrame is a multiple of rotateAngle and a whole number
+                // rotationThisFrame = Mathf.Floor(currentRotation / rotateAngle) * rotateAngle;
+                // prism.transform.Rotate(axis, rotationThisFrame - (currentRotation - rotateAngle));
+                float overshoot = currentRotation - rotateAngle;
+                prism.transform.Rotate(axis, -overshoot);
                 currentRotation = 0; // Reset for the next rotation
-            }
+                canRotate = false;
+            }   
         }
         else if(reflectorType == ReflectorType.rotating)
         {
@@ -56,7 +61,7 @@ public class ReflectorBehaviour : MonoBehaviour
             prism.transform.Rotate(axis, rotationThisFrame);
             currentRotation += rotationThisFrame;
 
-            if (currentRotation >= rotateAngle)
+            if (currentRotation == rotateAngle)
             {
                 canRotate = true;
                 currentRotation = 0; // Reset for the next rotation
@@ -70,7 +75,7 @@ public class ReflectorBehaviour : MonoBehaviour
         {
             canRotate = true;
         }
-        while (canRotate)
+        while(canRotate)
         {
             RotateReflector();
             yield return null;

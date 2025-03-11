@@ -9,6 +9,10 @@ public class LeverBehavior : MonoBehaviour
     [Header("Lever Controls")]
     [SerializeField] private GameObject[] objectToControl;//The object the lever controls
     [SerializeField] private bool setToDamaged;//Set the lever to damaged
+    [Header("Debug Controls")]
+    [SerializeField] private bool debugMode;//Debug mode
+    [SerializeField] private bool debugActivate;//Debug activate the lever
+    [SerializeField] private bool debugDeactivate;//Debug deactivate the lever
     private bool playerInRange = false;
     /// <summary>
     /// Activate the lever
@@ -48,7 +52,7 @@ public class LeverBehavior : MonoBehaviour
                     obj.GetComponent<ElevatorBehaviour>().canMove = true;
                     break;
                 case "Reflector":
-                    obj.GetComponent<ReflectorBehaviour>().canRotate = true;
+                    //obj.GetComponent<ReflectorBehaviour>().canRotate = true;
                     obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
                     break;
                 case "Receiver":
@@ -83,6 +87,31 @@ public class LeverBehavior : MonoBehaviour
         if(other.GetComponent<Collider>().tag == "Player")
         {
             playerInRange = false;
+        }
+    }
+    void OnDrawGizmos()
+    {
+        if (debugMode)
+        {
+            // Draw lines from the lever to the objects it controls
+            Gizmos.color = Color.red;
+            foreach (GameObject obj in objectToControl)
+            {
+                if (obj != null)
+                {
+                    Gizmos.DrawLine(transform.position, obj.transform.position);
+                }
+            }
+            if (debugActivate)
+            {
+                ActivateLever();
+                debugActivate = false;
+            }
+            if (debugDeactivate)
+            {
+                //DeactivateLever();
+                debugDeactivate = false;
+            }
         }
     }
 
