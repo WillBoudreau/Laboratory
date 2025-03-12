@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class ReflectorBehaviour : MonoBehaviour
@@ -14,12 +13,8 @@ public class ReflectorBehaviour : MonoBehaviour
     public bool canRotate; // If the reflector can rotate
     private float currentRotation = 0; // Track the current rotation
     public GameObject prism;
-    public int position;
-    public Transform rotationPos1;
-    public Transform rotationPos2;
     void Start()
     {
-        position = 1;
         if(reflectorType == ReflectorType.stationary)
         {
             canRotate = false;
@@ -43,34 +38,21 @@ public class ReflectorBehaviour : MonoBehaviour
     {
         if(reflectorType == ReflectorType.stationary)
         {
-           // Calculate the rotation for this frame
+            // Calculate the rotation for this frame
             float rotationThisFrame = rotateAngle * Time.deltaTime * rotateSpeed;
-            if(position == 1)
+            prism.transform.Rotate(axis, rotationThisFrame);
+            currentRotation += rotationThisFrame;
+
+            if (currentRotation >= rotateAngle)
             {
-                prism.transform.Rotate(axis, rotationThisFrame);
-                currentRotation += rotationThisFrame;
-                Debug.Log("currentRotation = " + currentRotation);
-                if (currentRotation >= rotateAngle)
-                {
-                    prism.transform.rotation = rotationPos1.rotation;
-                    canRotate = false;
-                    currentRotation = 0; // Reset for the next rotation
-                    position = 2;
-                }
-            }
-            if(position == 2)
-            {
-                prism.transform.Rotate(axis, rotationThisFrame);
-                currentRotation += rotationThisFrame;
-                Debug.Log("currentRotation = " + currentRotation);
-                if (currentRotation >= rotateAngle)
-                {
-                    prism.transform.rotation = rotationPos2.rotation;
-                    canRotate = false;
-                    currentRotation = 0; // Reset for the next rotation
-                    position = 1;
-                }
-            }
+                // Ensure rotationThisFrame is a multiple of rotateAngle and a whole number
+                // rotationThisFrame = Mathf.Floor(currentRotation / rotateAngle) * rotateAngle;
+                // prism.transform.Rotate(axis, rotationThisFrame - (currentRotation - rotateAngle));
+                float overshoot = currentRotation - rotateAngle;
+                prism.transform.Rotate(axis, -overshoot);
+                currentRotation = 0; // Reset for the next rotation
+                canRotate = false;
+            }   
         }
         else if(reflectorType == ReflectorType.rotating)
         {
@@ -79,7 +61,7 @@ public class ReflectorBehaviour : MonoBehaviour
             prism.transform.Rotate(axis, rotationThisFrame);
             currentRotation += rotationThisFrame;
 
-            if (currentRotation >= rotateAngle)
+            if (currentRotation == rotateAngle)
             {
                 canRotate = true;
                 currentRotation = 0; // Reset for the next rotation
@@ -93,7 +75,7 @@ public class ReflectorBehaviour : MonoBehaviour
         {
             canRotate = true;
         }
-        while (canRotate)
+        while(canRotate)
         {
             RotateReflector();
             yield return null;
