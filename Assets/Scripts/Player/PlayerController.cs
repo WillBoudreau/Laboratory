@@ -8,6 +8,7 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Variables
     [Header("Managers")]
     [SerializeField]
     private GameManager gameManager;
@@ -17,6 +18,14 @@ public class PlayerController : MonoBehaviour
     private UIManager uIManager;
     [SerializeField]
     private SFXManager sFXManager;
+    [Header("Player State")]
+    [SerializeField]
+    public ActionState actionState;
+    private ActionState prevState;
+    public enum ActionState{Idle, Moving, Jumping, Falling, Hanging, Climbing}
+    [SerializeField]
+    private bool isGrounded;
+    public bool isFacingLeft;
     [Header("Components")]
     [SerializeField]
     private Rigidbody playerBody;
@@ -29,27 +38,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform leftFacing;
 
-    [Header("PlayerStats")]
+    [Header("Player Stats")]
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private float jumpForce;
     [SerializeField]
-    private bool isIdle;
-    [SerializeField]
-    private bool isGrabbingLedge;
-    [SerializeField]
-    private bool isGrounded;
-    public bool isFacingLeft;
-    [SerializeField]
     private float turnTime;
-    private Vector2 moveDirection;
     public float gravScale;
     public float jumpBoost;
+    public float jumpThreshold;
+    private Vector2 moveDirection;
+    [Header("Ground Check Properties")]
     public RaycastHit groundingHit;
     public float groundingDistance;
-    public bool isJumping;
-    public float jumpThreshold;
     public float groundCheckRadius;
     [Header("Player Damage Properties")]
     public bool isDead;
@@ -74,7 +76,6 @@ public class PlayerController : MonoBehaviour
     private bool isFreeHanging;
     public AnimationClip climbAnim;
     public AnimationClip freehandClimbAnim;
-    private bool isClimbing;
     private Coroutine climbRoutine;
     [Header("Camera Control Properties")]
     public CinemachineVirtualCamera playerCam;
@@ -84,10 +85,6 @@ public class PlayerController : MonoBehaviour
     public int zoomedInPos;
     public int zoomedOutPos;
     [Header("Interaction Properties")]
-    [SerializeField]
-    private MeshRenderer interactionBaseModelRen;
-    [SerializeField]
-    private MeshRenderer interactionExtraModelRen;
     public bool interactionPosable;
     [SerializeField]
     private bool isGrabbingIntractable;
@@ -95,8 +92,6 @@ public class PlayerController : MonoBehaviour
     public Transform grabPoint;
     public float pushDistance;
     public float currentDistance;
-    public bool isPushing;
-    public bool isPulling;
     public float pushForce;
     [Header("Input Properties")]
     public bool debugMode;
@@ -112,12 +107,11 @@ public class PlayerController : MonoBehaviour
     public  Vector3 launchPosition;
     public Vector3 landingPosition;
     public float fallThreshold;
-    public bool isFalling;
     [Header("Checkpoint system")]
     public Checkpoint activeCheckpoint;
 
-    
-
+    #endregion
+    #region Unity Events
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -129,6 +123,7 @@ public class PlayerController : MonoBehaviour
         input = this.gameObject.GetComponent<PlayerInput>();
         deathFadeTime = uIManager.deathFadeTime*3;
         confiner.InvalidateCache();
+        playerAnim.SetBool("isIdle",true);
         gameObject.SetActive(false);
     }
 
@@ -145,17 +140,14 @@ public class PlayerController : MonoBehaviour
         {
             CheckInputType();
             isGrounded = GroundingCheck(Vector2.down,groundingDistance);
-            if(moveDirection.x != 0 && isGrounded)
+            switch(actionState)
             {
-                playerAnim.SetBool("isIdle", false);
-                isIdle = false;
-            }
-            else if(moveDirection.x == 0 && moveDirection.y == 0)
-            {
-                isIdle = true;
+                case ActionState.Hanging:
+                    IsHanging();
+                    break;
             }
             if(moveDirection.x > 0 && !isGrabbingIntractable)
-            {
+            {       
                 if(isFacingLeft)
                 {
                     isFacingLeft = false;
@@ -170,149 +162,15 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = leftFacing.rotation;
                 }
             }
-            if(isGrabbingLedge == true)
-            {
-                if(ledge.transform.position.x < this.gameObject.transform.position.x)
-                {
-                    activeOffset = leftOffset + ledge.transform.position;
-                    //used to make sure player is facing ledge
-                }
-                if(ledge.transform.position.x > this.gameObject.transform.position.x)
-                {
-                    activeOffset = rightOffset + ledge.transform.position;
-                    //used to make sure player is facing ledge
-                }
-                topOfLedge = ledge.transform.position;
-                topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
-                this.gameObject.transform.position = activeOffset;
-                playerAnim.SetBool("isIdle", true);
-                if(isFreeHanging)
-                {
-                    playerAnim.SetBool("isFreeHanging", true);
-                }
-                else
-                {
-                    playerAnim.SetBool("isHanging", true);
-                }
-                isIdle = true;
-            }
-            if(isGrabbingIntractable && interactionTarget != null)
-            {
-                currentDistance = Vector3.Distance(transform.position,interactionTarget.transform.position);
-                if(Vector3.Distance(transform.position, interactionTarget.transform.position) <= pushDistance)
-                {
-                    if(moveDirection.x != 0)
-                    {
-                        interactionTarget.transform.position += new Vector3(moveDirection.x * (Time.deltaTime * pushForce),0,0);
-                    }
-                    if(moveDirection.x < 0)
-                    {
-                        if(isFacingLeft)
-                        {
-                            playerAnim.SetBool("isPushing", true);
-                            playerAnim.SetBool("isPulling", false);
-                        }
-                        else
-                        {
-                            playerAnim.SetBool("isPushing", false);
-                            playerAnim.SetBool("isPulling", true);
-                        }
-                    }
-                    else if(moveDirection.x > 0)
-                    {
-                        if(isFacingLeft)
-                        {
-                            playerAnim.SetBool("isPushing", false);
-                            playerAnim.SetBool("isPulling", true);
-                        }
-                        else
-                        {
-                            playerAnim.SetBool("isPushing", true);
-                            playerAnim.SetBool("isPulling", false);
-                        }
-                    }
-                    else
-                    {
-                        playerAnim.SetBool("isPushing", false);
-                        playerAnim.SetBool("isPulling", false);
-                    }
-                }
-            }
-            else if(interactionTarget == null)
-            {
-                isGrabbingIntractable = false;
-                playerAnim.SetBool("isPushing", false);
-                playerAnim.SetBool("isPulling", false);
-            }
-            if(interactionTarget != null && Vector3.Distance(transform.position,interactionTarget.transform.position) > pushDistance)
-            {
-                isGrabbingIntractable = false;
-                interactionTarget = null;
-                playerAnim.SetBool("isPushing", false);
-                playerAnim.SetBool("isPulling", false);
-            }
-            if(isHurt)
-            {
-                hurtTimer -= Time.deltaTime;
-                if(hurtTimer <= 0)
-                {
-                    isHurt = false;
-                }
-            }
-            if(isZoomedOut)
-            {
-                if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance < zoomedOutPos)
-                {
-                    playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += Time.deltaTime *2; 
-                }
-            }
-            else
-            {
-                if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance > zoomedInPos)
-                {
-                    playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= Time.deltaTime *2;
-                }
-            }
-            if(!sFXManager.source2D.isPlaying && moveDirection.x != 0 && isGrounded)
-            {
-                sFXManager.Player2DSFX(sFXManager.metalStep,false);
-            }
-            else if(sFXManager.source2D.isPlaying && moveDirection.x == 0)
-            {
-                sFXManager.source2D.Stop();
-            }
-            //Debug.Log(playerBody.velocity.y + " = player Y velocities");
-            if(playerBody.velocity.y < fallThreshold && !isGrabbingLedge)
+            CheckPushPull();
+            HurtTimer();
+            CameraZoomCheck();
+            SoundCheck();
+            CheckIfFalling();
+            if(actionState == ActionState.Falling)
             {
                 playerBody.AddForce(Vector3.down * gravScale);
             }
-            if(playerBody.velocity.y > jumpThreshold)
-            {
-                isJumping = true;
-            }
-            else
-            {
-                isJumping = false;
-            }
-            if(interactionPosable && !isGrabbingIntractable)
-            {
-                promptHolder.SetActive(true);
-                promptHolder.transform.position = promptPos.position;
-                switch(isGamepadActive)
-                {
-                    case true:
-                        promptText.text = "B";
-                        break;
-                    case false:
-                        promptText.text = "E";
-                        break;
-                }
-            }
-            else
-            {
-                promptHolder.SetActive(false);
-            }
-            playerAnim.SetBool("isIdle", isIdle);
         }  
     }
 
@@ -320,12 +178,12 @@ public class PlayerController : MonoBehaviour
     {
         if(inputEnabled)
         {
-            if(!isGrabbingLedge)
+            if(actionState != ActionState.Hanging && actionState != ActionState.Climbing)
             {
                 if(!isGrabbingIntractable)
                 {
                     playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
-                    if(isJumping)
+                    if(actionState == ActionState.Jumping)
                     {
                         playerBody.velocity = new Vector3(playerBody.velocity.x, playerBody.velocity.y*jumpBoost,playerBody.velocity.z);
                     }
@@ -336,17 +194,12 @@ public class PlayerController : MonoBehaviour
                 }
                 
             }
-        }
-        if(!isJumping && !isGrounded && !isClimbing)
-        {
-            playerAnim.SetBool("isFalling",true);
-        }
-        else
-        {
-            playerAnim.SetBool("isFalling",false);
+            InteractPrompt();
         }
     }
 
+    #endregion
+    #region Input Events
     /// <summary>
     /// Event called by input system when move input is detected.
     /// </summary>
@@ -355,14 +208,21 @@ public class PlayerController : MonoBehaviour
     {
         if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled)
         {
+            if(actionState == ActionState.Idle)
+            {
+                ChangeActionState(ActionState.Moving);
+            }
             //Movement logic
             Vector2 moveVector2 = movementValue.Get<Vector2>();
-            if(!isGrabbingLedge)
+            if(actionState != ActionState.Hanging && actionState != ActionState.Climbing)
             {
                 moveDirection.x = moveVector2.x;
-                playerAnim.SetBool("isIdle",false);
+                if(moveDirection.x == 0)
+                {
+                    ChangeActionState(ActionState.Idle);
+                }
             }
-            else if(isGrabbingLedge)
+            else if(actionState == ActionState.Hanging)
             {
                 moveDirection.y = moveVector2.y;
                 if(moveDirection.y > 0)
@@ -371,8 +231,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if(moveDirection.y < 0)
                 {
-                    playerAnim.SetBool("isHanging", false);
-                    isGrabbingLedge = false;
+                    ChangeActionState(ActionState.Falling);
                     ledge = null;
                     topOfLedge = Vector3.zero;
                     activeOffset = Vector3.zero;
@@ -382,6 +241,70 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// Event called when input system detects interaction input. 
+    /// </summary>
+    void OnInteract()
+    {
+        if(interactionPosable && inputEnabled && interactionTarget != null)
+        {
+            if(interactionTarget.tag != null && interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
+            {
+                if(isGrabbingIntractable)
+                {
+                    isGrabbingIntractable = false;
+                }
+                else if(actionState != ActionState.Hanging && actionState != ActionState.Climbing)
+                {
+                    isGrabbingIntractable = true;
+                    //interactionTarget.transform.position = grabPoint.position;
+                }
+            }
+            else if(interactionTarget.TryGetComponent<LeverBehavior>(out LeverBehavior lever))
+            {
+                lever.ActivateLever();
+                sFXManager.Player2DSFX(sFXManager.leverSFX,false);
+            }
+        }
+    }
+    /// <summary>
+    /// Event called when input system detects jump input. 
+    /// </summary>
+    void OnJump()
+    {
+        if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled)
+        {
+            if(isGrounded)
+            {
+                ChangeActionState(ActionState.Jumping);
+                playerBody.AddForce(transform.up * jumpForce);
+            }
+            if(actionState == ActionState.Hanging)
+            {
+                StartCoroutine(LedgeClimb());
+            }
+        }
+    }
+    /// <summary>
+    /// Event called when pause input is detected. 
+    /// </summary>
+    void OnPause()
+    {
+        if(gameManager.gameState == GameManager.GameState.Gameplay)
+        {
+            if(gameManager.isPaused)
+            {
+                gameManager.ResumeGame();
+            }   
+            else
+            {
+                gameManager.PauseGame();
+            }   
+        }
+    }
+
+    #endregion
+    #region Collisions
+    /// <summary>
     /// Event called when collision starts.
     /// </summary>
     /// <param name="col"></param>
@@ -390,6 +313,10 @@ public class PlayerController : MonoBehaviour
         if(col.gameObject.tag == "Receiver" || col.gameObject.tag == "Reflector" || col.gameObject.tag == "Platform" || col.gameObject.tag == "Box" && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
         {
             isGrounded = true;
+            if(actionState == ActionState.Falling)
+            {
+                ChangeActionState(ActionState.Idle);
+            }
             SetLandingPosition(); 
         }
     }
@@ -415,7 +342,6 @@ public class PlayerController : MonoBehaviour
     {
         if(col.gameObject.CompareTag("Platform") || col.gameObject.CompareTag("Box"))
         {
-            //isGrounded = false;
             SetLaunchPosition();
         }
         else if(col.gameObject.TryGetComponent<Intractable>(out Intractable other))
@@ -424,71 +350,25 @@ public class PlayerController : MonoBehaviour
             interactionTarget = null;
         }
     }
-    /// <summary>
-    /// Event called when input system detects interaction input. 
-    /// </summary>
-    void OnInteract()
-    {
-        if(interactionPosable && inputEnabled && interactionTarget != null)
-        {
-            if(interactionTarget.tag != null && interactionTarget.tag == "Box" || interactionTarget.tag == "ReflectorBox")
-            {
-                if(isGrabbingIntractable)
-                {
-                    isGrabbingIntractable = false;
-                }
-                else if(!isGrabbingLedge)
-                {
-                    isGrabbingIntractable = true;
-                    //interactionTarget.transform.position = grabPoint.position;
-                }
-            }
-            else if(interactionTarget.TryGetComponent<LeverBehavior>(out LeverBehavior lever))
-            {
-                lever.ActivateLever();
-                sFXManager.Player2DSFX(sFXManager.leverSFX,false);
-            }
-        }
-    }
-    /// <summary>
-    /// Event called when input system detects jump input. 
-    /// </summary>
-    void OnJump()
-    {
-        if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled)
-        {
-            if(isGrounded)
-            {
-                playerAnim.SetTrigger("jump");
-                playerAnim.SetBool("isJumping",true);
-                playerBody.AddForce(transform.up * jumpForce);
-                sFXManager.source2D.Stop();
-                sFXManager.Player2DSFX(sFXManager.jumpSFX,false);
-            }
-            if(isGrabbingLedge)
-            {
-                StartCoroutine(LedgeClimb());
-            }
-        }
-    }
-    /// <summary>
-    /// Event called when pause input is detected. 
-    /// </summary>
-    void OnPause()
-    {
-        if(gameManager.gameState == GameManager.GameState.Gameplay)
-        {
-            if(gameManager.isPaused)
-            {
-                gameManager.ResumeGame();
-            }   
-            else
-            {
-                gameManager.PauseGame();
-            }   
-        }
-    }
+    #endregion
+    #region Grab/Climb
 
+    void IsHanging()
+    {
+        if(ledge.transform.position.x < this.gameObject.transform.position.x)
+        {
+            activeOffset = leftOffset + ledge.transform.position;
+            //used to make sure player is facing ledge
+        }
+        if(ledge.transform.position.x > this.gameObject.transform.position.x)
+        {
+            activeOffset = rightOffset + ledge.transform.position;
+            //used to make sure player is facing ledge
+        }
+        topOfLedge = ledge.transform.position;
+        topOfLedge.y = ledge.transform.position.y + ledge.transform.localScale.y/2;
+        this.gameObject.transform.position = activeOffset;
+    }
     /// <summary>
     /// Event for when the grab is triggered by a ledge. 
     /// </summary>
@@ -521,6 +401,7 @@ public class PlayerController : MonoBehaviour
                     topOfLedge.x = ledge.transform.position.x + ledge.transform.localScale.x/2;
                 }
             }
+            playerAnim.SetBool("isFreeHanging", isFreeHanging);
         }
     }
 
@@ -530,12 +411,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="ledge"></param>
     void LedgeGrab(GameObject ledge)
     {
-        if(!isClimbing)
-        {
-            playerAnim.SetTrigger("grab");
-        }
         this.ledge = ledge;
-        isGrabbingLedge = true;
+        ChangeActionState(ActionState.Hanging);
     }
 
     /// <summary>
@@ -544,6 +421,7 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     IEnumerator LedgeClimb()
     {
+        ChangeActionState(ActionState.Climbing);
         if(isFreeHanging)
         {
             climbDuration = freehandClimbAnim.length *.5f;
@@ -552,9 +430,6 @@ public class PlayerController : MonoBehaviour
         {
             climbDuration = climbAnim.length *.5f;
         }
-        playerAnim.SetBool("isClimbing", true);
-        isClimbing = true;
-        playerAnim.SetTrigger("climb");
         inputEnabled = false;
         float climbTime = 0f;
         Vector3 startValue = transform.position;
@@ -568,18 +443,16 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         transform.position = topOfLedge;
-        playerAnim.SetBool("isHanging", false);
-        playerAnim.SetBool("isFreeHanging", false);
         ledge = null;
-        playerAnim.SetBool("isClimbing", false);
         topOfLedge = Vector3.zero;
         activeOffset = Vector3.zero;
         moveDirection = Vector2.zero;
-        isGrabbingLedge = false;
         inputEnabled = true;
-        isClimbing = false;
+        ChangeActionState(ActionState.Idle);
     }
 
+    #endregion
+    #region Input/Bounding
     /// <summary>
     /// Checks for active input device between keyboard/mouse and gamepad. 
     /// </summary>
@@ -609,6 +482,8 @@ public class PlayerController : MonoBehaviour
             confiner.InvalidateCache();
         }
     }
+    #endregion
+    #region Damage/Death
 
     /// <summary>
     /// Used to se the start position for a fall check.
@@ -625,18 +500,17 @@ public class PlayerController : MonoBehaviour
     {
         landingPosition = transform.position;
         playerAnim.SetBool("isJumping", false);
-        CheckForFall();
+        CheckForFallDamage();
     }
 
     /// <summary>
     /// Checks if the player has fallen more than the max fall hight, if they have, player takes damage. 
     /// </summary>
-    private void CheckForFall()
+    private void CheckForFallDamage()
     {
-        if(isFalling)
+        if(actionState == ActionState.Falling)
         {
-            isFalling = false;
-            playerAnim.SetTrigger("landing");            
+            ChangeActionState(ActionState.Idle);          
         }
         lastFallHight = launchPosition.y - landingPosition.y;
         if(launchPosition.y - landingPosition.y >= maxFallHight)
@@ -644,6 +518,17 @@ public class PlayerController : MonoBehaviour
             TakeDamage();
             RollForHurtSFX();
             launchPosition = landingPosition;
+        }
+    }
+
+    void CheckIfFalling()
+    {
+        if(actionState != ActionState.Falling && actionState != ActionState.Hanging && actionState != ActionState.Climbing)
+        {
+            if(playerBody.velocity.y < fallThreshold && !isGrounded)
+            {
+                ChangeActionState(ActionState.Falling);
+            }
         }
     }
 
@@ -688,6 +573,18 @@ public class PlayerController : MonoBehaviour
         activeCheckpoint.canBeActivated = false;
     }
 
+    private void HurtTimer()
+    {
+        if(isHurt)
+        {
+            hurtTimer -= Time.deltaTime;
+            if(hurtTimer <= 0)
+            {
+                isHurt = false;
+            }
+        }
+    }
+
     /// <summary>
     /// Kills the player, trigger the fade out fade in, can be timed to death animation. 
     /// </summary>
@@ -708,6 +605,8 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(uIManager.DeathUIFadeOut());
     }
 
+    #endregion
+    #region Ground Check
     /// <summary>
     /// Checks a small area around the bottom of the player to check for grounding. 
     /// </summary>
@@ -742,6 +641,8 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(groundChecker.transform.position,groundCheckRadius);
     }
+    #endregion
+    #region Misc Methods
     /// <summary>
     /// used by level manager to make sure player faces the right way. 
     /// </summary>
@@ -751,6 +652,119 @@ public class PlayerController : MonoBehaviour
         transform.rotation = leftFacing.rotation;
     }
 
+    private void CheckPushPull()
+    {
+        if(isGrabbingIntractable && interactionTarget != null)
+        {
+            currentDistance = Vector3.Distance(transform.position,interactionTarget.transform.position);
+            if(Vector3.Distance(transform.position, interactionTarget.transform.position) <= pushDistance)
+            {
+                if(moveDirection.x != 0)
+                {
+                    interactionTarget.transform.position += new Vector3(moveDirection.x * (Time.deltaTime * pushForce),0,0);
+                }
+                if(moveDirection.x < 0)
+                {
+                    if(isFacingLeft)
+                    {
+                        playerAnim.SetBool("isPushing", true);
+                        playerAnim.SetBool("isPulling", false);
+                    }
+                    else
+                    {
+                        playerAnim.SetBool("isPushing", false);
+                        playerAnim.SetBool("isPulling", true);
+                    }
+                }
+                else if(moveDirection.x > 0)
+                {
+                    if(isFacingLeft)
+                    {
+                        playerAnim.SetBool("isPushing", false);
+                        playerAnim.SetBool("isPulling", true);
+                    }
+                    else
+                    {
+                        playerAnim.SetBool("isPushing", true);
+                        playerAnim.SetBool("isPulling", false);
+                    }
+                }
+                else
+                {
+                    playerAnim.SetBool("isPushing", false);
+                    playerAnim.SetBool("isPulling", false);
+                }
+            }
+        }
+        else if(interactionTarget == null)
+        {
+            isGrabbingIntractable = false;
+            playerAnim.SetBool("isPushing", false);
+            playerAnim.SetBool("isPulling", false);
+        }
+        if(interactionTarget != null && Vector3.Distance(transform.position,interactionTarget.transform.position) > pushDistance)
+        {
+            isGrabbingIntractable = false;
+            interactionTarget = null;
+            playerAnim.SetBool("isPushing", false);
+            playerAnim.SetBool("isPulling", false);
+        }
+    }
+
+    void CameraZoomCheck()
+    {
+        if(isZoomedOut)
+        {
+            if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance < zoomedOutPos)
+            {
+                playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += Time.deltaTime *2; 
+            }
+        }
+        else
+        {
+            if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance > zoomedInPos)
+            {
+                playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= Time.deltaTime *2;
+            }
+        }
+    }
+
+    void SoundCheck()
+    {
+        if(!sFXManager.source2D.isPlaying && moveDirection.x != 0 && isGrounded)
+        {
+            sFXManager.Player2DSFX(sFXManager.metalStep,false);
+        }
+        else if(sFXManager.source2D.isPlaying && moveDirection.x == 0)
+        {
+            sFXManager.source2D.Stop();
+        }
+    }
+
+    void InteractPrompt()
+    {
+        if(interactionPosable && !isGrabbingIntractable)
+        {
+            promptHolder.SetActive(true);
+            promptHolder.transform.position = promptPos.position;
+            switch(isGamepadActive)
+            {
+                case true:
+                    promptText.text = "B";
+                    break;
+                case false:
+                    promptText.text = "E";
+                    break;
+            }
+        }
+        else
+        {
+            promptHolder.SetActive(false);
+        }
+    }
+
+    #endregion
+    #region Debug Controls
     /// <summary>
     /// Debug controls to load level 1.
     /// </summary>
@@ -783,4 +797,151 @@ public class PlayerController : MonoBehaviour
             levelManager.DebugLoadScene("L_3");   
         }
     }
+    #endregion
+    #region State machine
+
+    public void ChangeActionState(ActionState nextState)
+    {
+        Debug.Log("Changing to action state to " + nextState);
+        if(prevState != actionState)
+        {
+            prevState = actionState;
+        }
+        ExitState(prevState);
+        EnterState(nextState);    
+    }
+
+    private void EnterState(ActionState state)
+    {
+        switch(state)
+        {
+            case ActionState.Idle:
+                Idle();
+                break;
+            case ActionState.Moving:
+                Moving();
+                break;
+            case ActionState.Jumping:
+                Jumping();
+                break;
+            case ActionState.Falling:
+                Falling();
+                break;
+            case ActionState.Climbing:
+                Climbing();
+                break;
+            case ActionState.Hanging:
+                Hanging();
+                break;
+            default:
+                Idle();
+                Debug.Log("Default for Enter state");
+                break;
+        }
+        actionState = state;
+    }
+    private void ExitState(ActionState state)
+    {
+        switch(state)
+        {
+            case ActionState.Idle:
+                IdleExit();
+                break;
+            case ActionState.Moving:
+                MovingExit();
+                break;
+            case ActionState.Jumping:
+                JumpingExit();
+                break;
+            case ActionState.Falling:
+                FallingExit();
+                break;
+            case ActionState.Climbing:
+                ClimbingExit();
+                break;
+            case ActionState.Hanging:
+                HangingExit();
+                break;
+            default:
+                IdleExit();
+                Debug.Log("Default for Exit state");
+                break;
+        }
+    }
+
+    private void Idle()
+    {
+        playerAnim.SetBool("isIdle", true);
+        playerAnim.SetBool("isHanging", false);
+        playerAnim.SetBool("isFreeHanging", false);
+        playerAnim.SetBool("isClimbing", false);
+        if(prevState == ActionState.Falling)
+        {
+            playerAnim.SetTrigger("landing");
+        }
+    }
+
+    private void Moving()
+    {
+        playerAnim.SetBool("isIdle", false);
+    }
+
+    private void Jumping()
+    {
+        playerAnim.SetTrigger("jump");
+        playerAnim.SetBool("isJumping",true);
+        sFXManager.source2D.Stop();
+        sFXManager.Player2DSFX(sFXManager.jumpSFX,false);
+    }
+
+    private void Falling()
+    {
+        playerAnim.SetBool("isFalling", true);
+    }
+
+    private void Climbing()
+    {
+        playerAnim.SetTrigger("climb");
+        playerAnim.SetBool("isClimbing", true);
+        playerAnim.SetBool("isIdle", false);
+    }
+
+    private void Hanging()
+    {
+        playerAnim.SetTrigger("grab");
+        playerAnim.SetBool("isHanging",true);
+    }
+
+    private void IdleExit()
+    {
+
+    }
+
+    private void MovingExit()
+    {
+
+    }
+
+    private void JumpingExit()
+    {
+
+    }
+
+    private void FallingExit()
+    {
+        playerAnim.SetBool("isFalling", false);
+
+    }
+
+    private void ClimbingExit()
+    {
+
+    }
+
+    private void HangingExit()
+    {
+
+    }
+
+    #endregion
 }

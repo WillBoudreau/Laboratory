@@ -9,7 +9,7 @@ public class Climbable : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerController>().GrabTriggered(this.gameObject, isFreeHanging);
+            other.GetComponent<PlayerController>().GrabTriggered(this.gameObject, this.isFreeHanging);
         }
     }
 }
