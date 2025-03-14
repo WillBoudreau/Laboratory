@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
     public float jumpThreshold;
     private Vector2 moveDirection;
     [Header("Ground Check Properties")]
+    public float coyoteTimeLimit;
+    public float groundTimer;
+    public bool timerActive;
     public RaycastHit groundingHit;
     public float groundingDistance;
     public float groundCheckRadius;
@@ -171,7 +174,8 @@ public class PlayerController : MonoBehaviour
             {
                 playerBody.AddForce(Vector3.down * gravScale);
             }
-        }  
+        }
+        CoyoteTimer();  
     }
 
     void FixedUpdate()
@@ -275,6 +279,7 @@ public class PlayerController : MonoBehaviour
         {
             if(isGrounded)
             {
+                Debug.Log("Jump Pressed");
                 ChangeActionState(ActionState.Jumping);
                 playerBody.AddForce(transform.up * jumpForce);
             }
@@ -632,6 +637,22 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    void CoyoteTimer()
+    {
+        if(timerActive)
+        {
+            groundTimer -= Time.deltaTime;
+            if(groundTimer > 0)
+            {
+                isGrounded = true;
+            }
+            else
+            {
+                timerActive = false;   
+            }
+        }
+    }
+
     /// <summary>
     /// Draws a gizmo, curently showing the grounding check area.
     /// </summary>
@@ -802,7 +823,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeActionState(ActionState nextState)
     {
-        Debug.Log("Changing to action state to " + nextState);
+        //Debug.Log("Changing to action state to " + nextState);
         if(prevState != actionState)
         {
             prevState = actionState;
@@ -897,6 +918,11 @@ public class PlayerController : MonoBehaviour
     private void Falling()
     {
         playerAnim.SetBool("isFalling", true);
+        if(prevState != ActionState.Jumping)
+        {
+            groundTimer = coyoteTimeLimit;
+            timerActive = true;
+        }
     }
 
     private void Climbing()

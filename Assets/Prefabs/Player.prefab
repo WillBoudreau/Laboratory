@@ -1520,23 +1520,24 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   uIManager: {fileID: 0}
   sFXManager: {fileID: 0}
+  actionState: 0
+  isGrounded: 0
+  isFacingLeft: 0
   playerBody: {fileID: 2713157487807189705}
   playerAnim: {fileID: 1424496899848126070}
   groundChecker: {fileID: 3149230898410498501}
   rightFacing: {fileID: 0}
   leftFacing: {fileID: 0}
-  moveSpeed: 250
+  moveSpeed: 300
   jumpForce: 240
-  isIdle: 0
-  isGrabbingLedge: 0
-  isGrounded: 0
-  isFacingLeft: 0
   turnTime: 1
-  gravScale: 2
+  gravScale: 10
   jumpBoost: 1.015
-  groundingDistance: 0.25
-  isJumping: 0
   jumpThreshold: 3
+  coyoteTimeLimit: 0.5
+  groundTimer: 0
+  timerActive: 0
+  groundingDistance: 0.25
   groundCheckRadius: 0
   isDead: 0
   isHurt: 0
@@ -1546,7 +1547,7 @@ MonoBehaviour:
   activeOffset: {x: 0, y: 0, z: 0}
   leftOffset: {x: 0, y: -2.03, z: 0}
   rightOffset: {x: 0, y: -2.03, z: 0}
-  climbDuration: 1
+  climbDuration: 2
   topOfLedge: {x: 0, y: 0, z: 0}
   climbAnim: {fileID: 7400000, guid: 4a4539dbc3166a9428413eeb443b4f93, type: 2}
   freehandClimbAnim: {fileID: 7400000, guid: 0e576b36c186eb6429671cf229451337, type: 2}
@@ -1556,28 +1557,26 @@ MonoBehaviour:
   confiner: {fileID: 0}
   zoomedInPos: 7
   zoomedOutPos: 10
-  interactionBaseModelRen: {fileID: 0}
-  interactionExtraModelRen: {fileID: 0}
   interactionPosable: 0
   isGrabbingIntractable: 0
   interactionTarget: {fileID: 0}
   grabPoint: {fileID: 3145958797850906509}
   pushDistance: 5
   currentDistance: 0
-  isPushing: 0
-  isPulling: 0
-  pushForce: 2.33
+  pushForce: 3
   debugMode: 1
   playerInputActions: {fileID: -944628639613478452, guid: 21347e7e14cf3d0488e7c472a503656d,
     type: 3}
   input: {fileID: 1666142307545511599}
   isGamepadActive: 0
   inputEnabled: 0
+  promptHolder: {fileID: 0}
+  promptText: {fileID: 0}
+  promptPos: {fileID: 4689327581875436500}
   lastFallHight: 0
   launchPosition: {x: 0, y: 0, z: 0}
   landingPosition: {x: 0, y: 0, z: 0}
-  fallThreshold: 0
-  isFalling: 0
+  fallThreshold: -0.5
   activeCheckpoint: {fileID: 0}
 --- !u!114 &1666142307545511599
 MonoBehaviour:
@@ -1665,7 +1664,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6623255379414128161}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6fa1fbc73e2516c45a84fcf528bdfca8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
