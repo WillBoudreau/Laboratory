@@ -87,6 +87,8 @@ public class PlayerController : MonoBehaviour
     public CinemachineConfiner2D confiner;
     public int zoomedInPos;
     public int zoomedOutPos;
+    public int menuClipPlane;
+    public int gameplayClipPlane;
     [Header("Interaction Properties")]
     public bool interactionPosable;
     [SerializeField]
@@ -141,6 +143,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        SetCameraClippingPlane();
         if(inputEnabled)
         {
             CheckInputType();
@@ -808,6 +811,18 @@ public class PlayerController : MonoBehaviour
         else
         {
             promptHolder.SetActive(false);
+        }
+    }
+
+    void SetCameraClippingPlane()
+    {
+        if(gameManager.gameState == GameManager.GameState.MainMenu)
+        {
+            playerCam.m_Lens.FarClipPlane = menuClipPlane;
+        }
+        else if(gameManager.gameState == GameManager.GameState.Gameplay)
+        {
+            playerCam.m_Lens.FarClipPlane = gameplayClipPlane;
         }
     }
 

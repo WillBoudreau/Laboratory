@@ -16722,10 +16722,25 @@ PrefabInstance:
       propertyPath: m_Lens.FieldOfView
       value: 82.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1724394666256343947, guid: ef4e645916e880545966ecf7313beacd,
+        type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 602
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339909527534099918, guid: ef4e645916e880545966ecf7313beacd,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3339909527534099918, guid: ef4e645916e880545966ecf7313beacd,
         type: 3}
       propertyPath: field of view
       value: 82.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339909527534099918, guid: ef4e645916e880545966ecf7313beacd,
+        type: 3}
+      propertyPath: far clip plane
+      value: 602
       objectReference: {fileID: 0}
     - target: {fileID: 5415182159440856694, guid: ef4e645916e880545966ecf7313beacd,
         type: 3}

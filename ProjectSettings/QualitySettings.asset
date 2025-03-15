@@ -58,6 +58,7 @@ QualitySettings:
     - Server
     - Standalone
     - Android
+    - WebGL
   - serializedVersion: 3
     name: Low
     pixelLightCount: 0
@@ -110,6 +111,7 @@ QualitySettings:
     - Standalone
     - Server
     - Android
+    - WebGL
   - serializedVersion: 3
     name: Medium
     pixelLightCount: 1
@@ -161,6 +163,7 @@ QualitySettings:
     excludedTargetPlatforms:
     - Standalone
     - Server
+    - WebGL
   - serializedVersion: 3
     name: High
     pixelLightCount: 2
@@ -211,7 +214,8 @@ QualitySettings:
     terrainMaxTrees: 50
     excludedTargetPlatforms:
     - Android
-    - WebGL
+    - Standalone
+    - Server
   - serializedVersion: 3
     name: Very High
     pixelLightCount: 3
@@ -315,9 +319,7 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms:
-    - Standalone
     - Android
-    - Server
     - WebGL
   m_TextureMipmapLimitGroupNames: []
   m_PerPlatformDefaultQuality:
