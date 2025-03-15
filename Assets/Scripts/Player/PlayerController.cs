@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
     [Header("Input Properties")]
     public bool debugMode;
     public InputActionAsset playerInputActions;
+    public InputAction moveAction;
     public PlayerInput input;
     public bool isGamepadActive;
     public bool inputEnabled;
@@ -128,6 +129,7 @@ public class PlayerController : MonoBehaviour
         confiner.InvalidateCache();
         playerAnim.SetBool("isIdle",true);
         gameObject.SetActive(false);
+        moveAction = playerInputActions.FindAction("Move");
     }
 
     void Awake()
@@ -147,6 +149,9 @@ public class PlayerController : MonoBehaviour
             {
                 case ActionState.Hanging:
                     IsHanging();
+                    break;
+                case ActionState.Idle:
+                    playerAnim.SetBool("isIdle", true);
                     break;
             }
             if(moveDirection.x > 0 && !isGrabbingIntractable)
@@ -173,6 +178,10 @@ public class PlayerController : MonoBehaviour
             if(actionState == ActionState.Falling)
             {
                 playerBody.AddForce(Vector3.down * gravScale);
+            }
+            if(moveAction.IsPressed())
+            {
+                MovementLogic(moveDirection);
             }
         }
         CoyoteTimer();  
@@ -210,6 +219,17 @@ public class PlayerController : MonoBehaviour
     /// <param name="movementValue"></param>
     void OnMove(InputValue movementValue)
     {
+        
+        if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled)
+        {
+            Vector2 moveVector2 = movementValue.Get<Vector2>();
+            moveDirection = moveVector2;
+            MovementLogic(moveDirection);
+        }
+    }
+
+    void MovementLogic(Vector2 moveVector2)
+    {
         if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled)
         {
             if(actionState == ActionState.Idle)
@@ -217,23 +237,20 @@ public class PlayerController : MonoBehaviour
                 ChangeActionState(ActionState.Moving);
             }
             //Movement logic
-            Vector2 moveVector2 = movementValue.Get<Vector2>();
             if(actionState != ActionState.Hanging && actionState != ActionState.Climbing)
             {
-                moveDirection.x = moveVector2.x;
-                if(moveDirection.x == 0)
+                if(moveVector2.x == 0)
                 {
                     ChangeActionState(ActionState.Idle);
                 }
             }
             else if(actionState == ActionState.Hanging)
             {
-                moveDirection.y = moveVector2.y;
-                if(moveDirection.y > 0)
+                if(moveVector2.y > 0)
                 {
                     climbRoutine = StartCoroutine(LedgeClimb());
                 }
-                if(moveDirection.y < 0)
+                if(moveVector2.y < 0)
                 {
                     ChangeActionState(ActionState.Falling);
                     ledge = null;
@@ -318,10 +335,6 @@ public class PlayerController : MonoBehaviour
         if(col.gameObject.tag == "Receiver" || col.gameObject.tag == "Reflector" || col.gameObject.tag == "Platform" || col.gameObject.tag == "Box" && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
         {
             isGrounded = true;
-            if(actionState == ActionState.Falling)
-            {
-                ChangeActionState(ActionState.Idle);
-            }
             SetLandingPosition(); 
         }
     }
@@ -453,7 +466,14 @@ public class PlayerController : MonoBehaviour
         activeOffset = Vector3.zero;
         moveDirection = Vector2.zero;
         inputEnabled = true;
-        ChangeActionState(ActionState.Idle);
+        if(moveAction.inProgress)
+        {
+            ChangeActionState(ActionState.Moving);
+        }
+        else
+        {
+            ChangeActionState(ActionState.Idle);
+        }
     }
 
     #endregion
@@ -515,7 +535,14 @@ public class PlayerController : MonoBehaviour
     {
         if(actionState == ActionState.Falling)
         {
-            ChangeActionState(ActionState.Idle);          
+            if(moveDirection.x == 0)
+            {
+                ChangeActionState(ActionState.Idle);          
+            }
+            else
+            {
+                ChangeActionState(ActionState.Moving);          
+            }
         }
         lastFallHight = launchPosition.y - landingPosition.y;
         if(launchPosition.y - landingPosition.y >= maxFallHight)
@@ -824,11 +851,14 @@ public class PlayerController : MonoBehaviour
     public void ChangeActionState(ActionState nextState)
     {
         //Debug.Log("Changing to action state to " + nextState);
-        if(prevState != actionState)
+        if(prevState != actionState && actionState != ActionState.Hanging)
         {
             prevState = actionState;
         }
-        ExitState(prevState);
+        if(actionState != ActionState.Hanging)
+        {
+            ExitState(prevState);
+        }
         EnterState(nextState);    
     }
 
@@ -880,9 +910,6 @@ public class PlayerController : MonoBehaviour
             case ActionState.Climbing:
                 ClimbingExit();
                 break;
-            case ActionState.Hanging:
-                HangingExit();
-                break;
             default:
                 IdleExit();
                 Debug.Log("Default for Exit state");
@@ -892,7 +919,6 @@ public class PlayerController : MonoBehaviour
 
     private void Idle()
     {
-        playerAnim.SetBool("isIdle", true);
         playerAnim.SetBool("isHanging", false);
         playerAnim.SetBool("isFreeHanging", false);
         playerAnim.SetBool("isClimbing", false);
@@ -905,10 +931,15 @@ public class PlayerController : MonoBehaviour
     private void Moving()
     {
         playerAnim.SetBool("isIdle", false);
+        if(prevState == ActionState.Falling)
+        {
+            playerAnim.SetTrigger("landing");
+        }
     }
 
     private void Jumping()
     {
+        playerAnim.SetBool("isIdle", false);
         playerAnim.SetTrigger("jump");
         playerAnim.SetBool("isJumping",true);
         sFXManager.source2D.Stop();
@@ -917,6 +948,7 @@ public class PlayerController : MonoBehaviour
 
     private void Falling()
     {
+        playerAnim.SetBool("isIdle", false);
         playerAnim.SetBool("isFalling", true);
         if(prevState != ActionState.Jumping)
         {
@@ -961,12 +993,7 @@ public class PlayerController : MonoBehaviour
 
     private void ClimbingExit()
     {
-
-    }
-
-    private void HangingExit()
-    {
-
+        
     }
 
     #endregion
