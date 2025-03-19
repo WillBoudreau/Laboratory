@@ -25,6 +25,7 @@ public class LeverBehavior : MonoBehaviour
             Debug.Log(obj.tag);
             switch(obj.tag)
             {
+                //Open or close the door
                 case "Door":
                     if (obj.GetComponent<DoorBehaviour>().isOpen)
                     {
@@ -35,6 +36,7 @@ public class LeverBehavior : MonoBehaviour
                         obj.GetComponent<DoorBehaviour>().OpenThisDoor();
                     }
                     break;
+                //Move the platform
                 case "Platform":
                     Debug.Log(obj.GetComponent<MovingPlatform>().canMove + "1");
                     if(obj.GetComponent<MovingPlatform>().canMove == false)
@@ -48,13 +50,16 @@ public class LeverBehavior : MonoBehaviour
                     }
                     Debug.Log(obj.GetComponent<MovingPlatform>().canMove + "2");
                     break;
+                //Move the elevator
                 case "Elevator":
                     obj.GetComponent<ElevatorBehaviour>().canMove = true;
                     break;
+                //Rotate the reflector
                 case "Reflector":
                     //obj.GetComponent<ReflectorBehaviour>().canRotate = true;
                     obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
                     break;
+                //Switch the laser type
                 case "Receiver":
                     if(!setToDamaged)
                     {

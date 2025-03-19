@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 905640579493607887}
   - component: {fileID: 4893091421601358894}
   - component: {fileID: 8279926440529290368}
+  - component: {fileID: 9163152785279923029}
   m_Layer: 0
   m_Name: Door Object
   m_TagString: Door
@@ -169,8 +170,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.55642104, y: 1.8900956, z: 2.8523762}
-  m_Center: {x: -0.00000047683716, y: -0.0007265221, z: 0.0000009536743}
+  m_Size: {x: 0.55642104, y: 1.8900954, z: 2.854716}
+  m_Center: {x: -0.00000047683716, y: -0.0007265145, z: -0.0011719068}
 --- !u!114 &905640579493607887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +304,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &9163152785279923029
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3306891464786360074}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.36740202, y: 0.99999964, z: 0.042124577}
+  m_Center: {x: -0.028924614, y: -0.000000095669094, z: -1.4445549}
 --- !u!1 &3941559696890667811
 GameObject:
   m_ObjectHideFlags: 0
