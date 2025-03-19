@@ -396,8 +396,9 @@ public class PlayerController : MonoBehaviour
     /// <param name="trigger"></param>
     public void GrabTriggered(GameObject trigger, bool isFreeHanging)
     {
-        if(trigger.TryGetComponent<Climbable>(out Climbable other) && trigger.transform.position.y > this.gameObject.transform.position.y)
+        if(trigger.TryGetComponent<Climbable>(out Climbable other) && trigger.transform.position.y > this.gameObject.transform.position.y && actionState != ActionState.Hanging)
         {
+            playerAnim.SetTrigger("grab");
             this.isFreeHanging = isFreeHanging;
             if(isFacingLeft && other.gameObject.transform.position.x < transform.position.x)
             {
@@ -671,6 +672,7 @@ public class PlayerController : MonoBehaviour
     {
         if(timerActive)
         {
+            playerBody.useGravity = false;
             groundTimer -= Time.deltaTime;
             if(groundTimer > 0)
             {
@@ -679,7 +681,12 @@ public class PlayerController : MonoBehaviour
             else
             {
                 timerActive = false;   
+                playerBody.useGravity = true;
             }
+        }
+        else
+        {
+            playerBody.useGravity = true;
         }
     }
 
@@ -936,7 +943,6 @@ public class PlayerController : MonoBehaviour
     {
         playerAnim.SetBool("isHanging", false);
         playerAnim.SetBool("isFreeHanging", false);
-        playerAnim.SetBool("isClimbing", false);
         if(prevState == ActionState.Falling)
         {
             playerAnim.SetTrigger("landing");
@@ -981,7 +987,6 @@ public class PlayerController : MonoBehaviour
 
     private void Hanging()
     {
-        playerAnim.SetTrigger("grab");
         playerAnim.SetBool("isHanging",true);
     }
 
@@ -1006,9 +1011,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void HangingExit()
+    {
+        playerAnim.SetBool("isHanging", false);
+    }
+
     private void ClimbingExit()
     {
-        
+        playerAnim.SetBool("isClimbing", false);
     }
 
     #endregion
