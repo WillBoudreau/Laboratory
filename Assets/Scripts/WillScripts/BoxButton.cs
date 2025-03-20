@@ -6,9 +6,12 @@ public class BoxButton : MonoBehaviour
 {
     [Header("Box Button Controls")]
     [SerializeField] private GameObject[] objectToControl;//The object the button controls
+    [SerializeField] private AudioClip buttonSound;//The sound the button makes
+    [SerializeField] private AudioSource audioSource;//The audio source for the button
 
     void OnTriggerEnter(Collider other)
     {
+        PlayButtonSound();
         foreach(GameObject obj in objectToControl)
         {
             if(other.GetComponent<Collider>().tag == "Box")
@@ -44,5 +47,12 @@ public class BoxButton : MonoBehaviour
                 }
             }
         }
+    }
+    /// <summary>
+    /// Play the button sound
+    /// </summary>
+    void PlayButtonSound()
+    {
+        audioSource.PlayOneShot(buttonSound);
     }
 }

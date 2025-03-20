@@ -7,6 +7,12 @@ public class HeavyButton : MonoBehaviour
     [Header("Heavy Button Settings")]
     [SerializeField] private GameObject[] objectsToControl;//The object the button controls
     [SerializeField] private float massThreshold;//The mass threshold for the object to control
+    [SerializeField] private AudioClip buttonSound;//The sound the button makes
+    [SerializeField] private AudioSource audioSource;//The audio source for the button
+    void OnTriggerEnter(Collider other)
+    {
+        PlayButtonSound();
+    }
     void OnTriggerStay(Collider other)
     {
         foreach(GameObject objectToControl in objectsToControl)
@@ -60,5 +66,12 @@ public class HeavyButton : MonoBehaviour
                 }
             }
         }
+    }
+    /// <summary>
+    /// Play the button sound
+    /// </summary>
+    void PlayButtonSound()
+    {
+        audioSource.PlayOneShot(buttonSound);
     }
 }

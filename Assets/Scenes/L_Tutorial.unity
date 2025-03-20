@@ -15708,6 +15708,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxDispenser
       objectReference: {fileID: 0}
+    - target: {fileID: 2332663249869011179, guid: d79133f59673ead41a4959af7fa57322,
+        type: 3}
+      propertyPath: m_TagString
+      value: BoxDispenser
+      objectReference: {fileID: 0}
     - target: {fileID: 3347880106174913700, guid: d79133f59673ead41a4959af7fa57322,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15758,6 +15763,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6364037719763864454, guid: d79133f59673ead41a4959af7fa57322,
+        type: 3}
+      propertyPath: boxPrefab
+      value: 
+      objectReference: {fileID: 3727949763740477352, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+    - target: {fileID: 6364037719763864454, guid: d79133f59673ead41a4959af7fa57322,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 2059429931}
+    - target: {fileID: 6364037719763864454, guid: d79133f59673ead41a4959af7fa57322,
+        type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 2059429934}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15772,6 +15793,18 @@ Transform:
 --- !u!4 &2059429932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3347880106174913700, guid: d79133f59673ead41a4959af7fa57322,
+    type: 3}
+  m_PrefabInstance: {fileID: 2059429930}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2059429933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2332663249869011179, guid: d79133f59673ead41a4959af7fa57322,
+    type: 3}
+  m_PrefabInstance: {fileID: 2059429930}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &2059429934 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7180888455578260377, guid: d79133f59673ead41a4959af7fa57322,
     type: 3}
   m_PrefabInstance: {fileID: 2059429930}
   m_PrefabAsset: {fileID: 0}
@@ -16178,6 +16211,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DispenserButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.data[0]
+      value: 
+      objectReference: {fileID: 2059429933}
     - target: {fileID: 9159171360504130780, guid: 3313c883a743552439d9e70b4e932af0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16228,10 +16271,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1336072014822996194, guid: 3313c883a743552439d9e70b4e932af0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6515945365037799152, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 377665487142126160}
   m_SourcePrefab: {fileID: 100100000, guid: 3313c883a743552439d9e70b4e932af0, type: 3}
 --- !u!4 &377665487142126158 stripped
 Transform:
@@ -16239,6 +16287,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 377665487142126157}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &377665487142126159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6515945365037799152, guid: 3313c883a743552439d9e70b4e932af0,
+    type: 3}
+  m_PrefabInstance: {fileID: 377665487142126157}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &377665487142126160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377665487142126159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1e714406ac20443ab86718014021e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToControl:
+  - {fileID: 2059429933}
+  objectsOnButton: 0
+  buttonSound: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!4 &442217353134176337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 678673611361219865, guid: 629df25f0c79622498dc2e2953cf0c7f,
