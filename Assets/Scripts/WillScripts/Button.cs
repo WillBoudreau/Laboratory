@@ -7,8 +7,12 @@ public class Button : MonoBehaviour
     [Header("Button Settings")]
     [SerializeField] private GameObject[] objectsToControl;//The object the button controls
     [SerializeField] private int objectsOnButton = 0;//The number of objects on the button
-    [SerializeField] private AudioClip buttonSound;//The sound the button makes
-    [SerializeField] private AudioSource audioSource;//The audio source for the button
+    [Header("Audio Settings")]
+    [SerializeField] private SFXManager sFXManager;//The SFX manager
+    void Awake()
+    {
+        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -21,8 +25,7 @@ public class Button : MonoBehaviour
             if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
             {
                 objectsOnButton++;
-                PlayButtonSound();
-
+                sFXManager.Player2DSFX(sFXManager.buttonPress,false);
                 Debug.Log("Box or Player can interact with button");
                 //If the object is a door, open it
                 if(obj.tag == "Door")
@@ -80,11 +83,11 @@ public class Button : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// Play the button sound
-    /// </summary>
-    void PlayButtonSound()
-    {
-        audioSource.PlayOneShot(buttonSound);
-    }
+    // /// <summary>
+    // /// Play the button sound
+    // /// </summary>
+    // void PlayButtonSound()
+    // {
+    //     audioSource.PlayOneShot(buttonSound);
+    // }
 }

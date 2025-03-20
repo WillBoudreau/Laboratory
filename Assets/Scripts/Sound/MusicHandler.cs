@@ -15,7 +15,10 @@ public class MusicHandler : MonoBehaviour
 
     [Header("Sound References")]
     [SerializeField] private AudioClip titleMusic;
+    [SerializeField] private AudioClip tutorialMusic;
     [SerializeField] private AudioClip levelMusic;
+    [SerializeField] private AudioClip level2Music;
+    [SerializeField] private AudioClip level3Music;
     private string currentTrackName;
 
     // Start is called before the first frame update
@@ -38,9 +41,17 @@ public class MusicHandler : MonoBehaviour
             case "title":
                 musicPlayer.clip = titleMusic;
                 break;
-
-            case "level":
+            case "tutorial":
+                musicPlayer.clip = tutorialMusic;
+                break;
+            case "level1":
                 musicPlayer.clip = levelMusic;
+                break;
+            case "level2":
+                musicPlayer.clip = level2Music;
+                break;
+            case "level3":
+                musicPlayer.clip = level3Music;
                 break;
 
             default:

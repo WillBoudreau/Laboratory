@@ -6,23 +6,27 @@ using UnityEngine.InputSystem;
 
 public class LeverBehavior : MonoBehaviour
 {
+    [Header("Class calls")]
+    [SerializeField] private SFXManager sFXManager;//The SFX manager
     [Header("Lever Controls")]
     [SerializeField] private GameObject[] objectToControl;//The object the lever controls
     [SerializeField] private bool setToDamaged;//Set the lever to damaged
-    [SerializeField] private AudioClip leverSound;//The sound the lever makes
-    [SerializeField] private AudioSource audioSource;//The audio source for the lever
     [Header("Debug Controls")]
     [SerializeField] private bool debugMode;//Debug mode
     [SerializeField] private bool debugActivate;//Debug activate the lever
     [SerializeField] private bool debugDeactivate;//Debug deactivate the lever
     private bool playerInRange = false;
+    void Awake()
+    {
+        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
+    }
     /// <summary>
     /// Activate the lever
     /// </summary>
     public void ActivateLever()
     {
+        sFXManager.Player2DSFX(sFXManager.leverSFX,false);
         Debug.Log("Lever Activated");
-        PlayLeverSound();
         foreach(GameObject obj in objectToControl)
         {
             Debug.Log(obj.tag);
@@ -123,11 +127,11 @@ public class LeverBehavior : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Play the lever sound effect
-    /// </summary>
-    void PlayLeverSound()
-    {
-        audioSource.PlayOneShot(leverSound);
-    }
+    // /// <summary>
+    // /// Play the lever sound effect
+    // /// </summary>
+    // void PlayLeverSound()
+    // {
+    //     audioSource.PlayOneShot(leverSound);
+    // }
 }

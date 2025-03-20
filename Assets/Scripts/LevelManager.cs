@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     [Header("Level Settings")]
     [SerializeField] private UIManager uIManager;//The UI Manager
     [SerializeField] private GameManager gameManager;//The game manager
-    [SerializeField] 
+    [SerializeField] private MusicHandler musicHandler;//The music handler
     private GameObject player; 
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
@@ -34,10 +34,31 @@ public class LevelManager : MonoBehaviour
         if(sceneName.Contains("L_"))
         {
             uIManager.UILoadingScreen(uIManager.hUD);
+            if(sceneName.Contains("Tutorial"))
+            {
+                Debug.Log("Setting music to tutorial");
+                musicHandler.SwitchAudioTrack("tutorial");
+            }
+            else if(sceneName.Contains("1"))
+            {
+                Debug.Log("Setting music to level1");
+                musicHandler.SwitchAudioTrack("level1");
+            }
+            else if(sceneName.Contains("2"))
+            {
+                Debug.Log("Setting music to level2");
+                musicHandler.SwitchAudioTrack("level2");
+            }
+            else if(sceneName.Contains("3"))
+            {
+                Debug.Log("Setting music to level3");
+                musicHandler.SwitchAudioTrack("level3");
+            }
         }
         if(sceneName.Contains("MainMenu"))
         {
             Debug.Log("Setting Ui to menu");
+            musicHandler.SwitchAudioTrack("title");
             uIManager.UILoadingScreen(uIManager.mainMenu); 
         }  
         StartCoroutine(WaitForScreenLoad(sceneName));
