@@ -8,6 +8,8 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private GameObject boxPrefab; // The box prefab
     [SerializeField] private GameObject spawnedBox; // The spawned box
     [SerializeField] private Transform spawnPoint; // The spawn point
+    [SerializeField] private AudioClip spawnSound; // The sound to play when the box is spawned
+    [SerializeField] private AudioSource audioSource; // The audio source component
 
     /// <summary>
     /// Spawns a box at the spawn point if there is no box already spawned
@@ -16,6 +18,7 @@ public class BoxSpawner : MonoBehaviour
     {
         if (spawnedBox == null)
         {
+            PlaySpawnSound();
             InstantiateBox();
         }
     }
@@ -29,11 +32,13 @@ public class BoxSpawner : MonoBehaviour
         spawnedBox = Instantiate(boxPrefab, spawnPoint.position, boxPrefab.transform.rotation);
     }
 
-    void OnTriggerEnter(Collider other)
+    /// <summary>
+    /// Plays the spawn sound
+    /// </summary>
+    void PlaySpawnSound()
     {
-        if(other.CompareTag("Player") && spawnedBox == null)
-        {
-            SpawnBox();
-        }
+        Debug.Log("Playing box spawn sound");
+        // Play the spawn sound
+        audioSource.PlayOneShot(spawnSound);
     }
 }

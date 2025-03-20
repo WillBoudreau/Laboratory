@@ -9,6 +9,8 @@ public class LeverBehavior : MonoBehaviour
     [Header("Lever Controls")]
     [SerializeField] private GameObject[] objectToControl;//The object the lever controls
     [SerializeField] private bool setToDamaged;//Set the lever to damaged
+    [SerializeField] private AudioClip leverSound;//The sound the lever makes
+    [SerializeField] private AudioSource audioSource;//The audio source for the lever
     [Header("Debug Controls")]
     [SerializeField] private bool debugMode;//Debug mode
     [SerializeField] private bool debugActivate;//Debug activate the lever
@@ -20,6 +22,7 @@ public class LeverBehavior : MonoBehaviour
     public void ActivateLever()
     {
         Debug.Log("Lever Activated");
+        PlayLeverSound();
         foreach(GameObject obj in objectToControl)
         {
             Debug.Log(obj.tag);
@@ -120,13 +123,11 @@ public class LeverBehavior : MonoBehaviour
         }
     }
 
-    void Update()
+    /// <summary>
+    /// Play the lever sound effect
+    /// </summary>
+    void PlayLeverSound()
     {
-        // //If the player is in range and presses the E key
-        // if(playerInRange && Keyboard.current.eKey.wasPressedThisFrame)
-        // {
-        //     Debug.Log("Player Activated Lever");
-        //     ActivateLever();
-        // }
+        audioSource.PlayOneShot(leverSound);
     }
 }

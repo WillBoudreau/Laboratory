@@ -18,6 +18,11 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private float movementPauseTime = 0.5f; // When the moving platform reachs its destination, wait this long before moving again
     [SerializeField] private MovementType movementType = MovementType.BackAndForth; // The type of movement the platform will have
 
+    [Header("Sound Settings")]
+    [SerializeField] private List<AudioClip> audioClips; // The sound the platform makes
+    [SerializeField] private AudioSource audioSource; // The audio source for the platform
+    public int deactivateSoundIndex; // The index of the sound effect in the audioClips list
+
     [Header("Platform Positions")]
     [SerializeField] public bool autoAssignTargetPositions = true; // if you want to run the "AssignTargetPositionsInList()" on start
     [SerializeField] private List<Transform> targetPositions = new List<Transform>(); // List of target positions the platform moves to
@@ -33,6 +38,7 @@ public class MovingPlatform : MonoBehaviour
 
     void Start()
     {
+        deactivateSoundIndex = 0;
         if (autoAssignTargetPositions)
             AssignTargetPositionsInList();
 
@@ -191,5 +197,13 @@ public class MovingPlatform : MonoBehaviour
         {
             targetPositions.Add(targetPositionsParent.transform.GetChild(i).transform);
         }
+    }
+    /// <summary>
+    /// Play the platform sound effect
+    /// </summary>
+    /// <param name="clipIndex">The index of the sound effect in the audioClips list</param>
+    public void PlayPlatformSound(int clipIndex)
+    {
+        audioSource.PlayOneShot(audioClips[clipIndex]);
     }
 }
