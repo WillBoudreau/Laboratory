@@ -5149,6 +5149,11 @@ PrefabInstance:
       propertyPath: objectsToControl.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.data[0]
+      value: 
+      objectReference: {fileID: 428005011}
     - target: {fileID: 9159171360504130780, guid: 3313c883a743552439d9e70b4e932af0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10034,6 +10039,12 @@ Transform:
 --- !u!82 &428005010 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 7180888455578260377, guid: d79133f59673ead41a4959af7fa57322,
+    type: 3}
+  m_PrefabInstance: {fileID: 428005007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &428005011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2332663249869011179, guid: d79133f59673ead41a4959af7fa57322,
     type: 3}
   m_PrefabInstance: {fileID: 428005007}
   m_PrefabAsset: {fileID: 0}
@@ -27402,7 +27413,7 @@ Transform:
   m_GameObject: {fileID: 1139696122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -64.875, y: 28, z: 0}
+  m_LocalPosition: {x: -62.82, y: 28.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
