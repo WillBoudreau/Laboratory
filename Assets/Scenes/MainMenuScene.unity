@@ -6984,21 +6984,6 @@ PrefabInstance:
       objectReference: {fileID: 2098503433}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
-      propertyPath: gravScale
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
-        type: 3}
-      propertyPath: jumpSpeed
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
-        type: 3}
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 2098503435}
@@ -7032,8 +7017,7 @@ PrefabInstance:
       propertyPath: gameplayClipPlane
       value: 15
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2713157487807189705, guid: ad6a7730677d8b44f9d23bd355ba6e5d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

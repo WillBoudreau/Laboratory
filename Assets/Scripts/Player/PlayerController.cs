@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 using TMPro;
 using Cinemachine;
 using System;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,8 +27,8 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     public bool isFacingLeft;
     [Header("Components")]
-    // [SerializeField]
-    // private Rigidbody playerBody;
+    [SerializeField]
+    private Rigidbody playerBody;
     [SerializeField]
     private Animator playerAnim;
     [SerializeField]
@@ -38,11 +37,10 @@ public class PlayerController : MonoBehaviour
     private Transform rightFacing;
     [SerializeField]
     private Transform leftFacing;
+
     [Header("Player Stats")]
     [SerializeField]
     private float moveSpeed;
-    [SerializeField]
-    private float jumpSpeed;
     [SerializeField]
     private float jumpForce;
     [SerializeField]
@@ -126,7 +124,7 @@ public class PlayerController : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
         uIManager = FindObjectOfType<UIManager>();
         sFXManager = FindObjectOfType<SFXManager>();
-        //playerBody = this.gameObject.GetComponent<Rigidbody>();
+        playerBody = this.gameObject.GetComponent<Rigidbody>();
         playerAnim = this.gameObject.GetComponent<Animator>();
         input = this.gameObject.GetComponent<PlayerInput>();
         deathFadeTime = uIManager.deathFadeTime*3;
@@ -159,7 +157,7 @@ public class PlayerController : MonoBehaviour
                     playerAnim.SetBool("isIdle", true);
                     break;
             }
-            if(moveDirection.x > 0 && !isGrabbingIntractable && actionState!= ActionState.Hanging)
+            if(moveDirection.x > 0 && !isGrabbingIntractable)
             {       
                 if(isFacingLeft)
                 {
@@ -167,7 +165,7 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = rightFacing.rotation;
                 }
             }
-            else if(moveDirection.x < 0 && !isGrabbingIntractable && actionState!= ActionState.Hanging)
+            else if(moveDirection.x < 0 && !isGrabbingIntractable)
             {
                 if(!isFacingLeft)
                 {
@@ -182,7 +180,7 @@ public class PlayerController : MonoBehaviour
             CheckIfFalling();
             if(actionState == ActionState.Falling)
             {
-                //playerBody.AddForce(Vector3.down * gravScale);
+                playerBody.AddForce(Vector3.down * gravScale);
             }
             if(moveAction.IsPressed())
             {
@@ -200,16 +198,15 @@ public class PlayerController : MonoBehaviour
             {
                 if(!isGrabbingIntractable)
                 {
-                    transform.position = new Vector3(transform.position.x+moveDirection.x*Time.deltaTime*moveSpeed,transform.position.y,0);
-                    //playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+                    playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
                     if(actionState == ActionState.Jumping)
                     {
-                        //playerBody.velocity = new Vector3(playerBody.velocity.x*jumpSpeed, playerBody.velocity.y*jumpBoost,playerBody.velocity.z);
+                        playerBody.velocity = new Vector3(playerBody.velocity.x, playerBody.velocity.y*jumpBoost,playerBody.velocity.z);
                     }
                 }
                 if(isGrabbingIntractable)
                 {
-                    //playerBody.velocity = new Vector3(moveDirection.x * (moveSpeed*.5f) * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
+                    playerBody.velocity = new Vector3(moveDirection.x * (moveSpeed*.5f) * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
                 }
                 
             }
@@ -304,7 +301,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Jump Pressed");
                 ChangeActionState(ActionState.Jumping);
-                //playerBody.AddForce(transform.up * jumpForce);
+                playerBody.AddForce(transform.up * jumpForce);
             }
             if(actionState == ActionState.Hanging)
             {
@@ -564,10 +561,10 @@ public class PlayerController : MonoBehaviour
     {
         if(actionState != ActionState.Falling && actionState != ActionState.Hanging && actionState != ActionState.Climbing)
         {
-            // if(playerBody.velocity.y < fallThreshold && !isGrounded)
-            // {
-            //     ChangeActionState(ActionState.Falling);
-            // }
+            if(playerBody.velocity.y < fallThreshold && !isGrounded)
+            {
+                ChangeActionState(ActionState.Falling);
+            }
         }
     }
 
@@ -675,7 +672,7 @@ public class PlayerController : MonoBehaviour
     {
         if(timerActive)
         {
-            //playerBody.useGravity = false;
+            playerBody.useGravity = false;
             groundTimer -= Time.deltaTime;
             if(groundTimer > 0)
             {
@@ -684,12 +681,12 @@ public class PlayerController : MonoBehaviour
             else
             {
                 timerActive = false;   
-                //playerBody.useGravity = true;
+                playerBody.useGravity = true;
             }
         }
         else
         {
-            //playerBody.useGravity = true;
+            playerBody.useGravity = true;
         }
     }
 
