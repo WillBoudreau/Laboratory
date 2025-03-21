@@ -5144,6 +5144,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DispenserButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.data[0]
+      value: 
+      objectReference: {fileID: 428005011}
     - target: {fileID: 9159171360504130780, guid: 3313c883a743552439d9e70b4e932af0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9998,6 +10008,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6364037719763864454, guid: d79133f59673ead41a4959af7fa57322,
+        type: 3}
+      propertyPath: boxPrefab
+      value: 
+      objectReference: {fileID: 3727949763740477352, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
+    - target: {fileID: 6364037719763864454, guid: d79133f59673ead41a4959af7fa57322,
+        type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 428005010}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10012,6 +10033,18 @@ Transform:
 --- !u!4 &428005009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3347880106174913700, guid: d79133f59673ead41a4959af7fa57322,
+    type: 3}
+  m_PrefabInstance: {fileID: 428005007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &428005010 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7180888455578260377, guid: d79133f59673ead41a4959af7fa57322,
+    type: 3}
+  m_PrefabInstance: {fileID: 428005007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &428005011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2332663249869011179, guid: d79133f59673ead41a4959af7fa57322,
     type: 3}
   m_PrefabInstance: {fileID: 428005007}
   m_PrefabAsset: {fileID: 0}
@@ -11752,6 +11785,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxDispenser
       objectReference: {fileID: 0}
+    - target: {fileID: 2332663249869011179, guid: d79133f59673ead41a4959af7fa57322,
+        type: 3}
+      propertyPath: m_TagString
+      value: BoxDispenser
+      objectReference: {fileID: 0}
     - target: {fileID: 3347880106174913700, guid: d79133f59673ead41a4959af7fa57322,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -11826,6 +11864,12 @@ Transform:
 --- !u!4 &486125167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3347880106174913700, guid: d79133f59673ead41a4959af7fa57322,
+    type: 3}
+  m_PrefabInstance: {fileID: 486125165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &486125168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2332663249869011179, guid: d79133f59673ead41a4959af7fa57322,
     type: 3}
   m_PrefabInstance: {fileID: 486125165}
   m_PrefabAsset: {fileID: 0}
@@ -14889,6 +14933,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DispenserButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.data[0]
+      value: 
+      objectReference: {fileID: 953472706}
     - target: {fileID: 9159171360504130780, guid: 3313c883a743552439d9e70b4e932af0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20131,6 +20185,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DispenserButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.data[0]
+      value: 
+      objectReference: {fileID: 486125168}
     - target: {fileID: 9159171360504130780, guid: 3313c883a743552439d9e70b4e932af0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22798,6 +22862,12 @@ Transform:
 --- !u!4 &953472705 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3347880106174913700, guid: d79133f59673ead41a4959af7fa57322,
+    type: 3}
+  m_PrefabInstance: {fileID: 953472703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &953472706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2332663249869011179, guid: d79133f59673ead41a4959af7fa57322,
     type: 3}
   m_PrefabInstance: {fileID: 953472703}
   m_PrefabAsset: {fileID: 0}
@@ -27343,7 +27413,7 @@ Transform:
   m_GameObject: {fileID: 1139696122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -64.875, y: 28, z: 0}
+  m_LocalPosition: {x: -62.82, y: 28.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44277,6 +44347,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxDispenser
       objectReference: {fileID: 0}
+    - target: {fileID: 2332663249869011179, guid: d79133f59673ead41a4959af7fa57322,
+        type: 3}
+      propertyPath: m_TagString
+      value: BoxDispenser
+      objectReference: {fileID: 0}
     - target: {fileID: 3347880106174913700, guid: d79133f59673ead41a4959af7fa57322,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -44351,6 +44426,12 @@ Transform:
 --- !u!4 &2016797185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3347880106174913700, guid: d79133f59673ead41a4959af7fa57322,
+    type: 3}
+  m_PrefabInstance: {fileID: 2016797183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2016797186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2332663249869011179, guid: d79133f59673ead41a4959af7fa57322,
     type: 3}
   m_PrefabInstance: {fileID: 2016797183}
   m_PrefabAsset: {fileID: 0}
@@ -47058,6 +47139,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DispenserButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575041950324201324, guid: 3313c883a743552439d9e70b4e932af0,
+        type: 3}
+      propertyPath: objectsToControl.Array.data[0]
+      value: 
+      objectReference: {fileID: 2016797186}
     - target: {fileID: 9159171360504130780, guid: 3313c883a743552439d9e70b4e932af0,
         type: 3}
       propertyPath: m_LocalPosition.x

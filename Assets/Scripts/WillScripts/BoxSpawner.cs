@@ -7,8 +7,13 @@ public class BoxSpawner : MonoBehaviour
     [Header("Box Settings")]
     [SerializeField] private GameObject boxPrefab; // The box prefab
     [SerializeField] private GameObject spawnedBox; // The spawned box
-    [SerializeField] private Transform spawnPoint; // The spawn point
-
+    [SerializeField] private Transform spawnPoint; // The spawn point for the box
+    [Header("Audio Settings")]
+    [SerializeField] private SFXManager sFXManager; // The SFX manager
+    void Awake()
+    {
+        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
+    }
     /// <summary>
     /// Spawns a box at the spawn point if there is no box already spawned
     /// </summary>
@@ -25,15 +30,9 @@ public class BoxSpawner : MonoBehaviour
     /// </summary>
     void InstantiateBox()
     {
+        // Play the box spawn sound
+        sFXManager.Player2DSFX(sFXManager.boxDispenserSFX, false);
         // Instantiate a box at the spawn point
         spawnedBox = Instantiate(boxPrefab, spawnPoint.position, boxPrefab.transform.rotation);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player") && spawnedBox == null)
-        {
-            SpawnBox();
-        }
     }
 }

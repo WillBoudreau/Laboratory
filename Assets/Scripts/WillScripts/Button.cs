@@ -7,6 +7,13 @@ public class Button : MonoBehaviour
     [Header("Button Settings")]
     [SerializeField] private GameObject[] objectsToControl;//The object the button controls
     [SerializeField] private int objectsOnButton = 0;//The number of objects on the button
+    [Header("Audio Settings")]
+    [SerializeField] private SFXManager sFXManager;//The SFX manager
+    void Awake()
+    {
+        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
@@ -18,7 +25,7 @@ public class Button : MonoBehaviour
             if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
             {
                 objectsOnButton++;
-
+                sFXManager.Player2DSFX(sFXManager.buttonPress,false);
                 Debug.Log("Box or Player can interact with button");
                 //If the object is a door, open it
                 if(obj.tag == "Door")
@@ -30,7 +37,7 @@ public class Button : MonoBehaviour
                 else if(obj.tag == "Platform")
                 {
                     Debug.Log("Platform can move");
-                    obj.GetComponent<MovingPlatform>().canMove = true;
+                    obj.GetComponent<MovingPlatform>().canMove = true;  
                 }
                 else if(obj.tag == "Receiver")
                 {
@@ -66,6 +73,7 @@ public class Button : MonoBehaviour
                     else if(obj.tag == "Platform")
                     {
                         obj.GetComponent<MovingPlatform>().canMove = false;
+                        obj.GetComponent<MovingPlatform>().PlayPlatformSound(obj.GetComponent<MovingPlatform>().deactivateSoundIndex); 
                     }
                     else if(obj.tag == "Receiver")
                     {
@@ -75,4 +83,11 @@ public class Button : MonoBehaviour
             }
         }
     }
+    // /// <summary>
+    // /// Play the button sound
+    // /// </summary>
+    // void PlayButtonSound()
+    // {
+    //     audioSource.PlayOneShot(buttonSound);
+    // }
 }

@@ -13,7 +13,8 @@ public class SFXManager : MonoBehaviour
     public AudioClip hurtSFX1;
     public AudioClip hurtSFX2;
     public AudioClip jumpSFX;
-
+    public AudioClip boxDispenserSFX;
+    
     void Start()
     {
         source2D = gameObject.GetComponent<AudioSource>();

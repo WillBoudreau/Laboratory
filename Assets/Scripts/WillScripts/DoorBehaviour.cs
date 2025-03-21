@@ -82,18 +82,12 @@ public class DoorBehaviour : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, targetPOS, speed * Time.deltaTime);
     }
-    void OntTriggerEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Box")
         {
-            if(!isOpen)
-            {
-                OpenThisDoor();
-            }
-            else
-            {
-                CloseThisDoor();
-            }
+            Destroy(other.gameObject);
+            OpenThisDoor();
         }
     }
 }

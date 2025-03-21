@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class LeverBehavior : MonoBehaviour
 {
+    [Header("Class calls")]
+    [SerializeField] private SFXManager sFXManager;//The SFX manager
     [Header("Lever Controls")]
     [SerializeField] private GameObject[] objectToControl;//The object the lever controls
     [SerializeField] private bool setToDamaged;//Set the lever to damaged
@@ -14,17 +16,23 @@ public class LeverBehavior : MonoBehaviour
     [SerializeField] private bool debugActivate;//Debug activate the lever
     [SerializeField] private bool debugDeactivate;//Debug deactivate the lever
     private bool playerInRange = false;
+    void Awake()
+    {
+        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
+    }
     /// <summary>
     /// Activate the lever
     /// </summary>
     public void ActivateLever()
     {
+        sFXManager.Player2DSFX(sFXManager.leverSFX,false);
         Debug.Log("Lever Activated");
         foreach(GameObject obj in objectToControl)
         {
             Debug.Log(obj.tag);
             switch(obj.tag)
             {
+                //Open or close the door
                 case "Door":
                     if (obj.GetComponent<DoorBehaviour>().isOpen)
                     {
@@ -35,6 +43,7 @@ public class LeverBehavior : MonoBehaviour
                         obj.GetComponent<DoorBehaviour>().OpenThisDoor();
                     }
                     break;
+                //Move the platform
                 case "Platform":
                     Debug.Log(obj.GetComponent<MovingPlatform>().canMove + "1");
                     if(obj.GetComponent<MovingPlatform>().canMove == false)
@@ -48,13 +57,16 @@ public class LeverBehavior : MonoBehaviour
                     }
                     Debug.Log(obj.GetComponent<MovingPlatform>().canMove + "2");
                     break;
+                //Move the elevator
                 case "Elevator":
                     obj.GetComponent<ElevatorBehaviour>().canMove = true;
                     break;
+                //Rotate the reflector
                 case "Reflector":
                     //obj.GetComponent<ReflectorBehaviour>().canRotate = true;
                     obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
                     break;
+                //Switch the laser type
                 case "Receiver":
                     if(!setToDamaged)
                     {
@@ -115,13 +127,11 @@ public class LeverBehavior : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // //If the player is in range and presses the E key
-        // if(playerInRange && Keyboard.current.eKey.wasPressedThisFrame)
-        // {
-        //     Debug.Log("Player Activated Lever");
-        //     ActivateLever();
-        // }
-    }
+    // /// <summary>
+    // /// Play the lever sound effect
+    // /// </summary>
+    // void PlayLeverSound()
+    // {
+    //     audioSource.PlayOneShot(leverSound);
+    // }
 }

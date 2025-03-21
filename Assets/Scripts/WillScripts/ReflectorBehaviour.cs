@@ -45,9 +45,6 @@ public class ReflectorBehaviour : MonoBehaviour
 
             if (currentRotation >= rotateAngle)
             {
-                // Ensure rotationThisFrame is a multiple of rotateAngle and a whole number
-                // rotationThisFrame = Mathf.Floor(currentRotation / rotateAngle) * rotateAngle;
-                // prism.transform.Rotate(axis, rotationThisFrame - (currentRotation - rotateAngle));
                 float overshoot = currentRotation - rotateAngle;
                 prism.transform.Rotate(axis, -overshoot);
                 currentRotation = 0; // Reset for the next rotation
