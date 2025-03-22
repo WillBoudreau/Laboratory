@@ -37,7 +37,7 @@ public class Button : MonoBehaviour
                 else if(obj.tag == "Platform")
                 {
                     Debug.Log("Platform can move");
-                    obj.GetComponent<MovingPlatform>().canMove = true;  
+                    obj.GetComponent<MovingPlatform>().SetMovementStatus(true);
                 }
                 else if(obj.tag == "Receiver")
                 {
@@ -72,8 +72,7 @@ public class Button : MonoBehaviour
                     //If the object is a platform, stop it from moving
                     else if(obj.tag == "Platform")
                     {
-                        obj.GetComponent<MovingPlatform>().canMove = false;
-                        obj.GetComponent<MovingPlatform>().PlayPlatformSound(obj.GetComponent<MovingPlatform>().deactivateSoundIndex); 
+                        obj.GetComponent<MovingPlatform>().SetMovementStatus(false);
                     }
                     else if(obj.tag == "Receiver")
                     {
@@ -83,11 +82,6 @@ public class Button : MonoBehaviour
             }
         }
     }
-    // /// <summary>
-    // /// Play the button sound
-    // /// </summary>
-    // void PlayButtonSound()
-    // {
-    //     audioSource.PlayOneShot(buttonSound);
-    // }
+    /// <summary>
+    /// 
 }

@@ -7,11 +7,15 @@ public class HeavyButton : MonoBehaviour
     [Header("Heavy Button Settings")]
     [SerializeField] private GameObject[] objectsToControl;//The object the button controls
     [SerializeField] private float massThreshold;//The mass threshold for the object to control
-    [SerializeField] private AudioClip buttonSound;//The sound the button makes
-    [SerializeField] private AudioSource audioSource;//The audio source for the button
+    [Header("Audio Settings")]
+    [SerializeField] private SFXManager sFXManager;//The SFX manager
+    void Awake()
+    {
+        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
+    }
     void OnTriggerEnter(Collider other)
     {
-        PlayButtonSound();
+        sFXManager.Player2DSFX(sFXManager.buttonPress,false);
     }
     void OnTriggerStay(Collider other)
     {
@@ -66,12 +70,5 @@ public class HeavyButton : MonoBehaviour
                 }
             }
         }
-    }
-    /// <summary>
-    /// Play the button sound
-    /// </summary>
-    void PlayButtonSound()
-    {
-        audioSource.PlayOneShot(buttonSound);
     }
 }

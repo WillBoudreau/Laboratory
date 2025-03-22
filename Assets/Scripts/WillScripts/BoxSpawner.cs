@@ -32,6 +32,7 @@ public class BoxSpawner : MonoBehaviour
     {
         // Play the box spawn sound
         sFXManager.Player2DSFX(sFXManager.boxDispenserSFX, false);
+        Debug.Log("Box Dispenser is spawning a box");
         // Instantiate a box at the spawn point
         spawnedBox = Instantiate(boxPrefab, spawnPoint.position, boxPrefab.transform.rotation);
     }
