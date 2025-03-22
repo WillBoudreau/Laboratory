@@ -48,11 +48,11 @@ public class LeverBehavior : MonoBehaviour
                     Debug.Log(obj.GetComponent<MovingPlatform>().canMove + "1");
                     if(obj.GetComponent<MovingPlatform>().canMove == false)
                     {
-                        obj.GetComponent<MovingPlatform>().canMove = true;
+                        obj.GetComponent<MovingPlatform>().SetMovementStatus(true);
                     }
                     else
                     {
-                        obj.GetComponent<MovingPlatform>().canMove = false;
+                        obj.GetComponent<MovingPlatform>().SetMovementStatus(false);
                         break;
                     }
                     Debug.Log(obj.GetComponent<MovingPlatform>().canMove + "2");
@@ -105,6 +105,10 @@ public class LeverBehavior : MonoBehaviour
     {
         if (debugMode)
         {
+            if(sFXManager == null)
+            {
+                return;
+            }
             // Draw lines from the lever to the objects it controls
             Gizmos.color = Color.red;
             foreach (GameObject obj in objectToControl)

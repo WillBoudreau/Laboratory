@@ -19,9 +19,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private MovementType movementType = MovementType.BackAndForth; // The type of movement the platform will have
 
     [Header("Sound Settings")]
-    [SerializeField] private List<AudioClip> audioClips; // The sound the platform makes
-    [SerializeField] private AudioSource audioSource; // The audio source for the platform
-    public int deactivateSoundIndex; // The index of the sound effect in the audioClips list
+    [SerializeField] private SFXManager sFXManager; // The SFX manager
 
     [Header("Platform Positions")]
     [SerializeField] public bool autoAssignTargetPositions = true; // if you want to run the "AssignTargetPositionsInList()" on start
@@ -38,7 +36,7 @@ public class MovingPlatform : MonoBehaviour
 
     void Start()
     {
-        deactivateSoundIndex = 0;
+        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
         if (autoAssignTargetPositions)
             AssignTargetPositionsInList();
 
@@ -199,11 +197,22 @@ public class MovingPlatform : MonoBehaviour
         }
     }
     /// <summary>
-    /// Play the platform sound effect
+    /// Set the moving status of the platform
     /// </summary>
-    /// <param name="clipIndex">The index of the sound effect in the audioClips list</param>
-    public void PlayPlatformSound(int clipIndex)
+    public void SetMovementStatus(bool status)
     {
-        audioSource.PlayOneShot(audioClips[clipIndex]);
+        canMove = status;
+        if(status == false)
+        {
+            PlayPlatformSound(0);
+        }
+    }
+
+    /// <summary>
+    /// Play the sound of the platform moving or stopping
+    /// </summary>
+    public void PlayPlatformSound(int soundIndex)
+    {
+        sFXManager.Player2DSFX(sFXManager.movingPlatformSFX[soundIndex], false);
     }
 }

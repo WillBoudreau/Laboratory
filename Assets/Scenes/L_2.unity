@@ -5363,6 +5363,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6364037719763864454, guid: d79133f59673ead41a4959af7fa57322,
+        type: 3}
+      propertyPath: boxPrefab
+      value: 
+      objectReference: {fileID: 3727949763740477352, guid: 2c36476892e2e794ba7d7cfac00b3647,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -53072,9 +53078,7 @@ MonoBehaviour:
   canMove: 0
   movementPauseTime: 2
   movementType: 0
-  audioClips: []
-  audioSource: {fileID: 0}
-  deactivateSoundIndex: 0
+  sFXManager: {fileID: 0}
   autoAssignTargetPositions: 0
   targetPositions:
   - {fileID: 6388335886068244697}
@@ -54060,9 +54064,7 @@ MonoBehaviour:
   canMove: 0
   movementPauseTime: 0.5
   movementType: 0
-  audioClips: []
-  audioSource: {fileID: 0}
-  deactivateSoundIndex: 0
+  sFXManager: {fileID: 0}
   autoAssignTargetPositions: 0
   targetPositions:
   - {fileID: 241108751999950070}
