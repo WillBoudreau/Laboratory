@@ -43,11 +43,7 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed;
     [SerializeField]
     private float jumpForce;
-    [SerializeField]
-    private float turnTime;
     public float gravScale;
-    public float jumpBoost;
-    public float jumpThreshold;
     private Vector2 moveDirection;
     [Header("Ground Check Properties")]
     public float coyoteTimeLimit;
@@ -157,7 +153,7 @@ public class PlayerController : MonoBehaviour
                     playerAnim.SetBool("isIdle", true);
                     break;
             }
-            if(moveDirection.x > 0 && !isGrabbingIntractable)
+            if(moveDirection.x > 0 && !isGrabbingIntractable && actionState != ActionState.Hanging)
             {       
                 if(isFacingLeft)
                 {
@@ -165,7 +161,7 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = rightFacing.rotation;
                 }
             }
-            else if(moveDirection.x < 0 && !isGrabbingIntractable)
+            else if(moveDirection.x < 0 && !isGrabbingIntractable && actionState != ActionState.Hanging)
             {
                 if(!isFacingLeft)
                 {
@@ -201,7 +197,7 @@ public class PlayerController : MonoBehaviour
                     playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
                     if(actionState == ActionState.Jumping)
                     {
-                        playerBody.velocity = new Vector3(playerBody.velocity.x, playerBody.velocity.y*jumpBoost,playerBody.velocity.z);
+                        playerBody.velocity = new Vector3(playerBody.velocity.x*0.8f, playerBody.velocity.y,playerBody.velocity.z);
                     }
                 }
                 if(isGrabbingIntractable)
