@@ -16,6 +16,7 @@ public class LeverBehavior : MonoBehaviour
     [SerializeField] private bool debugActivate;//Debug activate the lever
     [SerializeField] private bool debugDeactivate;//Debug deactivate the lever
     private bool playerInRange = false;
+    public Animator animator;
     void Awake()
     {
         sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
@@ -25,6 +26,10 @@ public class LeverBehavior : MonoBehaviour
     /// </summary>
     public void ActivateLever()
     {
+        if(animator != null)
+        {
+            animator.SetTrigger("changeState");
+        }
         sFXManager.Player2DSFX(sFXManager.leverSFX,false);
         Debug.Log("Lever Activated");
         foreach(GameObject obj in objectToControl)
