@@ -54,7 +54,7 @@ public class ReflectorBehaviour : MonoBehaviour
         else if(reflectorType == ReflectorType.rotating)
         {
             // Calculate the rotation for this frame
-            float rotationThisFrame = rotateAngle * Time.deltaTime * rotateSpeed;
+            float rotationThisFrame = Time.deltaTime * rotateSpeed;
             prism.transform.Rotate(axis, rotationThisFrame);
             currentRotation += rotationThisFrame;
 
