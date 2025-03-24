@@ -9475,6 +9475,84 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 366457319}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &367426232
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4292219
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.91418874
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -40.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00037146354
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00037146354
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1025747049401105355, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8469801745911753061, guid: 1d8333a3ff4ccaa4d83916fd553ab83d,
+        type: 3}
+      propertyPath: m_Name
+      value: ShootingStars Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1d8333a3ff4ccaa4d83916fd553ab83d, type: 3}
 --- !u!1001 &367652689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61472,3 +61550,4 @@ SceneRoots:
   - {fileID: 1323881115}
   - {fileID: 963590121}
   - {fileID: 1769087595}
+  - {fileID: 367426232}
