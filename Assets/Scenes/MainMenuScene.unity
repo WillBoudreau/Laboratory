@@ -13713,16 +13713,20 @@ MonoBehaviour:
   interactableSource2D: {fileID: 1744534262}
   enviromentSource2D: {fileID: 1744534263}
   buttonPress: {fileID: 8300000, guid: ab0367c20c22ff044828b1f5483e767e, type: 3}
-  movingPlatformSFX:
-  - {fileID: 8300000, guid: a2fb2d81256f025419aa014763b467e5, type: 3}
   metalStep: {fileID: 8300000, guid: 6884ebdaaba2ff141aaa7f78bc0cf28c, type: 3}
   leverSFX: {fileID: 8300000, guid: 899cd6eb8e61de94e80916bfb26aa4c5, type: 3}
   hurtSFX1: {fileID: 8300000, guid: 85005ae5efdacee42ac07fc8a58ab677, type: 3}
   hurtSFX2: {fileID: 8300000, guid: e872b6a96ba20064e86105b857590d0d, type: 3}
   jumpSFX: {fileID: 8300000, guid: 107b9490d08ce0f4db302b751bf9f18a, type: 3}
   boxDispenserSFX: {fileID: 8300000, guid: b72998233905ab741b5e4e62496c41d0, type: 3}
-  interactableSFX:
+  boxLandSFX: {fileID: 8300000, guid: 1359eb42b301d0344a3e13451a5d0299, type: 3}
+  buttonSFX:
   - {fileID: 8300000, guid: ab0367c20c22ff044828b1f5483e767e, type: 3}
+  - {fileID: 8300000, guid: f49bf300285fbea4980558bdf569cbb4, type: 3}
+  - {fileID: 8300000, guid: 4cb2b912a5b05b546bab1cb00b44d23b, type: 3}
+  movingPlatformSFX:
+  - {fileID: 8300000, guid: a2fb2d81256f025419aa014763b467e5, type: 3}
+  interactableSFX:
   - {fileID: 8300000, guid: 899cd6eb8e61de94e80916bfb26aa4c5, type: 3}
   enviromentSFX:
   - {fileID: 8300000, guid: b72998233905ab741b5e4e62496c41d0, type: 3}
