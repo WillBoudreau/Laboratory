@@ -17,6 +17,7 @@ public class Button : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
+        sFXManager.Player2DSFX(sFXManager.buttonSFX[0],false);
         //For each object in the array
         foreach(GameObject obj in objectsToControl)
         {
@@ -24,8 +25,8 @@ public class Button : MonoBehaviour
             //If the object that enters the trigger is a box or the player
             if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
             {
+                sFXManager.Player2DSFX(sFXManager.buttonSFX[1],false);
                 objectsOnButton++;
-                sFXManager.Player2DSFX(sFXManager.buttonPress,false);
                 Debug.Log("Box or Player can interact with button");
                 //If the object is a door, open it
                 if(obj.tag == "Door")
@@ -60,6 +61,7 @@ public class Button : MonoBehaviour
             //If the object that enters the trigger is a box or the player
             if(other.gameObject.tag == "Box" || other.gameObject.tag == "Player")
             {
+                sFXManager.Player2DSFX(sFXManager.buttonSFX[2],false);
                 objectsOnButton--;
                 if(objectsOnButton <= 0)
                 {
