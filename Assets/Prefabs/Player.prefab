@@ -1529,7 +1529,7 @@ MonoBehaviour:
   rightFacing: {fileID: 0}
   leftFacing: {fileID: 0}
   moveSpeed: 300
-  jumpForce: 100
+  jumpForce: 260
   holdForce: 150
   gravScale: 6
   maxYVelocity: 3.5
@@ -1557,7 +1557,7 @@ MonoBehaviour:
   zoomedInPos: 7
   zoomedOutPos: 10
   menuClipPlane: 602
-  gameplayClipPlane: 15
+  gameplayClipPlane: 25
   interactionPosable: 0
   isGrabbingIntractable: 0
   interactionTarget: {fileID: 0}
@@ -1581,9 +1581,8 @@ MonoBehaviour:
   isGamepadActive: 0
   inputEnabled: 0
   promptHolder: {fileID: 0}
-  promptText: {fileID: 0}
   promptPos: {fileID: 4689327581875436500}
-  maxHoldTime: 2
+  jumpHoldTime: 0
   lastFallHight: 0
   launchPosition: {x: 0, y: 0, z: 0}
   landingPosition: {x: 0, y: 0, z: 0}
