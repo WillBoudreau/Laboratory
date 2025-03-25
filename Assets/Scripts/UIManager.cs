@@ -169,21 +169,24 @@ public class UIManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "L_Tutorial" && tutorialLevelControllerGraphics == null)
         {
+
             tutorialLevelControllerGraphics = GameObject.FindWithTag("ControllerGr");
             tutorialLevelKeyboardGraphics = GameObject.FindWithTag("KeyboardGr");
             reset = true;
+            Debug.Log(GameObject.FindWithTag("ControllerGr").name);
         }
         else if (SceneManager.GetActiveScene().name != "L_Tutorial")
         {
             tutorialLevelControllerGraphics = null;
             tutorialLevelKeyboardGraphics = null;
-            reset = true;
         }
 
         if (wasGamepadActive == gameManager.playerCon.isGamepadActive && !reset)
         {
             return;
         }
+
+        
 
         if (gameManager.playerCon.isGamepadActive)
         {
