@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using Cinemachine;
 using System;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
     public float gravScale;
     private Vector2 moveDirection;
     public float maxYVelocity;
+    public float walkCycleSpeed;
     [Header("Ground Check Properties")]
     public float coyoteTimeLimit;
     public float groundTimer;
@@ -110,6 +112,7 @@ public class PlayerController : MonoBehaviour
     public float jumpHoldTime;
     private float jumpTime;
     private bool jumpPressed;
+    private float walkSFXTimer;
     [Header("Fall Check Properties")]
     public float lastFallHight;
     public  Vector3 launchPosition;
@@ -136,6 +139,7 @@ public class PlayerController : MonoBehaviour
         jumpPressed = false;
         moveAction = playerInputActions.FindAction("Move");
         jumpAction = playerInputActions.FindAction("Jump");
+        walkSFXTimer = walkCycleSpeed;
     }
 
     void Awake()
@@ -159,6 +163,9 @@ public class PlayerController : MonoBehaviour
                     break;
                 case ActionState.Idle:
                     playerAnim.SetBool("isIdle", true);
+                    break;
+                case ActionState.Moving:
+                    MovingSFX();
                     break;
             }
             if(moveDirection.x > 0 && !isGrabbingIntractable && actionState != ActionState.Hanging)
@@ -581,17 +588,18 @@ public class PlayerController : MonoBehaviour
 
     void RollForHurtSFX()
     {
-        float roll;
-        roll = UnityEngine.Random.Range(1, 3);
+        int roll;
+        roll = UnityEngine.Random.Range(0, sFXManager.playerHurtSFX.Count);
         Debug.Log("Hurt roll=" + roll);
-        if(roll == 1)
-        {
-            sFXManager.Player2DSFX(sFXManager.hurtSFX1,false);
-        }
-        if(roll == 2)
-        {
-            sFXManager.Player2DSFX(sFXManager.hurtSFX2,false);
-        }
+        sFXManager.Player2DSFX(sFXManager.playerHurtSFX[roll],false);
+    }
+
+    void RollForDeathSFX()
+    {
+        int roll;
+        roll = UnityEngine.Random.Range(0, sFXManager.playerDeathSFX.Count);
+        Debug.Log("Death roll=" + roll);
+        sFXManager.Player2DSFX(sFXManager.playerDeathSFX[roll],false);
     }
 
     /// <summary>
@@ -638,6 +646,7 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     IEnumerator Death()
     {
+        RollForDeathSFX();
         StartCoroutine(uIManager.DeathUIFadeIN());
         yield return new WaitForSeconds(deathFadeTime);
         if(activeCheckpoint != null)
@@ -801,13 +810,22 @@ public class PlayerController : MonoBehaviour
 
     void SoundCheck()
     {
-        if(!sFXManager.source2D.isPlaying && moveDirection.x != 0 && isGrounded)
+        if(sFXManager.playerWalkSource.isPlaying && moveDirection.x == 0)
         {
-            sFXManager.Player2DSFX(sFXManager.metalStep,false);
+            sFXManager.playerWalkSource.Stop();
         }
-        else if(sFXManager.source2D.isPlaying && moveDirection.x == 0)
+    }
+
+    void MovingSFX()
+    {
+        if(walkSFXTimer > 0)
         {
-            sFXManager.source2D.Stop();
+            walkSFXTimer -= Time.deltaTime;
+        }
+        else
+        {
+            sFXManager.playerWalkSource.PlayOneShot(sFXManager.metalStep);
+            walkSFXTimer = walkCycleSpeed;
         }
     }
 
@@ -966,7 +984,7 @@ public class PlayerController : MonoBehaviour
         playerAnim.SetBool("isIdle", false);
         playerAnim.SetTrigger("jump");
         playerAnim.SetBool("isJumping",true);
-        sFXManager.source2D.Stop();
+        sFXManager.playerWalkSource.Stop();
         sFXManager.Player2DSFX(sFXManager.jumpSFX,false);
     }
 

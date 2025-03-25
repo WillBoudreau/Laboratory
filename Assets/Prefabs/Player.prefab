@@ -1529,10 +1529,11 @@ MonoBehaviour:
   rightFacing: {fileID: 0}
   leftFacing: {fileID: 0}
   moveSpeed: 300
-  jumpForce: 260
+  jumpForce: 250
   holdForce: 150
   gravScale: 6
   maxYVelocity: 3.5
+  walkCycleSpeed: 0.3
   coyoteTimeLimit: 0.5
   groundTimer: 0
   timerActive: 0
