@@ -67,6 +67,7 @@ public class HeavyButton : MonoBehaviour
                 else if(objectToControl.gameObject.tag == "Reflector")
                 {
                     objectToControl.GetComponent<ReflectorBehaviour>().canRotate = true;
+                    objectToControl.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
                 }
             }
         }
