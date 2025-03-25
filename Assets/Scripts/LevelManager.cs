@@ -6,14 +6,17 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [Header("Level Settings")]
+    [Header("Class References")]
     [SerializeField] private UIManager uIManager;//The UI Manager
     [SerializeField] private GameManager gameManager;//The game manager
     [SerializeField] private MusicHandler musicHandler;//The music handler
+    [Header("Level Variables")]
     private GameObject player; 
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     public int activeLevelNumber;
     public string sceneName;
+    [SerializeField] private float sceneLoadTime = 2.0f;//The time it takes to load a scene
     void Start()
     {
         //If the UIManager is null, find the UIManager
@@ -133,6 +136,8 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Loading Scene " + sceneName + " Starting");
         yield return new WaitForSeconds(uIManager.fadeTime);
+
+        yield return new WaitForSeconds(sceneLoadTime);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.completed += OperationCompleted;

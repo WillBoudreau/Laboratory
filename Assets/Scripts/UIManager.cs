@@ -10,8 +10,9 @@ public class UIManager : MonoBehaviour
 {
     [Header("Class References")]
     [SerializeField] private GameManager gameManager;//The game manager
-    [SerializeField] private LevelManager levelManager;
-    [SerializeField] private MusicHandler musicHandler;
+    [SerializeField] private LevelManager levelManager;//The level manager
+    [SerializeField] private MusicHandler musicHandler;//The music handler
+    [SerializeField] private LoadingScreenBehavior loadingScreenBehavior;//The loading screen behavior
     [Header("UI Elements")]
     public GameObject winMenu;//The win menu
     public GameObject mainMenu;//The main menu
@@ -19,12 +20,12 @@ public class UIManager : MonoBehaviour
     public GameObject hUD;//The game menu
     [SerializeField] private GameObject pauseMenu;//The pause menu
     [SerializeField] private GameObject controlsMenu;//The controls menu
-    public GameObject loadingScreen;
-    public GameObject deathScreen;
+    public GameObject loadingScreen;//The loading screen
+    public GameObject deathScreen;//The death screen
     [Header("Options UI Elements")]
-    public Slider masterVolSlider;
-    public Slider musicVolSlider;
-    public Slider sFXVolSlider;
+    public Slider masterVolSlider;//The master volume slider
+    public Slider musicVolSlider;//The music volume slider
+    public Slider sFXVolSlider;//The sfx volume slider
     public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
     public Toggle fullscreenToggle;
@@ -159,6 +160,7 @@ public class UIManager : MonoBehaviour
         
         StartCoroutine(LoadingUIFadeIN());
         StartCoroutine(DelayedSwitchUIPanel(fadeTime, targetPanel));
+        loadingScreenBehavior.SetLoadingScreen();
     }
 
     // <summary>
