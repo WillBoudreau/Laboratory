@@ -43,8 +43,11 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed;
     [SerializeField]
     private float jumpForce;
+    [SerializeField]
+    private float holdForce;
     public float gravScale;
     private Vector2 moveDirection;
+    public float maxYVelocity;
     [Header("Ground Check Properties")]
     public float coyoteTimeLimit;
     public float groundTimer;
@@ -98,12 +101,15 @@ public class PlayerController : MonoBehaviour
     public bool debugMode;
     public InputActionAsset playerInputActions;
     public InputAction moveAction;
+    private InputAction jumpAction;
     public PlayerInput input;
     public bool isGamepadActive;
     public bool inputEnabled;
     public GameObject promptHolder;
     public TextMeshProUGUI promptText;
     public Transform promptPos;
+    public float jumpHoldTime;
+    private float jumpTime;
     private bool jumpPressed;
     [Header("Fall Check Properties")]
     public float lastFallHight;
@@ -130,6 +136,7 @@ public class PlayerController : MonoBehaviour
         gameObject.SetActive(false);
         jumpPressed = false;
         moveAction = playerInputActions.FindAction("Move");
+        jumpAction = playerInputActions.FindAction("Jump");
     }
 
     void Awake()
@@ -185,7 +192,8 @@ public class PlayerController : MonoBehaviour
                 MovementLogic(moveDirection);
             }
         }
-        CoyoteTimer();  
+        CoyoteTimer(); 
+        //Debug.Log("Player Y velocity = " + playerBody.velocity.y); 
     }
 
     void FixedUpdate()
@@ -301,6 +309,10 @@ public class PlayerController : MonoBehaviour
                 ChangeActionState(ActionState.Jumping);
                 playerBody.velocity = playerBody.velocity.normalized;
                 playerBody.AddForce(transform.up * jumpForce);
+                if(playerBody.velocity.y > maxYVelocity)
+                {
+                    playerBody.velocity.Set(playerBody.velocity.x,maxYVelocity,playerBody.velocity.z);
+                }
             }
             if(actionState == ActionState.Hanging)
             {
