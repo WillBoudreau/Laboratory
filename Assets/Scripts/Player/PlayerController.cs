@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour
         if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled)
         {
             Vector2 moveVector2 = movementValue.Get<Vector2>();
-            moveDirection = moveVector2;
+            moveDirection = moveVector2.normalized;
             MovementLogic(moveDirection);
         }
     }
@@ -299,6 +299,7 @@ public class PlayerController : MonoBehaviour
                 timerActive = false;
                 Debug.Log("Jump Pressed");
                 ChangeActionState(ActionState.Jumping);
+                playerBody.velocity = playerBody.velocity.normalized;
                 playerBody.AddForce(transform.up * jumpForce);
             }
             if(actionState == ActionState.Hanging)
