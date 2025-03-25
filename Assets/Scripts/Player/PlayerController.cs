@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
     public GameObject promptHolder;
     public TextMeshProUGUI promptText;
     public Transform promptPos;
+    private bool jumpPressed;
     [Header("Fall Check Properties")]
     public float lastFallHight;
     public  Vector3 launchPosition;
@@ -127,6 +128,7 @@ public class PlayerController : MonoBehaviour
         confiner.InvalidateCache();
         playerAnim.SetBool("isIdle",true);
         gameObject.SetActive(false);
+        jumpPressed = false;
         moveAction = playerInputActions.FindAction("Move");
     }
 
@@ -243,22 +245,20 @@ public class PlayerController : MonoBehaviour
                     ChangeActionState(ActionState.Idle);
                 }
             }
-            else if(actionState == ActionState.Hanging)
+            if(actionState == ActionState.Hanging && moveVector2.y > 0)
             {
-                if(moveVector2.y > 0)
-                {
-                    climbRoutine = StartCoroutine(LedgeClimb());
-                }
-                if(moveVector2.y < 0)
-                {
-                    ChangeActionState(ActionState.Falling);
-                    ledge = null;
-                    topOfLedge = Vector3.zero;
-                    activeOffset = Vector3.zero;
-                }
+                climbRoutine = StartCoroutine(LedgeClimb());
+            }
+            else if(actionState == ActionState.Hanging && moveVector2.y < 0)
+            {
+                ChangeActionState(ActionState.Falling);
+                ledge = null;
+                topOfLedge = Vector3.zero;
+                activeOffset = Vector3.zero;
             }
         }
     }
+
 
     /// <summary>
     /// Event called when input system detects interaction input. 
@@ -291,10 +291,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void OnJump()
     {
-        if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled)
+        if(gameManager.gameState == GameManager.GameState.Gameplay && inputEnabled && actionState != ActionState.Jumping && actionState != ActionState.Falling)
         {
+            jumpPressed = true;
             if(isGrounded)
             {
+                timerActive = false;
                 Debug.Log("Jump Pressed");
                 ChangeActionState(ActionState.Jumping);
                 playerBody.AddForce(transform.up * jumpForce);
@@ -334,6 +336,7 @@ public class PlayerController : MonoBehaviour
         if(col.gameObject.tag == "Receiver" || col.gameObject.tag == "Reflector" || col.gameObject.tag == "Platform" || col.gameObject.tag == "Box" && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
         {
             isGrounded = true;
+            jumpPressed = false;
             SetLandingPosition(); 
         }
     }
@@ -346,7 +349,7 @@ public class PlayerController : MonoBehaviour
     {
         if(col.gameObject.tag == "Receiver" || col.gameObject.tag == "Reflector" || col.gameObject.tag == "Platform" || col.gameObject.tag == "Box" && col.gameObject.transform.position.y + col.gameObject.transform.localScale.y/2 < transform.position.y)
         {
-            isGrounded = true;
+            //isGrounded = true;
         }
     }
     
@@ -673,6 +676,7 @@ public class PlayerController : MonoBehaviour
             if(groundTimer > 0)
             {
                 isGrounded = true;
+                jumpPressed = false;
             }
             else
             {
@@ -967,7 +971,7 @@ public class PlayerController : MonoBehaviour
     {
         playerAnim.SetBool("isIdle", false);
         playerAnim.SetBool("isFalling", true);
-        if(prevState != ActionState.Jumping)
+        if(prevState != ActionState.Jumping && !jumpPressed)
         {
             groundTimer = coyoteTimeLimit;
             timerActive = true;
