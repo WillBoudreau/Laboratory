@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8685254099449682138}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RampColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,8 +154,7 @@ MonoBehaviour:
   objectsToControl:
   - {fileID: 0}
   massThreshold: 5
-  buttonSound: {fileID: 8300000, guid: ab0367c20c22ff044828b1f5483e767e, type: 3}
-  audioSource: {fileID: 0}
+  sFXManager: {fileID: 0}
 --- !u!1 &6225072827958288286
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2418255909260727252}
   - component: {fileID: 7808216587576287661}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -390,7 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109190619264118795}
   - component: {fileID: 5375953116711782747}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right
   m_TagString: Platform
   m_Icon: {fileID: 0}
