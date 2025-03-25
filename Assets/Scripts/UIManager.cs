@@ -38,6 +38,14 @@ public class UIManager : MonoBehaviour
     public GameObject hurtIndicator;
     public CanvasGroup deathCanvasGroup;
     public float deathFadeTime;
+    [Header("Control Graphic Elements")]
+    public GameObject tutorialLevelControllerGraphics;
+    public GameObject tutorialLevelKeyboardGraphics;
+    public GameObject controlsMenuControllerGraphics;
+    public GameObject controlsMenuKeyboardGraphics;
+    public GameObject interactPromptControllerGraphics;
+    public GameObject interactPromptKeyboardGraphics;
+    private bool wasGamepadActive;
     [Header("Target Buttons")]
     public GameObject menuFirstButton;
     public GameObject pauseFirstButton;
@@ -48,11 +56,13 @@ public class UIManager : MonoBehaviour
     {
         SetUIFalse();
         LoadUI("MainMenuScene");
+        ChangeControlGraphics(true);
     }
     void Update()
     {
         CheckWinCondition();
         UpdateHUD();
+        ChangeControlGraphics();
     }
     /// <summary>
     /// Check the win condition
@@ -146,8 +156,68 @@ public class UIManager : MonoBehaviour
     /// <param name="targetPanel"></param>
     public void UILoadingScreen(GameObject targetPanel)
     {
+        
         StartCoroutine(LoadingUIFadeIN());
         StartCoroutine(DelayedSwitchUIPanel(fadeTime, targetPanel));
+    }
+
+    // <summary>
+    /// Checks and changes the control graphics around the game based on whether or not the player is using a keyboard or a controller.
+    /// </summary>
+    /// <returns></returns>
+    public void ChangeControlGraphics(bool reset = false)
+    {
+        if (SceneManager.GetActiveScene().name == "L_Tutorial" && tutorialLevelControllerGraphics == null)
+        {
+            tutorialLevelControllerGraphics = GameObject.FindWithTag("ControllerGr");
+            tutorialLevelKeyboardGraphics = GameObject.FindWithTag("KeyboardGr");
+            reset = true;
+        }
+        else if (SceneManager.GetActiveScene().name != "L_Tutorial")
+        {
+            tutorialLevelControllerGraphics = null;
+            tutorialLevelKeyboardGraphics = null;
+            reset = true;
+        }
+
+        if (wasGamepadActive == gameManager.playerCon.isGamepadActive && !reset)
+        {
+            return;
+        }
+
+        if (gameManager.playerCon.isGamepadActive)
+        {
+
+            if (tutorialLevelControllerGraphics)
+            {
+                tutorialLevelControllerGraphics.SetActive(true);
+                tutorialLevelKeyboardGraphics.SetActive(false);
+            }
+
+            controlsMenuControllerGraphics.SetActive(true);
+            interactPromptControllerGraphics.SetActive(true);
+
+            controlsMenuKeyboardGraphics.SetActive(false);
+            interactPromptKeyboardGraphics.SetActive(false);
+
+            wasGamepadActive = true;
+        }
+        else
+        {
+            if (tutorialLevelControllerGraphics)
+            {
+                tutorialLevelKeyboardGraphics.SetActive(true);
+                tutorialLevelControllerGraphics.SetActive(false);
+            }
+
+            controlsMenuKeyboardGraphics.SetActive(true);
+            interactPromptKeyboardGraphics.SetActive(true);
+
+            controlsMenuControllerGraphics.SetActive(false);
+            interactPromptControllerGraphics.SetActive(false);
+
+            wasGamepadActive = false;
+        }
     }
 
     /// <summary>

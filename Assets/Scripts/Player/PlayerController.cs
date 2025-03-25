@@ -102,7 +102,6 @@ public class PlayerController : MonoBehaviour
     public bool isGamepadActive;
     public bool inputEnabled;
     public GameObject promptHolder;
-    public TextMeshProUGUI promptText;
     public Transform promptPos;
     [Header("Fall Check Properties")]
     public float lastFallHight;
@@ -801,15 +800,6 @@ public class PlayerController : MonoBehaviour
         {
             promptHolder.SetActive(true);
             promptHolder.transform.position = promptPos.position;
-            switch(isGamepadActive)
-            {
-                case true:
-                    promptText.text = "B";
-                    break;
-                case false:
-                    promptText.text = "E";
-                    break;
-            }
         }
         else
         {
