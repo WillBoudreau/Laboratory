@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7940433019663085383}
   - component: {fileID: 3302318338071141906}
   - component: {fileID: 5593331831267522953}
+  - component: {fileID: 8660434736544647460}
   m_Layer: 7
   m_Name: (L)PhotonReflectionCube
   m_TagString: Box
@@ -246,6 +247,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8660434736544647460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3356710243083716096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034f3a07e2b8580498b605493191fffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sFXManager: {fileID: 0}
+  rb: {fileID: 0}
+  fallThreshold: -0.5
+  hasFallen: 0
 --- !u!1 &3954843123422559528
 GameObject:
   m_ObjectHideFlags: 0
