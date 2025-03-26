@@ -11,6 +11,7 @@ public class MusicHandler : MonoBehaviour
     [SerializeField] private float titleVolume;
     [SerializeField] private float levelVolume;
     [SerializeField] private AudioSource musicPlayer;
+    [SerializeField] private AudioSource ambientPlayer;
     public AudioMixer mixer;
 
     [Header("Sound References")]
@@ -19,6 +20,7 @@ public class MusicHandler : MonoBehaviour
     [SerializeField] private AudioClip levelMusic;
     [SerializeField] private AudioClip level2Music;
     [SerializeField] private AudioClip level3Music;
+    [SerializeField] private AudioClip ambientMusic;
     private string currentTrackName;
 
     // Start is called before the first frame update
@@ -57,8 +59,14 @@ public class MusicHandler : MonoBehaviour
             default:
                 break;
         }
+        if(name != "title")
+        {
+            ambientPlayer.clip = ambientMusic;
+            ambientPlayer.Play();
+        }
         currentTrackName = name;
         musicPlayer.Play();
+        //Play the ambient music
     }
 
 
