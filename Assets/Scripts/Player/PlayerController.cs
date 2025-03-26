@@ -774,8 +774,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    playerAnim.SetBool("isPushing", false);
-                    playerAnim.SetBool("isPulling", false);
+                    playerAnim.SetBool("isIdle", true);
                 }
             }
         }
