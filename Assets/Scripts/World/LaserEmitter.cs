@@ -14,6 +14,7 @@ public class LaserEmitter : MonoBehaviour
     private LineRenderer lineRenderer;
     [SerializeField] private enum LaserType {Normal,Damaged};//The type of laser
     [SerializeField] private LaserType laserType;//The type of laser
+    [SerializeField] private SFXManager sFXManager;//The SFX manager
     [Header("Damaged Laser Settings")]
     [SerializeField] private float timeBetweenBurst;//The time between each burst
     [SerializeField] private float coolDownTimer;//The cooldown timer
@@ -25,6 +26,7 @@ public class LaserEmitter : MonoBehaviour
     private Vector3 laserDirection;
     public LaserReceiver laserReceiver;
     public AudioSource sFXSource;
+    public AudioSource sFXSource2;
     public bool isArray;
     public GameObject sourceParticle;
     public GameObject particlePrefab;
@@ -35,6 +37,7 @@ public class LaserEmitter : MonoBehaviour
     void Awake()
     {
         SetUpParticles();
+        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
         sourceParticle.SetActive(false);
         lineRenderer = GetComponent<LineRenderer>();
         if(isArray)
@@ -89,6 +92,13 @@ public class LaserEmitter : MonoBehaviour
             particle.SetActive(false);
         }
     }
+    /// <summary>
+    /// Play the spark sound when laser is damaged
+    /// </summary>
+    public void PlaySparkSound()
+    {
+        sFXSource2.PlayOneShot(sFXManager.damageSFX);
+    }
 
     /// <summary>
     /// Fire the laser in bursts
@@ -115,6 +125,7 @@ public class LaserEmitter : MonoBehaviour
             timeBetweenBurst -= Time.deltaTime;
             lineRenderer.positionCount = 1;
             FireLaser();
+            PlaySparkSound();
         }
     }
     /// <summary>

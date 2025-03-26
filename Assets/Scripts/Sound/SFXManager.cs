@@ -19,6 +19,8 @@ public class SFXManager : MonoBehaviour
     public AudioClip jumpSFX;
     public AudioClip boxDispenserSFX;
     public AudioClip boxLandSFX;
+    public AudioClip damageSFX;
+    [Header("Lists")]
     public List<AudioClip> buttonSFX;
     public List<AudioClip> movingPlatformSFX;
     public List<AudioClip> interactableSFX;

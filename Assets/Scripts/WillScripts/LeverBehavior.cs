@@ -76,6 +76,7 @@ public class LeverBehavior : MonoBehaviour
                     if(!setToDamaged)
                     {
                         obj.GetComponent<LaserEmitter>().isButtonActivated = false;
+                        obj.GetComponent<LaserEmitter>().PlaySparkSound();
                     }
                     else
                     {
