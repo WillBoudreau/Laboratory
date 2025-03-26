@@ -195,6 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034f3a07e2b8580498b605493191fffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sFXManager: {fileID: 0}
+  rb: {fileID: 0}
+  fallThreshold: -0.005
+  landThreshold: 0.015
+  isOnPlatform: 0
+  hasFallen: 0
 --- !u!114 &-3143215096046300572
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,26 +6,36 @@ public class BoxBehavior : MonoBehaviour
 {
     [Header("Sound settings")]
     [SerializeField] private SFXManager sFXManager; // The SFX manager
-    bool isOnPlatform = false;
+    [SerializeField] private Rigidbody rb; // The rigidbody of the box
+    [SerializeField] private float fallThreshold = -0.5f; // The threshold for falling (negative for downward velocity)
+    [SerializeField] private bool hasFallen = false;
+
     void Awake()
     {
-        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Receiver")
+        if (sFXManager == null)
         {
-            Destroy(this.gameObject);
+            sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
+        }
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
         }
     }
+
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Platform")
+        // Check if the box is falling
+        if (rb.velocity.y < fallThreshold) // If the box is falling downward
         {
-            if(isOnPlatform == false)
+            hasFallen = true;
+        }
+        if (collision.gameObject.tag == "Platform")
+        {
+            // Check if the box has fallen and the impact velocity is significant
+            if (hasFallen)
             {
                 sFXManager.Player2DSFX(sFXManager.boxLandSFX, false);
-                isOnPlatform = true;
+                hasFallen = false;
             }
         }
     }
