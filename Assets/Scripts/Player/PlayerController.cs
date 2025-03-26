@@ -607,6 +607,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void TakeDamage()
     {
+        uIManager.playerDamage();
         if(isHurt)
         {
             StartCoroutine(Death());
