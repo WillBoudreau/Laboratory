@@ -31,7 +31,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d4c867f6b72b714dbb5fd1780afe208, type: 3}
-  m_Name: New VFX
+  m_Name: New VFX 1
   m_EditorClassIdentifier: 
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 0}
@@ -61,7 +61,7 @@ VisualEffectResource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New VFX
+  m_Name: New VFX 1
   m_Graph: {fileID: 114350483966674976}
   m_Infos:
     m_RendererSettings:
@@ -2050,7 +2050,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":2.0201034545898439,"g":0.0,"b":4.0,"a":1.0},"time":0.0},{"color":{"r":1.405477523803711,"g":0.1860743761062622,"b":4.383087158203125,"a":1.0},"time":0.1117723360657692},{"color":{"r":0.5437533259391785,"g":0.34509801864624026,"b":8.0,"a":1.0},"time":0.7205920219421387},{"color":{"r":0.0,"g":3.5189058780670168,"b":5.660377502441406,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.10000763088464737},{"alpha":0.6627451181411743,"time":0.7058823704719544},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":5.986289024353027,"g":5.239016056060791,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":5.2445068359375,"g":1.4498732089996338,"b":0.0,"a":1.0},"time":0.1117723360657692},{"color":{"r":7.999999046325684,"g":0.5203593969345093,"b":0.3769630789756775,"a":1.0},"time":0.7205920219421387},{"color":{"r":5.660377502441406,"g":0.0,"b":1.1353915929794312,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.10000763088464737},{"alpha":0.6627451181411743,"time":0.7058823704719544},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
     m_Space: 2147483647
   m_Property:
     name: gradient
@@ -4032,7 +4032,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 0
     m_Space: 2147483647
   m_Property:
     name: Delay
