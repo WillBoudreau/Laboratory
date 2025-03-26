@@ -10,6 +10,7 @@ public class SFXManager : MonoBehaviour
     public AudioSource enviromentSource2D;
     public AudioSource playerSound2D;
     public AudioSource playerWalkSource;
+    public AudioSource uiSource;
     [Header("2D sounds")]
     public AudioClip buttonPress;
     public AudioClip metalStep;
@@ -20,6 +21,9 @@ public class SFXManager : MonoBehaviour
     public AudioClip boxDispenserSFX;
     public AudioClip boxLandSFX;
     public AudioClip damageSFX;
+    public AudioClip buttonHoverSFX;
+    public AudioClip buttonClickSFX;
+    public AudioClip buttonClick2SFX;
     [Header("Lists")]
     public List<AudioClip> buttonSFX;
     public List<AudioClip> movingPlatformSFX;
@@ -27,6 +31,7 @@ public class SFXManager : MonoBehaviour
     public List<AudioClip> enviromentSFX;
     public List<AudioClip> playerHurtSFX;
     public List<AudioClip> playerDeathSFX;
+    public List<AudioClip> uISFX;
     
     void Start()
     {
@@ -65,6 +70,12 @@ public class SFXManager : MonoBehaviour
             enviromentSource2D.clip = clip;
             enviromentSource2D.loop = isLooping;
             enviromentSource2D.Play();
+        }
+        else if(uISFX.Contains(clip))
+        {
+            uiSource.clip = clip;
+            uiSource.loop = isLooping;
+            uiSource.Play();
         }
         else if(playerDeathSFX.Contains(clip) || playerHurtSFX.Contains(clip))
         {
