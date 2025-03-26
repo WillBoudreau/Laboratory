@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class UIManager : MonoBehaviour
 {
@@ -36,9 +38,20 @@ public class UIManager : MonoBehaviour
     public Image loadingBar;
     public float fadeTime;
     [Header("HUD UI Elements")]
-    public GameObject hurtIndicator;
     public CanvasGroup deathCanvasGroup;
     public float deathFadeTime;
+    public List<Sprite> hudUINormal;
+    public List<Sprite> hudUIDamaged;
+    public GameObject hudTop;
+    public GameObject hudBottom;
+    public float damageFluxTime;
+    public int damagePulses;
+    private float vignetteTimer;
+    private int pulseCounter;
+    public bool vignetteActive;
+    public Volume volume;
+    public VolumeProfile[] profiles;
+
     [Header("Control Graphic Elements")]
     public GameObject tutorialLevelControllerGraphics;
     public GameObject tutorialLevelKeyboardGraphics;
@@ -157,7 +170,6 @@ public class UIManager : MonoBehaviour
     /// <param name="targetPanel"></param>
     public void UILoadingScreen(GameObject targetPanel)
     {
-        
         StartCoroutine(LoadingUIFadeIN());
         StartCoroutine(DelayedSwitchUIPanel(fadeTime, targetPanel));
         loadingScreenBehavior.SetLoadingScreen();
@@ -276,19 +288,16 @@ public class UIManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator LoadingBarProgress()
     {
+        float timer = 0;
+        loadingBar.fillAmount = 0;
         //Debug.Log("Starting Progress Bar");
-        while (levelManager.scenesToLoad.Count <= 0)
+        while (timer < 1)
         {
-            //waiting for loading to begin
-            yield return null;
-        }
-        while (levelManager.scenesToLoad.Count > 0)
-        {
-            loadingBar.fillAmount = levelManager.GetLoadingProgress();
+            timer += Time.deltaTime/2f;
+            loadingBar.fillAmount += Time.deltaTime/2f;
             yield return null;
         }
         yield return new WaitForEndOfFrame();
-        //Debug.Log("Ending Progress Bar");
         StartCoroutine(LoadingUIFadeOut());
     }
     /// <summary>
@@ -313,8 +322,51 @@ public class UIManager : MonoBehaviour
     {
         if(hUD.activeSelf)
         {
-            hurtIndicator.SetActive(gameManager.playerCon.isHurt);
+            if(gameManager.playerCon.isHurt)
+            {
+                hudTop.GetComponent<Image>().sprite = hudUIDamaged[0];
+                hudBottom.GetComponent<Image>().sprite = hudUIDamaged[1];
+            }
+            else
+            {
+                hudTop.GetComponent<Image>().sprite = hudUINormal[0];
+                hudBottom.GetComponent<Image>().sprite = hudUINormal[1];
+            }
         }
+    }
+
+    public void playerDamage()
+    {
+        if(!vignetteActive)
+        {
+           StartCoroutine(DamageVignette());
+        }
+    }
+
+    public IEnumerator DamageVignette()
+    {
+        vignetteActive = true;
+        vignetteTimer = damageFluxTime;
+        pulseCounter = damagePulses;
+        
+        for(pulseCounter = damagePulses; pulseCounter > 0; pulseCounter -= 1)
+        {
+            for(vignetteTimer = damageFluxTime;vignetteTimer > 0;)
+            {
+                vignetteTimer -= Time.deltaTime;
+                if(pulseCounter % 2 == 0)
+                {
+                    volume.profile = profiles[2];
+                }
+                else
+                {
+                    volume.profile = profiles[1];
+                }
+                yield return null;
+            }
+        }
+        volume.profile = profiles[0];
+        vignetteActive = false;
     }
 
     /// <summary>
@@ -430,10 +482,10 @@ public class UIManager : MonoBehaviour
                resolutions[i].height == Screen.currentResolution.height)
             {
                 CurrentResolutionIndex = i;
-                resolutionDropdown.value = CurrentResolutionIndex;
             }
         }
         resolutionDropdown.AddOptions(Options);
+        resolutionDropdown.value = CurrentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
     }
     /// <summary>

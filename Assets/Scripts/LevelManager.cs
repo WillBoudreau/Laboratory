@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
@@ -96,6 +98,7 @@ public class LevelManager : MonoBehaviour
     {
         sceneName = SceneManager.GetActiveScene().name;
         spawn = GameObject.FindWithTag("Spawn");
+        uIManager.volume = FindObjectOfType<Volume>();
         if(spawn != null)
         {
             player.transform.position = spawn.transform.position;
