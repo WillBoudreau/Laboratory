@@ -800,7 +800,7 @@ public class PlayerController : MonoBehaviour
         {
             if(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance < zoomedOutPos)
             {
-                playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += Time.deltaTime *2; 
+                playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += Time.deltaTime *2;
             }
         }
         else

@@ -99,6 +99,8 @@ public class LevelManager : MonoBehaviour
         sceneName = SceneManager.GetActiveScene().name;
         spawn = GameObject.FindWithTag("Spawn");
         uIManager.volume = FindObjectOfType<Volume>();
+        gameManager.playerCon.isZoomedOut = false;
+        gameManager.playerCon.confiner.InvalidateCache();
         if(spawn != null)
         {
             player.transform.position = spawn.transform.position;
