@@ -416,7 +416,10 @@ public class PlayerController : MonoBehaviour
     {
         if(trigger.TryGetComponent<Climbable>(out Climbable other) && trigger.transform.position.y > this.gameObject.transform.position.y && actionState != ActionState.Hanging)
         {
-            playerAnim.SetTrigger("grab");
+            if(actionState != ActionState.Hanging && actionState != ActionState.Climbing)
+            {
+                playerAnim.SetTrigger("grab");
+            }
             this.isFreeHanging = isFreeHanging;
             if(isFacingLeft && other.gameObject.transform.position.x < transform.position.x)
             {
