@@ -455,6 +455,9 @@ public class UIManager : MonoBehaviour
             case "SFXVol":
                 musicHandler.ChangeVolume(group,sFXVolSlider.value);
                 break;
+            case "AmbianceVol":
+                musicHandler.ChangeVolume(group,ambienceVolSlider.value);
+                break;
         }
     }
 
@@ -472,7 +475,7 @@ public class UIManager : MonoBehaviour
             LoadUI("Pause");
         }
     }
-
+    #region Res/FullScreen
     /// <summary>
     /// Sets all dropdown options to available resolutions on device. 
     /// </summary>
@@ -516,4 +519,5 @@ public class UIManager : MonoBehaviour
     {
         Screen.fullScreen = fullscreenToggle.isOn;
     }
+    #endregion
 }
