@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;//The level manager
     [SerializeField] private MusicHandler musicHandler;//The music handler
     [SerializeField] private LoadingScreenBehavior loadingScreenBehavior;//The loading screen behavior
+    [SerializeField] private SFXManager sFXManager;//The sfx manager    
     [Header("UI Elements")]
     public GameObject winMenu;//The win menu
     public GameObject mainMenu;//The main menu
@@ -71,6 +72,7 @@ public class UIManager : MonoBehaviour
         SetUIFalse();
         LoadUI("MainMenuScene");
         ChangeControlGraphics(true);
+        sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
     }
     void Update()
     {
@@ -174,7 +176,13 @@ public class UIManager : MonoBehaviour
         StartCoroutine(DelayedSwitchUIPanel(fadeTime, targetPanel));
         loadingScreenBehavior.SetLoadingScreen();
     }
-
+    /// <summary>
+    /// Tells the SFX manager to play the button click sound
+    /// </summary>
+    public void PlayButtonClickSFX(int sfxIndex)
+    {
+        sFXManager.Player2DSFX(sFXManager.uISFX[sfxIndex], false);
+    }
     // <summary>
     /// Checks and changes the control graphics around the game based on whether or not the player is using a keyboard or a controller.
     /// </summary>
