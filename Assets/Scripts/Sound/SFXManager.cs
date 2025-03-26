@@ -24,6 +24,8 @@ public class SFXManager : MonoBehaviour
     public AudioClip buttonHoverSFX;
     public AudioClip buttonClickSFX;
     public AudioClip buttonClick2SFX;
+    [Header("3D sounds")]
+    public AudioClip ambientSFX;
     [Header("Lists")]
     public List<AudioClip> buttonSFX;
     public List<AudioClip> movingPlatformSFX;
@@ -75,7 +77,7 @@ public class SFXManager : MonoBehaviour
         {
             uiSource.clip = clip;
             uiSource.loop = isLooping;
-            uiSource.Play();
+            uiSource.PlayOneShot(clip,0.5f);
         }
         else if(playerDeathSFX.Contains(clip) || playerHurtSFX.Contains(clip))
         {
