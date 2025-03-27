@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     public Slider masterVolSlider;//The master volume slider
     public Slider musicVolSlider;//The music volume slider
     public Slider sFXVolSlider;//The sfx volume slider
+    public Slider ambienceVolSlider;//The ambience volume slider
     public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
     public Toggle fullscreenToggle;
@@ -431,6 +432,10 @@ public class UIManager : MonoBehaviour
         if(musicHandler.mixer.GetFloat("SFXVol", out float sfxValue))
         {
             sFXVolSlider.value = sfxValue;
+        }
+        if(musicHandler.mixer.GetFloat("AmbienceVol", out float ambienceValue))
+        {
+            ambienceVolSlider.value = ambienceValue;
         }
     }
     /// <summary>
