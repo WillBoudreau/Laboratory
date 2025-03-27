@@ -7,7 +7,7 @@ public class VoiceLineManager : MonoBehaviour
 {
     public List<AudioClip> voiceLines;
     public AudioSource vLSource; //VL = voice line
-    private GameObject[] speakers;
+    public GameObject[] speakers;
     public GameObject firstDoor;
 
 
@@ -25,7 +25,7 @@ public class VoiceLineManager : MonoBehaviour
 
     void Update()
     {
-        if(speakers.Count() > 0)
+        if(speakers[0] != null)
         {
             foreach(GameObject speaker in speakers)
             {

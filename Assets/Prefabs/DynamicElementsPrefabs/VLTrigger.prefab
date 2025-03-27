@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9073984131450804915}
   - component: {fileID: 3513087790182899846}
   - component: {fileID: 8161734757398200221}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VLTrigger
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -46,11 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceLineIndex: 0
-  speakers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   vLManager: {fileID: 0}
 --- !u!65 &8161734757398200221
 BoxCollider:

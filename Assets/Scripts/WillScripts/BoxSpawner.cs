@@ -10,9 +10,12 @@ public class BoxSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoint; // The spawn point for the box
     [Header("Audio Settings")]
     [SerializeField] private SFXManager sFXManager; // The SFX manager
+    [SerializeField] private VoiceLineManager voiceLineManager;
+    private int boxSpawnCount;
     void Awake()
     {
         sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
+        boxSpawnCount = 0;
     }
     /// <summary>
     /// Spawns a box at the spawn point if there is no box already spawned
@@ -35,5 +38,10 @@ public class BoxSpawner : MonoBehaviour
         Debug.Log("Box Dispenser is spawning a box");
         // Instantiate a box at the spawn point
         spawnedBox = Instantiate(boxPrefab, spawnPoint.position, boxPrefab.transform.rotation);
+        boxSpawnCount += 1;
+        if(boxSpawnCount % 3 == 0) //Every 3rd box will trigger the voice line. 
+        {
+            voiceLineManager.PlayVoiceLine(voiceLineManager.voiceLines[7]);
+        }
     }
 }
