@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private UIManager uIManager;//The UI Manager
     [SerializeField] private GameManager gameManager;//The game manager
     [SerializeField] private MusicHandler musicHandler;//The music handler
+    [SerializeField] private VoiceLineManager vLManager;
     [Header("Level Variables")]
     private GameObject player; 
     public GameObject spawn;
@@ -26,7 +27,7 @@ public class LevelManager : MonoBehaviour
         {
             uIManager = FindObjectOfType<UIManager>();
         }
-        
+        vLManager = FindObjectOfType<VoiceLineManager>();
         player = gameManager.player;
     }
     /// <summary>
@@ -114,9 +115,23 @@ public class LevelManager : MonoBehaviour
         if(scene.name.StartsWith("L"))
         {
             player.SetActive(true);
+            vLManager.GetAllSpeakers();
+            if(scene.name.Contains("Tutorial"))
+            {
+                vLManager.PlayVoiceLine(vLManager.voiceLines[5]);
+                vLManager.firstDoor = GameObject.FindWithTag("1stDoor");
+            }
+            else
+            {
+                vLManager.firstDoor = null;
+            }
             if(scene.name.Contains("2"))
             {
                 gameManager.playerCon.faceLeft();
+            }
+            if(scene.name.Contains("3"))
+            {
+                vLManager.PlayVoiceLine(vLManager.voiceLines[12]);
             }
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();

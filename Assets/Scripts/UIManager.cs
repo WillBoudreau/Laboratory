@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     public Slider musicVolSlider;//The music volume slider
     public Slider sFXVolSlider;//The sfx volume slider
     public Slider ambienceVolSlider;//The ambience volume slider
+    public Slider voiceVolSlider;
     public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
     public Toggle fullscreenToggle;
@@ -437,6 +438,10 @@ public class UIManager : MonoBehaviour
         {
             ambienceVolSlider.value = ambienceValue;
         }
+        if(musicHandler.mixer.GetFloat("VoiceVol", out float voiceValue))
+        {
+            voiceVolSlider.value = voiceValue;
+        }
     }
     /// <summary>
     /// Used by slider to pass value to sound manager
@@ -457,6 +462,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "AmbianceVol":
                 musicHandler.ChangeVolume(group,ambienceVolSlider.value);
+                break;
+            case "VoiceVol":
+                musicHandler.ChangeVolume(group,voiceVolSlider.value);
                 break;
         }
     }
