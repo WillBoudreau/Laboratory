@@ -30,6 +30,11 @@ public class LoadingScreenBehavior : MonoBehaviour
         {
             graphic.SetActive(false);
         }
+        // var localizationComponent = loadingScreenInfoGraphicDisplay.GetComponent<LocalizationComponent>();
+        // if (localizationComponent != null)
+        // {
+        //     localizationComponent.localizationKey = infoText;
+        // }
         infoGraphic.SetActive(true);
         loadingScreenInfoGraphicDisplay = infoGraphic;
         //Set the loading screen info text
@@ -42,6 +47,7 @@ public class LoadingScreenBehavior : MonoBehaviour
     {
         //Set the loading screen info text
         loadingScreenInfoTextDisplay.text = loadingScreenInfoText[currentLoadingScreenInfoIndex];
+        loadingScreenInfoTextDisplay.GetComponent<LocalizationComponent>().localizationKey = loadingScreenInfoText[currentLoadingScreenInfoIndex];
         DisplayInfo(loadingScreenInfoGraphics[currentLoadingScreenInfoIndex], loadingScreenInfoText[currentLoadingScreenInfoIndex]);
     }
     /// <summary>

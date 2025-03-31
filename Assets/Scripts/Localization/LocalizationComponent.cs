@@ -1,0 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
+using UnityEngine.UI;
+using TMPro;
+
+
+public class LocalizationComponent : MonoBehaviour
+{
+  [Header("Localization Settings")]
+  [SerializeField] private TextMeshProUGUI uIText;// The text that will change based on the selected locale.
+  public string localizationKey;// The key used to identify the text in the localization table.
+  public string localizationTableName;// The name of the localization table.
+
+  private LocalizedString localizedSTR;// The localized string object.
+
+  void Start()
+  {
+    // Register the AdjustText method to be called when the selected locale changes.
+    LocalizationSettings.SelectedLocaleChanged += AdjustText;
+
+    // Get the localized string based on the selected locale and update the text component.
+    var localizedSTR = new LocalizedString { TableReference = localizationTableName, TableEntryReference = localizationKey };
+    var textComponent = GetComponent<TextMeshProUGUI>();
+    textComponent.text = localizedSTR.GetLocalizedString();
+  }
+  /// <summary>
+  /// Sets the language for the localization system.
+  /// This method changes the selected locale based on the provided language string.
+  /// </summary>
+  /// <param name="newLanguage"></param>
+  public void SetLanguage(string newLanguage)
+  {
+    // If the language is French, set the locale to French.
+    if(newLanguage == "French")
+    {
+      var FrenchLocale = LocalizationSettings.AvailableLocales.GetLocale("fr");
+      LocalizationSettings.SelectedLocale = FrenchLocale;
+    }
+    // If the language is English, set the locale to English.
+    else if(newLanguage == "English")
+    {
+      var EnglishLocale = LocalizationSettings.AvailableLocales.GetLocale("en");
+      LocalizationSettings.SelectedLocale = EnglishLocale;
+    }
+  }
+  /// <summary>
+  /// Adjusts the text of the component based on the selected locale.
+  /// This method is called when the selected locale changes.
+  /// </summary>
+  void AdjustText(Locale locale)
+  {
+    // Get the localized string based on the selected locale and update the text component.
+    var localizedSTR = new LocalizedString { TableReference = localizationTableName, TableEntryReference = localizationKey };
+    var textComponent = GetComponent<TextMeshProUGUI>();
+    textComponent.text = localizedSTR.GetLocalizedString();
+  }
+  private void OnDestroy()
+  {
+    LocalizationSettings.SelectedLocaleChanged -= AdjustText;
+  }
+}
