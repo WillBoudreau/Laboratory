@@ -6,6 +6,7 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class LocalizationComponent : MonoBehaviour
@@ -15,18 +16,48 @@ public class LocalizationComponent : MonoBehaviour
   public string localizationKey;// The key used to identify the text in the localization table.
   public string localizationTableName;// The name of the localization table.
 
-  private LocalizedString localizedSTR;// The localized string object.
+  private LocalizedString localizedSTR = new LocalizedString();// The localized string object.
 
   void Start()
   {
     // Register the AdjustText method to be called when the selected locale changes.
     LocalizationSettings.SelectedLocaleChanged += AdjustText;
-
-    // Get the localized string based on the selected locale and update the text component.
-    var localizedSTR = new LocalizedString { TableReference = localizationTableName, TableEntryReference = localizationKey };
-    var textComponent = GetComponent<TextMeshProUGUI>();
-    textComponent.text = localizedSTR.GetLocalizedString();
+    SetupLocalizationString();
   }
+  void OnEnable()
+  {
+    // Register the OnSceneLoaded method to be called when a new scene is loaded.
+    SceneManager.sceneLoaded += OnSceneLoaded;
+  }
+  void OnDisable()
+  {
+    // Unregister the OnSceneLoaded method when the object is disabled.
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+  }
+  /// <summary>
+  /// Updates the text component with the localized string.
+  ///</summary>
+  /// <param name="localizedString"></param>
+  void UpdateText(string localizedString)
+  {
+    if(uIText != null)
+    {
+      uIText.text = localizedString;
+    }
+  }
+  /// <summary>
+  /// Set up the localization string
+  /// <summary>
+  public void SetupLocalizationString()
+  {
+    // Get the localized string based on the selected locale and update the text component.
+    //localizedSTR.StringChanged -= UpdateText;
+    localizedSTR.StringChanged -= UpdateText;
+    localizedSTR = new LocalizedString { TableReference = localizationTableName, TableEntryReference = localizationKey };
+    localizedSTR.StringChanged += UpdateText;
+    localizedSTR.RefreshString();
+  }
+
   /// <summary>
   /// Sets the language for the localization system.
   /// This method changes the selected locale based on the provided language string.
@@ -53,13 +84,16 @@ public class LocalizationComponent : MonoBehaviour
   /// </summary>
   void AdjustText(Locale locale)
   {
-    // Get the localized string based on the selected locale and update the text component.
-    var localizedSTR = new LocalizedString { TableReference = localizationTableName, TableEntryReference = localizationKey };
-    var textComponent = GetComponent<TextMeshProUGUI>();
-    textComponent.text = localizedSTR.GetLocalizedString();
+    SetupLocalizationString();
+  }
+  void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+  {
+    // Re-setup the localization string when a new scene is loaded.
+    SetupLocalizationString();
   }
   private void OnDestroy()
   {
     LocalizationSettings.SelectedLocaleChanged -= AdjustText;
+    localizedSTR.StringChanged -= UpdateText;
   }
 }

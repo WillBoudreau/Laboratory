@@ -12,6 +12,8 @@ public class LoadingScreenBehavior : MonoBehaviour
     [SerializeField] private TextMeshProUGUI loadingScreenInfoTextDisplay;//The loading screen info text display
     [SerializeField] private GameObject loadingScreenInfoGraphicDisplay;//The loading screen info graphic display
     [SerializeField] private int currentLoadingScreenInfoIndex = 0;//The current loading screen info index
+    [Header("Class calls")]
+    [SerializeField] private LocalizationComponent localizationComponent;//The localization component
     /// <summary>
     /// Set the loading screen
     /// </summary>
@@ -30,11 +32,6 @@ public class LoadingScreenBehavior : MonoBehaviour
         {
             graphic.SetActive(false);
         }
-        // var localizationComponent = loadingScreenInfoGraphicDisplay.GetComponent<LocalizationComponent>();
-        // if (localizationComponent != null)
-        // {
-        //     localizationComponent.localizationKey = infoText;
-        // }
         infoGraphic.SetActive(true);
         loadingScreenInfoGraphicDisplay = infoGraphic;
         //Set the loading screen info text
@@ -44,10 +41,15 @@ public class LoadingScreenBehavior : MonoBehaviour
     /// Set the text based on the amount of hints in the list
     /// </summary>
     void SetText()
-    {
-        //Set the loading screen info text
-        loadingScreenInfoTextDisplay.text = loadingScreenInfoText[currentLoadingScreenInfoIndex];
-        loadingScreenInfoTextDisplay.GetComponent<LocalizationComponent>().localizationKey = loadingScreenInfoText[currentLoadingScreenInfoIndex];
+    {   if(localizationComponent == null)
+        {
+            localizationComponent =  loadingScreenInfoTextDisplay.GetComponent<LocalizationComponent>();
+        }
+        if (localizationComponent != null)
+        {
+            localizationComponent.localizationKey = loadingScreenInfoText[currentLoadingScreenInfoIndex];
+            localizationComponent.SetupLocalizationString();
+        }
         DisplayInfo(loadingScreenInfoGraphics[currentLoadingScreenInfoIndex], loadingScreenInfoText[currentLoadingScreenInfoIndex]);
     }
     /// <summary>
