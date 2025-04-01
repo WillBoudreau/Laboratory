@@ -174,9 +174,10 @@ public class UIManager : MonoBehaviour
     /// <param name="targetPanel"></param>
     public void UILoadingScreen(GameObject targetPanel)
     {
+        loadingScreenBehavior.SetLoadingScreen();
+        loadingScreenBehavior.localizationComponent.SetupLocalizationString();
         StartCoroutine(LoadingUIFadeIN());
         StartCoroutine(DelayedSwitchUIPanel(fadeTime, targetPanel));
-        loadingScreenBehavior.SetLoadingScreen();
     }
     /// <summary>
     /// Tells the SFX manager to play the button click sound
