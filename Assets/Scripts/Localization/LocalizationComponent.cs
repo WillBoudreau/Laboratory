@@ -6,7 +6,6 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 
 public class LocalizationComponent : MonoBehaviour
@@ -23,16 +22,6 @@ public class LocalizationComponent : MonoBehaviour
     // Register the AdjustText method to be called when the selected locale changes.
     LocalizationSettings.SelectedLocaleChanged += AdjustText;
     SetupLocalizationString();
-  }
-  void OnEnable()
-  {
-    // Register the OnSceneLoaded method to be called when a new scene is loaded.
-    SceneManager.sceneLoaded += OnSceneLoaded;
-  }
-  void OnDisable()
-  {
-    // Unregister the OnSceneLoaded method when the object is disabled.
-    SceneManager.sceneLoaded -= OnSceneLoaded;
   }
   /// <summary>
   /// Updates the text component with the localized string.
@@ -84,11 +73,6 @@ public class LocalizationComponent : MonoBehaviour
   /// </summary>
   void AdjustText(Locale locale)
   {
-    SetupLocalizationString();
-  }
-  void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-  {
-    // Re-setup the localization string when a new scene is loaded.
     SetupLocalizationString();
   }
   private void OnDestroy()

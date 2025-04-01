@@ -13,7 +13,7 @@ public class LoadingScreenBehavior : MonoBehaviour
     [SerializeField] private GameObject loadingScreenInfoGraphicDisplay;//The loading screen info graphic display
     [SerializeField] private int currentLoadingScreenInfoIndex = 0;//The current loading screen info index
     [Header("Class calls")]
-    [SerializeField] private LocalizationComponent localizationComponent;//The localization component
+    public LocalizationComponent localizationComponent;//The localization component
     /// <summary>
     /// Set the loading screen
     /// </summary>
