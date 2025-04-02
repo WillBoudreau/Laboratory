@@ -9,6 +9,7 @@ public class VoiceLineTrigger : MonoBehaviour
     public VoiceLineManager vLManager; // VL -- Voice line
     private AudioSource voiceSource;
     private bool hasBeenTriggered;
+    [SerializeField] private DisplayDialogue displayDialogue;
     void Awake()
     {
         vLManager = FindObjectOfType<VoiceLineManager>();
@@ -21,6 +22,7 @@ public class VoiceLineTrigger : MonoBehaviour
         if(other.tag == "Player" && !hasBeenTriggered)
         {
             hasBeenTriggered = true;
+            displayDialogue.SetDialogue();
             vLManager.PlayVoiceLine(vLManager.voiceLines[voiceLineIndex]);
         }
     }

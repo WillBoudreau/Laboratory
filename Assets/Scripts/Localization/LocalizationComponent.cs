@@ -14,6 +14,7 @@ public class LocalizationComponent : MonoBehaviour
   [SerializeField] private TextMeshProUGUI uIText;// The text that will change based on the selected locale.
   public string localizationKey;// The key used to identify the text in the localization table.
   public string localizationTableName;// The name of the localization table.
+  [SerializeField] private float fontSize = 24;// The font size of the text.
 
   private LocalizedString localizedSTR = new LocalizedString();// The localized string object.
 
