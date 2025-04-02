@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     private float hurtTimer;
     public float deathFadeTime;
     public bool inDangerZone; //used for the leg sweep voice line trigger. 
+    private bool hasITYSTrigger; //ITYS is I told you so, referring to a voice line. 
     [Header("Ledge Grab Properties")]
     [SerializeField]
     private Vector3 activeOffset;
@@ -143,6 +144,7 @@ public class PlayerController : MonoBehaviour
         moveAction = playerInputActions.FindAction("Move");
         jumpAction = playerInputActions.FindAction("Jump");
         walkSFXTimer = walkCycleSpeed;
+        hasITYSTrigger = false;
     }
 
     void Awake()
@@ -654,9 +656,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator Death()
     {
         RollForDeathSFX();
-        if(inDangerZone)
+        if(inDangerZone && !hasITYSTrigger)
         {
             voiceLineManager.PlayVoiceLine(voiceLineManager.voiceLines[13]);
+            hasITYSTrigger = true;
         }
         StartCoroutine(uIManager.DeathUIFadeIN());
         yield return new WaitForSeconds(deathFadeTime);
@@ -864,10 +867,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void LaserDeathEvent()
-    {
-
-    }
 
     #endregion
     #region Debug Controls
