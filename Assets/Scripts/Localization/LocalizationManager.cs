@@ -6,6 +6,8 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class LocalizationManager : MonoBehaviour
 {
@@ -15,9 +17,11 @@ public class LocalizationManager : MonoBehaviour
   [SerializeField] private string localizationTableName; // The name of the localization table.
   [SerializeField] private string selectedLocale; // The currently selected locale.
   [SerializeField] private string localizationKey; // The key used to identify the text in the localization table.
+  public AsyncOperationHandle PreloadOperation; // The preload operation for the localization table.
 
   private void Start()
   {
+    PreloadTable();
     // Populate the dropdown with available locales.
     PopulateLanguageDropdown();
 
@@ -29,7 +33,20 @@ public class LocalizationManager : MonoBehaviour
       component.SetLanguage(selectedLocale);
     }
   }
-
+  /// <summary>
+  /// Preload operation for the localization table.
+  /// </summary>
+  void PreloadTable()
+  {
+    // Preload the localization table to ensure it's ready for use.
+    PreloadOperation = LocalizationSettings.InitializationOperation;
+    if (PreloadOperation.IsDone)
+    {
+      // If the operation is done, set the selected locale and update the components.
+      SetLanguage(selectedLocale);
+    }
+  }
+  
   /// <summary>
   /// Populate the language dropdown with available locales.
   /// </summary>
