@@ -19,11 +19,18 @@ public class VoiceLineTrigger : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player" && !hasBeenTriggered)
+        if(other.tag == "Player" && !hasBeenTriggered && vLManager != null)
         {
             hasBeenTriggered = true;
-            displayDialogue.SetDialogue();
+            if(displayDialogue != null)
+            {
+                displayDialogue.SetDialogue();
+            }
             vLManager.PlayVoiceLine(vLManager.voiceLines[voiceLineIndex]);
+        }
+        else
+        {
+            Debug.Log("Something is wrong with this trigger!");
         }
     }
 }

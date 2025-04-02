@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private UIManager uIManager;
     [SerializeField]
     private SFXManager sFXManager;
+    [SerializeField]
+    private VoiceLineManager voiceLineManager;
     [Header("Player State")]
     [SerializeField]
     public ActionState actionState;
@@ -64,6 +66,7 @@ public class PlayerController : MonoBehaviour
     public float recoveryTime;
     private float hurtTimer;
     public float deathFadeTime;
+    public bool inDangerZone; //used for the leg sweep voice line trigger. 
     [Header("Ledge Grab Properties")]
     [SerializeField]
     private Vector3 activeOffset;
@@ -651,6 +654,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator Death()
     {
         RollForDeathSFX();
+        if(inDangerZone)
+        {
+            voiceLineManager.PlayVoiceLine(voiceLineManager.voiceLines[13]);
+        }
         StartCoroutine(uIManager.DeathUIFadeIN());
         yield return new WaitForSeconds(deathFadeTime);
         if(activeCheckpoint != null)
@@ -855,6 +862,11 @@ public class PlayerController : MonoBehaviour
         {
             playerCam.m_Lens.FarClipPlane = gameplayClipPlane;
         }
+    }
+
+    void LaserDeathEvent()
+    {
+
     }
 
     #endregion

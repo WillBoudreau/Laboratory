@@ -5,7 +5,7 @@ using UnityEngine;
 public class LaserVLTrigger : MonoBehaviour
 {
     private VoiceLineManager voiceLineManager;
-    private PlayerController player;
+    public PlayerController player;
     private bool hasBeenTriggered;
 
     void Awake()
@@ -18,25 +18,16 @@ public class LaserVLTrigger : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             player = FindObjectOfType<PlayerController>();
-        }
+            player.inDangerZone = true;
+        }   
     }
 
-    void Update()
-    {
-        if(player != null && !hasBeenTriggered)
-        {
-            if(player.isDead)
-            {
-                voiceLineManager.PlayVoiceLine(voiceLineManager.voiceLines[13]);
-                hasBeenTriggered = true;
-            }
-        }
-    }
 
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
+            player.inDangerZone = false;
             player = null;
         }
     }
