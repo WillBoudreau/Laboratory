@@ -489,6 +489,7 @@ MonoBehaviour:
   uIText: {fileID: 73431268}
   localizationKey: MOVE LEFT AND RIGHT
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &91770432 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 898fd5606c2c94d4caedde67ef6b724d,
@@ -748,6 +749,7 @@ MonoBehaviour:
   uIText: {fileID: 118267197}
   localizationKey: VOICE LINE VOLUME
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &120062207
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +902,7 @@ MonoBehaviour:
   uIText: {fileID: 120062209}
   localizationKey: INTERACT
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &127005717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,6 +1855,7 @@ MonoBehaviour:
   uIText: {fileID: 252768449}
   localizationKey: BACK
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &270744404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,6 +1967,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277714222}
   m_CullTransparentMesh: 1
+--- !u!1 &320356513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 320356514}
+  - component: {fileID: 320356515}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &320356514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320356513}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.660264, y: -52.312347, z: 294.0816}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 501068506}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &320356515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320356513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593cb79337f2c2c428b11ba47ebd9844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogues: []
 --- !u!1 &322640798
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,6 +2163,7 @@ MonoBehaviour:
   uIText: {fileID: 322640800}
   localizationKey: QUIT
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &326024122
 GameObject:
   m_ObjectHideFlags: 0
@@ -3619,6 +3669,7 @@ MonoBehaviour:
   uIText: {fileID: 467753045}
   localizationKey: START GAME
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &483282470
 GameObject:
   m_ObjectHideFlags: 0
@@ -3843,6 +3894,7 @@ Transform:
   - {fileID: 884737603}
   - {fileID: 1939888506}
   - {fileID: 236207267}
+  - {fileID: 320356514}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &503706765
@@ -4246,6 +4298,7 @@ MonoBehaviour:
   uIText: {fileID: 509115011}
   localizationKey: JUMP
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &523450123
 GameObject:
   m_ObjectHideFlags: 0
@@ -4399,6 +4452,7 @@ MonoBehaviour:
   uIText: {fileID: 523450125}
   localizationKey: RESOLUTION
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &536379533
 GameObject:
   m_ObjectHideFlags: 0
@@ -4625,6 +4679,7 @@ MonoBehaviour:
   uIText: {fileID: 538966833}
   localizationKey: SOUND EFFECTS VOLUME
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &550389811
 GameObject:
   m_ObjectHideFlags: 0
@@ -5416,6 +5471,7 @@ MonoBehaviour:
   uIText: {fileID: 574507254}
   localizationKey: CONTROLS
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &581058009
 GameObject:
   m_ObjectHideFlags: 0
@@ -7212,6 +7268,7 @@ MonoBehaviour:
   uIText: {fileID: 883691734}
   localizationKey: MUSIC VOLUME
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1001 &884737602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7467,6 +7524,7 @@ MonoBehaviour:
   uIText: {fileID: 885800652}
   localizationKey: AMBIANCE VOLUME
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &891316054
 GameObject:
   m_ObjectHideFlags: 0
@@ -8061,8 +8119,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8126,6 +8184,7 @@ MonoBehaviour:
   uIText: {fileID: 923887705}
   localizationKey: OPTIONS
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &932186569
 GameObject:
   m_ObjectHideFlags: 0
@@ -8353,6 +8412,7 @@ MonoBehaviour:
   uIText: {fileID: 936338816}
   localizationKey: INTERACT
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &938326260
 GameObject:
   m_ObjectHideFlags: 0
@@ -8622,6 +8682,7 @@ MonoBehaviour:
   uIText: {fileID: 943635593}
   localizationKey: CONTROLS
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &944290224
 GameObject:
   m_ObjectHideFlags: 0
@@ -8773,6 +8834,7 @@ MonoBehaviour:
   uIText: {fileID: 944290226}
   localizationKey: OPTIONS
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &962796795
 GameObject:
   m_ObjectHideFlags: 0
@@ -8858,8 +8920,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8894,7 +8956,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -29.584251, y: 0, z: -30.438805, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8923,6 +8985,7 @@ MonoBehaviour:
   uIText: {fileID: 962796797}
   localizationKey: MAIN MENU
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &978096180
 GameObject:
   m_ObjectHideFlags: 0
@@ -11010,6 +11073,7 @@ MonoBehaviour:
   uIText: {fileID: 1257463569}
   localizationKey: JUMP
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &1261065206
 GameObject:
   m_ObjectHideFlags: 0
@@ -11161,6 +11225,7 @@ MonoBehaviour:
   uIText: {fileID: 1261065208}
   localizationKey: ACTIONS
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &1274917251
 GameObject:
   m_ObjectHideFlags: 0
@@ -11316,6 +11381,7 @@ MonoBehaviour:
   uIText: {fileID: 1274917253}
   localizationKey: MOVE LEFT AND RIGHT
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1001 &1277290842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13059,6 +13125,7 @@ MonoBehaviour:
   uIText: {fileID: 1428278434}
   localizationKey: 
   localizationTableName: LoadingScreen
+  fontSize: 24
 --- !u!1 &1433823764
 GameObject:
   m_ObjectHideFlags: 0
@@ -14630,6 +14697,7 @@ MonoBehaviour:
   uIText: {fileID: 1573002241}
   localizationKey: BACK
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &1576021095
 GameObject:
   m_ObjectHideFlags: 0
@@ -15164,6 +15232,7 @@ MonoBehaviour:
   uIText: {fileID: 1617321162}
   localizationKey: MASTER VOLUME
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &1635479987
 GameObject:
   m_ObjectHideFlags: 0
@@ -16486,8 +16555,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16551,6 +16620,7 @@ MonoBehaviour:
   uIText: {fileID: 1779279298}
   localizationKey: BACK
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &1779481798
 GameObject:
   m_ObjectHideFlags: 0
@@ -17160,6 +17230,7 @@ MonoBehaviour:
   uIText: {fileID: 1803774323}
   localizationKey: QUIT
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1 &1839016196
 GameObject:
   m_ObjectHideFlags: 0
@@ -17842,6 +17913,7 @@ MonoBehaviour:
   uIText: {fileID: 1860550177}
   localizationKey: NEXT LEVEL
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!1001 &1861035347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19539,6 +19611,7 @@ MonoBehaviour:
   uIText: {fileID: 2065361675}
   localizationKey: KEY/BUTTON
   localizationTableName: LocalizationTableCollection
+  fontSize: 24
 --- !u!4 &2080671191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 898fd5606c2c94d4caedde67ef6b724d,
