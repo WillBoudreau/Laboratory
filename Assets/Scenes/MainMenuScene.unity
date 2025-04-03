@@ -295,9 +295,6 @@ GameObject:
   m_Component:
   - component: {fileID: 69596038}
   - component: {fileID: 69596039}
-  - component: {fileID: 69596041}
-  - component: {fileID: 69596040}
-  - component: {fileID: 69596042}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -336,81 +333,11 @@ MonoBehaviour:
   gameManager: {fileID: 421211238}
   musicHandler: {fileID: 1467707072}
   vLManager: {fileID: 0}
+  localeDropdown: {fileID: 1190973422}
   spawn: {fileID: 0}
-  introDialogues:
-  - {fileID: 69596041}
-  - {fileID: 69596040}
   activeLevelNumber: 0
   sceneName: 
   sceneLoadTime: 2
---- !u!114 &69596040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69596037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a933a4e850f7143a5f1a089117903b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueText:
-  - "Welcome to the pit as the boys in the lab call it. You should have all the skills
-    and knowledge you need assuming you don\u2019t have the memory span of a goldfish.
-    Mind your step and try not to break your legs TOO much, I know that recovery
-    process is\u2026Uncomfortable. "
-  dialogueTextDisplay: {fileID: 2129901474}
-  dialogueTextDisplayPanel: {fileID: 201670369}
-  currentDialogueIndex: 0
-  timeBetweenText: 0.025
-  timeAtEndOfText: 10
-  isDialogueActive: 0
-  localizationComponent: {fileID: 0}
-  dialogueManager: {fileID: 0}
---- !u!114 &69596041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69596037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a933a4e850f7143a5f1a089117903b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueText:
-  - "Hellooo Subject Number Beep . Welcome to the Photon Labs Exo Suit Program. You\u2019ve
-    been selected to test out our MK2 exo suit in multiple human trials. These will
-    test your skills in yada yada whatever\u2026and prove the abilities of blah blah
-    WHATEVER. Look, just get through these trials and DO NOT damage that suit. You,
-    and it, are company property. You\u2019ll get your compensation once every test
-    has been completed. Assuming you survive, that is\u2026"
-  dialogueTextDisplay: {fileID: 636877744}
-  dialogueTextDisplayPanel: {fileID: 682018210}
-  currentDialogueIndex: 0
-  timeBetweenText: 0.025
-  timeAtEndOfText: 10
-  isDialogueActive: 0
-  localizationComponent: {fileID: 69596042}
-  dialogueManager: {fileID: 0}
---- !u!114 &69596042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69596037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2c98441481e1f341985fb5dbad08348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uIText: {fileID: 0}
-  localizationKey: 
-  localizationTableName: 
-  fontSize: 24
 --- !u!1 &73431266
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,6 +491,18 @@ MonoBehaviour:
   localizationKey: MOVE LEFT AND RIGHT
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &91770432 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 898fd5606c2c94d4caedde67ef6b724d,
@@ -824,6 +763,18 @@ MonoBehaviour:
   localizationKey: VOICE LINE VOLUME
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &120062207
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +928,18 @@ MonoBehaviour:
   localizationKey: INTERACT
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &127005717
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,6 +1969,18 @@ MonoBehaviour:
   localizationKey: BACK
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &270744404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,6 +2137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues: []
+  maxActiveDialogues: 0
 --- !u!1 &322640798
 GameObject:
   m_ObjectHideFlags: 0
@@ -2314,6 +2290,18 @@ MonoBehaviour:
   localizationKey: QUIT
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &326024122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2768,8 +2756,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 978096181}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3820,6 +3808,18 @@ MonoBehaviour:
   localizationKey: START GAME
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &483282470
 GameObject:
   m_ObjectHideFlags: 0
@@ -4451,6 +4451,18 @@ MonoBehaviour:
   localizationKey: JUMP
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &523450123
 GameObject:
   m_ObjectHideFlags: 0
@@ -4605,6 +4617,18 @@ MonoBehaviour:
   localizationKey: RESOLUTION
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &536379533
 GameObject:
   m_ObjectHideFlags: 0
@@ -4637,8 +4661,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1307766966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4832,6 +4856,18 @@ MonoBehaviour:
   localizationKey: SOUND EFFECTS VOLUME
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &550389811
 GameObject:
   m_ObjectHideFlags: 0
@@ -5624,6 +5660,18 @@ MonoBehaviour:
   localizationKey: CONTROLS
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &581058009
 GameObject:
   m_ObjectHideFlags: 0
@@ -7632,6 +7680,18 @@ MonoBehaviour:
   localizationKey: MUSIC VOLUME
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &884737602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7922,6 +7982,18 @@ MonoBehaviour:
   localizationKey: AMBIANCE VOLUME
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &891316054
 GameObject:
   m_ObjectHideFlags: 0
@@ -7954,8 +8026,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1504155626}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8582,6 +8654,18 @@ MonoBehaviour:
   localizationKey: OPTIONS
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &932186569
 GameObject:
   m_ObjectHideFlags: 0
@@ -8615,7 +8699,7 @@ RectTransform:
   m_Father: {fileID: 1096647180}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8810,6 +8894,18 @@ MonoBehaviour:
   localizationKey: INTERACT
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &938326260
 GameObject:
   m_ObjectHideFlags: 0
@@ -9080,6 +9176,18 @@ MonoBehaviour:
   localizationKey: CONTROLS
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &944290224
 GameObject:
   m_ObjectHideFlags: 0
@@ -9232,6 +9340,18 @@ MonoBehaviour:
   localizationKey: OPTIONS
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &962796795
 GameObject:
   m_ObjectHideFlags: 0
@@ -9383,6 +9503,18 @@ MonoBehaviour:
   localizationKey: MAIN MENU
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &978096180
 GameObject:
   m_ObjectHideFlags: 0
@@ -9730,7 +9862,7 @@ RectTransform:
   m_Father: {fileID: 921030967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9966,8 +10098,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1521653618}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11016,7 +11148,7 @@ RectTransform:
   m_Father: {fileID: 483282471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11297,7 +11429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1253532434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11471,6 +11603,18 @@ MonoBehaviour:
   localizationKey: JUMP
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1261065206
 GameObject:
   m_ObjectHideFlags: 0
@@ -11623,6 +11767,18 @@ MonoBehaviour:
   localizationKey: ACTIONS
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1274917251
 GameObject:
   m_ObjectHideFlags: 0
@@ -11779,6 +11935,18 @@ MonoBehaviour:
   localizationKey: MOVE LEFT AND RIGHT
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1277111690
 GameObject:
   m_ObjectHideFlags: 0
@@ -12004,8 +12172,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 867216988}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13624,6 +13792,18 @@ MonoBehaviour:
   localizationKey: 
   localizationTableName: LoadingScreen
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1433823764
 GameObject:
   m_ObjectHideFlags: 0
@@ -15299,6 +15479,18 @@ MonoBehaviour:
   localizationKey: BACK
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1576021095
 GameObject:
   m_ObjectHideFlags: 0
@@ -15430,7 +15622,7 @@ RectTransform:
   m_Father: {fileID: 1026319012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15834,6 +16026,18 @@ MonoBehaviour:
   localizationKey: MASTER VOLUME
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1635479987
 GameObject:
   m_ObjectHideFlags: 0
@@ -17222,6 +17426,18 @@ MonoBehaviour:
   localizationKey: BACK
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1779481798
 GameObject:
   m_ObjectHideFlags: 0
@@ -17832,6 +18048,18 @@ MonoBehaviour:
   localizationKey: QUIT
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1839016196
 GameObject:
   m_ObjectHideFlags: 0
@@ -18515,6 +18743,18 @@ MonoBehaviour:
   localizationKey: NEXT LEVEL
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &1861035347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19855,7 +20095,7 @@ RectTransform:
   m_Father: {fileID: 1924985545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -20240,6 +20480,18 @@ MonoBehaviour:
   localizationKey: KEY/BUTTON
   localizationTableName: LocalizationTableCollection
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &2080671191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 898fd5606c2c94d4caedde67ef6b724d,

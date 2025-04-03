@@ -16,7 +16,7 @@ public class LocalizationComponent : MonoBehaviour
   public string localizationTableName;// The name of the localization table.
   [SerializeField] private float fontSize = 24;// The font size of the text.
 
-  private LocalizedString localizedSTR = new LocalizedString();// The localized string object.
+  public LocalizedString localizedSTR = new LocalizedString();// The localized string object.
 
   void Start()
   {
@@ -28,7 +28,7 @@ public class LocalizationComponent : MonoBehaviour
   /// Updates the text component with the localized string.
   ///</summary>
   /// <param name="localizedString"></param>
-  void UpdateText(string localizedString)
+  public void UpdateText(string localizedString)
   {
     if(uIText != null)
     {
@@ -42,6 +42,14 @@ public class LocalizationComponent : MonoBehaviour
   {
     // Get the localized string based on the selected locale and update the text component.
     //localizedSTR.StringChanged -= UpdateText;
+    if(string.IsNullOrEmpty(localizationKey) || string.IsNullOrEmpty(localizationTableName))
+    {
+      Debug.LogError("Localization key or table name is not set.");
+      Debug.LogError("Localization key: " + localizationKey);
+      Debug.LogError("Localization table name: " + localizationTableName);
+      Debug.LogError(this.gameObject.name + " is missing a localization key or table name.");
+      return;
+    }
     localizedSTR.StringChanged -= UpdateText;
     localizedSTR = new LocalizedString { TableReference = localizationTableName, TableEntryReference = localizationKey };
     localizedSTR.StringChanged += UpdateText;
@@ -75,6 +83,12 @@ public class LocalizationComponent : MonoBehaviour
   void AdjustText(Locale locale)
   {
     SetupLocalizationString();
+
+    DisplayDialogue displayDialogue = GetComponent<DisplayDialogue>();
+    if(displayDialogue != null)
+    {
+      displayDialogue.ResetDialogue(displayDialogue.dialogueTextDisplayPanel);
+    }
   }
   private void OnDestroy()
   {

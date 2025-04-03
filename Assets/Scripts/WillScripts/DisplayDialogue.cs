@@ -8,12 +8,12 @@ public class DisplayDialogue : MonoBehaviour
 {
     [Header("Dialogue Settings")]
     [SerializeField] private List<string> dialogueText; // The dialogue text
-    [SerializeField] private TextMeshProUGUI dialogueTextDisplay; // The dialogue text
-    [SerializeField] private GameObject dialogueTextDisplayPanel; // The dialogue text graphic
+    public TextMeshProUGUI dialogueTextDisplay; // The dialogue text
+    public GameObject dialogueTextDisplayPanel; // The dialogue text graphic
     [SerializeField] private int currentDialogueIndex = 0; // The current dialogue index
     [SerializeField] private float timeBetweenText = 0.025f; // The time between each letter being displayed
     [SerializeField] private float timeAtEndOfText = 10f; // The time at the end of the text before it is cleared
-    [SerializeField] private bool isDialogueActive = false; // Is the dialogue active
+    public bool isDialogueActive = false; // Is the dialogue active
     [Header("Class calls")]
     public LocalizationComponent localizationComponent; // The localization component
     [SerializeField] private DialogueManager dialogueManager; // The dialogue manager
@@ -27,12 +27,12 @@ public class DisplayDialogue : MonoBehaviour
     /// <summary>
     /// Set the loading screen
     /// </summary>
-    public void SetDialogue()
+    public void SetDialogue(GameObject activeDialogue)
     {
+        SetTextToLocalizationComponent();
+        currentCoroutine = StartCoroutine(TypeWriter(localizationComponent.localizedSTR.GetLocalizedString(), dialogueTextDisplayPanel, dialogueTextDisplay));  
         dialogueManager.GetAllDialogues();
-        dialogueManager.CheckActiveDialogue();
-        SetText();
-        ChangeIndex();
+        dialogueManager.CheckActiveDialogue(activeDialogue);
     }
 
     /// <summary>
@@ -42,6 +42,33 @@ public class DisplayDialogue : MonoBehaviour
     {
         DisplayInfo(dialogueTextDisplayPanel);
         currentCoroutine = StartCoroutine(TypeWriter(dialogueText[currentDialogueIndex], dialogueTextDisplayPanel, dialogueTextDisplay));
+    }
+    ///<summary>
+    /// Set the text to the localization component
+    /// </summary>
+    public void SetTextToLocalizationComponent()
+    {
+        if (localizationComponent != null)
+        {
+            localizationComponent.SetupLocalizationString();
+            localizationComponent.UpdateText(dialogueText[currentDialogueIndex]);
+        }
+    }
+    /// <summary>
+    /// Reset the dialogue to match the locale 
+    /// </summary>
+    public void ResetDialogue(GameObject activeDialogue)
+    {
+        if(currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+            currentCoroutine = null;
+            dialogueManager.GetAllDialogues();
+            dialogueManager.CheckActiveDialogue(activeDialogue);
+        }
+        dialogueTextDisplay.text = string.Empty;
+        string localizedText = localizationComponent.localizedSTR.GetLocalizedString();
+        currentCoroutine = StartCoroutine(TypeWriter(localizedText, dialogueTextDisplayPanel, dialogueTextDisplay));
     }
 
     /// <summary>
@@ -53,18 +80,6 @@ public class DisplayDialogue : MonoBehaviour
         if (textPanel != null)
         {
             textPanel.SetActive(true);
-        }
-    }
-
-    /// <summary>
-    /// Change the index of the dialogue text
-    /// </summary>
-    public void ChangeIndex()
-    {
-        currentDialogueIndex++;
-        if (currentDialogueIndex >= dialogueText.Count)
-        {
-            currentDialogueIndex = 0;
         }
     }
 
@@ -95,7 +110,7 @@ public class DisplayDialogue : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenText);
         }
         yield return new WaitForSeconds(timeAtEndOfText);
-        textDisplay.text = string.Empty;
         textPanel.SetActive(false);
+        textDisplay.text = string.Empty;
     }
 }

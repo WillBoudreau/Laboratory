@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,11 +14,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;//The game manager
     [SerializeField] private MusicHandler musicHandler;//The music handler
     [SerializeField] private VoiceLineManager vLManager;
+    [SerializeField] private TMP_Dropdown localeDropdown;//The dropdown for the locale
     [Header("Level Variables")]
     private GameObject player; 
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
-    [SerializeField] private List<DisplayDialogue> introDialogues = new List<DisplayDialogue>();
     private int introDialogue1Index = 0;
     private int introDialogue2Index = 1;
     public int activeLevelNumber;
@@ -47,27 +48,34 @@ public class LevelManager : MonoBehaviour
             {
                 Debug.Log("Setting music to tutorial");
                 musicHandler.SwitchAudioTrack("tutorial");
+                localeDropdown.gameObject.SetActive(false);
             }
             else if(sceneName.Contains("1"))
             {
                 Debug.Log("Setting music to level1");
                 musicHandler.SwitchAudioTrack("level1");
+                localeDropdown.gameObject.SetActive(false);
             }
             else if(sceneName.Contains("2"))
             {
                 Debug.Log("Setting music to level2");
                 musicHandler.SwitchAudioTrack("level2");
+                localeDropdown.gameObject.SetActive(false);
             }
             else if(sceneName.Contains("3"))
             {
                 Debug.Log("Setting music to level3");
                 musicHandler.SwitchAudioTrack("level3");
+                localeDropdown.gameObject.SetActive(false);
             }
         }
         if(sceneName.Contains("MainMenu"))
         {
             Debug.Log("Setting Ui to menu");
             musicHandler.SwitchAudioTrack("title");
+            localeDropdown.gameObject.SetActive(true);
+            GameObject dialogueMenu = GameObject.FindGameObjectWithTag("Dialogue");
+            dialogueMenu.SetActive(false);
             uIManager.UILoadingScreen(uIManager.mainMenu); 
         }  
         StartCoroutine(WaitForScreenLoad(sceneName));
@@ -122,7 +130,6 @@ public class LevelManager : MonoBehaviour
             if(scene.name.Contains("Tutorial"))
             {
                 vLManager.PlayVoiceLine(vLManager.voiceLines[5]);
-                introDialogues[introDialogue1Index].SetDialogue();
                 vLManager.firstDoor = GameObject.FindWithTag("1stDoor");
             }
             else
@@ -136,7 +143,6 @@ public class LevelManager : MonoBehaviour
             if(scene.name.Contains("3"))
             {
                 vLManager.PlayVoiceLine(vLManager.voiceLines[12]);
-                introDialogues[introDialogue2Index].SetDialogue();
             }
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();

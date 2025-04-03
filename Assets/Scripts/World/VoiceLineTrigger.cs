@@ -24,7 +24,7 @@ public class VoiceLineTrigger : MonoBehaviour
             hasBeenTriggered = true;
             if(displayDialogue != null)
             {
-                displayDialogue.SetDialogue();
+                displayDialogue.SetDialogue(displayDialogue.dialogueTextDisplayPanel);
             }
             else
             {
