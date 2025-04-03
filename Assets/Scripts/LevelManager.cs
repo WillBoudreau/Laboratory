@@ -17,6 +17,9 @@ public class LevelManager : MonoBehaviour
     private GameObject player; 
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
+    [SerializeField] private List<DisplayDialogue> introDialogues = new List<DisplayDialogue>();
+    private int introDialogue1Index = 0;
+    private int introDialogue2Index = 1;
     public int activeLevelNumber;
     public string sceneName;
     [SerializeField] private float sceneLoadTime = 2.0f;//The time it takes to load a scene
@@ -119,6 +122,7 @@ public class LevelManager : MonoBehaviour
             if(scene.name.Contains("Tutorial"))
             {
                 vLManager.PlayVoiceLine(vLManager.voiceLines[5]);
+                introDialogues[introDialogue1Index].SetDialogue();
                 vLManager.firstDoor = GameObject.FindWithTag("1stDoor");
             }
             else
@@ -132,6 +136,7 @@ public class LevelManager : MonoBehaviour
             if(scene.name.Contains("3"))
             {
                 vLManager.PlayVoiceLine(vLManager.voiceLines[12]);
+                introDialogues[introDialogue2Index].SetDialogue();
             }
             gameManager.gameState = GameManager.GameState.Gameplay;
             gameManager.playerCon.boundingBox = GameObject.FindWithTag("BoundingBox").GetComponent<Collider2D>();
