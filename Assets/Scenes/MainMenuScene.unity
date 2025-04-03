@@ -20018,6 +20018,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 501068506}
     m_Modifications:
+    - target: {fileID: -7422560703399978062, guid: ef4e645916e880545966ecf7313beacd,
+        type: 3}
+      propertyPath: m_Antialiasing
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1278453316379441521, guid: ef4e645916e880545966ecf7313beacd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20072,6 +20077,21 @@ PrefabInstance:
         type: 3}
       propertyPath: far clip plane
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339909527534099918, guid: ef4e645916e880545966ecf7313beacd,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339909527534099918, guid: ef4e645916e880545966ecf7313beacd,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339909527534099918, guid: ef4e645916e880545966ecf7313beacd,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5415182159440856694, guid: ef4e645916e880545966ecf7313beacd,
         type: 3}
