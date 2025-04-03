@@ -7640,6 +7640,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 501068506}
     m_Modifications:
+    - target: {fileID: 2682485780690470062, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.1910119
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682485780690470062, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682485780690470062, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.55085766
+      objectReference: {fileID: 0}
     - target: {fileID: 6596099876700949223, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7717,6 +7732,16 @@ PrefabInstance:
       objectReference: {fileID: 1926404945}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
+      propertyPath: boxCollider
+      value: 
+      objectReference: {fileID: 1867640091}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: capCollider
+      value: 
+      objectReference: {fileID: 1867640090}
+    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
       propertyPath: rightFacing
       value: 
       objectReference: {fileID: 326024123}
@@ -7733,7 +7758,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6623255379414128161, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1867640091}
   m_SourcePrefab: {fileID: 100100000, guid: ad6a7730677d8b44f9d23bd355ba6e5d, type: 3}
 --- !u!4 &884737603 stripped
 Transform:
@@ -18591,6 +18620,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b74b2cbcc5e1f4d81db37b7f1fa00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &1867640090 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 2682485780690470062, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 884737602}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1867640091
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867640081}
+  m_Material: {fileID: 13400000, guid: 6fa1fbc73e2516c45a84fcf528bdfca8, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.51008457, y: 1.1910242, z: 0.21784693}
+  m_Center: {x: 0.066518396, y: 0.55058026, z: -0.08475387}
 --- !u!1 &1900124681
 GameObject:
   m_ObjectHideFlags: 0

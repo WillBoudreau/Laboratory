@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     private Transform rightFacing;
     [SerializeField]
     private Transform leftFacing;
+    public Collider boxCollider;
+    public Collider capCollider;
 
     [Header("Player Stats")]
     [SerializeField]
@@ -173,6 +175,18 @@ public class PlayerController : MonoBehaviour
                     MovingSFX();
                     break;
             }
+            if(isGrounded)
+            {
+                boxCollider.enabled = true;
+                capCollider.enabled = false;
+                playerBody.useGravity = false;
+            }
+            else
+            {
+                boxCollider.enabled = false;
+                capCollider.enabled = true;
+                playerBody.useGravity = true;
+            }
             if(moveDirection.x > 0 && !isGrabbingIntractable && actionState != ActionState.Hanging)
             {       
                 if(isFacingLeft)
@@ -214,7 +228,7 @@ public class PlayerController : MonoBehaviour
             if(actionState != ActionState.Hanging && actionState != ActionState.Climbing)
             {
                 if(!isGrabbingIntractable)
-                {
+                {                    
                     playerBody.velocity = new Vector3(moveDirection.x * moveSpeed * Time.deltaTime, playerBody.velocity.y,playerBody.velocity.z);
                     if(actionState == ActionState.Jumping)
                     {
