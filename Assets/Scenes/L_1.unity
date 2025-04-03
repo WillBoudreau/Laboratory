@@ -68350,6 +68350,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VLTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 4385110687900525558, guid: 06fe5b9bbeba39442917971131965725,
+        type: 3}
+      propertyPath: m_TagString
+      value: Dialogue
+      objectReference: {fileID: 0}
     - target: {fileID: 9073984131450804915, guid: 06fe5b9bbeba39442917971131965725,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -68447,7 +68452,9 @@ MonoBehaviour:
   currentDialogueIndex: 0
   timeBetweenText: 0.025
   timeAtEndOfText: 10
+  isDialogueActive: 0
   localizationComponent: {fileID: 2066523904}
+  dialogueManager: {fileID: 0}
 --- !u!114 &2066523904
 MonoBehaviour:
   m_ObjectHideFlags: 0

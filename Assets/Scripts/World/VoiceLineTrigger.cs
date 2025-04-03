@@ -8,7 +8,7 @@ public class VoiceLineTrigger : MonoBehaviour
     public int voiceLineIndex;
     public VoiceLineManager vLManager; // VL -- Voice line
     private AudioSource voiceSource;
-    private bool hasBeenTriggered;
+    [SerializeField]private bool hasBeenTriggered;
     [SerializeField] private DisplayDialogue displayDialogue;
     void Awake()
     {
@@ -25,6 +25,10 @@ public class VoiceLineTrigger : MonoBehaviour
             if(displayDialogue != null)
             {
                 displayDialogue.SetDialogue();
+            }
+            else
+            {
+                Debug.Log("DisplayDialogue is null!");
             }
             vLManager.PlayVoiceLine(vLManager.voiceLines[voiceLineIndex]);
         }
