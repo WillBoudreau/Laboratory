@@ -4651,7 +4651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText:
-  - "\tThat is a Photon Reflector Box. As the name would imply it reflects and redirects
+  - "That is a Photon Reflector Box. As the name would imply it reflects and redirects
     the Photons within the beam and points it in another direction. Very useful in
     a lot of scenarios though, watch where the beam is pointed. I\u2019ve got money
     on you, Subject don\u2019t screw this up. "
@@ -4676,9 +4676,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIText: {fileID: 709107201}
-  localizationKey: 
-  localizationTableName: 
+  localizationKey: Dialogue9
+  localizationTableName: Dialogue
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &109765779
 GameObject:
   m_ObjectHideFlags: 0
@@ -10242,9 +10254,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIText: {fileID: 1088413614}
-  localizationKey: 
-  localizationTableName: 
+  localizationKey: Dialogue6
+  localizationTableName: Dialogue
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &273383201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13576,7 +13600,7 @@ MonoBehaviour:
   timeBetweenText: 0.025
   timeAtEndOfText: 10
   isDialogueActive: 0
-  localizationComponent: {fileID: 0}
+  localizationComponent: {fileID: 363551216}
   dialogueManager: {fileID: 0}
 --- !u!114 &363551216
 MonoBehaviour:
@@ -13591,9 +13615,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIText: {fileID: 709107201}
-  localizationKey: 
-  localizationTableName: 
+  localizationKey: Dialogue8
+  localizationTableName: Dialogue
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &366457319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48003,9 +48039,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIText: {fileID: 1801577111}
-  localizationKey: 
-  localizationTableName: 
+  localizationKey: Dialogue7
+  localizationTableName: Dialogue
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &1221489683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50014,9 +50062,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIText: {fileID: 1931663113}
-  localizationKey: 
-  localizationTableName: 
+  localizationKey: Dialogue10
+  localizationTableName: Dialogue
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &1266697715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62026,9 +62086,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uIText: {fileID: 375615549}
-  localizationKey: 
-  localizationTableName: 
+  localizationKey: Dialogue5
+  localizationTableName: Dialogue
   fontSize: 24
+  localizedSTR:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &1606186218
 PrefabInstance:
   m_ObjectHideFlags: 0

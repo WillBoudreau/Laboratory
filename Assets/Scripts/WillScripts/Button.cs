@@ -84,6 +84,4 @@ public class Button : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// 
 }
