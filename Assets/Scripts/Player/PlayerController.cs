@@ -40,8 +40,6 @@ public class PlayerController : MonoBehaviour
     private Transform rightFacing;
     [SerializeField]
     private Transform leftFacing;
-    public Collider boxCollider;
-    public Collider capCollider;
 
     [Header("Player Stats")]
     [SerializeField]
@@ -174,18 +172,6 @@ public class PlayerController : MonoBehaviour
                 case ActionState.Moving:
                     MovingSFX();
                     break;
-            }
-            if(isGrounded)
-            {
-                boxCollider.enabled = true;
-                capCollider.enabled = false;
-                playerBody.useGravity = false;
-            }
-            else
-            {
-                boxCollider.enabled = false;
-                capCollider.enabled = true;
-                playerBody.useGravity = true;
             }
             if(moveDirection.x > 0 && !isGrabbingIntractable && actionState != ActionState.Hanging)
             {       

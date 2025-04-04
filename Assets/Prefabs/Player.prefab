@@ -1520,6 +1520,7 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   uIManager: {fileID: 0}
   sFXManager: {fileID: 0}
+  voiceLineManager: {fileID: 0}
   actionState: 0
   isGrounded: 0
   isFacingLeft: 0
@@ -1531,7 +1532,7 @@ MonoBehaviour:
   moveSpeed: 300
   jumpForce: 250
   holdForce: 150
-  gravScale: 6
+  gravScale: 5
   maxYVelocity: 3.5
   walkCycleSpeed: 0.3
   coyoteTimeLimit: 0.5
@@ -1544,6 +1545,7 @@ MonoBehaviour:
   maxFallHight: 7
   recoveryTime: 5
   deathFadeTime: 0
+  inDangerZone: 0
   activeOffset: {x: 0, y: 0, z: 0}
   leftOffset: {x: 0.19, y: -2.03, z: 0}
   rightOffset: {x: -0.06, y: -2.03, z: 0}
@@ -1609,9 +1611,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.15999998
-  m_Height: 1.2290418
+  m_Height: 1.1910119
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5318438, z: 0}
+  m_Center: {x: 0, y: 0.55085766, z: 0}
 --- !u!114 &1666142307545511599
 MonoBehaviour:
   m_ObjectHideFlags: 0
