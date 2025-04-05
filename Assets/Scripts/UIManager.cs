@@ -106,6 +106,7 @@ public class UIManager : MonoBehaviour
         hUD.SetActive(false);
         pauseMenu.SetActive(false);
         controlsMenu.SetActive(false);
+        CheckForDialogue();
     }
     /// <summary>
     /// Load the UI element based on the ui string
@@ -170,6 +171,23 @@ public class UIManager : MonoBehaviour
         {
             winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/{totalScenes}\nCOMPLETE";
 
+        }
+    }
+    /// <summary>
+    /// Check for dialogue in the scene and set it to inactive
+    /// </summary>
+    public void CheckForDialogue()
+    {
+        if(dialogueManager != null)
+        {
+            dialogueManager.GetAllDialogues();
+            foreach(GameObject dialogue in dialogueManager.dialogues)
+            {
+                if(dialogue.activeSelf)
+                {
+                    dialogue.SetActive(false);
+                }
+            }
         }
     }
 
