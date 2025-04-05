@@ -109,6 +109,7 @@ public class DisplayDialogue : MonoBehaviour
             textDisplay.text += letter;
             yield return new WaitForSeconds(timeBetweenText);
         }
+        Debug.Log("Clearing text");
         yield return new WaitForSeconds(timeAtEndOfText);
         textPanel.SetActive(false);
         textDisplay.text = string.Empty;

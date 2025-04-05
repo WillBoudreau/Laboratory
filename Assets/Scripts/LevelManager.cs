@@ -14,9 +14,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;//The game manager
     [SerializeField] private MusicHandler musicHandler;//The music handler
     [SerializeField] private VoiceLineManager vLManager;
+    [SerializeField] private DialogueManager dialogueManager;//The dialogue manager
     [SerializeField] private TMP_Dropdown localeDropdown;//The dropdown for the locale
     [Header("Level Variables")]
-    private GameObject player; 
+    private GameObject player;
     public GameObject spawn;
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     private int introDialogue1Index = 0;
@@ -32,6 +33,7 @@ public class LevelManager : MonoBehaviour
             uIManager = FindObjectOfType<UIManager>();
         }
         vLManager = FindObjectOfType<VoiceLineManager>();
+        dialogueManager = FindObjectOfType<DialogueManager>();
         player = gameManager.player;
     }
     /// <summary>
@@ -74,10 +76,8 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Setting Ui to menu");
             musicHandler.SwitchAudioTrack("title");
             localeDropdown.gameObject.SetActive(true);
-            GameObject dialogueMenu = GameObject.FindGameObjectWithTag("Dialogue");
-            dialogueMenu.SetActive(false);
-            uIManager.UILoadingScreen(uIManager.mainMenu); 
-        }  
+            uIManager.UILoadingScreen(uIManager.mainMenu);
+        }
         StartCoroutine(WaitForScreenLoad(sceneName));
     }
     /// <summary>
@@ -131,6 +131,7 @@ public class LevelManager : MonoBehaviour
             {
                 vLManager.PlayVoiceLine(vLManager.voiceLines[5]);
                 vLManager.firstDoor = GameObject.FindWithTag("1stDoor");
+                dialogueManager.PlayIntroDialogue();
             }
             else
             {
@@ -159,7 +160,7 @@ public class LevelManager : MonoBehaviour
     }
 
      /// <summary>
-    /// Waits for screen to load before starting operation. 
+    /// Waits for screen to load before starting operation.
     /// </summary>
     /// <param name="sceneName"></param>
     /// <returns></returns>
@@ -175,7 +176,7 @@ public class LevelManager : MonoBehaviour
         scenesToLoad.Add(operation);
     }
     /// <summary>
-    /// Gets average progress for Loading bar. 
+    /// Gets average progress for Loading bar.
     /// </summary>
     /// <returns></returns>
     public float GetLoadingProgress()
@@ -190,7 +191,7 @@ public class LevelManager : MonoBehaviour
         return totalProgress / scenesToLoad.Count;
     }
     /// <summary>
-    /// Event for when load operation is finished. 
+    /// Event for when load operation is finished.
     /// </summary>
     /// <param name="operation"></param>
     private void OperationCompleted(AsyncOperation operation)

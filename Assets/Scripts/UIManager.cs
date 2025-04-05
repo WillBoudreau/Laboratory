@@ -15,7 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;//The level manager
     [SerializeField] private MusicHandler musicHandler;//The music handler
     [SerializeField] private LoadingScreenBehavior loadingScreenBehavior;//The loading screen behavior
-    [SerializeField] private SFXManager sFXManager;//The sfx manager    
+    [SerializeField] private SFXManager sFXManager;//The sfx manager 
+    [SerializeField] private DialogueManager dialogueManager;//The dialogue manager   
     [Header("UI Elements")]
     public GameObject winMenu;//The win menu
     public GameObject mainMenu;//The main menu
@@ -75,6 +76,7 @@ public class UIManager : MonoBehaviour
         LoadUI("MainMenuScene");
         ChangeControlGraphics(true);
         sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
+        dialogueManager = FindObjectOfType<DialogueManager>();
     }
     void Update()
     {
@@ -148,6 +150,9 @@ public class UIManager : MonoBehaviour
                 controlsMenu.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(controlsFirstButton);
+                break;
+            case "Dialogue":
+                dialogueManager.GetAllDialogues();
                 break;
         }
     }

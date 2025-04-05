@@ -5,8 +5,15 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     [Header("Dialogue Settings")]
-    public List<GameObject> dialogues; // The dialogue objects in the scene
+    public List<GameObject> dialogues = new List<GameObject>(); // The dialogue objects in the scene
     [SerializeField] private int maxActiveDialogues; // The currently active dialogue object
+    [SerializeField] private LevelManager levelManager; // The level manager
+    [SerializeField] private LoadingScreenBehavior loadingScreenBehavior; // The loading screen behavior
+
+    void Start()
+    {
+        levelManager = FindObjectOfType<LevelManager>();
+    }
     /// <summary>
     /// Find all of the dialogue objects in the scene
     /// </summary>
@@ -53,4 +60,59 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Make sure that the entire dialogue object including children are active
+    /// </summary>
+    public void DisplayInfo(GameObject dialogue)
+    {
+        GetAllDialogues();
+        gameObject.GetComponent<DisplayDialogue>().SetDialogue(dialogue);
+    }
+    ///<summary>
+    ///Play the intro dialogue for the tutorial and level 3 levels
+    ///</summary>
+    public void PlayIntroDialogue()
+    {
+        foreach (GameObject dialogue in dialogues)
+        {
+            if (dialogue.tag == "Dialogue")
+            {
+                if (dialogue.name == "IntroDialogue1" && levelManager.activeLevelNumber == 0)
+                {
+                    DisplayInfo(dialogue);
+                }
+                else if (dialogue.name == "IntroDialogue2" && levelManager.activeLevelNumber == 3)
+                {
+                    DisplayInfo(dialogue);
+                }
+                else
+                {
+                    dialogue.SetActive(false);
+                }
+            }
+        }
+        // GetAllDialogues();
+        // if (levelManager.activeLevelNumber == 0 || levelManager.activeLevelNumber == 3)
+        // {
+        //     foreach (GameObject dialogue in introDialogues)
+        //     {
+        //         if (dialogue.tag == "Dialogue")
+        //         {
+        //             if(dialogue.name == "IntroDialogue1" && levelManager.activeLevelNumber == 0)
+        //             {
+        //                 DisplayInfo(dialogue);
+        //             }
+        //             else if (dialogue.name == "IntroDialogue2" && levelManager.activeLevelNumber == 3)
+        //             {
+        //                 dialogue.SetActive(true);
+        //             }
+        //             else
+        //             {
+        //                 dialogue.SetActive(false);
+        //             }
+        //         }
+        //     }
+        // }
+    }
+    
 }
