@@ -30,14 +30,14 @@ public class DoorTrigger : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && door.GetComponent<DoorBehaviour>().canOpen)
         {
            OpenDoor();
         }
     }
     public void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && door.GetComponent<DoorBehaviour>().canOpen)
         {
             CloseDoor();
         }

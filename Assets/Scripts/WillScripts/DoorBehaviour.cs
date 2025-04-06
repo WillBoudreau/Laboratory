@@ -13,39 +13,47 @@ public class DoorBehaviour : MonoBehaviour
     public bool isOpen = false;//If the door is open
     [SerializeField] private int targetIndex = 0;
     private SFXTrigger sFXTrigger;
+    public bool canOpen;
 
     void Awake()
     {
         sFXTrigger = gameObject.GetComponent<SFXTrigger>();
+        canOpen = true;
     }
     /// <summary>
     /// Move the door to the open position
     /// </summary>
     public void OpenThisDoor()
     {
-        targetIndex = 1;
-        if(sFXTrigger != null  && !sFXTrigger.source3D.isPlaying && !isOpen)
+        if(canOpen)
         {
-            sFXTrigger.PlaySFX(1);
+            targetIndex = 1;
+            if(sFXTrigger != null  && !sFXTrigger.source3D.isPlaying && !isOpen)
+            {
+                sFXTrigger.PlaySFX(1);
+            }
+            isOpen = true;
         }
-        isOpen = true;
     }
     /// <summary>
     /// Close the door once the player leaves the trigger
     /// </summary>
     public void CloseThisDoor()
     {
-        targetIndex = 0;
-        if(sFXTrigger != null && !sFXTrigger.source3D.isPlaying && isOpen)
+        if(canOpen)
         {
-            sFXTrigger.PlaySFX(2);
+            targetIndex = 0;
+            if(sFXTrigger != null && !sFXTrigger.source3D.isPlaying && isOpen  && canOpen)
+            {
+                sFXTrigger.PlaySFX(2);
+            }
+            isOpen = false;
         }
-        isOpen = false;
     }
     void Update()
     {
         //If the Door is unpowered, automatically move the door to the next position
-        if(doorType == DoorType.UnPowered)
+        if(doorType == DoorType.UnPowered && canOpen)
         {
            //If the door is open, move the door to the open position
             if(!isOpen)
@@ -59,7 +67,7 @@ public class DoorBehaviour : MonoBehaviour
             }
         }
         //If the door is powered, only move the door when the player powers the door
-        else if(doorType == DoorType.Powered)
+        else if(doorType == DoorType.Powered && canOpen)
         {
             if(!isOpen)
             {

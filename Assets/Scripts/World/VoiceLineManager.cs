@@ -36,11 +36,11 @@ public class VoiceLineManager : MonoBehaviour
         {
             if(vLSource.isPlaying)
             {
-                firstDoor.GetComponent<DoorBehaviour>().enabled = false;
+                firstDoor.GetComponent<DoorBehaviour>().canOpen = false;
             }
             else
             {
-                firstDoor.GetComponent<DoorBehaviour>().enabled = true;
+                firstDoor.GetComponent<DoorBehaviour>().canOpen = true;
             }
         }
     }
