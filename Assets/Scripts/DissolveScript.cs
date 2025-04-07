@@ -15,26 +15,23 @@ public class DissolveScript : MonoBehaviour
     {
         if (skinnedMesh != null)
             skinnedMaterials = skinnedMesh.materials;
-
     }
 
-    // Update is called once per frame
-    void Update()
+    // Method to trigger the dissolve effect, can be called from other scripts
+    public void StartDissolve()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(DissolveCo());
-        }
+        StartCoroutine(DissolveCo());
     }
+
     IEnumerator DissolveCo()
     {
-        if(skinnedMaterials.Length > 0)
+        if (skinnedMaterials.Length > 0)
         {
             float counter = 0;
-            while (skinnedMaterials[0].GetFloat("") < 1)
+            while (skinnedMaterials[0].GetFloat("_DissolveAmount") < 1)
             {
                 counter += dissolveRate;
-                for(int i=0; i < skinnedMaterials.Length;)
+                for (int i = 0; i < skinnedMaterials.Length; i++)  // Fixed loop condition here
                 {
                     skinnedMaterials[i].SetFloat("_DissolveAmount", counter);
                 }
