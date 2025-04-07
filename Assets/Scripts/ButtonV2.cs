@@ -7,6 +7,7 @@ public class ButtonV2 : MonoBehaviour
 {
     [Header("Button Settings")]
     [SerializeField] private GameObject[] objectsToControl; // The object the button controls
+    [SerializeField] private bool canPlayerInteract = true;
     [SerializeField] private float upwardVelocity = 1;
 
     [Header("Audio Settings")]
@@ -14,11 +15,13 @@ public class ButtonV2 : MonoBehaviour
 
     private Rigidbody rb;
     [HideInInspector] public bool isActivated;
+    private int numberOfTouchingObjects;
 
     void Awake()
     {
         sfxManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
 
+        numberOfTouchingObjects = 0;
         isActivated = false;
         rb = transform.GetComponent<Rigidbody>();
     }
@@ -46,7 +49,8 @@ public class ButtonV2 : MonoBehaviour
             ButtonDeactivated();
         }
 
-        rb.velocity = new Vector3(0, upwardVelocity, 0);
+        if (numberOfTouchingObjects < 1)
+            rb.velocity = new Vector3(0, upwardVelocity, 0);
 
     }
 
@@ -86,9 +90,10 @@ public class ButtonV2 : MonoBehaviour
         isActivated = true;
     }
 
+
     private void ButtonDeactivated()
     {
-        sfxManager.Player2DSFX(sfxManager.buttonSFX[1], false);
+        sfxManager.Player2DSFX(sfxManager.buttonSFX[2], false);
 
         //For each object in the array
         foreach (GameObject obj in objectsToControl)
@@ -119,5 +124,31 @@ public class ButtonV2 : MonoBehaviour
         }
 
         isActivated = false;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player") && canPlayerInteract)
+        {
+            numberOfTouchingObjects++;
+        }
+
+        if (collision.transform.CompareTag("Box"))
+        {
+            numberOfTouchingObjects++;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player") && canPlayerInteract)
+        {
+            numberOfTouchingObjects--;
+        }
+
+        if (collision.transform.CompareTag("Box"))
+        {
+
+            numberOfTouchingObjects--;
+        }
     }
 }
