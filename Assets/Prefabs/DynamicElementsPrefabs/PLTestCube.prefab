@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9143189719845734758}
   - component: {fileID: 8427374096871721713}
   - component: {fileID: 3372649371281428925}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4889952233642357674}
   - component: {fileID: -3143215096046300572}
   - component: {fileID: -8671038697175559269}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PLTestCube
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -198,8 +198,6 @@ MonoBehaviour:
   sFXManager: {fileID: 0}
   rb: {fileID: 0}
   fallThreshold: -0.005
-  landThreshold: 0.015
-  isOnPlatform: 0
   hasFallen: 0
 --- !u!114 &-3143215096046300572
 MonoBehaviour:
