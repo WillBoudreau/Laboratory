@@ -8623,10 +8623,12 @@ MonoBehaviour:
   currentDialogueIndex: 0
   timeBetweenText: 0.02
   isDialogueActive: 0
+  isNormalTrigger: 1
   localizationComponent: {fileID: 747557305}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
   voiceLineTrigger: {fileID: 747557307}
+  laserVLTrigger: {fileID: 0}
 --- !u!114 &747557307 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3513087790182899846, guid: 06fe5b9bbeba39442917971131965725,
@@ -9759,10 +9761,12 @@ MonoBehaviour:
   currentDialogueIndex: 0
   timeBetweenText: 0.025
   isDialogueActive: 0
+  isNormalTrigger: 1
   localizationComponent: {fileID: 795397095}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
   voiceLineTrigger: {fileID: 795397097}
+  laserVLTrigger: {fileID: 0}
 --- !u!114 &795397097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3513087790182899846, guid: 06fe5b9bbeba39442917971131965725,
@@ -13201,10 +13205,12 @@ MonoBehaviour:
   currentDialogueIndex: 0
   timeBetweenText: 0.02
   isDialogueActive: 0
+  isNormalTrigger: 1
   localizationComponent: {fileID: 1004822263}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
   voiceLineTrigger: {fileID: 1004822264}
+  laserVLTrigger: {fileID: 0}
 --- !u!114 &1004822263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29414,10 +29420,12 @@ MonoBehaviour:
   currentDialogueIndex: 0
   timeBetweenText: 0.02
   isDialogueActive: 0
+  isNormalTrigger: 1
   localizationComponent: {fileID: 1905656380900167122}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
   voiceLineTrigger: {fileID: 1905656380900167123}
+  laserVLTrigger: {fileID: 0}
 --- !u!114 &1905656380900167122
 MonoBehaviour:
   m_ObjectHideFlags: 0

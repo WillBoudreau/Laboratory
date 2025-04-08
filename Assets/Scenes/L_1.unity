@@ -68844,10 +68844,12 @@ MonoBehaviour:
   currentDialogueIndex: 0
   timeBetweenText: 0.025
   isDialogueActive: 0
+  isNormalTrigger: 1
   localizationComponent: {fileID: 2066523904}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
   voiceLineTrigger: {fileID: 2066523905}
+  laserVLTrigger: {fileID: 0}
 --- !u!114 &2066523904
 MonoBehaviour:
   m_ObjectHideFlags: 0

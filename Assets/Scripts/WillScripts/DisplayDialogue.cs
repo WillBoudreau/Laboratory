@@ -13,11 +13,13 @@ public class DisplayDialogue : MonoBehaviour
     [SerializeField] private int currentDialogueIndex = 0; // The current dialogue index
     [SerializeField] private float timeBetweenText = 0.025f; // The time between each letter being displayed
     public bool isDialogueActive = false; // Is the dialogue active
+    [SerializeField] private bool isNormalTrigger;//If it's a normal trigger
     [Header("Class calls")]
     public LocalizationComponent localizationComponent; // The localization component
     [SerializeField] private DialogueManager dialogueManager; // The dialogue manager
     [SerializeField] private VoiceLineManager voiceLineManager; // The voiceline manager
     [SerializeField] private VoiceLineTrigger voiceLineTrigger;// The voiceline tigger
+    [SerializeField] private LaserVLTrigger laserVLTrigger; // The laser voice line trigger
 
     private Coroutine currentCoroutine; // Track the active coroutine
 
@@ -112,7 +114,15 @@ public class DisplayDialogue : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenText);
         }
         Debug.Log("Clearing text");
-        yield return new WaitForSeconds(voiceLineManager.voiceLines[voiceLineTrigger.voiceLineIndex].length);
+        if(isNormalTrigger)
+        {
+            yield return new WaitForSeconds(voiceLineManager.voiceLines[voiceLineTrigger.voiceLineIndex].length);
+        }
+        else
+        {
+            Debug.Log("Told ya so");
+            yield return new WaitForSeconds(voiceLineManager.voiceLines[13].length);
+        }
         textPanel.SetActive(false);
         textDisplay.text = string.Empty;
     }

@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     private float hurtTimer;
     public float deathFadeTime;
     public bool inDangerZone; //used for the leg sweep voice line trigger. 
-    private bool hasITYSTrigger; //ITYS is I told you so, referring to a voice line. 
+    public bool hasITYSTrigger; //ITYS is I told you so, referring to a voice line. 
     [Header("Ledge Grab Properties")]
     [SerializeField]
     private Vector3 activeOffset;

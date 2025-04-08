@@ -40833,10 +40833,12 @@ MonoBehaviour:
   currentDialogueIndex: 0
   timeBetweenText: 0.025
   isDialogueActive: 0
+  isNormalTrigger: 1
   localizationComponent: {fileID: 879049295}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
   voiceLineTrigger: {fileID: 879049297}
+  laserVLTrigger: {fileID: 0}
 --- !u!114 &879049297 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3513087790182899846, guid: 06fe5b9bbeba39442917971131965725,
@@ -67785,10 +67787,12 @@ MonoBehaviour:
   currentDialogueIndex: 0
   timeBetweenText: 0.025
   isDialogueActive: 0
+  isNormalTrigger: 1
   localizationComponent: {fileID: 1477712536}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
   voiceLineTrigger: {fileID: 1477712538}
+  laserVLTrigger: {fileID: 0}
 --- !u!114 &1477712538 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3513087790182899846, guid: 06fe5b9bbeba39442917971131965725,
