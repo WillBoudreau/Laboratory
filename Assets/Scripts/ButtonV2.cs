@@ -81,6 +81,10 @@ public class ButtonV2 : MonoBehaviour
                     obj.GetComponent<BoxSpawner>().SpawnBox();
                     break;
 
+                case "Reflector":
+                    obj.GetComponent<ReflectorBehaviour>().canRotate = false;
+                    break;
+
                 default:
                     Debug.LogError("Object under objectsToControl not tagged correctly or missing behaviour");
                     break;
@@ -116,6 +120,12 @@ public class ButtonV2 : MonoBehaviour
 
                 case "BoxDispenser":
                     break;
+
+                case "Reflector":
+                    obj.GetComponent<ReflectorBehaviour>().canRotate = true;
+                    obj.GetComponent<ReflectorBehaviour>().StartCoroutine("RotateReflectorCoroutine");
+                    break;
+
 
                 default:
                     Debug.LogError("Object under objectsToControl not tagged correctly or missing behaviour");
