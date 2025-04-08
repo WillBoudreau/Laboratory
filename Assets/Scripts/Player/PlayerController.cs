@@ -680,6 +680,14 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = levelManager.spawn.transform.position;
         }
+        if(isFacingLeft)
+        {
+            transform.rotation = leftFacing.rotation;
+        }
+        else
+        {
+            transform.rotation = rightFacing.rotation;
+        }
         StartCoroutine(uIManager.DeathUIFadeOut());
     }
 

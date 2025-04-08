@@ -6,6 +6,7 @@ public class Checkpoint : MonoBehaviour
 {
     public bool canBeActivated;
     public bool leftLevelFlow;
+    public bool isFacingLeft;
     // Start is called before the first frame update
     void Start()
     {
