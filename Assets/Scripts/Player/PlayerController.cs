@@ -264,6 +264,14 @@ public class PlayerController : MonoBehaviour
                     ChangeActionState(ActionState.Idle);
                 }
             }
+            if(moveVector2.x != 0)
+            {
+                playerAnim.SetBool("isIdle", false);
+            }
+            else
+            {
+                playerAnim.SetBool("isIdle", true);
+            }
             if(actionState == ActionState.Hanging && moveVector2.y > 0)
             {
                 climbRoutine = StartCoroutine(LedgeClimb());
@@ -986,7 +994,6 @@ public class PlayerController : MonoBehaviour
 
     private void Moving()
     {
-        playerAnim.SetBool("isIdle", false);
         if(prevState == ActionState.Falling)
         {
             playerAnim.SetTrigger("landing");
