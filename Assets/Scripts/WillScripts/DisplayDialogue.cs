@@ -12,17 +12,19 @@ public class DisplayDialogue : MonoBehaviour
     public GameObject dialogueTextDisplayPanel; // The dialogue text graphic
     [SerializeField] private int currentDialogueIndex = 0; // The current dialogue index
     [SerializeField] private float timeBetweenText = 0.025f; // The time between each letter being displayed
-    [SerializeField] private float timeAtEndOfText = 10f; // The time at the end of the text before it is cleared
     public bool isDialogueActive = false; // Is the dialogue active
     [Header("Class calls")]
     public LocalizationComponent localizationComponent; // The localization component
     [SerializeField] private DialogueManager dialogueManager; // The dialogue manager
+    [SerializeField] private VoiceLineManager voiceLineManager; // The voiceline manager
+    [SerializeField] private VoiceLineTrigger voiceLineTrigger;// The voiceline tigger
 
     private Coroutine currentCoroutine; // Track the active coroutine
 
     void Start()
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
+        voiceLineManager = FindObjectOfType<VoiceLineManager>();
     }
     /// <summary>
     /// Set the loading screen
@@ -110,7 +112,7 @@ public class DisplayDialogue : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenText);
         }
         Debug.Log("Clearing text");
-        yield return new WaitForSeconds(timeAtEndOfText);
+        yield return new WaitForSeconds(voiceLineManager.voiceLines[voiceLineTrigger.voiceLineIndex].length);
         textPanel.SetActive(false);
         textDisplay.text = string.Empty;
     }

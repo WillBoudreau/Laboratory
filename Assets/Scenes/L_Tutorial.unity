@@ -8621,11 +8621,24 @@ MonoBehaviour:
   dialogueTextDisplay: {fileID: 531908155}
   dialogueTextDisplayPanel: {fileID: 187071383}
   currentDialogueIndex: 0
-  timeBetweenText: 0.025
-  timeAtEndOfText: 12
+  timeBetweenText: 0.02
   isDialogueActive: 0
   localizationComponent: {fileID: 747557305}
   dialogueManager: {fileID: 0}
+  voiceLineManager: {fileID: 0}
+  voiceLineTrigger: {fileID: 747557307}
+--- !u!114 &747557307 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3513087790182899846, guid: 06fe5b9bbeba39442917971131965725,
+    type: 3}
+  m_PrefabInstance: {fileID: 747557302}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747557304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5308a52f58db1a04da01d9aad7491db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &752921356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9745,10 +9758,23 @@ MonoBehaviour:
   dialogueTextDisplayPanel: {fileID: 810368002}
   currentDialogueIndex: 0
   timeBetweenText: 0.025
-  timeAtEndOfText: 10
   isDialogueActive: 0
   localizationComponent: {fileID: 795397095}
   dialogueManager: {fileID: 0}
+  voiceLineManager: {fileID: 0}
+  voiceLineTrigger: {fileID: 795397097}
+--- !u!114 &795397097 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3513087790182899846, guid: 06fe5b9bbeba39442917971131965725,
+    type: 3}
+  m_PrefabInstance: {fileID: 795397092}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795397094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5308a52f58db1a04da01d9aad7491db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &806721582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13173,11 +13199,12 @@ MonoBehaviour:
   dialogueTextDisplay: {fileID: 759890472}
   dialogueTextDisplayPanel: {fileID: 472429763}
   currentDialogueIndex: 0
-  timeBetweenText: 0.025
-  timeAtEndOfText: 10
+  timeBetweenText: 0.02
   isDialogueActive: 0
   localizationComponent: {fileID: 1004822263}
   dialogueManager: {fileID: 0}
+  voiceLineManager: {fileID: 0}
+  voiceLineTrigger: {fileID: 1004822264}
 --- !u!114 &1004822263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13206,6 +13233,18 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1004822264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3513087790182899846, guid: 06fe5b9bbeba39442917971131965725,
+    type: 3}
+  m_PrefabInstance: {fileID: 1004822259}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004822261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5308a52f58db1a04da01d9aad7491db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1009326377
 GameObject:
   m_ObjectHideFlags: 0
@@ -29373,11 +29412,12 @@ MonoBehaviour:
   dialogueTextDisplay: {fileID: 1444280808}
   dialogueTextDisplayPanel: {fileID: 1617254938}
   currentDialogueIndex: 0
-  timeBetweenText: 0.025
-  timeAtEndOfText: 12
+  timeBetweenText: 0.02
   isDialogueActive: 0
   localizationComponent: {fileID: 1905656380900167122}
   dialogueManager: {fileID: 0}
+  voiceLineManager: {fileID: 0}
+  voiceLineTrigger: {fileID: 1905656380900167123}
 --- !u!114 &1905656380900167122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29406,6 +29446,18 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1905656380900167123 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3513087790182899846, guid: 06fe5b9bbeba39442917971131965725,
+    type: 3}
+  m_PrefabInstance: {fileID: 1905656380900167118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905656380900167120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5308a52f58db1a04da01d9aad7491db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2367969297605601914
 Transform:
   m_ObjectHideFlags: 0
