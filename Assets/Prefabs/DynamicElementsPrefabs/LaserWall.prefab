@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 882270526277877541}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.00000020861626, y: 0, z: 8.333334}
+  m_LocalPosition: {x: -0, y: -0, z: 8.9}
   m_LocalScale: {x: 13.333329, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -239,6 +239,7 @@ MonoBehaviour:
   laserLength: 10000
   lineRenderer: {fileID: 0}
   laserType: 0
+  sFXManager: {fileID: 0}
   timeBetweenBurst: 0
   coolDownTimer: 0
   timeBetweenShots: 0
@@ -246,6 +247,7 @@ MonoBehaviour:
   deActivated: 0
   laserReceiver: {fileID: 0}
   sFXSource: {fileID: 5386916461237760583}
+  sFXSource2: {fileID: 0}
   isArray: 1
   sourceParticle: {fileID: 5268495490713491375}
   particlePrefab: {fileID: 584086461711756653, guid: d17a5e096eb7c9a4a9fe040012edf492,
@@ -380,7 +382,7 @@ Transform:
   m_GameObject: {fileID: 1529106212774723615}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.00000020861626, y: 0, z: 8.333334}
+  m_LocalPosition: {x: -0, y: -0, z: 8.9}
   m_LocalScale: {x: 13.333329, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -506,6 +508,7 @@ MonoBehaviour:
   laserLength: 10000
   lineRenderer: {fileID: 0}
   laserType: 0
+  sFXManager: {fileID: 0}
   timeBetweenBurst: 0
   coolDownTimer: 0
   timeBetweenShots: 0
@@ -513,6 +516,7 @@ MonoBehaviour:
   deActivated: 0
   laserReceiver: {fileID: 0}
   sFXSource: {fileID: 7911972835484857616}
+  sFXSource2: {fileID: 0}
   isArray: 1
   sourceParticle: {fileID: 50362875066373776}
   particlePrefab: {fileID: 584086461711756653, guid: d17a5e096eb7c9a4a9fe040012edf492,
@@ -732,7 +736,7 @@ Transform:
   m_GameObject: {fileID: 3166593640403895458}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.00000020861626, y: 0, z: 8.333334}
+  m_LocalPosition: {x: -0, y: -0, z: 8.9}
   m_LocalScale: {x: 13.333329, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -858,6 +862,7 @@ MonoBehaviour:
   laserLength: 10000
   lineRenderer: {fileID: 0}
   laserType: 0
+  sFXManager: {fileID: 0}
   timeBetweenBurst: 0
   coolDownTimer: 0
   timeBetweenShots: 0
@@ -865,6 +870,7 @@ MonoBehaviour:
   deActivated: 0
   laserReceiver: {fileID: 0}
   sFXSource: {fileID: 7096567399038461101}
+  sFXSource2: {fileID: 0}
   isArray: 1
   sourceParticle: {fileID: 8113424675363118406}
   particlePrefab: {fileID: 584086461711756653, guid: d17a5e096eb7c9a4a9fe040012edf492,
@@ -1084,7 +1090,7 @@ Transform:
   m_GameObject: {fileID: 3465392567791461801}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.00000020861626, y: 0, z: 8.333334}
+  m_LocalPosition: {x: -0, y: -0, z: 8.9}
   m_LocalScale: {x: 13.333329, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1210,6 +1216,7 @@ MonoBehaviour:
   laserLength: 10000
   lineRenderer: {fileID: 0}
   laserType: 0
+  sFXManager: {fileID: 0}
   timeBetweenBurst: 0
   coolDownTimer: 0
   timeBetweenShots: 0
@@ -1217,6 +1224,7 @@ MonoBehaviour:
   deActivated: 0
   laserReceiver: {fileID: 0}
   sFXSource: {fileID: 8464942333719605947}
+  sFXSource2: {fileID: 0}
   isArray: 1
   sourceParticle: {fileID: 3404491136742008986}
   particlePrefab: {fileID: 584086461711756653, guid: d17a5e096eb7c9a4a9fe040012edf492,
@@ -1351,7 +1359,7 @@ Transform:
   m_GameObject: {fileID: 4160576797224979259}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.00000020861626, y: 0, z: 8.333334}
+  m_LocalPosition: {x: -0, y: -0, z: 8.9}
   m_LocalScale: {x: 13.333329, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1477,6 +1485,7 @@ MonoBehaviour:
   laserLength: 10000
   lineRenderer: {fileID: 0}
   laserType: 0
+  sFXManager: {fileID: 0}
   timeBetweenBurst: 0
   coolDownTimer: 0
   timeBetweenShots: 0
@@ -1484,6 +1493,7 @@ MonoBehaviour:
   deActivated: 0
   laserReceiver: {fileID: 0}
   sFXSource: {fileID: 5797852320269596160}
+  sFXSource2: {fileID: 0}
   isArray: 1
   sourceParticle: {fileID: 2348292649618693473}
   particlePrefab: {fileID: 584086461711756653, guid: d17a5e096eb7c9a4a9fe040012edf492,
@@ -1700,7 +1710,7 @@ Transform:
   m_GameObject: {fileID: 6709469886100051355}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -14.875, y: -27.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
