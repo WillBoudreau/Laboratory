@@ -6,17 +6,26 @@ public class GameObjectTrigger : MonoBehaviour
 {
     [Header("GameObject Settings")]
     [SerializeField] private GameObject[] objectToTrigger; // The object to trigger
-    [SerializeField] private bool triggerOnce; // If the trigger should only be activated once
-    private bool triggered; // If the trigger has been activated
+    [SerializeField]private bool triggered; // If the trigger has been activated
 
     void OnTriggerEnter(Collider other)
     {
         if (!triggered)
         {
-            foreach (GameObject obj in objectToTrigger)
+            if(other.CompareTag("Player"))
             {
-                if (other.GetComponent<Collider>().tag == "Player")
+                foreach (GameObject obj in objectToTrigger)
                 {
+                    // If the object to control is a door
+                    if (obj.tag == "Door")
+                    {
+                        obj.GetComponent<DoorBehaviour>().OpenThisDoor();
+                    }
+                    // If the object to control is a moving platform
+                    else if (obj.tag == "Platform")
+                    {
+                        obj.GetComponent<MovingPlatform>().canMove = false;
+                    }
                     // If the object to control is a door
                     if (obj.tag == "Door")
                     {
@@ -28,10 +37,7 @@ public class GameObjectTrigger : MonoBehaviour
                         obj.GetComponent<MovingPlatform>().canMove = true;
                     }
                 }
-            }
-            if (triggerOnce)
-            {
-                triggered = true;
+                triggered = true; // Set the trigger to true
             }
         }
     }

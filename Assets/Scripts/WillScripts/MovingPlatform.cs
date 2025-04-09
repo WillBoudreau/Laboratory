@@ -15,7 +15,7 @@ public class MovingPlatform : MonoBehaviour
     [Header("Platform Movement Settings")]
     [SerializeField] private float speed = 3; // Speed of the platform
     public bool canMove; // if the platform can move
-    [SerializeField] private float movementPauseTime = 0.5f; // When the moving platform reachs its destination, wait this long before moving again
+    public float movementPauseTime = 0.5f; // When the moving platform reachs its destination, wait this long before moving again
     [SerializeField] private MovementType movementType = MovementType.BackAndForth; // The type of movement the platform will have
 
     [Header("Sound Settings")]
@@ -76,7 +76,7 @@ public class MovingPlatform : MonoBehaviour
     /// <summary>
     /// Move the platform to the next position within the positions list
     /// </summary>
-    void MoveToNextPosition()
+    public void MoveToNextPosition()
     {
         // Get the target position the platform is moving towards
         Vector3 targetPos = targetPositions[currentTargetIndex].position;
@@ -139,6 +139,28 @@ public class MovingPlatform : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// Switch Direction of the platform when the player is about to get crushed
+    /// </summary>
+    public void SwitchDirection()
+    {
+        // Setup movement pause timer
+        movementPauseTimer = movementPauseTime;
+
+        // Reverse moving direction
+        if (movingForward)
+        {
+            movingForward = false;
+        }
+        else
+        {
+            movingForward = true;
+        }
+
+        int previousTargetIndexTemp = previousTargetIndex;
+        previousTargetIndex = currentTargetIndex;
+        currentTargetIndex = previousTargetIndexTemp;
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -166,6 +188,14 @@ public class MovingPlatform : MonoBehaviour
             int previousTargetIndexTemp = previousTargetIndex;
             previousTargetIndex = currentTargetIndex;
             currentTargetIndex = previousTargetIndexTemp;
+        }
+    }
+    void OnTriggerStay(Collider other)
+    {
+        // If the object is the player, make the player a child of the platform
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.transform.SetParent(transform,true);
         }
     }
 
