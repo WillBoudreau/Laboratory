@@ -44,7 +44,8 @@ public class PlayerController : MonoBehaviour
     private DissolveScript dissolve;
     [SerializeField]
     private DissolveScript dissolveShoulders;
-
+    [SerializeField]
+    private GameObject dissolveVFX;
     [Header("Player Stats")]
     [SerializeField]
     private float moveSpeed;
@@ -151,6 +152,7 @@ public class PlayerController : MonoBehaviour
         jumpAction = playerInputActions.FindAction("Jump");
         walkSFXTimer = walkCycleSpeed;
         hasITYSTrigger = false;
+        dissolveVFX.SetActive(false);
     }
 
     void Awake()
@@ -681,6 +683,7 @@ public class PlayerController : MonoBehaviour
         RollForDeathSFX();
         if(isByLaser && dissolve != null)
         {
+            dissolveVFX.SetActive(true);
             dissolveRoutineShoulders = dissolveShoulders.StartDissolve();
             dissolveRoutine = dissolve.StartDissolve();
         }
@@ -709,6 +712,9 @@ public class PlayerController : MonoBehaviour
             transform.rotation = rightFacing.rotation;
         }
         StartCoroutine(uIManager.DeathUIFadeOut());
+        dissolve.Reset();
+        dissolveShoulders.Reset();
+        dissolveVFX.SetActive(false);
     }
 
     #endregion

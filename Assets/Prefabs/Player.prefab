@@ -998,6 +998,8 @@ GameObject:
   - component: {fileID: 1226999315184423680}
   - component: {fileID: 4563234342048425904}
   - component: {fileID: 2948915374632607718}
+  - component: {fileID: 4500610512919973198}
+  - component: {fileID: 3264687822762333970}
   m_Layer: 0
   m_Name: Disintegration_VFX
   m_TagString: Untagged
@@ -1041,7 +1043,16 @@ VisualEffect:
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0.00096438604, y: 0.0017412788, z: 359.95016}
+        m_Name: Transform_angles
+        m_Overridden: 1
+      - m_Value: {x: -0.015279397, y: 1.1226994, z: -0.032180533}
+        m_Name: Transform_position
+        m_Overridden: 1
+      - m_Value: {x: 0.61349666, y: 0.6134969, z: 0.61349666}
+        m_Name: Transform_scale
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -1056,9 +1067,9 @@ VisualEffect:
       m_Array: []
     m_NamedObject:
       m_Array:
-      - m_Value: {fileID: 7016424891266916503}
+      - m_Value: {fileID: 0}
         m_Name: New SkinnedMeshRenderer
-        m_Overridden: 1
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!73398921 &2948915374632607718
@@ -1101,6 +1112,37 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4500610512919973198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4303935040838850886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExecuteInEditor: 1
+  m_Bindings:
+  - {fileID: 3264687822762333970}
+  m_VisualEffect: {fileID: 4563234342048425904}
+--- !u!114 &3264687822762333970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4303935040838850886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdfea1f838247c40921a07afedde962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Property:
+    m_Name: Transform
+  Target: {fileID: 8989567269447034544}
 --- !u!1 &4386560864512766860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1315,7 @@ GameObject:
   - component: {fileID: 3528651957830185676}
   - component: {fileID: 1460582586750174355}
   - component: {fileID: 4216897024963283470}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: InteractionTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1648,6 +1690,7 @@ MonoBehaviour:
   leftFacing: {fileID: 0}
   dissolve: {fileID: 4197273753722566459}
   dissolveShoulders: {fileID: 8219186429754404754}
+  dissolveVFX: {fileID: 4303935040838850886}
   moveSpeed: 300
   jumpForce: 5.5
   holdForce: 150

@@ -33,8 +33,8 @@ public class DissolveScript : MonoBehaviour
         }
         if (skinnedMaterials.Length > 0)
         {
+            
             float counter = 0;
-
             while (skinnedMaterials[0].GetFloat("_Dissolve_Amount") < 1)
             {
                 counter += dissolveRate;
@@ -43,6 +43,19 @@ public class DissolveScript : MonoBehaviour
                     skinnedMaterials[i].SetFloat("_Dissolve_Amount", counter);
                 }
                 yield return new WaitForSeconds(refreshRate);
+            }
+        }
+    }
+
+    public void Reset()
+    {
+        float counter = 1;
+        while (skinnedMaterials[0].GetFloat("_Dissolve_Amount") > 0)
+        {
+            counter -= dissolveRate;
+            for (int i = 0; i < skinnedMaterials.Length; i++)  // Fixed loop condition here
+            {
+                skinnedMaterials[i].SetFloat("_Dissolve_Amount", counter);
             }
         }
     }
