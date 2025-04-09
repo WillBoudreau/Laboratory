@@ -318,6 +318,7 @@ public class PlayerController : MonoBehaviour
             {
                 lever.ActivateLever();
                 sFXManager.Player2DSFX(sFXManager.leverSFX,false);
+                Debug.Log("Lever Activated");
             }
         }
     }
@@ -792,7 +793,7 @@ public class PlayerController : MonoBehaviour
         if(isGrabbingIntractable && interactionTarget != null)
         {
             currentDistance = Vector3.Distance(transform.position,interactionTarget.transform.position);
-            if(Vector3.Distance(transform.position, interactionTarget.transform.position) <= pushDistance)
+            if(Vector3.Distance(transform.position, interactionTarget.transform.position) <= pushDistance && interactionTarget.tag == "Box")
             {
                 if(moveDirection.x != 0)
                 {
@@ -831,6 +832,12 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if(interactionTarget == null)
+        {
+            isGrabbingIntractable = false;
+            playerAnim.SetBool("isPushing", false);
+            playerAnim.SetBool("isPulling", false);
+        }
+        else if(interactionTarget != null && interactionTarget.tag != "Box")
         {
             isGrabbingIntractable = false;
             playerAnim.SetBool("isPushing", false);
