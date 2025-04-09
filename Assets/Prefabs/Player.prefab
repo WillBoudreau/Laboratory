@@ -998,8 +998,6 @@ GameObject:
   - component: {fileID: 1226999315184423680}
   - component: {fileID: 4563234342048425904}
   - component: {fileID: 2948915374632607718}
-  - component: {fileID: 4500610512919973198}
-  - component: {fileID: 3264687822762333970}
   m_Layer: 0
   m_Name: Disintegration_VFX
   m_TagString: Untagged
@@ -1112,37 +1110,6 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4500610512919973198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4303935040838850886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ExecuteInEditor: 1
-  m_Bindings:
-  - {fileID: 3264687822762333970}
-  m_VisualEffect: {fileID: 4563234342048425904}
---- !u!114 &3264687822762333970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4303935040838850886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fdfea1f838247c40921a07afedde962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Property:
-    m_Name: Transform
-  Target: {fileID: 8989567269447034544}
 --- !u!1 &4386560864512766860
 GameObject:
   m_ObjectHideFlags: 0
