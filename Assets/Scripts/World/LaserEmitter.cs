@@ -237,8 +237,8 @@ public class LaserEmitter : MonoBehaviour
                     {
                         if(!raycastHit.collider.gameObject.GetComponent<PlayerController>().isHurt)
                         {
-                            raycastHit.collider.gameObject.GetComponent<PlayerController>().TakeDamage();
-                            raycastHit.collider.gameObject.GetComponent<PlayerController>().TakeDamage();
+                            raycastHit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(true);
+                            raycastHit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(true);
                         }   
                     }
                     if(raycastHit.collider.tag == "Box")

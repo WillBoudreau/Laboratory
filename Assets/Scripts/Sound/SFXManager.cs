@@ -15,8 +15,6 @@ public class SFXManager : MonoBehaviour
     public AudioClip buttonPress;
     public AudioClip metalStep;
     public AudioClip leverSFX;
-    public AudioClip hurtSFX1;
-    public AudioClip hurtSFX2;
     public AudioClip jumpSFX;
     public AudioClip boxDispenserSFX;
     public AudioClip boxLandSFX;
@@ -32,6 +30,7 @@ public class SFXManager : MonoBehaviour
     public List<AudioClip> interactableSFX;
     public List<AudioClip> enviromentSFX;
     public List<AudioClip> playerHurtSFX;
+    public List<AudioClip> playerSnapSFX;
     public List<AudioClip> playerDeathSFX;
     public List<AudioClip> uISFX;
     

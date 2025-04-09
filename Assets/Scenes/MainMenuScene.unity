@@ -8968,6 +8968,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 501068506}
     m_Modifications:
+    - target: {fileID: 4500610512919973198, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_Bindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500610512919973198, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_Bindings.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563234342048425904, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.x
+      value: 0.00096438604
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563234342048425904, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.y
+      value: 0.0017412788
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563234342048425904, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
+      value: -0.015279397
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563234342048425904, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
+      value: 1.1226994
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563234342048425904, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.z
+      value: -0.032180533
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563234342048425904, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6596099876700949223, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9030,11 +9070,6 @@ PrefabInstance:
       objectReference: {fileID: 2098503433}
     - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
         type: 3}
-      propertyPath: jumpForce
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7645474022128464097, guid: ad6a7730677d8b44f9d23bd355ba6e5d,
-        type: 3}
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 2098503435}
@@ -9058,7 +9093,9 @@ PrefabInstance:
       propertyPath: voiceLineManager
       value: 
       objectReference: {fileID: 1781230477}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3264687822762333970, guid: ad6a7730677d8b44f9d23bd355ba6e5d, type: 3}
+    - {fileID: 4500610512919973198, guid: ad6a7730677d8b44f9d23bd355ba6e5d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -17788,7 +17825,7 @@ MonoBehaviour:
   loadingBar: {fileID: 1598468900}
   fadeTime: 0.5
   deathCanvasGroup: {fileID: 462592819}
-  deathFadeTime: 0.5
+  deathFadeTime: 2
   hudUINormal:
   - {fileID: 21300000, guid: fa358fe295e0d8748a8535385fc21e90, type: 3}
   - {fileID: 21300000, guid: 57231cccf87dfb043bc8423ba1e49b98, type: 3}
@@ -19113,8 +19150,6 @@ MonoBehaviour:
   buttonPress: {fileID: 8300000, guid: ab0367c20c22ff044828b1f5483e767e, type: 3}
   metalStep: {fileID: 8300000, guid: 6884ebdaaba2ff141aaa7f78bc0cf28c, type: 3}
   leverSFX: {fileID: 8300000, guid: 899cd6eb8e61de94e80916bfb26aa4c5, type: 3}
-  hurtSFX1: {fileID: 8300000, guid: 85005ae5efdacee42ac07fc8a58ab677, type: 3}
-  hurtSFX2: {fileID: 8300000, guid: e872b6a96ba20064e86105b857590d0d, type: 3}
   jumpSFX: {fileID: 8300000, guid: 107b9490d08ce0f4db302b751bf9f18a, type: 3}
   boxDispenserSFX: {fileID: 8300000, guid: b72998233905ab741b5e4e62496c41d0, type: 3}
   boxLandSFX: {fileID: 8300000, guid: 1359eb42b301d0344a3e13451a5d0299, type: 3}
@@ -19146,6 +19181,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 338006b5e6b721142a66d48db95679b7, type: 3}
   - {fileID: 8300000, guid: b9655a5d44baf3443b2a5214955f5028, type: 3}
   - {fileID: 8300000, guid: b4d6323bbff48f24c9a8e4aabf16a704, type: 3}
+  playerSnapSFX:
+  - {fileID: 8300000, guid: 85005ae5efdacee42ac07fc8a58ab677, type: 3}
+  - {fileID: 8300000, guid: e872b6a96ba20064e86105b857590d0d, type: 3}
   playerDeathSFX:
   - {fileID: 8300000, guid: 2e41919676cb4964b931d51f55f34289, type: 3}
   - {fileID: 8300000, guid: abf2a50d9b755b24b9418c36e94d30aa, type: 3}
