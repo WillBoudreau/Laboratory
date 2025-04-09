@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour
     private Transform rightFacing;
     [SerializeField]
     private Transform leftFacing;
+    [SerializeField]
+    private DissolveScript dissolve;
+    [SerializeField]
+    private DissolveScript dissolveShoulders;
 
     [Header("Player Stats")]
     [SerializeField]
@@ -68,6 +72,8 @@ public class PlayerController : MonoBehaviour
     public float deathFadeTime;
     public bool inDangerZone; //used for the leg sweep voice line trigger. 
     public bool hasITYSTrigger; //ITYS is I told you so, referring to a voice line. 
+    private Coroutine dissolveRoutine;
+    private Coroutine dissolveRoutineShoulders;
     [Header("Ledge Grab Properties")]
     [SerializeField]
     private Vector3 activeOffset;
@@ -585,7 +591,8 @@ public class PlayerController : MonoBehaviour
         lastFallHight = launchPosition.y - landingPosition.y;
         if(launchPosition.y - landingPosition.y >= maxFallHight)
         {
-            TakeDamage();
+            TakeDamage(false);
+            RollForSnapSFX();
             RollForHurtSFX();
             launchPosition = landingPosition;
         }
@@ -610,6 +617,14 @@ public class PlayerController : MonoBehaviour
         sFXManager.Player2DSFX(sFXManager.playerHurtSFX[roll],false);
     }
 
+    void RollForSnapSFX()
+    {
+        int roll;
+        roll = UnityEngine.Random.Range(0, sFXManager.playerSnapSFX.Count);
+        Debug.Log("Hurt roll=" + roll);
+        sFXManager.Player2DSFX(sFXManager.playerSnapSFX[roll],false);
+    }
+
     void RollForDeathSFX()
     {
         int roll;
@@ -621,12 +636,12 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Makes the player take damage, if already hurt, trigger player death. 
     /// </summary>
-    public void TakeDamage()
+    public void TakeDamage(bool isByLaser)
     {
         uIManager.playerDamage();
         if(isHurt)
         {
-            StartCoroutine(Death());
+            StartCoroutine(Death(isByLaser));
         }
         else
         {
@@ -661,9 +676,14 @@ public class PlayerController : MonoBehaviour
     /// Kills the player, trigger the fade out fade in, can be timed to death animation. 
     /// </summary>
     /// <returns></returns>
-    IEnumerator Death()
+    IEnumerator Death(bool isByLaser)
     {
         RollForDeathSFX();
+        if(isByLaser && dissolve != null)
+        {
+            dissolveRoutineShoulders = dissolveShoulders.StartDissolve();
+            dissolveRoutine = dissolve.StartDissolve();
+        }
         if(inDangerZone && !hasITYSTrigger)
         {
             voiceLineManager.PlayVoiceLine(voiceLineManager.voiceLines[13]);

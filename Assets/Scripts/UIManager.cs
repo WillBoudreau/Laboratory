@@ -418,7 +418,7 @@ public class UIManager : MonoBehaviour
 
         float timer = 0;
 
-        while (timer < fadeTime)
+        while (timer < deathFadeTime)
         {
             deathCanvasGroup.alpha = Mathf.Lerp(1, 0, timer/deathFadeTime);
             timer += Time.deltaTime;
@@ -438,7 +438,7 @@ public class UIManager : MonoBehaviour
         //Debug.Log("Starting Fade in");
         float timer = 0;
         loadingScreen.SetActive(true);
-        while (timer < fadeTime)
+        while (timer < deathFadeTime)
         {
             deathCanvasGroup.alpha = Mathf.Lerp(0, 1, timer / deathFadeTime);
             timer += Time.deltaTime;

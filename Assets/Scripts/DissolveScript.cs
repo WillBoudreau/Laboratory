@@ -20,9 +20,9 @@ public class DissolveScript : MonoBehaviour
     }
 
     // Method to trigger the dissolve effect, can be called from other scripts
-    public void StartDissolve()
+    public Coroutine StartDissolve()
     {
-        StartCoroutine(DissolveCo());
+        return StartCoroutine(DissolveCo());
     }
 
     IEnumerator DissolveCo()
