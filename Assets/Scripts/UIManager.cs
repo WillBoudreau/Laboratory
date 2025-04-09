@@ -283,7 +283,6 @@ public class UIManager : MonoBehaviour
     private IEnumerator LoadingUIFadeOut()
     {
         //Debug.Log("Starting Fade out");
-
         float timer = 0;
 
         while (timer < fadeTime)
@@ -296,6 +295,7 @@ public class UIManager : MonoBehaviour
         loadingScreenCanvasGroup.alpha = 0;
         loadingScreen.SetActive(false);
         loadingBar.fillAmount = 0;
+        gameManager.playerCon.inputEnabled = true;
         //Debug.Log("Ending Fade out");
     }
     /// <summary>
@@ -304,6 +304,7 @@ public class UIManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator LoadingUIFadeIN()
     {
+        gameManager.playerCon.inputEnabled = false;
         SetUIFalse();
         //Debug.Log("Starting Fade in");
         float timer = 0;
