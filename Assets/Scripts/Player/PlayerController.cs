@@ -326,8 +326,8 @@ public class PlayerController : MonoBehaviour
                 timerActive = false;
                 Debug.Log("Jump Pressed");
                 ChangeActionState(ActionState.Jumping);
-                playerBody.velocity = playerBody.velocity.normalized;
-                playerBody.AddForce(transform.up * jumpForce);
+                playerBody.velocity = new Vector3(playerBody.velocity.x, 0, playerBody.velocity.z);
+                playerBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
                 if(playerBody.velocity.y > maxYVelocity)
                 {
                     playerBody.velocity.Set(playerBody.velocity.x,maxYVelocity,playerBody.velocity.z);
