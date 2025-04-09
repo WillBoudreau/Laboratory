@@ -687,6 +687,7 @@ public class PlayerController : MonoBehaviour
             //dissolveVFX.SetActive(true);
             dissolveRoutineShoulders = dissolveShoulders.StartDissolve();
             dissolveRoutine = dissolve.StartDissolve();
+            sFXManager.Player2DSFX(sFXManager.dissolveSFX, false);
         }
         if(inDangerZone && !hasITYSTrigger)
         {

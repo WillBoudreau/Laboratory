@@ -22,6 +22,7 @@ public class SFXManager : MonoBehaviour
     public AudioClip buttonHoverSFX;
     public AudioClip buttonClickSFX;
     public AudioClip buttonClick2SFX;
+    public AudioClip dissolveSFX;
     [Header("3D sounds")]
     public AudioClip ambientSFX;
     [Header("Lists")]
