@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
         jumpAction = playerInputActions.FindAction("Jump");
         walkSFXTimer = walkCycleSpeed;
         hasITYSTrigger = false;
-        //dissolveVFX.SetActive(false);
+        dissolveVFX.SetActive(false);
     }
 
     void Awake()
@@ -684,7 +684,7 @@ public class PlayerController : MonoBehaviour
         RollForDeathSFX();
         if(isByLaser && dissolve != null)
         {
-            //dissolveVFX.SetActive(true);
+            dissolveVFX.SetActive(true);
             dissolveRoutineShoulders = dissolveShoulders.StartDissolve();
             dissolveRoutine = dissolve.StartDissolve();
             sFXManager.Player2DSFX(sFXManager.dissolveSFX, false);
@@ -716,7 +716,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(uIManager.DeathUIFadeOut());
         dissolve.Reset();
         dissolveShoulders.Reset();
-        //dissolveVFX.SetActive(false);
+        dissolveVFX.SetActive(false);
     }
 
     #endregion
