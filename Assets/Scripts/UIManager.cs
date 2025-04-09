@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public GameObject hUD;//The game menu
     [SerializeField] private GameObject pauseMenu;//The pause menu
     [SerializeField] private GameObject controlsMenu;//The controls menu
+    [SerializeField] private GameObject creditsMenu;//The credits menu
     public GameObject loadingScreen;//The loading screen
     public GameObject deathScreen;//The death screen
     [Header("Options UI Elements")]
@@ -106,6 +107,7 @@ public class UIManager : MonoBehaviour
         hUD.SetActive(false);
         pauseMenu.SetActive(false);
         controlsMenu.SetActive(false);
+        creditsMenu.SetActive(false);
         CheckForDialogue();
     }
     /// <summary>
@@ -154,6 +156,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "Dialogue":
                 dialogueManager.GetAllDialogues();
+                break;
+            case "Credits":
+                creditsMenu.SetActive(true);
                 break;
         }
     }
