@@ -162,6 +162,7 @@ MonoBehaviour:
   distance: 0.1
   isOpen: 0
   targetIndex: 0
+  canOpen: 0
 --- !u!114 &8055607609432397679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +519,7 @@ Transform:
   m_GameObject: {fileID: 8907200516928262735}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0.33, y: 0.286, z: -0}
+  m_LocalPosition: {x: 0.51, y: 0.29, z: -0}
   m_LocalScale: {x: 2.54, y: 0.7, z: 2.78}
   m_ConstrainProportionsScale: 0
   m_Children: []
