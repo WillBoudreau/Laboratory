@@ -62,7 +62,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 00e29d06d8d8e9245bac87a95e283088, type: 2}
-  - {fileID: 2100000, guid: e509467b58d7ba74f8b6f1fd8fd2594a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -278,6 +277,9 @@ MonoBehaviour:
   VFXGraph: {fileID: 4854772227176434797}
   dissolveRate: 0.0125
   refreshRate: 0.025
+  col: {fileID: 1425524571372095295}
+  rb: {fileID: 3462999211997830422}
+  particles: {fileID: 2914320676445423527}
 --- !u!65 &1425524571372095295
 BoxCollider:
   m_ObjectHideFlags: 0

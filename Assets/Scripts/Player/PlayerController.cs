@@ -893,6 +893,11 @@ public class PlayerController : MonoBehaviour
         {
             walkSFXTimer -= Time.deltaTime;
         }
+        else if(isGrabbingIntractable)
+        {
+            sFXManager.playerWalkSource.PlayOneShot(sFXManager.metalStep);
+            walkSFXTimer = walkCycleSpeed*2.25f;
+        }
         else
         {
             sFXManager.playerWalkSource.PlayOneShot(sFXManager.metalStep);

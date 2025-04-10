@@ -14,6 +14,7 @@ public class BoxSpawner : MonoBehaviour
     private int boxSpawnCount;
     void Awake()
     {
+        voiceLineManager = FindObjectOfType<VoiceLineManager>();
         sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
         boxSpawnCount = 0;
     }
