@@ -179,6 +179,13 @@ public class PlayerController : MonoBehaviour
                 case ActionState.Moving:
                     MovingSFX();
                     break;
+                case ActionState.Falling:
+                    if(isGrounded)
+                    {
+                        ChangeActionState(ActionState.Idle);
+                        return;
+                    }
+                    break;
             }
             if(moveDirection.x > 0 && !isGrabbingIntractable && actionState != ActionState.Hanging)
             {       
@@ -680,6 +687,7 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     IEnumerator Death(bool isByLaser)
     {
+        inputEnabled = false;
         RollForDeathSFX();
         if(isByLaser && dissolve != null)
         {
@@ -716,6 +724,7 @@ public class PlayerController : MonoBehaviour
         dissolve.Reset();
         dissolveShoulders.Reset();
         dissolveVFX.SetActive(false);
+        inputEnabled = true;
     }
 
     #endregion
