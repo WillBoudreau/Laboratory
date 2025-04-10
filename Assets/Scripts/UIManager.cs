@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private LoadingScreenBehavior loadingScreenBehavior;//The loading screen behavior
     [SerializeField] private SFXManager sFXManager;//The sfx manager 
     [SerializeField] private DialogueManager dialogueManager;//The dialogue manager   
+    [SerializeField] private VoiceLineManager voiceLineManager;
     [Header("UI Elements")]
     public GameObject winMenu;//The win menu
     public GameObject mainMenu;//The main menu
@@ -27,6 +28,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject creditsMenu;//The credits menu
     public GameObject loadingScreen;//The loading screen
     public GameObject deathScreen;//The death screen
+    public GameObject endFadeScreen;
     [Header("Options UI Elements")]
     public Slider masterVolSlider;//The master volume slider
     public Slider musicVolSlider;//The music volume slider
@@ -44,6 +46,7 @@ public class UIManager : MonoBehaviour
     public float fadeTime;
     [Header("HUD UI Elements")]
     public CanvasGroup deathCanvasGroup;
+    public CanvasGroup endCanvasGroup;
     public float deathFadeTime;
     public List<Sprite> hudUINormal;
     public List<Sprite> hudUIDamaged;
@@ -71,6 +74,7 @@ public class UIManager : MonoBehaviour
     public GameObject controlsFirstButton;
     public GameObject optionsFirstButton;
     public GameObject nextLevelButton;
+    public GameObject endMenuButton;
     void Start()
     {
         SetUIFalse();
@@ -78,6 +82,7 @@ public class UIManager : MonoBehaviour
         ChangeControlGraphics(true);
         sFXManager = GameObject.Find("SFXManager").GetComponent<SFXManager>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+        endMenuButton.SetActive(false);
     }
     void Update()
     {
@@ -108,6 +113,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(false);
         controlsMenu.SetActive(false);
         creditsMenu.SetActive(false);
+        endFadeScreen.SetActive(false);
         CheckForDialogue();
     }
     /// <summary>
@@ -123,11 +129,6 @@ public class UIManager : MonoBehaviour
             case "Win":
                 UpdateWinScreen();
                 winMenu.SetActive(true);
-                if(gameManager.playerCon.isGamepadActive)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    EventSystem.current.SetSelectedGameObject(nextLevelButton);
-                }
                 break;
             case "MainMenuScene":
                 mainMenu.SetActive(true);
@@ -171,11 +172,22 @@ public class UIManager : MonoBehaviour
         if(SceneManager.GetActiveScene().buildIndex == totalScenes)
         {
             winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/{totalScenes}\nCOMPLETE\nSIMULATION COMPLETE";
+            nextLevelButton.SetActive(false);
+            endMenuButton.SetActive(true);
+            if(gameManager.playerCon.isGamepadActive)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(endMenuButton);
+            }
         }
         else
         {
             winText.text = $"TEST {SceneManager.GetActiveScene().buildIndex}/{totalScenes}\nCOMPLETE";
-
+            if(gameManager.playerCon.isGamepadActive)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(nextLevelButton);
+            }        
         }
     }
     /// <summary>
@@ -446,6 +458,30 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         deathCanvasGroup.alpha = 1;
+    }
+
+
+    public void startUIEnding()
+    {
+        StartCoroutine(EndUIFadeIN());
+    }
+    /// <summary>
+    /// Fades end screen in.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator EndUIFadeIN()
+    {
+        endFadeScreen.SetActive(true);
+        //Debug.Log("Starting Fade in");
+        float timer = 0;
+        loadingScreen.SetActive(true);
+        while (timer < voiceLineManager.vLSource.clip.length)
+        {
+            endCanvasGroup.alpha = Mathf.Lerp(0, 1, timer / voiceLineManager.vLSource.clip.length);
+            timer += Time.deltaTime * 1.25f;
+            yield return null;
+        }
+        endCanvasGroup.alpha = 1;
     }
     /// <summary>
     /// Sets sliders value to base volume level

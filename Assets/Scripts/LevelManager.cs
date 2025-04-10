@@ -112,6 +112,10 @@ public class LevelManager : MonoBehaviour
         uIManager.volume = FindObjectOfType<Volume>();
         gameManager.playerCon.isZoomedOut = false;
         gameManager.playerCon.confiner.InvalidateCache();
+        if(gameManager.playerCon.inputEnabled == false)
+        {
+            gameManager.playerCon.inputEnabled = true;
+        }
         if(spawn != null)
         {
             player.transform.position = spawn.transform.position;

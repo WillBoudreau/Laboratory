@@ -164,7 +164,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        SetCameraClippingPlane();
         if(inputEnabled)
         {
             CheckInputType();
@@ -905,16 +904,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SetCameraClippingPlane()
+    public void StartEnding()
     {
-        if(gameManager.gameState == GameManager.GameState.MainMenu)
-        {
-            playerCam.m_Lens.FarClipPlane = menuClipPlane;
-        }
-        else if(gameManager.gameState == GameManager.GameState.Gameplay)
-        {
-            playerCam.m_Lens.FarClipPlane = gameplayClipPlane;
-        }
+        StartCoroutine(Ending());
+    }
+
+    public IEnumerator Ending()
+    {
+        inputEnabled = false;
+        playerAnim.SetBool("isIdle", true);
+        voiceLineManager.PlayVoiceLine(voiceLineManager.voiceLines[15]);
+        uIManager.startUIEnding();
+        yield return new WaitForSeconds(voiceLineManager.vLSource.clip.length);
+        uIManager.LoadUI("Win");
     }
 
 
