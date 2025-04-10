@@ -14,6 +14,7 @@ public class DisplayDialogue : MonoBehaviour
     [SerializeField] private float timeBetweenText = 0.025f; // The time between each letter being displayed
     public bool isDialogueActive = false; // Is the dialogue active
     [SerializeField] private bool isNormalTrigger;//If it's a normal trigger
+    [SerializeField] private bool isEndTrigger;//If it's an end trigger
     [Header("Class calls")]
     public LocalizationComponent localizationComponent; // The localization component
     [SerializeField] private DialogueManager dialogueManager; // The dialogue manager
@@ -117,6 +118,10 @@ public class DisplayDialogue : MonoBehaviour
         if(isNormalTrigger)
         {
             yield return new WaitForSeconds(voiceLineManager.voiceLines[voiceLineTrigger.voiceLineIndex].length);
+        }
+        else if(isEndTrigger)
+        {
+            yield return new WaitForSeconds(voiceLineManager.voiceLines[15].length);
         }
         else
         {
