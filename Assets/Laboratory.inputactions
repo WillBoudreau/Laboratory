@@ -40,6 +40,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DebugLoadLevel1",
+                    "type": "Button",
+                    "id": "f2886fea-ed75-44c5-8e15-0cb03e534928",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugLoadLevel2",
+                    "type": "Button",
+                    "id": "5cdc0951-d7fa-4f66-a715-e677d73b7254",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugLoadLevel3",
+                    "type": "Button",
+                    "id": "ce723c13-a463-402b-9711-290b00c9e668",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -282,6 +309,83 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82de7925-6b9f-4916-85b3-47e3af23ecd1",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugLoadLevel1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7a91c6b-6fd7-47b3-b1ee-78f6cae099fe",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugLoadLevel1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e7128cc-d08f-4073-8953-9c10741cbb31",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugLoadLevel2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "01122fd0-018e-4dc9-9c8d-026c8be83e50",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugLoadLevel2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9e633cd-9981-4649-b4d4-9b7b36ccf1d8",
+                    "path": "<Keyboard>/numpad2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugLoadLevel2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28671b3e-f210-41a6-b135-d5bcf10551a8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugLoadLevel3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e2fcb854-d399-4fdd-92f7-e98c4be70bc1",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugLoadLevel3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
