@@ -5,6 +5,7 @@ using UnityEngine;
 public class EndingTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject player;//The player object
+    [SerializeField] private DisplayDialogue displayDialogue;//The display dialogue object
     private Coroutine endingRoutine;
     void Start()
     {
@@ -20,6 +21,7 @@ public class EndingTrigger : MonoBehaviour
         if(other.gameObject == player)
         {
             player.GetComponent<PlayerController>().StartEnding();
+            displayDialogue.SetDialogue(displayDialogue.dialogueTextDisplayPanel);
         }
     }
 }
