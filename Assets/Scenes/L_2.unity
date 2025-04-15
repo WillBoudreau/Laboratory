@@ -4839,6 +4839,7 @@ MonoBehaviour:
   timeBetweenText: 0.025
   isDialogueActive: 0
   isNormalTrigger: 1
+  isEndTrigger: 0
   localizationComponent: {fileID: 106735734}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
@@ -10760,6 +10761,7 @@ MonoBehaviour:
   timeBetweenText: 0.025
   isDialogueActive: 0
   isNormalTrigger: 1
+  isEndTrigger: 0
   localizationComponent: {fileID: 273383200}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
@@ -14448,6 +14450,7 @@ MonoBehaviour:
   timeBetweenText: 0.025
   isDialogueActive: 0
   isNormalTrigger: 1
+  isEndTrigger: 0
   localizationComponent: {fileID: 363551216}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
@@ -52629,6 +52632,7 @@ MonoBehaviour:
   timeBetweenText: 0.025
   isDialogueActive: 0
   isNormalTrigger: 1
+  isEndTrigger: 0
   localizationComponent: {fileID: 1221489682}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
@@ -54845,6 +54849,7 @@ MonoBehaviour:
   timeBetweenText: 0.025
   isDialogueActive: 0
   isNormalTrigger: 1
+  isEndTrigger: 0
   localizationComponent: {fileID: 1266697714}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
@@ -57418,6 +57423,7 @@ MonoBehaviour:
   timeBetweenText: 0.025
   isDialogueActive: 0
   isNormalTrigger: 0
+  isEndTrigger: 0
   localizationComponent: {fileID: 1347503120}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
@@ -65644,12 +65650,17 @@ PrefabInstance:
     - target: {fileID: 2842907137637239795, guid: 76219eee1b05b754780d352b763326b9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.87000006
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842907137637239795, guid: 76219eee1b05b754780d352b763326b9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.59999996
       objectReference: {fileID: 0}
     - target: {fileID: 2842907137637239795, guid: 76219eee1b05b754780d352b763326b9,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.87000006
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 2842907137637239795, guid: 76219eee1b05b754780d352b763326b9,
         type: 3}
@@ -68297,6 +68308,7 @@ MonoBehaviour:
   timeBetweenText: 0.025
   isDialogueActive: 0
   isNormalTrigger: 1
+  isEndTrigger: 0
   localizationComponent: {fileID: 1605800083}
   dialogueManager: {fileID: 0}
   voiceLineManager: {fileID: 0}
@@ -81889,12 +81901,17 @@ PrefabInstance:
     - target: {fileID: 2842907137637239795, guid: 76219eee1b05b754780d352b763326b9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.87000006
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842907137637239795, guid: 76219eee1b05b754780d352b763326b9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.59999996
       objectReference: {fileID: 0}
     - target: {fileID: 2842907137637239795, guid: 76219eee1b05b754780d352b763326b9,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.87000006
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 2842907137637239795, guid: 76219eee1b05b754780d352b763326b9,
         type: 3}
@@ -84664,12 +84681,17 @@ PrefabInstance:
     - target: {fileID: 2842907137637239795, guid: a2e20e36fd2276b4e82e4a42900dd0d9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.87000006
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842907137637239795, guid: a2e20e36fd2276b4e82e4a42900dd0d9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.59999996
       objectReference: {fileID: 0}
     - target: {fileID: 2842907137637239795, guid: a2e20e36fd2276b4e82e4a42900dd0d9,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.87000006
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 2842907137637239795, guid: a2e20e36fd2276b4e82e4a42900dd0d9,
         type: 3}
