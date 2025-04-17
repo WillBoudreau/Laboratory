@@ -9,7 +9,7 @@ public class DoorBehaviour : MonoBehaviour
     [Header("Door Controls")]
     [SerializeField] private GameObject[] positions = new GameObject[2];//The positions the door can move to,FOR INSPECTOR Closed first then Open
     [SerializeField] private float speed;//The speed of the door
-    [SerializeField] private float distance = 0.1f;//The point where the door will move to the next position
+    [SerializeField] private float delay = 1.5f;//The delay before the door closes
     public bool isOpen = false;//If the door is open
     [SerializeField] private int targetIndex = 0;
     private SFXTrigger sFXTrigger;
@@ -94,8 +94,36 @@ public class DoorBehaviour : MonoBehaviour
     {
         if(other.gameObject.tag == "Box")
         {
-            Destroy(other.gameObject);
+            StartCoroutine(OpenAndCloseDoor(other, delay));
+        }
+        else if(other.gameObject.tag == "Player")
+        {
+            if(doorType == DoorType.Powered && canOpen)
+            {
+                if(!isOpen)
+                {
+                    OpenThisDoor();
+                }
+                else if(isOpen && targetIndex == 1)
+                {
+                    CloseThisDoor();
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// When the door comes into contact with a box, open the door and then close it after a delay
+    /// </summary>
+    /// <param name="other">The other collider</param>
+    /// <param name="delay">The delay before the door closes</param>
+    /// <returns></returns>
+    public IEnumerator OpenAndCloseDoor(Collider other, float delay)
+    {
+        if(other.gameObject.tag == "Box")
+        {
             OpenThisDoor();
+            yield return new WaitForSeconds(delay);
+            CloseThisDoor();
         }
     }
 }
